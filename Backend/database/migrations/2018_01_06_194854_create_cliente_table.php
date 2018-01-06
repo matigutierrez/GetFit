@@ -21,7 +21,6 @@ class CreateClienteTable extends Migration
             $table->string('cli_numerotelefonico', 30)->nullable();
             $table->string('cli_direccion')->nullable();
             $table->binary('cli_huella')->nullable();
-            $table->timestamps();
         });
     }
 
