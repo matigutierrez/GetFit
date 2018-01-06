@@ -15,7 +15,7 @@ class CreateMetodoPagoTable extends Migration
     {
         Schema::create('tgf_metodo_pago', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('mep_nombre'):
+            $table->string('mep_nombre');
         });
     }
 
