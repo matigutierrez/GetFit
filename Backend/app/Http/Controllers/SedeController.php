@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Sede;
 use Illuminate\Http\Request;
 
-class Sede extends Controller
+class SedeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class Sede extends Controller
      */
     public function index()
     {
-        //
+        return Sede::with('usuarios')->get();
     }
 
     /**
