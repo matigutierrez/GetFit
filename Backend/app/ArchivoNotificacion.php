@@ -12,7 +12,7 @@ class ArchivoNotificacion extends Model
     protected $fillable = ['arn_nombre', 'arn_archivo']
 
     public function notificacion() {
-    	return $this->belongsTo('App\Notificacion');
+    	return $this->belongsTo('App\Notificacion', 'tgf_notificacion_id');
     }
 
 }

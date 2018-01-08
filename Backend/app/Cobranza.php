@@ -1,0 +1,26 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cobranza extends Model
+{
+    protected $table = 'tgf_cobranza';
+    protected $primarykey = 'id';
+
+    protected $fillable = ['cob_monto', 'cob_fecha'];
+
+    public function contrato() {
+    	return $this->belongsTo('App\Contrato', 'tgf_contrato_id');
+    }
+
+    public function descuentos() {
+    	return $this->hasMany('App\DescuentoCobranza', 'tgf_cobranza_id');
+    }
+
+    public function pago() {
+    	return $this->hasOne('App\Pago', 'tgf_cobranza_id');
+    }
+    
+}

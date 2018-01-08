@@ -16,7 +16,7 @@ class Sede extends Model
     }
 
     public function planes() {
-    	return $this->hasMany('App\Plan');
+    	return $this->hasMany('App\Plan', 'tgf_sede_id');
     }
 
 }

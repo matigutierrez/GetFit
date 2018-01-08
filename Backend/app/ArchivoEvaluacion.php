@@ -12,7 +12,7 @@ class ArchivoEvaluacion extends Model
     protected $fillable = ['ear_nombre', 'ear_archivo'];
 
     public function evaluacion() {
-    	return $this->belongsTo('App\Evaluacion');
+    	return $this->belongsTo('App\Evaluacion', 'tgf_evaluacion_id');
     }
 
 }

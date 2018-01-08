@@ -12,8 +12,12 @@ class Usuario extends Model
     protected $fillable = ['usu_fecha_registro', 'usu_correo'];
     protected $hidden = ['usu_pass'];
 
+    public function rol() {
+        return $this->belongsTo('App\Rol', 'tgf_rol_id');
+    }
+
     public function cliente() {
-    	return $this->belongsTo('App\Cliente');
+    	return $this->belongsTo('App\Cliente', 'tgf_cliente_id');
     }
 
     public function sedes() {

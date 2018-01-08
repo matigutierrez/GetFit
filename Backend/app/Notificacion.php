@@ -16,6 +16,6 @@ class Notificacion extends Model
     }
 
     public function archivos() {
-    	return $this->hasMany('App\Archivo');
+    	return $this->hasMany('App\Archivo', 'tgf_notificacion_id');
     }
 }

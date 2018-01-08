@@ -12,11 +12,19 @@ class Cliente extends Model
     protected $fillable = ['cli_rut', 'cli_nombres', 'cli_apellidos', 'cli_numerotelefonico', 'cli_direccion', 'cli_huella'];
 
     public function usuario() {
-    	return $this->hasOne('App\Usuario');
+    	return $this->hasOne('App\Usuario', 'tgf_cliente_id');
     }
 
     public function evaluaciones() {
-    	return $this->hasMany('App\Evaluacion');
+    	return $this->hasMany('App\Evaluacion', 'tgf_cliente_id');
+    }
+
+    public function fotos() {
+		return $this->hasMany('App\Foto', 'tgf_cliente_id');
+    }
+
+    public function contratos() {
+        return $this->hasMany('App\Contrato', 'tgf_cliente_id');
     }
 
 }

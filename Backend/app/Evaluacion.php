@@ -12,11 +12,11 @@ class Evaluacion extends Model
     protected $fillable = ['eva_archivo', 'eva_fecha'];
 
     public function cliente() {
-    	return $this->belongsTo('App\Cliente');
+    	return $this->belongsTo('App\Cliente', 'tgf_cliente_id');
     }
 
     public function archivos() {
-    	return $this->hasMany('App\ArchivoEvaluacion');
+    	return $this->hasMany('App\ArchivoEvaluacion', 'tgf_evaluacion_id');
     }
 
 }
