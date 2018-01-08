@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Sede;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class SedeController extends Controller
 {
@@ -14,7 +15,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::with('usuarios')->get();
+        return Sede::all();
     }
 
     /**
@@ -35,27 +36,32 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        return Sede::insertGetId([
+            'sed_nombre' => $request->sed_nombre,
+            'sed_direccion' => $request->sed_direccion,
+        ]);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sede  $sede
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Sede $sede)
+    public function show($id)
     {
-        //
+        return Sede::find($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Sede  $sede
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sede $sede)
+    public function edit($id)
     {
         //
     }
@@ -64,22 +70,25 @@ class SedeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sede  $sede
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sede $sede)
+    public function update(Request $request, $id)
     {
-        //
+        $sede = Sede::find($id);
+        $sede->update($request->all());
+        return ['update' => true];
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sede  $sede
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sede $sede)
+    public function destroy($id)
     {
-        //
+        Sede::destroy($id);
+        return ['delete' => true];
     }
 }
