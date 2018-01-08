@@ -17,6 +17,7 @@ class CreateArchivoNotificacionTable extends Migration
             $table->increments('id');
             $table->integer('tgf_notificion_id')->unsigned();
             $table->foreign('tgf_notificion_id')->references('id')->on('tgf_notificacion')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('arn_nombre');
             $table->binary('arn_archivo');
         });
     }

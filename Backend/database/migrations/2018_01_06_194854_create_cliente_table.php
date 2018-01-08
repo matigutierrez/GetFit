@@ -15,7 +15,7 @@ class CreateClienteTable extends Migration
     {
         Schema::create('tgf_cliente', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('cli_rut', 30);
+            $table->string('cli_rut', 30)->unique();
             $table->string('cli_nombres');
             $table->string('cli_apellidos');
             $table->string('cli_numerotelefonico', 30)->nullable();
