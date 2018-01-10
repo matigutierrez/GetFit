@@ -12,6 +12,8 @@ class Usuario extends Model
     protected $fillable = ['usu_fecha_registro', 'usu_correo'];
     protected $hidden = ['usu_pass'];
 
+    const CREATED_AT = 'usu_fecha_registro';
+
     public function rol() {
         return $this->belongsTo('App\Rol', 'tgf_rol_id');
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\Asistencia;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class AsistenciaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return Asistencia::all();
     }
 
     /**
@@ -35,12 +35,11 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
+        return Asistencia::insertGetId([
+            'tgf_contrato_id' -> $request->tgf_contrato_id,
+            'tgf_horario_id' -> $request->tgf_horario_id,
+            'asi_presente' -> $request->asi_presente,
         ]);
-
     }
 
     /**
@@ -51,7 +50,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return Asistencia::find($id);
     }
 
     /**
@@ -74,9 +73,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $asistencia = Asistencia::find($id);
+        $asistencia->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +86,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        Asistencia::dsetroy($id);
+        return ['deleted' => true];
     }
 }

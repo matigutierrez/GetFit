@@ -18,7 +18,7 @@ class CreateCobDesApTable extends Migration
             $table->integer('tgf_cobranza_id')->unsigned();
             $table->foreign('tgf_cobranza_id')->references('id')->on('tgf_cobranza')->onDelete('cascade')->onUpdate('cascade');
             $table->text('cda_descripcion');
-            $table->integer('cda_cantidad');
+            $table->integer('cda_monto');
         });
     }
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\DescuentoCobranza;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class DescuentoCobranzaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return DescuentoCobranza::all();
     }
 
     /**
@@ -35,12 +35,11 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
+        return DescuentoCobranza::insertGetId([
+            'tgf_cobranza_id' => $request->tgf_cobranza_id,
+            'cda_descripcion' => $request->cda_descripcion,
+            'cda_monto' => $request->cda_monto,
         ]);
-
     }
 
     /**
@@ -51,7 +50,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return DescuentoCobranza::find($id);
     }
 
     /**
@@ -74,9 +73,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $descuentoCobranza = DescuentoCobranza::find($id);
+        $descuentoCobranza->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +86,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        DescuentoCobranza::destroy($id);
+        return ['deleted' => true];
     }
 }

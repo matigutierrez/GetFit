@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\Plan;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class PlanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return Plan::all();
     }
 
     /**
@@ -35,12 +35,12 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
+        return Plan::insertGetId([
+            'tgf_sede_id' -> $request->tgf_sede_id,
+            'pla_nombre' => $request->pla_nombre,
+            'pla_descripcion' => $request->pla_descripcion,
+            'pla_costo' => $request->pla_costo,
         ]);
-
     }
 
     /**
@@ -51,7 +51,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return Plan::find($id);
     }
 
     /**
@@ -74,9 +74,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $plan = Plan::find($id);
+        $plan->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +87,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        Plan::destroy($id);
+        return ['deleted' => true];
     }
 }

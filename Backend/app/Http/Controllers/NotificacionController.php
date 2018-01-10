@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\Notificacion;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class NotificacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return Notificacion::all();
     }
 
     /**
@@ -35,12 +35,10 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
-        ]);
-
+        return Notificacion::insertGetId([
+            'not_titulo' => $request->not_titulo,
+            'not_contenido' => $request->not_contenido,
+        ])
     }
 
     /**
@@ -51,7 +49,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return Notificacion::find($id);
     }
 
     /**
@@ -74,9 +72,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $notificacon = Notificacion::find($id);
+        $notificacion->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +85,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        Notificacion::destroy($id);
+        return ['deleted' => true];
     }
 }

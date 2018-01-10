@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\Cliente;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class ClienteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return Cliente::all();
     }
 
     /**
@@ -35,12 +35,14 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
+        return Cliente::insertGetId([       // Por ahora esta entidad no posee claves foraneas, pero si relaciones
+            'cli_rut' => $request->cli_rut,
+            'cli_nombres' => $request->cli_nombres,
+            'cli_apellidos' => $request->cli_apellidos,
+            'cli_numerotelefonico' => $request->cli_numerotelefonico,
+            'cli_direccion' => $request->cli_direccion,
+            'cli_huella' => $request->cli_huella,
         ]);
-
     }
 
     /**
@@ -51,7 +53,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return Cliente::find($id);
     }
 
     /**
@@ -74,9 +76,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $cliente = Cliente::find($id);
+        $cliente->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +89,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        Cliente::destroy($id);
+        return ['deleted' => true];
     }
 }

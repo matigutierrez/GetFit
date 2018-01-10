@@ -14,7 +14,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return Usuario::all();
     }
 
     /**
@@ -35,18 +35,23 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Usuario::insertGetId([
+            'tgf_rol_id' => $request->tgf_rol_id,
+            'tgf_cliente_id' => $request->tgf_cliente_id,
+            'usu_correo' => $request->usu_correo,
+            'usu_pass' => crypt($request->usu_pass),
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show($id)
     {
-        //
+        return Usuario::find($id);
     }
 
     /**
@@ -64,22 +69,25 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, $id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->update($request->all());
+        return ['updated' => true];
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        //
+        Usuario::destroy($id);
+        return ['deleted' => true];
     }
 }

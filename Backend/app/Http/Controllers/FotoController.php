@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\Foto;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class FotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return Foto::all();
     }
 
     /**
@@ -35,12 +35,10 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
+        return Foto::insertGetId([
+            'tgf_cliente_id' -> $request->tgf_cliente_id,
+            'fot_archivo' -> $request->fot_archivo,
         ]);
-
     }
 
     /**
@@ -51,7 +49,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return Foto::find($id);
     }
 
     /**
@@ -74,9 +72,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $foto = Foto::find($id);
+        $foto->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +85,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        Foto::destroy($id);
+        return ['deleted' => true];
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\ArchivoNotificacion;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class ArchivoNotificacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return ArchivoNotificacion:all();
     }
 
     /**
@@ -35,12 +35,11 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
+        return ArchivoNotificacion::insertGetId([
+            'tgf_notificacion_id' => $request->tgf_notificacion_id,
+            'arn_nombre' => $request->arn_nombre,
+            'arn_archivo' => $request->arn_archivo,
         ]);
-
     }
 
     /**
@@ -51,7 +50,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return ArchivoNotificacion::find($id);
     }
 
     /**
@@ -74,9 +73,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $archivoNotificacion = ArchivoNotificacion::find($id);
+        $archivoNotificacion->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +86,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        ArchivoNotificacion::destroy($id);
+        return ['deleted' => true];
     }
 }

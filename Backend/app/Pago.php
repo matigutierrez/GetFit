@@ -11,6 +11,8 @@ class Pago extends Model
 
     protected $fillable = ['pag_fecha'];
 
+    const CREATED_AT = 'pag_fecha';
+
     public function cobranza() {
     	return $this->belongsTo('App\Cobranza', 'tgf_cobranza_id');
     }

@@ -11,6 +11,8 @@ class Cobranza extends Model
 
     protected $fillable = ['cob_monto', 'cob_fecha'];
 
+    const CREATED_AT = 'cob_fecha';
+
     public function contrato() {
     	return $this->belongsTo('App\Contrato', 'tgf_contrato_id');
     }

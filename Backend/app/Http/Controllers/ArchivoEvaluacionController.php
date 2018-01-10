@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
+use App\ArchivoEvaluacion;
 use Illuminate\Http\Request;
 
-class SedeController extends Controller
+class ArchivoEvaluacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return ArchivoEvaluacion::all();
     }
 
     /**
@@ -35,12 +35,11 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
+        return ArchivoEvaluacion::insertGetId([
+            'tgf_evaluacion_id' => $request->tgf_evaluacion_id,
+            'ear_nombre' => $request->ear_nombre,
+            'ear_archivo' => $request->ear_archivo,
         ]);
-
     }
 
     /**
@@ -51,7 +50,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        return ArchivoEvaluacion::find($id);
     }
 
     /**
@@ -74,9 +73,9 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        $archivoEvaluacion = ArchivoEvaluacion::find($id);
+        $archivoEvaluacion->update($request->all());
+        return ['updated' => true];
     }
 
     /**
@@ -87,7 +86,7 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
+        ArchivoEvaluacion::destroy($id);
+        return ['deleted' => true];
     }
 }

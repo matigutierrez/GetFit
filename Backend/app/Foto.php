@@ -11,6 +11,8 @@ class Foto extends Model
 
     protected $fillable = ['fot_fecha', 'fot_archivo'];
 
+    const CREATED_AT = 'fot_fecha';
+
     public function cliente() {
     	return $this->belongsTo('App\Cliente', 'tgf_cliente_id');
     }
