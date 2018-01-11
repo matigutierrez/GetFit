@@ -16,13 +16,13 @@ class UsuarioSeeder extends Seeder
           	'tgf_rol_id' => '1',
           	'tgf_cliente_id' => '1',
           	'usu_correo' => 'm.gutierrez06@ufromail.cl',
-          	'usu_pass' => bcrypt('1234')
+          	'password' => bcrypt('1234')
           ),
           array(
           	'tgf_rol_id' => '2',
           	'tgf_cliente_id' => '1',
-          	'usu_correo' => 'm.gutierrez06@ufromail.cl',
-          	'usu_pass' => bcrypt('1234')
+          	'usu_correo' => 'm.gutierrez08@ufromail.cl',
+          	'password' => bcrypt('12345')
           )
         ]);
     }

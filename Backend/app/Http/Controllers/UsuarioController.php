@@ -39,7 +39,7 @@ class UsuarioController extends Controller
             'tgf_rol_id' => $request->tgf_rol_id,
             'tgf_cliente_id' => $request->tgf_cliente_id,
             'usu_correo' => $request->usu_correo,
-            'usu_pass' => crypt($request->usu_pass),
+            'password' => bcrypt($request->usu_pass),
         ]);
     }
 

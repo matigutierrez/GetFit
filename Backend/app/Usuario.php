@@ -3,14 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = 'tgf_usuario';
     protected $primarykey = 'id';
 
-    protected $fillable = ['usu_fecha_registro', 'usu_correo'];
-    protected $hidden = ['usu_pass'];
+    protected $fillable = ['usu_fecha_registro', 'usu_correo', 'password'];
+    protected $hidden = ['password', 'remember_token',];
 
     const CREATED_AT = 'usu_fecha_registro';
 
@@ -29,5 +33,6 @@ class Usuario extends Model
     public function notificaciones() {
         return $this->hasMany('App\Notificacion', 'tgf_notificacion_usuario', 'tgf_usu_id', 'tgf_not_id');
     }
+
 
 }

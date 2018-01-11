@@ -21,7 +21,7 @@ class CreateUsuarioTable extends Migration
             $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('usu_fecha_registro');
             $table->string('usu_correo');
-            $table->string('usu_pass');
+            $table->string('password');
         });
     }
 
