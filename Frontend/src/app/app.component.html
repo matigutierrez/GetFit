@@ -1,0 +1,14 @@
+<nav class="pink lighten-2">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">
+      <img class="logo" src="../../assets/logo.png">
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a [routerLink]="['/']" >home</a></li>
+      <li *ngIf="identity && token"><a [routerLink]="['/']" >registro</a></li>
+      <li *ngIf="identity && token"><a [routerLink]="['/login', 1]" >salir</a></li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

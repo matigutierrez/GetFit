@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col s6 offset-s3">
+    <div class="container">
+      <form class="fond" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col s4 offset-s4 center-align">
+            <img class="login" src="../../assets/sesion.png">
+          </div>
+        </div>
+        <div class="col s12">
+          <div class="row">
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input id="last_name" type="text" class="validate" name="usu_correo" #usu_correo="ngModel" [(ngModel)]="user.usu_correo">
+              <label for="icon_prefix">Email</label>
+            </div>
+          </div>
+        </div>
+        <div class="col s12">
+          <div class="row">
+            <div class="input-field">
+              <i class="material-icons prefix">vpn_key</i>
+              <input id="password" type="password" class="validate" name="password" #password="ngModel" [(ngModel)]="user.password">
+              <label for="icon_prefix">Password</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <button class="waves-effect waves-light btn-large pink lighten-2" type="submit" value="Entrar" name="action">Ingresar</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <input type="checkbox" id="test5" />
+            <label class="check" for="test5">Recordarme</label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
