@@ -13,7 +13,7 @@ export class RegistroComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router
   ){
-    this.title = 'Component del registro'; 
+    this.title = 'hola'; 
   }
 
   ngOnInit(){

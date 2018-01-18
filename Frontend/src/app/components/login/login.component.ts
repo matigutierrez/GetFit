@@ -30,6 +30,16 @@ export class LoginComponent implements OnInit {
     //console.log(this._userService.getIdentity());
     //console.log(this._userService.getToken());
     this.logout();
+    this.redirectIfIdentity();
+  }
+
+  redirectIfIdentity(){
+    let identity = this._userService.getIdentity();
+    let token = this._userService.getToken();
+
+    if (identity != null && token != null) {
+      this._router.navigate(["/registro"]);
+    }
   }
 
   onSubmit(){

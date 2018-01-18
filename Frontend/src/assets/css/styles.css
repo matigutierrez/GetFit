@@ -22,16 +22,26 @@ nav{
   font-size: 5px;
 }
 
-body { 
+body {
   background-image: url("../fondo.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100%;  
+  height: 100%;
+  width: 100%;
 }
 
-.logo {
-  margin-top: 5px;
-  height: 10%;
-  width: 10%;
+
+html{
+  width: 100%;
+  height: 100%;
+}
+
+.padlog{
+  margin-top: 4%
+}
+
+input{
+  border: 1px solid #ccc;
+  background-color: #E6E6E6;
 }

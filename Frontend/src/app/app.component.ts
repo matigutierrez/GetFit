@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
+declare var $:any;
+declare var jQuery:any;
 
 @Component({
   selector: 'app-root',
