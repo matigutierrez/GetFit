@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { MaterializeModule } from 'angular2-materialize';
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -19,7 +20,8 @@ import { RegistroComponent } from './components/registro/registro.component';
     FormsModule,
     HttpModule,
     routing,
-    MaterializeModule
+    MaterializeModule,
+    ChartsModule
   ],
   providers: [
   	appRoutingProviders

@@ -24,5 +24,13 @@ export class AppComponent {
   ngOnInit(){
   	console.log(this._userService.getIdentity());
     console.log(this._userService.getToken());
+    this.ajusteLogin();
+  }
+
+  ajusteLogin(){
+    if (!this.identity && !this.token) {
+      $("main").css("padding-left", "0px");
+      $("header").css("padding-left", "0px");
+    }
   }
 }

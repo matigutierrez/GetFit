@@ -9,8 +9,9 @@ button {
 }
 
 .fond {
-  border: 1px solid #ccc;
+  border: 1px solid #E6E6E6;
   padding: 0.01em 16px;
+  border-radius: 16px;
   background-color: white;
 }
 
@@ -23,12 +24,7 @@ nav{
 }
 
 body {
-  background-image: url("../fondo.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
+  background-color: #F2F2F2;
 }
 
 
@@ -57,5 +53,5 @@ header, main, footer {
 }
 
 .pad{
- padding: 0 !important;
+ padding: 1%;
 }
