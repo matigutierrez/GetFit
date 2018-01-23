@@ -45,4 +45,10 @@ export class UserService{
 
     return this.token;
   }
+
+  getUsuarios(token){
+    let headers = new Headers({'Authorization': token});
+
+    return this._http.get(this.url+'usuario', {headers: headers}).map(res => res.json());
+  }
 }

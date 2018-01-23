@@ -55,3 +55,8 @@ header, main, footer {
 .pad{
  padding: 1%;
 }
+
+.cards{
+  height: 50px;
+  width: 50px;
+}

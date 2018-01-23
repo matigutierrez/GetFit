@@ -8,12 +8,14 @@ import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { PrincipalComponent } from './components/principal/principal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     let token = this._userService.getToken();
 
     if (identity != null && token != null) {
-      this._router.navigate(["/registro"]);
+      this._router.navigate(["/getfit"]);
     }
   }
 
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           if (!this.identify.status && !this.token.status) {
             localStorage.setItem('identity', JSON.stringify(this.identify));
             localStorage.setItem('token', JSON.stringify(this.token));
-            window.location.href = '/registro';
+            window.location.href = '/getfit';
           }
         }
       },
