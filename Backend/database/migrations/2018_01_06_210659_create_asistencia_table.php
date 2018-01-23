@@ -20,6 +20,7 @@ class CreateAsistenciaTable extends Migration
             $table->integer('tgf_horario_id')->unsigned();
             $table->foreign('tgf_horario_id')->references('id')->on('tgf_horario')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('asi_presente');
+            $table->timestamp('asi_fecha');
         });
     }
 

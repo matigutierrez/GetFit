@@ -14,7 +14,7 @@ class ArchivoNotificacionController extends Controller
      */
     public function index()
     {
-        return ArchivoNotificacion:all();
+        return ArchivoNotificacion::all();
     }
 
     /**
