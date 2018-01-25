@@ -7,7 +7,7 @@ use JWTAuth;
 use App\Usuario;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class AuthController extends Controller
+class AuthenticateController extends Controller
 {
   public function authenticate(Request $request) {
         // grab credentials from the request
