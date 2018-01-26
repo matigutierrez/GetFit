@@ -9,12 +9,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { PrincipalComponent } from './components/principal/principal.component';
+import { ChartlineClienteComponent } from './components/chartlineCliente/chartlineCliente.component';
+import { BarChartContratoComponent } from './components/barchartContratos/barchartContrato.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistroComponent,
+    ChartlineClienteComponent,
+    BarChartContratoComponent,
     PrincipalComponent
   ],
   imports: [
