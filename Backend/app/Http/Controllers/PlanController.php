@@ -14,7 +14,7 @@ class PlanController extends Controller
      */
     public function index()
     {
-        return Plan::all();
+        return Plan::with('horarios','contratos.cliente')->get();
     }
 
     /**

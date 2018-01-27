@@ -6,7 +6,7 @@ import {GLOBAL} from './global';
 import {UserService} from './user.service';
 
 @Injectable()
-export class ClienteService{
+export class PlanService{
   public url: string;
 
   constructor(
@@ -17,16 +17,16 @@ export class ClienteService{
     this.url = GLOBAL.url;
   }
 
-  registry(cliente){
-    let params = JSON.stringify(cliente);
+  registry(plan){
+    let params = JSON.stringify(plan);
     let headers = new Headers({'Authorization': this._userService.getToken()});
 
-    return this._http.post(this.url+'cliente', params, {headers: headers}).map(res => res.json());
+    return this._http.post(this.url+'plan', params, {headers: headers}).map(res => res.json());
   }
 
-  getCliente(){
+  getPlan(){
     let headers = new Headers({'Authorization': this._userService.getToken()});
 
-    return this._http.get(this.url+'cliente', {headers: headers}).map(res => res.json());
+    return this._http.get(this.url+'plan', {headers: headers}).map(res => res.json());
   }
 }

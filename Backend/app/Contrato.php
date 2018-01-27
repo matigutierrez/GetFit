@@ -26,7 +26,7 @@ class Contrato extends Model
     }
 
     public function cobranzas() {
-        return $this->hasMany('App\Cobranza', 'tgf_contrato_id')
+        return $this->hasMany('App\Cobranza', 'tgf_contrato_id');
     }
 
 }

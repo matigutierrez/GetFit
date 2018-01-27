@@ -7,13 +7,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 
 export class RegistroComponent implements OnInit {
-  public title: string;
+  
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router
   ){
-    this.title = 'hola'; 
+    
   }
 
   ngOnInit(){

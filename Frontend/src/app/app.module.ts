@@ -11,6 +11,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { PrincipalComponent } from './components/principal/principal.component';
 import { ChartlineClienteComponent } from './components/chartlineCliente/chartlineCliente.component';
 import { BarChartContratoComponent } from './components/barchartContratos/barchartContrato.component';
+import { PlanComponent } from './components/plan/plan.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BarChartContratoComponent } from './components/barchartContratos/barcha
     RegistroComponent,
     ChartlineClienteComponent,
     BarChartContratoComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    PlanComponent
   ],
   imports: [
     BrowserModule,
