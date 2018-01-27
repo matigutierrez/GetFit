@@ -18,7 +18,7 @@ class CreateFotoTable extends Migration
             $table->integer('tgf_cliente_id')->unsigned();
             $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('fot_fecha');
-            $table->binary('fot_archivo');
+            $table->binary('fot_archivo')->nullable();
         });
     }
 

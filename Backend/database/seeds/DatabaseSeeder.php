@@ -14,15 +14,22 @@ class DatabaseSeeder extends Seeder
         $this->call(NotificacionSeeder::class);
         $this->call(ArchivoNotificacionSeeder::class);
 
-        $this->call(RolTableSeeder::class);
+        $this->call(RolSeeder::class);
         $this->call(SedeSeeder::class);
+        $this->call(PlanSeeder::class);
+        $this->call(HorarioSeeder::class);
+        $this->call(ContratoSeeder::class);
+        $this->call(AsistenciaSeeder::class);
+        $this->call(CobranzaSeeder::class);
+        $this->call(MetodoPagoSeeder::class);
 
         $this->call(ClienteSeeder::class);
+        $this->call(FotoSeeder::class);
         $this->call(UsuarioSeeder::class);
 
         $this->call(EvaluacionSeeder::class);
         $this->call(ArchivoEvaluacionSeeder::class);
         
-        $this->call(SedeUsuarioTableSeeder::class);
+        $this->call(SedeUsuarioSeeder::class);
     }
 }
