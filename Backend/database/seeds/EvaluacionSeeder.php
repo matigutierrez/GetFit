@@ -13,9 +13,9 @@ class EvaluacionSeeder extends Seeder
     public function run()
     {
         DB::table('tgf_evaluacion')->insert([
-        	['tgf_cliente_id' => 1, 'eva_archivo' => null],
-        	['tgf_cliente_id' => 2, 'eva_archivo' => null],
-        	['tgf_cliente_id' => 2, 'eva_archivo' => Carbon::tomorrow()]
-        ])
+        	['tgf_cliente_id' => 1, 'eva_archivo' => null, 'eva_fecha' => Carbon::now()],
+        	['tgf_cliente_id' => 2, 'eva_archivo' => null, 'eva_fecha' => Carbon::now()],
+        	['tgf_cliente_id' => 2, 'eva_archivo' => null, 'eva_fecha' => Carbon::tomorrow()]
+        ]);
     }
 }

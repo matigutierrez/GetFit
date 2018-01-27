@@ -18,7 +18,7 @@ class CreateEvaluacionArchivoTable extends Migration
             $table->integer('tgf_evaluacion_id')->unsigned();
             $table->foreign('tgf_evaluacion_id')->references('id')->on('tgf_evaluacion')->onDelete('cascade')->onUpdate('cascade');
             $table->string('ear_nombre');
-            $table->binary('ear_archivo');
+            $table->binary('ear_archivo')->nullable();
         });
     }
 

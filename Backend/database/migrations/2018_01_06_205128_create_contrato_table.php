@@ -20,7 +20,7 @@ class CreateContratoTable extends Migration
             $table->integer('tgf_plan_id')->unsigned();
             $table->foreign('tgf_plan_id')->references('id')->on('tgf_plan')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('con_fecha_inicio');
-            $table->binary('con_acta');                 // Esta columna debe ser de tipo mediumblob
+            $table->binary('con_acta')->nullable();                 // Esta columna debe ser de tipo mediumblob
         });
     }
 

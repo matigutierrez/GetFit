@@ -17,7 +17,7 @@ class CreateEvaluacionTable extends Migration
             $table->increments('id');
             $table->integer('tgf_cliente_id')->unsigned();
             $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onDelete('cascade')->onUpdate('cascade');
-            $table->binary('eva_archivo');      // Esta columna debe ser de tipo mediumblob
+            $table->binary('eva_archivo')->nullable();      // Esta columna debe ser de tipo mediumblob
             $table->timestamp('eva_fecha');
         });
     }

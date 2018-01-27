@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call(NotificacionSeeder::class);
         $this->call(ArchivoNotificacionSeeder::class);
 
+        $this->call(ClienteSeeder::class);
+
         $this->call(RolSeeder::class);
         $this->call(SedeSeeder::class);
         $this->call(PlanSeeder::class);
@@ -23,7 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CobranzaSeeder::class);
         $this->call(MetodoPagoSeeder::class);
 
-        $this->call(ClienteSeeder::class);
         $this->call(FotoSeeder::class);
         $this->call(UsuarioSeeder::class);
 

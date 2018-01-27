@@ -15,10 +15,10 @@ class CreateArchivoNotificacionTable extends Migration
     {
         Schema::create('tgf_archivo_notificacion', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tgf_notificion_id')->unsigned();
-            $table->foreign('tgf_notificion_id')->references('id')->on('tgf_notificacion')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('tgf_notificacion_id')->unsigned();
+            $table->foreign('tgf_notificacion_id')->references('id')->on('tgf_notificacion')->onDelete('cascade')->onUpdate('cascade');
             $table->string('arn_nombre');
-            $table->binary('arn_archivo');
+            $table->binary('arn_archivo')->nullable();
         });
     }
 
