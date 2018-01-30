@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PlanService } from '../../services/plan.service';
+import { PlanService } from '../../../services/plan.service';
+import {MaterializeAction} from 'angular2-materialize';
 
 @Component({
   selector: 'plan',
@@ -10,6 +11,9 @@ import { PlanService } from '../../services/plan.service';
 
 export class PlanComponent implements OnInit {
   public planes: JSON[];
+  public modalActions = new EventEmitter<string|MaterializeAction>();
+  public parametros: string;
+  public clientes: JSON[];
 
   constructor(
     private _route: ActivatedRoute,
@@ -29,5 +33,14 @@ export class PlanComponent implements OnInit {
 
   ngOnInit(){
     console.log('el compenente registro a sido cargado');
+  }
+
+  openModal(contratos) {
+    this.modalActions.emit({action:"modal",params:['open']});
+    this.clientes = contratos;
+    console.log(this.clientes);
+  }
+  closeModal() {
+    this.modalActions.emit({action:"modal",params:['close']});
   }
 }

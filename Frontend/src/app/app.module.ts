@@ -7,21 +7,21 @@ import { MaterializeModule } from 'angular2-materialize';
 import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegistroComponent } from './components/registro/registro.component';
-import { PrincipalComponent } from './components/principal/principal.component';
-import { ChartlineClienteComponent } from './components/chartlineCliente/chartlineCliente.component';
-import { BarChartContratoComponent } from './components/barchartContratos/barchartContrato.component';
-import { PlanComponent } from './components/plan/plan.component';
+import { PrincipalComponent } from './components/vistaprincipal/principal/principal.component';
+import { ChartlineClienteComponent } from './components/vistaprincipal/chartlineCliente/chartlineCliente.component';
+import { BarChartContratoComponent } from './components/vistaprincipal/barchartContratos/barchartContrato.component';
+import { PlanComponent } from './components/planes/plan/plan.component';
+import { ClienteComponent } from './components/clientes/cliente/cliente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistroComponent,
     ChartlineClienteComponent,
     BarChartContratoComponent,
     PrincipalComponent,
-    PlanComponent
+    PlanComponent,
+    ClienteComponent
   ],
   imports: [
     BrowserModule,

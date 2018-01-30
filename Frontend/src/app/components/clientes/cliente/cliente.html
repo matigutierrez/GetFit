@@ -1,0 +1,75 @@
+<div *ngIf="!plan" class="progress">
+  <div class="indeterminate"></div>
+</div>
+<div *ngIf="plan">
+  <div class="card grey lighten-5 z-depth-1">
+    <div class="card-content black-text">
+      <span class="card-title">{{plan.pla_nombre}}</span>
+      <p>{{plan.pla_descripcion}}</p>
+    </div>
+  </div>
+  <div class="container">
+    <ul materialize="tabs" class="tabs">
+      <li class="tab col s3"><a class="active" href="#test1">Registrar Cliente</a></li>
+      <li class="tab col s3"><a href="#test2">Registrar Usuario</a></li>
+    </ul>
+  </div>
+  <div id="test1">
+    <form class="container fondo" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="col s12">
+        <h4 class="center-align">Registro Cliente</h4>
+        <div class="row">
+          <div class="row">
+            <div class="col s12">
+              <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input id="last_name" type="text" name="cli_rut" #cli_rut="ngModel" [(ngModel)]="cliente.cli_rut">
+                <label for="icon_prefix">cli_rut</label>
+              </div>
+            </div>
+          </div>
+          <div class="row"> 
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input id="last_name" type="text" name="usu_correo" #cli_nombres="ngModel" [(ngModel)]="cliente.cli_nombres">
+                <label for="icon_prefix">cli_nombres</label>
+              </div>
+            </div>
+            <div class="col m6">
+               <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input id="last_name" type="text" name="cli_apellidos" #cli_apellidos="ngModel" [(ngModel)]="cliente.cli_apellidos">
+                <label for="icon_prefix">cli_apellidos</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">local_phone</i>
+                <input id="last_name" type="text" name="cli_numerotelefonico" #cli_numerotelefonico="ngModel" [(ngModel)]="cliente.cli_numerotelefonico">
+                <label for="icon_prefix">cli_numerotelefonico</label>
+              </div>
+            </div>
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">place</i>
+                <input id="last_name" type="text" name="cli_direccion" #cli_direccion="ngModel" [(ngModel)]="cliente.cli_direccion">
+                <label for="icon_prefix">cli_direccion</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="container">
+            <button class="waves-effect waves-light btn-large blue-grey darken-2" type="submit" value="Entrar" name="action">Ingresar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="test2" class="col s12">Test 4</div>
+</div>

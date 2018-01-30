@@ -29,4 +29,18 @@ export class PlanService{
 
     return this._http.get(this.url+'plan', {headers: headers}).map(res => res.json());
   }
+
+  getPlanId(id){
+    let params = JSON.stringify(id);
+    let headers = new Headers({'Authorization': this._userService.getToken()});
+
+    return this._http.get(this.url+'plan/'+params, {headers: headers}).map(res => res.json());;
+  }
+
+  deletePlanId(id){
+    let params = JSON.stringify(id);
+    let headers = new Headers({'Authorization': this._userService.getToken()});
+
+    return this._http.delete(this.url+'plan/'+params, {headers: headers}).map(res => res.json());;
+  }
 }

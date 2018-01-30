@@ -65,3 +65,17 @@ canvas{
   width: 600px;
   height: 300px;
 }
+
+.paddingcard{
+  padding: 4%;
+}
+
+.sizecard{
+  height: 150px;
+}
+
+.fondo {
+  border: 1px solid #E6E6E6;
+  padding: 0.01em 16px;
+  background-color: white;
+}
