@@ -14,7 +14,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return Cliente::all();
+        return Cliente::with('usuario.rol', 'contratos.plan')->get();
     }
 
     /**

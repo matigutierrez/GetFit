@@ -1,0 +1,47 @@
+<div *ngIf="!clientes" class="progress">
+  <div class="indeterminate"></div>
+</div>
+<div *ngIf="clientes" class="row">
+  <div class="paddingcard">
+    <h3>Clientes</h3>
+    <div class="card">
+      <table class="responsive-table striped highlight">
+        <thead>
+          <tr>
+            <th>Rut</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Contratos</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes; index as i;"> 
+            <td>{{cliente.cli_rut}}</td>
+            <td>{{cliente.cli_nombres}}</td>
+            <td>{{cliente.cli_apellidos}}</td>
+            <td>{{cliente.cli_numerotelefonico}}</td>
+            <td>{{cliente.cli_direccion}}</td>
+            <td>
+              <a materialize="dropdown" class="right-align" [attr.data-activates]="'dropdown-'+i" ><i class="material-icons">assignment</i></a>
+              <ul id="dropdown-{{i}}" class='dropdown-content'>
+                <li *ngFor="let planes of cliente.contratos"><a>{{planes.plan.pla_nombre}}</a></li>
+              </ul>
+            </td>
+            <td>{{cliente.usuario.usu_correo}}</td>
+            <td>{{cliente.usuario.rol.rol_nombre}}</td>
+            <td><a><i class="material-icons">group_add</i></a></td>
+            <td><a><i class="material-icons">create</i></a></td>
+            <td><a><i class="material-icons">close</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,8 @@ import { ChartlineClienteComponent } from './components/vistaprincipal/chartline
 import { BarChartContratoComponent } from './components/vistaprincipal/barchartContratos/barchartContrato.component';
 import { PlanComponent } from './components/planes/plan/plan.component';
 import { ClienteComponent } from './components/clientes/cliente/cliente.component';
+import { CircleChartComponent } from './components/vistaprincipal/circlechart/circlechart.component';
+import { VistaClientesComponent } from './components/clientes/vistaclientes/vistaclientes.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ClienteComponent } from './components/clientes/cliente/cliente.componen
     BarChartContratoComponent,
     PrincipalComponent,
     PlanComponent,
-    ClienteComponent
+    ClienteComponent,
+    CircleChartComponent,
+    VistaClientesComponent
   ],
   imports: [
     BrowserModule,

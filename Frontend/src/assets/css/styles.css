@@ -79,3 +79,7 @@ canvas{
   padding: 0.01em 16px;
   background-color: white;
 }
+
+.principal{
+  height: 210px;
+}

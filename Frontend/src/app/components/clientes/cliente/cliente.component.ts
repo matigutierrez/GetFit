@@ -39,7 +39,7 @@ export class ClienteComponent implements OnInit {
           console.log(this.plan);
         },
         Error => {
-          console.log(<any>Error)
+          console.log(<any>Error);
         }
       );
     });
