@@ -83,3 +83,7 @@ canvas{
 .principal{
   height: 210px;
 }
+
+.padtable{
+  padding: 2%;
+}

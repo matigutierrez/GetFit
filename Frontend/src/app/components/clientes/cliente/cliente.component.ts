@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClienteService } from '../../../services/cliente.service';
 import { PlanService } from '../../../services/plan.service';
+import {MaterializeAction} from 'angular2-materialize';
 declare var $:any;
 declare var jQuery:any;
 
@@ -13,7 +14,8 @@ declare var jQuery:any;
 
 export class ClienteComponent implements OnInit {
   public cliente;
-  public plan: JSON;
+  public clientes: JSON[];
+  public modalActions = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private _route: ActivatedRoute,
@@ -30,19 +32,14 @@ export class ClienteComponent implements OnInit {
       "cli_direccion": "",
       "cli_huella": "",
     };
-
-    this._route.params.forEach((params: Params) => {
-      let plan = +params['plan'];
-      this._planService.getPlanId(plan).subscribe(
-        Response => {
-          this.plan = Response;
-          console.log(this.plan);
-        },
-        Error => {
-          console.log(<any>Error);
-        }
-      );
-    });
+    this._clienteService.getCliente().subscribe(
+      Response => {
+        this.clientes = Response;
+        console.log(this.clientes);
+      }, Error => {
+        console.log(<any>Error);
+      }
+    );
   }
 
   ngOnInit(){
@@ -51,6 +48,13 @@ export class ClienteComponent implements OnInit {
 
   onSubmit(){
     console.log(this.cliente);
-    $('ul.tabs').tabs('select_tab', 'test2');
+  }
+
+  openModal(contratos) {
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+  
+  closeModal() {
+    this.modalActions.emit({action:"modal",params:['close']});
   }
 }

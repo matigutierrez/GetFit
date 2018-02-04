@@ -5,15 +5,13 @@ import { LoginComponent } from './components/login/login.component';
 import { PrincipalComponent } from './components/vistaprincipal/principal/principal.component';
 import { PlanComponent } from './components/planes/plan/plan.component';
 import { ClienteComponent } from './components/clientes/cliente/cliente.component';
-import { VistaClientesComponent } from './components/clientes/vistaclientes/vistaclientes.component';
 
 const appRoutes: Routes = [
   {path:'', component: LoginComponent},
   {path:'login', component: LoginComponent},
   {path:'login/:id', component: LoginComponent},
   {path:'getfit', component: PrincipalComponent},
-  {path:'clientes', component: VistaClientesComponent},
-  {path:'cliente', component: ClienteComponent},
+  {path:'clientes', component: ClienteComponent},
   {path:'cliente/Grupo/:plan', component: ClienteComponent},
   {path: 'plan', component: PlanComponent},
   {path:'**', component: LoginComponent}

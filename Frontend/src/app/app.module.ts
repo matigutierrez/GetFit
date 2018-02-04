@@ -13,7 +13,6 @@ import { BarChartContratoComponent } from './components/vistaprincipal/barchartC
 import { PlanComponent } from './components/planes/plan/plan.component';
 import { ClienteComponent } from './components/clientes/cliente/cliente.component';
 import { CircleChartComponent } from './components/vistaprincipal/circlechart/circlechart.component';
-import { VistaClientesComponent } from './components/clientes/vistaclientes/vistaclientes.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,7 @@ import { VistaClientesComponent } from './components/clientes/vistaclientes/vist
     PrincipalComponent,
     PlanComponent,
     ClienteComponent,
-    CircleChartComponent,
-    VistaClientesComponent
+    CircleChartComponent
   ],
   imports: [
     BrowserModule,
