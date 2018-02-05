@@ -27,4 +27,8 @@ class Cliente extends Model
         return $this->hasMany('App\Contrato', 'tgf_cliente_id');
     }
 
+    public function huella() {
+        return $this->hasOne('App\Huella', 'tgf_cliente_id');
+    }
+
 }

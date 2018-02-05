@@ -17,7 +17,7 @@ class CreateUsuarioTable extends Migration
             $table->increments('id');
             $table->integer('tgf_rol_id')->unsigned();
             $table->foreign('tgf_rol_id')->references('id')->on('tgf_rol')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('tgf_cliente_id')->unsigned();
+            $table->integer('tgf_cliente_id')->unsigned()->nullable();
             $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('usu_fecha_registro');
             $table->string('usu_correo');

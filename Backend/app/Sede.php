@@ -19,4 +19,8 @@ class Sede extends Model
     	return $this->hasMany('App\Plan', 'tgf_sede_id');
     }
 
+    public function capturasHuellas() {
+    	return $this->hasMany('App\CapturaHuella', 'tgf_sede_id');
+    }
+
 }
