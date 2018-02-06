@@ -90,4 +90,45 @@ class UsuarioController extends Controller
         Usuario::destroy($id);
         return ['deleted' => true];
     }
+
+    /**
+     * Obtener el rol del usuario
+     *
+     * @param  int $id
+     * @return \App\Rol
+     */
+    public function rol($id) {
+        return Usuario::find($id)->rol;
+    }
+
+    /**
+     * Obtener el cliente del usuario
+     *
+     * @param  int $id
+     * @return \App\Cliente
+     */
+    public function cliente($id) {
+        return Usuario::find($id)->cliente;
+    }
+
+    /**
+     * Obtener las sedes del usuario
+     *
+     * @param  int $id
+     * @return \App\Sede
+     */
+    public function sedes($id) {
+        return Usuario::find($id)->sedes;
+    }
+
+    /**
+     * Obtener las notificaciones del usuario
+     *
+     * @param  int $id
+     * @return \App\Notificacion
+     */
+    public function notificaciones($id) {
+        return Usuario::find($id)->notificaciones;
+    }
+
 }

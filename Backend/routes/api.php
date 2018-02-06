@@ -14,24 +14,47 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => ['jwt.auth']], function () {
+
 	Route::apiResource('archivoEvaluacion', 'ArchivoEvaluacionController');
+
 	Route::apiResource('archivoNotificacion', 'ArchivoNotificacionController');
+
 	Route::apiResource('asistencia', 'AsistenciaController');
+
 	Route::apiResource('cliente', 'ClienteController');
+
 	Route::apiResource('cobranza', 'CobranzaController');
+
 	Route::apiResource('contrato', 'ContratoController');
+
 	Route::apiResource('descuentoCobranza', 'DescuentoCobranzaController');
+
 	Route::apiResource('descuentoPlan', 'DescuentoPlanController');
+
 	Route::apiResource('evaluacion', 'EvaluacionController');
+
 	Route::apiResource('foto', 'FotoController');
+
 	Route::apiResource('horario', 'HorarioController');
+
 	Route::apiResource('metodopago', 'MetodoPagoController');
+
 	Route::apiResource('notificacion', 'NotificacionController');
+
 	Route::apiResource('pago', 'PagoController');
+
 	Route::apiResource('plan', 'PlanController');
+
 	Route::apiResource('rol', 'RolController');
+
 	Route::apiResource('sede', 'SedeController');
+
 	Route::apiResource('usuario', 'UsuarioController');
+	Route::get('usuario/{id}/rol', 'UsuarioController@rol');
+	Route::get('usuario/{id}/cliente', 'UsuarioController@cliente');
+	Route::get('usuario/{id}/sedes', 'UsuarioController@sedes');
+	Route::get('usuario/{id}/notificaciones', 'UsuarioController@notificaciones');
+
 });
 
 Route::post('login', 'AuthenticateController@authenticate');
