@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use App\Usuario;
 use Illuminate\Http\Request;
 
@@ -89,6 +90,16 @@ class UsuarioController extends Controller
     {
         Usuario::destroy($id);
         return ['deleted' => true];
+    }
+
+    /**
+     * Obtener el rol del usuario con sesion
+     *
+     * @param  int $id
+     * @return \App\Rol
+     */
+    public function rolSesion(AuthenticateController $auth) {
+        return $auth->getAuthenticatedUser()->rol;
     }
 
     /**

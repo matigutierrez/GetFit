@@ -92,4 +92,55 @@ class ClienteController extends Controller
         Cliente::destroy($id);
         return ['deleted' => true];
     }
+
+    /**
+     * Obtener el usuario de un cliente
+     *
+     * @param  int  $id
+     * @return \App\Usuario
+     */
+    public function usuario($id) {
+        return Cliente::find($id)->usuario;
+    }
+
+    /**
+     * Obtener evaluaciones de un cliente
+     *
+     * @param  int  $id
+     * @return \App\Evaluacion
+     */
+    public function evaluaciones($id) {
+        return Cliente::find($id)->evaluaciones;
+    }
+
+    /**
+     * Obtener fotos de un cliente
+     * 
+     * @param  int  $id
+     * @return \App\Foto
+     */
+    public function fotos($id) {
+        return Cliente::find($id)->fotos;
+    }
+
+    /**
+     * Obtener contratos de un cliente
+     *
+     * @param  int  $id
+     * @return \App\Contrato
+     */
+    public function contratos($id) {
+        return Cliente::find($id)->contratos;
+    }
+
+    /**
+     * Obtener huella de un cliente
+     * 
+     * @param  int  $id
+     * @return \App\Huella
+     */
+    public function huella($id) {
+        return Cliente::find($id)->huella;
+    }
+
 }

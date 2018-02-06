@@ -22,6 +22,11 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('asistencia', 'AsistenciaController');
 
 	Route::apiResource('cliente', 'ClienteController');
+	Route::get('cliente/{id}/usuario', 'ClienteController@usuario');
+	Route::get('cliente/{id}/evaluaciones', 'ClienteController@evaluaciones');
+	Route::get('cliente/{id}/fotos', 'ClienteController@fotos');
+	Route::get('cliente/{id}/contratos', 'ClienteController@contratos');
+	Route::get('cliente/{id}/huella', 'ClienteController@huella');
 
 	Route::apiResource('cobranza', 'CobranzaController');
 
@@ -50,6 +55,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('sede', 'SedeController');
 
 	Route::apiResource('usuario', 'UsuarioController');
+	Route::get('usuario/rol', 'UsuarioController@rolSesion');
 	Route::get('usuario/{id}/rol', 'UsuarioController@rol');
 	Route::get('usuario/{id}/cliente', 'UsuarioController@cliente');
 	Route::get('usuario/{id}/sedes', 'UsuarioController@sedes');
