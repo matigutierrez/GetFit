@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from './global';
@@ -10,16 +10,18 @@ export class UserService{
   public identity;
   public token;
 
-  constructor(private _http: Http){
+  constructor(
+    public _http: HttpClient
+  ){
     this.url = GLOBAL.url;
   }
 
-  signup(user_to_json){
+  signup(user_to_json): Observable<any>{
     let json = JSON.stringify(user_to_json);
     let params = json;
-    let headers = new Headers({'Content-Type': 'application/json'});
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this._http.post(this.url+'login', params, {headers: headers}).map(res => res.json());
+    return this._http.post(this.url+'login', params, {headers: headers});
   }
 
   getIdentity(){
@@ -46,9 +48,9 @@ export class UserService{
     return this.token;
   }
 
-  getUsuarios(){
-    let headers = new Headers({'Authorization': this.getToken()});
+  getUsuarios(): Observable<any>{
+    let headers = new HttpHeaders().set('Authorization', this.getToken());
 
-    return this._http.get(this.url+'usuario', {headers: headers}).map(res => res.json());
+    return this._http.get(this.url+'usuario', {headers: headers});
   }
 }
