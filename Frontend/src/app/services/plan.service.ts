@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from './global';
@@ -10,37 +10,37 @@ export class PlanService{
   public url: string;
 
   constructor(
-    private _http: Http,
+    private _http: HttpClient,
     private _userService: UserService
 
   ){
     this.url = GLOBAL.url;
   }
 
-  registry(plan){
+  registry(plan): Observable<any>{
     let params = JSON.stringify(plan);
-    let headers = new Headers({'Authorization': this._userService.getToken()});
+    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.post(this.url+'plan', params, {headers: headers}).map(res => res.json());
+    return this._http.post(this.url+'plan', params, {headers: headers});
   }
 
-  getPlan(){
-    let headers = new Headers({'Authorization': this._userService.getToken()});
+  getPlan(): Observable<any>{
+    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'plan', {headers: headers}).map(res => res.json());
+    return this._http.get(this.url+'plan', {headers: headers});
   }
 
-  getPlanId(id){
+  getPlanId(id): Observable<any>{
     let params = JSON.stringify(id);
-    let headers = new Headers({'Authorization': this._userService.getToken()});
+    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'plan/'+params, {headers: headers}).map(res => res.json());;
+    return this._http.get(this.url+'plan/'+params, {headers: headers});
   }
 
-  deletePlanId(id){
+  deletePlanId(id): Observable<any>{
     let params = JSON.stringify(id);
-    let headers = new Headers({'Authorization': this._userService.getToken()});
+    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.delete(this.url+'plan/'+params, {headers: headers}).map(res => res.json());;
+    return this._http.delete(this.url+'plan/'+params, {headers: headers});
   }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClienteService } from '../../../services/cliente.service';
+import { Cliente } from '../../../models/cliente';
 import { PlanService } from '../../../services/plan.service';
 import {MaterializeAction} from 'angular2-materialize';
 declare var $:any;
@@ -33,11 +34,11 @@ export class ClienteComponent implements OnInit {
       "cli_huella": "",
     };
     this._clienteService.getCliente().subscribe(
-      Response => {
+      Response  => {
+        console.log(Response);
         this.clientes = Response;
-        console.log(this.clientes);
-      }, Error => {
-        console.log(<any>Error);
+      }, error => {
+        console.log(<any>error);
       }
     );
   }
