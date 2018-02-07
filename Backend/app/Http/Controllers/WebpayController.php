@@ -48,7 +48,7 @@ class WebpayController extends Controller
     }
 
     public function thanks() {
-        return "Hola mundo!";
+        return "Gracias por su compra";
     }
 
 }

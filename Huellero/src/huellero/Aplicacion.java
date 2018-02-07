@@ -19,36 +19,23 @@ public class Aplicacion {
     
     public static void main(String [] args) throws Exception {
         
-        System.out.println("Lector de Huella Iniciado");
-        
+        // Inicializar lector de huellas
+        System.out.println("Software Lector de Huella Iniciado");
         Lector                  lector      = new Lector();
-        CapturaHuellaService    service     = CapturaHuellaService.instance;
+        CapturaHuellaService    service     = CapturaHuellaService.instance;    // Cliente REST
         
-        while (true) {
-            
-            DPFPSample sample = lector.getSample();
-            
-            if ( sample != null ) {
-                
-                CapturaHuella   captura = new CapturaHuella();
-                byte []         muestra = sample.serialize();
-                
-                captura.setSedeId( 1 );
-                captura.setFecha( Timestamp.from( Instant.now() ) );
-                captura.setMuestra( muestra );
-                
-                System.out.println("Enviando muestra (" + muestra.length + " bytes)");
-                
-                try {
-                    
-                    service.create( captura );
-                    
-                } catch ( feign.FeignException e ) {
-                    
-                }
-                
+        // Esperar huellas digitales
+        for ( DPFPSample sample = lector.getSample(); sample != null; sample = lector.getSample() ) {
+            CapturaHuella   captura = new CapturaHuella();
+            captura.setSedeId( 1 );
+            captura.setFecha( Timestamp.from( Instant.now() ) );
+            captura.setMuestra( sample.serialize() );
+
+            try {
+                System.out.println("Enviando muestra a servidor");
+                service.create( captura );                                      // Método del servicio REST
+            } catch ( feign.FeignException e ) {
             }
-            
         }
         
     }
