@@ -18,83 +18,37 @@ class WebpayController extends Controller
 
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    public function index() {
+        // Crear una transaccion
         $plus = TransbankServiceFactory::normal($this->bag);
-        $plus->addTransactionDetail(100, uniqid());
-        $response = $plus->initTransaction('http://localhost:8000/api/webpay/response', 'http://localhost:8000/api/webpay/thanks');
+        $plus->addTransactionDetail(100, "CODIGOBLABLABLA");
+        $response = $plus->initTransaction(
+            'http://localhost:8000/api/webpay/response',
+            'http://localhost:8000/api/webpay/thanks'
+        );
         return RedirectorHelper::redirectHTML($response->url, $response->token);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function response() {
+        // Respuesta a transaccion
+        $plus = TransbankServiceFactory::normal($this->bag);
+        $response = $plus->getTransactionResult();
+        $detalle = $response->detailOutput;
+
+        if ( $detalle->responseCode == 0 ) {
+            // Transaccion exitosa
+            $codigoTransaccion = $detalle->buyOrder;
+            $montoRecibido = $detalle->amount;
+
+            // Validar que el monto recibido es el mismo que el de la cobranza
+            $plus->acknowledgeTransaction();
+        }
+
+        return RedirectorHelper::redirectBackNormal($response->urlRedirection);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function thanks() {
+        return "Hola mundo!";
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

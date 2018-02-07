@@ -61,10 +61,10 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('usuario/{id}/sedes', 'UsuarioController@sedes');
 	Route::get('usuario/{id}/notificaciones', 'UsuarioController@notificaciones');
 
-	Route::apiResource('webpay', 'WebpayController');
-	Route::get('webpay/response', 'WebpayController@response');
-	Route::get('webpay/thanks', 'WebpayController@thanks');
-
 });
 
 Route::post('login', 'AuthenticateController@authenticate');
+
+Route::get('webpay', 'WebpayController@index');
+Route::post('webpay/response', 'WebpayController@response');
+Route::post('webpay/thanks', 'WebpayController@thanks');
