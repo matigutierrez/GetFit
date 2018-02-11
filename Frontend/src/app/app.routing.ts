@@ -7,14 +7,34 @@ import { PlanComponent } from './components/planes/plan/plan.component';
 import { ClienteComponent } from './components/clientes/cliente/cliente.component';
 
 const appRoutes: Routes = [
-  {path:'', component: LoginComponent},
-  {path:'login', component: LoginComponent},
-  {path:'login/:id', component: LoginComponent},
-  {path:'getfit', component: PrincipalComponent},
-  {path:'clientes', component: ClienteComponent},
-  {path:'cliente/Grupo/:plan', component: ClienteComponent},
-  {path: 'plan', component: PlanComponent},
-  {path:'**', component: LoginComponent}
+  {
+    path:'',
+    component: LoginComponent
+  },
+  {
+    path:'login',
+    component: LoginComponent
+  },
+  {
+    path:'login/:id',
+    component: LoginComponent
+  },
+  {
+    path:'getfit',
+    component: PrincipalComponent
+  },
+  {
+    path:'clientes',
+    component: ClienteComponent
+  },
+  {
+    path: 'plan',
+    component: PlanComponent
+  },
+  {
+    path:'**',
+    component: LoginComponent
+  }
 ];
 
 export const appRoutingProviders: any[] = [];

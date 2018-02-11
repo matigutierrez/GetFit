@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     console.log(this.user);
     this._userService.signup(this.user).subscribe(
       Response => {
-        this.identify = Response.usu_correo;
+        this.identify = Response.usuario.usu_correo;
         this.token = Response.token;
         if (this.identify.length <= 1) {
           console.log("error en el servidor")

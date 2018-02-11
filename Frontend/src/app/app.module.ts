@@ -11,7 +11,10 @@ import { PrincipalComponent } from './components/vistaprincipal/principal/princi
 import { ChartlineClienteComponent } from './components/vistaprincipal/chartlineCliente/chartlineCliente.component';
 import { BarChartContratoComponent } from './components/vistaprincipal/barchartContratos/barchartContrato.component';
 import { PlanComponent } from './components/planes/plan/plan.component';
+import { RegistroPlanComponent } from './components/planes/registroplan/registroplan.component';
 import { ClienteComponent } from './components/clientes/cliente/cliente.component';
+import { RegistroUsuarioComponent } from './components/usuarios/registrousuario/registrousuario.component';
+import { RegistroClienteComponent } from './components/clientes/registrocliente/registrocliente.component';
 import { CircleChartComponent } from './components/vistaprincipal/circlechart/circlechart.component';
 
 @NgModule({
@@ -23,7 +26,10 @@ import { CircleChartComponent } from './components/vistaprincipal/circlechart/ci
     PrincipalComponent,
     PlanComponent,
     ClienteComponent,
-    CircleChartComponent
+    CircleChartComponent,
+    RegistroPlanComponent,
+    RegistroClienteComponent,
+    RegistroUsuarioComponent
   ],
   imports: [
     BrowserModule,

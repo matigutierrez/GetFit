@@ -4,7 +4,7 @@
 <div *ngIf="clientes" class="row">
   <div class="padtable">
     <h4>Clientes</h4>
-    <div class="card">
+    <div>
       <table class="responsive-table striped highlight">
         <thead>
           <tr>
@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cliente of clientes; index as i;"> 
+          <tr *ngFor="let cliente of clientes; index as i;">
             <td>{{cliente.cli_rut}}</td>
             <td>{{cliente.cli_nombres}}</td>
             <td>{{cliente.cli_apellidos}}</td>
@@ -36,7 +36,7 @@
             </td>
             <td>{{cliente.usuario.usu_correo}}</td>
             <td>{{cliente.usuario.rol.rol_nombre}}</td>
-            <td><a><i class="material-icons">group_add</i></a></td>
+            <td><a><i class="material-icons">settings</i></a></td>
             <td><a><i class="material-icons">create</i></a></td>
             <td><a><i class="material-icons">close</i></a></td>
           </tr>
@@ -47,67 +47,24 @@
 </div>
 
 <div class="fixed-action-btn horizontal click-to-toggle">
-  <a class="btn-floating btn-large blue-grey darken-2" (click)="openModal()">
+  <a class="btn-floating btn-large blue-grey darken-2">
     <i class="material-icons">add</i>
   </a>
+  <ul>
+    <li><a class="btn-floating light-blue" (click)="openModal()"><i class="material-icons">people</i></a></li>
+  </ul>
 </div>
 
-<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
   <div class="modal-content">
-    <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
-      <div class="col s12">
-        <h4 class="center-align">Registro Cliente</h4>
-        <div class="row">
-          <div class="row">
-            <div class="col s12">
-              <div class="input-field">
-                <i class="material-icons prefix">person</i>
-                <input id="last_name" type="text" name="cli_rut" #cli_rut="ngModel" [(ngModel)]="cliente.cli_rut">
-                <label for="icon_prefix">cli_rut</label>
-              </div>
-            </div>
-          </div>
-          <div class="row"> 
-            <div class="col m6">
-              <div class="input-field">
-                <i class="material-icons prefix">person</i>
-                <input id="last_name" type="text" name="usu_correo" #cli_nombres="ngModel" [(ngModel)]="cliente.cli_nombres">
-                <label for="icon_prefix">cli_nombres</label>
-              </div>
-            </div>
-            <div class="col m6">
-               <div class="input-field">
-                <i class="material-icons prefix">person</i>
-                <input id="last_name" type="text" name="cli_apellidos" #cli_apellidos="ngModel" [(ngModel)]="cliente.cli_apellidos">
-                <label for="icon_prefix">cli_apellidos</label>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col m6">
-              <div class="input-field">
-                <i class="material-icons prefix">local_phone</i>
-                <input id="last_name" type="text" name="cli_numerotelefonico" #cli_numerotelefonico="ngModel" [(ngModel)]="cliente.cli_numerotelefonico">
-                <label for="icon_prefix">cli_numerotelefonico</label>
-              </div>
-            </div>
-            <div class="col m6">
-              <div class="input-field">
-                <i class="material-icons prefix">place</i>
-                <input id="last_name" type="text" name="cli_direccion" #cli_direccion="ngModel" [(ngModel)]="cliente.cli_direccion">
-                <label for="icon_prefix">cli_direccion</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="row">
-        <div class="col s12">
-          <div class="container">
-            <button class="waves-effect waves-light btn-large blue-grey darken-2" type="submit" value="Entrar" name="action">Ingresar</button>
-          </div>
+        <div class=" col s10 m6 left-align">
+          <h5>Registro</h5>
+        </div>
+        <div class="col s2 m6 right-align">
+          <a (click)="closeModal()"><i class="material-icons">close</i></a>
         </div>
       </div>
-    </form>
+      <registrocliente></registrocliente>
   </div>
 </div>

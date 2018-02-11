@@ -1,0 +1,38 @@
+<form #usuarioForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="col s12">
+      <div class="row">
+        <div class="col s12">
+          <div class="input-field">
+            <i class="material-icons prefix">email</i>
+            <input id="last_name" type="text" name="usu_correo" #usu_correo="ngModel" [(ngModel)]="usuario.usu_correo">
+            <label for="icon_prefix">Correo Electronico</label>
+          </div>
+        </div>
+        <div class="row"> 
+          <div class="col m6">
+            <div class="input-field">
+              <i class="material-icons prefix">lock_outline</i>
+              <input id="last_name" type="text" name="password" #password="ngModel" [(ngModel)]="usuario.password">
+              <label for="icon_prefix">Password</label>
+            </div>
+          </div>
+          <div class="col m6">
+            <div class="input-field">
+              <i class="material-icons prefix">settings</i>
+              <select name="tgf_rol_id" #tgf_rol_id="ngModel" [(ngModel)]="usuario.tgf_rol_id" materialize="material_select" [materializeSelectOptions]="selectOptions">
+                <option *ngFor="let option of selectOptions" [value]="option.id">{{option.rol_nombre}}</option>
+              </select>
+              <label for="icon_prefix">Rol</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 l3 offset-l9">
+        <div class="right-align">
+          <button class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Entrar" name="action">Ingresar</button>
+        </div>
+      </div>
+    </div>
+  </form>

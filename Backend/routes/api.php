@@ -55,7 +55,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('sede', 'SedeController');
 
 	Route::apiResource('usuario', 'UsuarioController');
-	Route::get('usuario/rol', 'UsuarioController@rolSesion');
+	Route::get('usuariorol', 'UsuarioController@rolSesion');
 	Route::get('usuario/{id}/rol', 'UsuarioController@rol');
 	Route::get('usuario/{id}/cliente', 'UsuarioController@cliente');
 	Route::get('usuario/{id}/sedes', 'UsuarioController@sedes');

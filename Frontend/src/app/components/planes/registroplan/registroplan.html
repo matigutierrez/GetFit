@@ -1,0 +1,47 @@
+<form #planForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="col s12">
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field">
+          <i class="material-icons prefix">person</i>
+          <input id="last_name" type="text" name="pla_nombre" #pla_nombre="ngModel" [(ngModel)]="plan.pla_nombre">
+          <label for="icon_prefix">Nombre del Plan</label>
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col m6">
+          <div class="input-field">
+            <i class="material-icons prefix">person</i>
+            <input id="last_name" type="text" name="pla_descripcion" #pla_descripcion="ngModel" [(ngModel)]="plan.pla_descripcion">
+            <label for="icon_prefix">Descripcion</label>
+          </div>
+        </div>
+        <div class="col m6">
+          <div class="input-field">
+            <i class="material-icons prefix">person</i>
+            <input id="last_name" type="text" name="pla_costo" #pla_costo="ngModel" [(ngModel)]="plan.pla_costo">
+            <label for="icon_prefix">Costo del Plan</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col m6">
+          <div class="input-field">
+            <i class="material-icons prefix">person</i>
+            <select name="tgf_sede_id" #tgf_sede_id="ngModel" [(ngModel)]="plan.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="selectOptions">
+              <option *ngFor="let option of selectOptions" [value]="option.id">{{option.sed_nombre}}</option>
+            </select>
+            <label for="icon_prefix">Sede</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 l3 offset-l9">
+      <div class="right-align">
+        <button class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Entrar" name="action">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</form>

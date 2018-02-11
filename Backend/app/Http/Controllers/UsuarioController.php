@@ -99,7 +99,7 @@ class UsuarioController extends Controller
      * @return \App\Rol
      */
     public function rolSesion(AuthenticateController $auth) {
-        return $auth->getAuthenticatedUser()->rol;
+        return Usuario::with('rol')->where('id', $auth->getAuthenticatedUser()->id)->first();
     }
 
     /**

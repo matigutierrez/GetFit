@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PlanService } from '../../../services/plan.service';
-import { SedeService } from '../../../services/sede.service';
+import { PlanService } from '../../../services/plan.service'
 import {MaterializeAction} from 'angular2-materialize';
 import { Plan } from '../../../models/plan';
 import { Cliente } from '../../../models/cliente';
@@ -9,7 +8,7 @@ import { Cliente } from '../../../models/cliente';
 @Component({
   selector: 'plan',
   templateUrl: 'plan.html',
-  providers:[PlanService, SedeService]
+  providers:[PlanService]
 })
 
 export class PlanComponent implements OnInit {
@@ -17,15 +16,13 @@ export class PlanComponent implements OnInit {
   public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalCreate = new EventEmitter<string|MaterializeAction>();
   public parametros: string;
-  public selectOptions: JSON[];
   public clientes: JSON[];
-  public plan;
+  
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _planService: PlanService,
-    private _sedeService: SedeService
+    private _planService: PlanService
   ){
     this._planService.getPlan().subscribe(
       Response => {
@@ -36,28 +33,10 @@ export class PlanComponent implements OnInit {
         console.log(<any>Error)
       }
     );
-    this._sedeService.getSede().subscribe(
-      Response => {
-        this.selectOptions = Response;
-      },
-      Error => {
-        console.log(<any>Error)
-      }
-    );
-    this.plan = {
-      "pla_nombre": "",
-      "pla_descripcion": "",
-      "pla_costo": "",
-      "tgf_sede_id": "1"
-    };
   }
 
   ngOnInit(){
     console.log('el compenente registro a sido cargado');
-  }
-
-  onSubmit(){
-    console.log(this.plan);
   }
 
   openModal(contratos) {
