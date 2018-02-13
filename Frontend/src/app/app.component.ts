@@ -34,7 +34,7 @@ export class AppComponent {
           if(Response.rol.id == 2){this.profesor = true;}
           if(Response.rol.id == 3){this.cliente = true;}
           console.log(Response);
-        }, 
+        },
         Error => {
           console.log(<any>Error)
         }

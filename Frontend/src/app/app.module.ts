@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { MaterializeModule } from 'angular2-materialize';
 import { ChartsModule } from 'ng2-charts';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { PrincipalComponent } from './components/vistaprincipal/principal/principal.component';
@@ -37,7 +38,8 @@ import { CircleChartComponent } from './components/vistaprincipal/circlechart/ci
     HttpClientModule,
     routing,
     MaterializeModule,
-    ChartsModule
+    ChartsModule,
+    NgxPaginationModule
   ],
   providers: [
   	appRoutingProviders

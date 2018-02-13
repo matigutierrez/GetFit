@@ -24,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let plan of planes; index as i;"> 
+          <tr *ngFor="let plan of planes | paginate: { itemsPerPage: 7, currentPage: p }; index as i;"> 
             <td>{{plan.pla_nombre}}</td>
             <td>{{plan.pla_descripcion}}</td>
             <td>
@@ -36,10 +36,11 @@
             <td>50</td>
             <td>{{plan.contratos.length}}</td>
             <td><a (click)="openModal(plan.contratos)"><i class="material-icons">person</i></a></td>
-            <td><a [routerLink]="['/cliente/Grupo', plan.id]"><i class="material-icons">group_add</i></a></td>
+            <td><a (click)="openUser(plan.id)"><i class="material-icons">group_add</i></a></td>
             <td><a [routerLink]="['/cliente/Grupo', plan.id]"><i class="material-icons">create</i></a></td>
             <td><a [routerLink]="['/cliente/Grupo', plan.id]"><i class="material-icons">close</i></a></td>
           </tr>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </tbody>
       </table>
     </div>
@@ -47,9 +48,12 @@
 </div>
 
 <div class="fixed-action-btn horizontal click-to-toggle">
-  <a class="btn-floating btn-large blue-grey darken-2" (click)="openCreate()">
+  <a class="btn-floating btn-large blue-grey darken-2">
     <i class="material-icons">add</i>
   </a>
+  <ul>
+    <li><a class="btn-floating light-blue" (click)="openCreate()"><i class="material-icons">people</i></a></li>
+  </ul>
 </div>
 
 <div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
@@ -89,5 +93,19 @@
       </div>
     </div>
     <registroplan></registroplan>
+  </div>
+</div>
+
+<div id="modal3" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalUser">
+  <div class="modal-content modalback">
+      <div class="row">
+        <div class=" col s10 m6 left-align">
+          <h5>Registro</h5>
+        </div>
+        <div class="col s2 m6 right-align">
+          <a (click)="closeUser()"><i class="material-icons">close</i></a>
+        </div>
+      </div>
+      <registrocliente [planid]="planid"></registrocliente>
   </div>
 </div>

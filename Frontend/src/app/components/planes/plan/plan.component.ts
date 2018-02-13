@@ -15,9 +15,11 @@ export class PlanComponent implements OnInit {
   public planes: JSON[];
   public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalCreate = new EventEmitter<string|MaterializeAction>();
+  public modalUser = new EventEmitter<string|MaterializeAction>();
   public parametros: string;
   public clientes: JSON[];
-  
+  public planid: string;
+  public p: number = 1; 
 
   constructor(
     private _route: ActivatedRoute,
@@ -53,5 +55,13 @@ export class PlanComponent implements OnInit {
   }
   closeCreate() {
     this.modalCreate.emit({action:"modal",params:['close']});
+  }
+
+  openUser(id) {
+    this.planid = id;
+    this.modalUser.emit({action:"modal",params:['open']});
+  }
+  closeUser() {
+    this.modalUser.emit({action:"modal",params:['close']});
   }
 }
