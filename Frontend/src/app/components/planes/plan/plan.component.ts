@@ -19,7 +19,7 @@ export class PlanComponent implements OnInit {
   public parametros: string;
   public clientes: JSON[];
   public planid: string;
-  public p: number = 1; 
+  public p: number = 1;
 
   constructor(
     private _route: ActivatedRoute,

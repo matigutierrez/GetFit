@@ -19,6 +19,7 @@ export class ClienteComponent implements OnInit {
   public clientes: JSON[];
   public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
+  public p: number = 1;
 
   constructor(
     private _route: ActivatedRoute,
