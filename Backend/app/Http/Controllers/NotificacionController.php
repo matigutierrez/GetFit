@@ -37,8 +37,8 @@ class NotificacionController extends Controller
     {
         return Notificacion::insertGetId([
             'not_titulo' => $request->not_titulo,
-            'not_contenido' => $request->not_contenido,
-        ])
+            'not_contenido' => $request->not_contenido
+        ]);
     }
 
     /**
