@@ -6,16 +6,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Page Title</title>
 		<style>
-			div.p { font-size: 50% }
+			p { font-size: 70%;}
+			.title { margin-bottom: 1px; }
+			th { font-size: 65%; }
+			td { font-size: 60%; }
 		</style>
 	</head>
 	<body>
-		<h1>NOMBRE EMPRESA</h1>
-		<div class="p">RUT: {rut empresa}</div>
+		<h4>NOMBRE EMPRESA</h3>
+		<p>RUT: {rut empresa}</p>
 		<p>DIRECCION: {direccion empresa}</p>
 		<p>GIRO: {giro empresa}</p>
 		<p>TELEFONO: {telefono}</p>
-		<h3 style="text-align: center;">BOLETA ELECTRONICA N&deg;{numero de boleta}</h3>
+		<h4 style="text-align: center;">BOLETA ELECTRONICA</h3>
+		<p style="text-align: center;">N&deg;{numero de boleta}</p>
 		<p style="text-align: center;">S.I.I {COMUNA}</p>
 		<p style="text-align: center;">FECHA DE EMISION: {fecha}</p>
 		<hr/>
