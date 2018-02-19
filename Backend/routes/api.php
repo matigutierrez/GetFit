@@ -68,3 +68,4 @@ Route::post('login', 'AuthenticateController@authenticate');
 Route::get('webpay', 'WebpayController@index');
 Route::post('webpay/response', 'WebpayController@response');
 Route::post('webpay/thanks', 'WebpayController@thanks');
+Route::any('webpay/test', 'WebpayController@test');

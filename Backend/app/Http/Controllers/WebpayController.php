@@ -7,6 +7,8 @@ use Freshwork\Transbank\CertificationBagFactory;
 use Freshwork\Transbank\TransbankServiceFactory;
 use Freshwork\Transbank\RedirectorHelper;
 
+use PDF;
+
 class WebpayController extends Controller
 {
 
@@ -49,6 +51,13 @@ class WebpayController extends Controller
 
     public function thanks() {
         return "Gracias por su compra";
+    }
+
+    public function test() {
+        $pdf = PDF::loadView('boleta');
+        $pdf->setPaper([0, 0, 250, 500]);
+        $pdf->setWarnings(false);
+        return $pdf->stream();
     }
 
 }
