@@ -55,7 +55,7 @@ class WebpayController extends Controller
 
     public function test() {
         $pdf = PDF::loadView('boleta');
-        $pdf->setPaper([0, 0, 250, 500]);
+        $pdf->setPaper([0, 0, 250, 700]);
         $pdf->setWarnings(false);
         return $pdf->stream();
     }

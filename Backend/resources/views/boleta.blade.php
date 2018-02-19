@@ -8,10 +8,9 @@
 <p>DIRECCION: {direccion empresa}</p>
 <p>GIRO: {giro empresa}</p>
 <p>TELEFONO: {telefono}</p>
-<p>FECHA: {fecha}</p>
-<p>HORA: 5:09:12 PM</p>
 <h3 style="text-align: center;">BOLETA ELECTRONICA N&deg;{numero de boleta}</h3>
 <p style="text-align: center;">S.I.I {COMUNA}</p>
+<p style="text-align: center;">FECHA DE EMISION: {fecha}</p>p>
 <hr />
 <table style="width: 100%;">
 <tbody>
