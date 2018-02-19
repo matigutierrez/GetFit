@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
+import { JwtModule } from '@auth0/angular-jwt';
 import { MaterializeModule } from 'angular2-materialize';
 import { ChartsModule } from 'ng2-charts';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -18,6 +19,8 @@ import { ClienteComponent } from './components/clientes/cliente/cliente.componen
 import { RegistroUsuarioComponent } from './components/usuarios/registrousuario/registrousuario.component';
 import { RegistroClienteComponent } from './components/clientes/registrocliente/registrocliente.component';
 import { CircleChartComponent } from './components/vistaprincipal/circlechart/circlechart.component';
+import { AuthGuardService } from './services/authguard.service';
+import { AuthService } from './services/auth.service'
 
 @NgModule({
   declarations: [
@@ -41,10 +44,20 @@ import { CircleChartComponent } from './components/vistaprincipal/circlechart/ci
     routing,
     MaterializeModule,
     ChartsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:4200']
+      }
+    })
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

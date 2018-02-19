@@ -37,8 +37,6 @@ export class AppComponent {
   }
 
   ngOnInit(){
-  	console.log(this._userService.getIdentity());
-    console.log(this._userService.getToken());
     this.ajusteLogin();
   }
 
