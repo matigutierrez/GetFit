@@ -7,7 +7,9 @@ use Freshwork\Transbank\CertificationBagFactory;
 use Freshwork\Transbank\TransbankServiceFactory;
 use Freshwork\Transbank\RedirectorHelper;
 
+//use PDF;
 use PDF;
+//use Elibyy\TCPDF\Facades\TCPDF;
 
 class WebpayController extends Controller
 {
@@ -54,10 +56,24 @@ class WebpayController extends Controller
     }
 
     public function test() {
+        /*
         $pdf = PDF::loadView('boleta');
         $pdf->setPaper([0, 0, 250, 700]);
         $pdf->setWarnings(false);
         return $pdf->stream();
+        */
+
+        $view = \View::make('boleta');
+        $html = $view->render();
+
+        $pdf = new PDF();
+
+        $pdf::AddPage('P', [100, 200]);
+        $pdf::SetMargins(5, 5, 5);
+        $pdf::writeHTML($html, true, false, true, false, '');
+        $pdf::Output('boleta.pdf', 'I');
+
+        return $pdf;
     }
 
 }

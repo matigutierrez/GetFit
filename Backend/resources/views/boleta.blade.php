@@ -21,7 +21,7 @@
 		<h3 style="text-align: center;">BOLETA ELECTRONICA N&deg;{numero de boleta}</h3>
 		<p style="text-align: center;">S.I.I {COMUNA}</p>
 		<p style="text-align: center;">FECHA DE EMISION: {fecha}</p>p>
-		<hr />
+		<hr/>
 		<table style="width: 100%;">
 		<tbody>
 		<tr>
