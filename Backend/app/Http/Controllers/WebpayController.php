@@ -64,16 +64,15 @@ class WebpayController extends Controller
         */
 
         $view = \View::make('boleta');
-        $html = $view->render();
+        $HTML = $view->render();
 
-        $pdf = new PDF();
-
-        $pdf::AddPage('P', [100, 200]);
-        $pdf::SetMargins(5, 5, 5);
-        $pdf::writeHTML($html, true, false, true, false, '');
-        $pdf::Output('boleta.pdf', 'I');
-
-        return $pdf;
+        PDF::SetPrintHeader(false);
+        PDF::SetMargins(5, 0, 5, true);
+        PDF::AddPage('P', [70, 120]);
+        PDF::SetTitle("Boleta Electrónica");
+        PDF::writeHTML($HTML, true, false, true, false, '');
+        
+        PDF::Output('boleta.pdf', 'I');
     }
 
 }
