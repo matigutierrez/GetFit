@@ -67,8 +67,10 @@ class WebpayController extends Controller
         $HTML = $view->render();
 
         PDF::SetPrintHeader(false);
-        PDF::SetMargins(5, 0, 5, true);
-        PDF::AddPage('P', [70, 120]);
+        PDF::SetMargins(3, 0, 3, true);
+        PDF::setJPEGQuality(100);
+        PDF::setTextShadow(['enabled' => false]);
+        PDF::AddPage('P', [75, 120]);
         PDF::SetTitle("Boleta Electrónica");
         PDF::writeHTML($HTML, true, false, true, false, '');
         
