@@ -11,8 +11,6 @@
             <th>Rut</th>
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Telefono</th>
-            <th>Direccion</th>
             <th>Contratos</th>
             <th>Correo</th>
             <th>Rol</th>
@@ -22,12 +20,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 7, currentPage: p }; index as i;">
+          <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
             <td>{{cliente.cli_rut}}</td>
             <td>{{cliente.cli_nombres}}</td>
             <td>{{cliente.cli_apellidos}}</td>
-            <td>{{cliente.cli_numerotelefonico}}</td>
-            <td>{{cliente.cli_direccion}}</td>
             <td>
               <a materialize="dropdown" class="right-align" [attr.data-activates]="'dropdown-'+i" ><i class="material-icons">assignment</i></a>
               <ul id="dropdown-{{i}}" class='dropdown-content'>
@@ -40,8 +36,8 @@
             <td><a><i class="material-icons">create</i></a></td>
             <td><a><i class="material-icons">close</i></a></td>
           </tr>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </tbody>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </table>
     </div>
   </div>

@@ -24,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let plan of planes | paginate: { itemsPerPage: 7, currentPage: p }; index as i;"> 
+          <tr *ngFor="let plan of planes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;"> 
             <td>{{plan.pla_nombre}}</td>
             <td>{{plan.pla_descripcion}}</td>
             <td>
