@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { RolService } from '../../services/rol.service';
 
 @Component({
   selector: 'login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService,
+    private _rolService: RolService
 
   ){
     this.user = {
@@ -54,7 +56,19 @@ export class LoginComponent implements OnInit {
           if (!this.identify.status && !this.token.status) {
             localStorage.setItem('identity', JSON.stringify(this.identify));
             localStorage.setItem('token', JSON.stringify(this.token));
-            window.location.href = '/getfit';
+            this._rolService.getRolSesion().subscribe(
+              Response => {
+                if(Response.tgf_rol_id == "1"){
+                  window.location.href = '/getfit';
+                }else {
+                  window.location.href = '/getfit/cliente';
+                }
+              },
+              Error => {
+                console.log(<any>Error)
+              }
+            );
+            
           }
         }
       },

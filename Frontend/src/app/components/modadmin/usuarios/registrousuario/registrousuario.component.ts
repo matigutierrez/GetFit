@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { UsuarioService } from '../../../services/usuario.service';
-import { RolService } from '../../../services/rol.service';
+import { UsuarioService } from '../../../../services/usuario.service';
+import { RolService } from '../../../../services/rol.service';
 
 @Component({
   selector: 'registrousuario',

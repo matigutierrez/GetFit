@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PlanService } from '../../../services/plan.service';
-import { SedeService } from '../../../services/sede.service';
+import { PlanService } from '../../../../services/plan.service';
+import { SedeService } from '../../../../services/sede.service';
 
 @Component({
   selector: 'registroplan',

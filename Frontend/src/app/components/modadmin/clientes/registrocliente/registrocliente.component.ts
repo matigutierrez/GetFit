@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { ClienteService } from '../../../services/cliente.service';
-import { Cliente } from '../../../models/cliente';
-import { Plan } from '../../../models/plan';
+import { ClienteService } from '../../../../services/cliente.service';
+import { Cliente } from '../../../../models/cliente';
+import { Plan } from '../../../../models/plan';
 declare var $:any;
 declare var jQuery:any;
 

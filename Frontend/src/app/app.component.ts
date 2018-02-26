@@ -15,6 +15,9 @@ declare var jQuery:any;
 export class AppComponent {
   public identity;
   public token;
+  public user;
+  public admin: boolean;
+  public cliente: boolean;
 
   constructor(
   	private _userService: UserService,
@@ -27,7 +30,12 @@ export class AppComponent {
     if(this.token != undefined){
       this._rolService.getRolSesion().subscribe(
         Response => {
-          console.log(Response);
+          this.user = Response;
+          if(this.user.rol.rol_nombre == "Administrador"){
+            this.admin = true;
+          }else{
+            this.cliente = true;
+          }
         },
         Error => {
           console.log(<any>Error)

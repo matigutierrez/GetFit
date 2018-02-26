@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PlanService } from '../../../services/plan.service'
+import { PlanService } from '../../../../services/plan.service'
 import {MaterializeAction} from 'angular2-materialize';
-import { Plan } from '../../../models/plan';
-import { Cliente } from '../../../models/cliente';
+import { Plan } from '../../../../models/plan';
+import { Cliente } from '../../../../models/cliente';
 
 @Component({
   selector: 'plan',

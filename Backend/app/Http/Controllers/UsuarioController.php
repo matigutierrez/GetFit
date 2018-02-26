@@ -99,12 +99,7 @@ class UsuarioController extends Controller
      * @return \App\Rol
      */
     public function rolSesion(AuthenticateController $auth) {
-        $rol =  Usuario::with('rol')->where('id', $auth->getAuthenticatedUser()->id)->first();
-        if($rol->rol->rol_nombre == "Administrador"){
-            return \Response::json('Correct', 200);
-        } else {
-            return \Response::json('Error', 500); 
-        }
+        return Usuario::with('rol')->where('id', $auth->getAuthenticatedUser()->id)->first();;
     }
 
     /**
