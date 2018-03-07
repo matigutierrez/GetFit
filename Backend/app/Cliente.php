@@ -35,8 +35,18 @@ class Cliente extends Model
 
     // $cliente->cobranzas;
     public function getCobranzasAttribute() {
+        // Obtener cobranzas
         $cobranzas = $this->contratos->pluck('cobranzas')->collapse();
-        $cobranzas->pluck('contrato', 'pago');
+
+        // Incluir contratos
+        $contratos = $cobranzas->pluck('contrato');
+
+        // Incluir plan de contrato
+        $contratos->pluck('plan');
+
+        // Incluir pagos
+        $cobranzas->pluck('pago');
+
         return $cobranzas;
     }
 
