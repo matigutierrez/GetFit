@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use App\Cliente;
 use Illuminate\Http\Request;
 
@@ -141,6 +142,25 @@ class ClienteController extends Controller
      */
     public function huella($id) {
         return Cliente::find($id)->huella;
+    }
+
+    /**
+     * Obtener cobranzas de un cliente
+     * 
+     * @param  int  $id
+     * @return \App\Cobranza
+     */
+    public function cobranzas($id) {
+        return Cliente::find($id)->cobranzas;
+    }
+
+    /**
+     * Obteer cobranzas de cliente
+     * 
+     * @return \App\Cobranza
+     */
+    public function cobranzasToken(AuthenticateController $auth) {
+        return $auth->getAuthenticatedUser()->cliente->cobranzas;
     }
 
 }

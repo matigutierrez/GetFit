@@ -11,6 +11,8 @@ class Cliente extends Model
 
     protected $fillable = ['cli_rut', 'cli_nombres', 'cli_apellidos', 'cli_numerotelefonico', 'cli_direccion', 'cli_huella'];
 
+    protected $appends = ['cobranzas'];
+
     public function usuario() {
     	return $this->hasOne('App\Usuario', 'tgf_cliente_id');
     }
@@ -29,6 +31,13 @@ class Cliente extends Model
 
     public function huella() {
         return $this->hasOne('App\Huella', 'tgf_cliente_id');
+    }
+
+    // $cliente->cobranzas;
+    public function getCobranzasAttribute() {
+        $cobranzas = $this->contratos->pluck('cobranzas')->collapse();
+        $cobranzas->pluck('contrato', 'pago');
+        return $cobranzas;
     }
 
 }
