@@ -5,7 +5,7 @@
         <img src="../../assets/img/bluegrey.png">
       </div>
       <a href="#!user"><img class="circle" src="../../assets/img/user.svg"></a>
-      <a *ngIf="user" href="#!name"><span class="white-text name">{{user.rol.rol_nombre}}</span></a>
+      <a *ngIf="user" href="#!name"><span class="white-text name">{{user.rol_nombre}}</span></a>
       <a href="#!email"><span class="white-text email">{{identity}}</span></a>
     </div>
   </li>
@@ -18,7 +18,8 @@
   <li *ngIf="cliente" ><a class="subheader">Cliente</a></li>
   <li *ngIf="cliente" ><a href="#!"><i class="material-icons">assignment</i>Planes</a></li>
   <li *ngIf="cliente" ><a href="#!"><i class="material-icons">perm_contact_calendar</i>Horarios</a></li>
-  <li *ngIf="cliente" ><a href="#!"><i class="material-icons">attach_money</i>Pagos</a></li>
+  <li *ngIf="cliente" ><a href="#!"><i class="material-icons">people</i>Alumnos</a></li>
+  <li *ngIf="cliente" ><a href="#!" [routerLink]="['/getfit/cobranzas']"><i class="material-icons">attach_money</i>Pagos</a></li>
   <li><div class="divider"></div></li>
   <li><a class="subheader">Cuenta</a></li>
   <li><a href="#!"><i class="material-icons">person</i>Perfil</a></li>

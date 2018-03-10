@@ -31,7 +31,7 @@ export class AppComponent {
       this._rolService.getRolSesion().subscribe(
         Response => {
           this.user = Response;
-          if(this.user.rol.rol_nombre == "Administrador"){
+          if(this.user.rol_nombre == "Administrador"){
             this.admin = true;
           }else{
             this.cliente = true;

@@ -10,10 +10,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AuthGuardService } from '../../services/authguard.service';
 import { AuthService } from '../../services/auth.service';
 import { VistaClienteComponent } from './vistacliente/vistacliente.component';
+import { CobranzaComponent } from './cobranzas/cobranza.component';
 
 @NgModule({
   declarations: [
-    VistaClienteComponent
+    VistaClienteComponent,
+    CobranzaComponent
   ],
   imports: [
     BrowserModule,
