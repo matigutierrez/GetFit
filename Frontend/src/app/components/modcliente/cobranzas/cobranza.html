@@ -17,6 +17,7 @@
             <th>Monto</th>
             <th>Estado</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
             <td>${{cobranza.cob_monto}}</td>
             <td *ngIf="cobranza.pago"><i class="material-icons">check</i></td>
             <td *ngIf="!cobranza.pago"><i class="material-icons">close</i></td>
+            <td><a (click)="redirect(cobranza.id)"><i class="material-icons">attach_money</i></a></td>
           </tr>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </tbody>

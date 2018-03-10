@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { CobranzaService } from '../../../services/cobranza.service'
+import { CobranzaService } from '../../../services/cobranza.service';
+import {GLOBAL} from '../../../services/global';
 
 @Component({
   selector: 'cobranza',
@@ -11,6 +12,9 @@ import { CobranzaService } from '../../../services/cobranza.service'
 export class CobranzaComponent implements OnInit {
 
   public cobranzas: JSON[];
+  public p: number = 1;
+  public API: string;
+  
 
   constructor(
     private _route: ActivatedRoute,
@@ -26,9 +30,14 @@ export class CobranzaComponent implements OnInit {
         console.log(<any>Error)
       }
     );
+    this.API = GLOBAL.url;
   }
 
   ngOnInit(){
     console.log('el compenente cobranza a sido cargado');
+  }
+
+  redirect(id) {
+    window.location.href = this.API+'webpay/pagar/'+ id;
   }
 }
