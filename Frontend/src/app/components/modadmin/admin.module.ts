@@ -41,7 +41,14 @@ import { AuthService } from '../../services/auth.service';
     MaterializeModule,
     ChartsModule,
     NgxPaginationModule,
-    JwtModule
+    JwtModule.forRoot({
+      config: {
+      tokenGetter: () => {
+        return localStorage.getItem('token');
+      },
+      whitelistedDomains: ['localhost:4200']
+      }
+    })
   ],
   providers: [
     appRoutingProviders,
