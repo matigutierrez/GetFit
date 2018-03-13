@@ -22,13 +22,13 @@ class WebpayController extends Controller
 
     }
 
-    public function index() {
+    public function index(Request $request) {
         // Crear una transaccion
         $plus = TransbankServiceFactory::normal($this->bag);
         $plus->addTransactionDetail(100, "CODIGOBLABLABLA");
         $response = $plus->initTransaction(
-            'http://localhost:8000/api/webpay/response',
-            'http://localhost:8000/api/webpay/thanks'
+            $response->getSchemeAndHttpHost() . '/api/webpay/response',
+            $response->getSchemeAndHttpHost() . '/api/webpay/thanks'
         );
         return RedirectorHelper::redirectHTML($response->url, $response->token);
     }

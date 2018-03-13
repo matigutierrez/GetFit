@@ -1,0 +1,5 @@
+ng serve --port 4200		(Iniciar Angular)
+ng serve --prod			(Iniciar en ambiente de produccion)
+kill $(lsof -t -i:4200)		(Terminar Angular)
+php artisan serve		(Iniciar backend)
+php artisan migrate --seed	(Realizar migraciones con seeds)
