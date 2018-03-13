@@ -11,14 +11,9 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): boolean {
     if (!this.auth.isAuthenticated()) {
-      $("main").css("padding-left", "0px");
-      $("header").css("padding-left", "0px");
-      localStorage.removeItem('identity');
-      localStorage.removeItem('token');
-      this.router.navigate(['login']);
+      this.router.navigate(['login/1']);
       return false;
     }
-    console.log("hola");
     return true;
   }
 }

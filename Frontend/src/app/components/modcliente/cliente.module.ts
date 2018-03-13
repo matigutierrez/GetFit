@@ -25,14 +25,7 @@ import { CobranzaComponent } from './cobranzas/cobranza.component';
     MaterializeModule,
     ChartsModule,
     NgxPaginationModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
-        whitelistedDomains: ['localhost:4200']
-      }
-    })
+    JwtModule
   ],
   providers: [
     appRoutingProviders,
