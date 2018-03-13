@@ -7,9 +7,11 @@ use Freshwork\Transbank\CertificationBagFactory;
 use Freshwork\Transbank\TransbankServiceFactory;
 use Freshwork\Transbank\RedirectorHelper;
 
-//use PDF;
+use App\Cobranza;
+use App\MetodoPago;
+use App\Pago;
+
 use PDF;
-//use Elibyy\TCPDF\Facades\TCPDF;
 
 class WebpayController extends Controller
 {
@@ -22,15 +24,22 @@ class WebpayController extends Controller
 
     }
 
-    public function index(Request $request) {
-        // Crear una transaccion
-        $plus = TransbankServiceFactory::normal($this->bag);
-        $plus->addTransactionDetail(100, "CODIGOBLABLABLA");
-        $response = $plus->initTransaction(
-            $response->getSchemeAndHttpHost() . '/api/webpay/response',
-            $response->getSchemeAndHttpHost() . '/api/webpay/thanks'
-        );
-        return RedirectorHelper::redirectHTML($response->url, $response->token);
+    public function pagar($id, Request $request) {
+        // Buscar cobranza
+        $cobranza = Cobranza::find($id);
+
+        // Validar que la cobranza existe
+        if ( isset($cobranza) ) {
+            // Iniciar pago por webpay
+            $plus = TransbankServiceFactory::normal($this->bag);
+            $plus->addTransactionDetail( $cobranza->cob_monto, $cobranza->id );
+            $response = $plus->initTransaction(
+                $request->getSchemeAndHttpHost() . '/api/webpay/response',
+                $request->getSchemeAndHttpHost() . '/api/webpay/thanks'
+            );
+            return RedirectorHelper::redirectHTML($response->url, $response->token);
+        }
+        
     }
 
     public function response() {
@@ -41,11 +50,33 @@ class WebpayController extends Controller
 
         if ( $detalle->responseCode == 0 ) {
             // Transaccion exitosa
-            $codigoTransaccion = $detalle->buyOrder;
-            $montoRecibido = $detalle->amount;
+            $id = $detalle->buyOrder;
+            $monto = $detalle->amount;
 
-            // Validar que el monto recibido es el mismo que el de la cobranza
-            $plus->acknowledgeTransaction();
+            // Buscar cobranza
+            $cobranza = Cobranza::find($id);
+
+            // Existe cobranza?
+            if ( isset($cobranza) ) {
+                // El monto de la cobranza es el mismo?
+                if ( $cobranza->cob_monto == $monto ) {
+                    // Validar transaccion
+                    $plus->acknowledgeTransaction();
+
+                    // Metodo de pago Webpay
+                    $metodoPago = MetodoPago::where('mep_nombre', 'Webpay Normal')->get()->last();
+
+                    // Crear nuevo pago
+                    $pago = new Pago;
+                    $pago->tgf_metodo_pago_id = $metodoPago->id;
+                    $pago->tgf_cobranza_id = $cobranza->id;
+
+                    // Guardar pago
+                    $pago->save();
+                }
+
+            }
+
         }
 
         return RedirectorHelper::redirectBackNormal($response->urlRedirection);
@@ -55,7 +86,7 @@ class WebpayController extends Controller
         return "Gracias por su compra";
     }
 
-    public function test() {
+    public function boleta() {
         /*
         $pdf = PDF::loadView('boleta');
         $pdf->setPaper([0, 0, 250, 700]);

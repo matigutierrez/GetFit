@@ -67,7 +67,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 Route::post('login', 'AuthenticateController@authenticate');
 
-Route::get('webpay', 'WebpayController@index');
+Route::get('webpay/pagar/{id}', 'WebpayController@pagar');
 Route::post('webpay/response', 'WebpayController@response');
 Route::post('webpay/thanks', 'WebpayController@thanks');
-Route::any('webpay/test', 'WebpayController@test');
+Route::any('webpay/boleta', 'WebpayController@boleta');

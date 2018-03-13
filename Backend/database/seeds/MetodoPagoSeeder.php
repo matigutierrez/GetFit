@@ -13,8 +13,7 @@ class MetodoPagoSeeder extends Seeder
     {
         DB::table('tgf_metodo_pago')->insert([
         	['mep_nombre' => 'Efectivo'],
-        	['mep_nombre' => 'Webpay Normal'],
-        	['mep_nombre' => 'Inscripción Webpay']
+        	['mep_nombre' => 'Webpay Normal']
         ]);
     }
 }
