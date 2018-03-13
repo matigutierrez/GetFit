@@ -24,8 +24,7 @@ import { CobranzaComponent } from './cobranzas/cobranza.component';
     routing,
     MaterializeModule,
     ChartsModule,
-    NgxPaginationModule,
-    JwtModule
+    NgxPaginationModule
   ],
   providers: [
     appRoutingProviders,
