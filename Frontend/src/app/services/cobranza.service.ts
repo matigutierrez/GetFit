@@ -17,7 +17,7 @@ export class CobranzaService{
     this.url = GLOBAL.url;
   }
 
-  getCliente(): Observable<any>{
+  getCobranzas(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
     return this._http.get(this.url+'clientecobranzas', {headers: headers});

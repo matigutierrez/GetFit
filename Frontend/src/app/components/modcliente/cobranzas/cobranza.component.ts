@@ -21,7 +21,7 @@ export class CobranzaComponent implements OnInit {
     private _router: Router,
     private _cobranzaService: CobranzaService
   ){
-    this._cobranzaService.getCliente().subscribe(
+    this._cobranzaService.getCobranzas().subscribe(
       Response => {
         this.cobranzas = Response;
         console.log(this.cobranzas);
