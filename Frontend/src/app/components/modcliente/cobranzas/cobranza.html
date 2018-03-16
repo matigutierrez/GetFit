@@ -25,9 +25,8 @@
             <td>{{cobranza.contrato.plan.pla_nombre}}</td>
             <td>{{cobranza.cob_fecha}}</td>
             <td>${{cobranza.cob_monto}}</td>
-            <td *ngIf="cobranza.pago"><i class="material-icons">check</i></td>
-            <td *ngIf="!cobranza.pago"><i class="material-icons">close</i></td>
-            <td><a (click)="redirect(cobranza.id)"><i class="material-icons">attach_money</i></a></td>
+            <td *ngIf="cobranza.pago"><a class="waves-effect waves-light btn">Descargar Boleta</a></td>
+            <td *ngIf="!cobranza.pago"><a class="waves-effect waves-light btn" (click)="redirect(cobranza.id)">Pagar</a></td>
           </tr>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </tbody>
