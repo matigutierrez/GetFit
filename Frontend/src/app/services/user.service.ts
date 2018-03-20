@@ -17,7 +17,7 @@ export class UserService{
     this.url = GLOBAL.url;
   }
 
-  signup(user_to_json): Observable<any>{
+  signin(user_to_json): Observable<any>{
     let json = JSON.stringify(user_to_json);
     let params = json;
     let headers = new HttpHeaders().set('Content-Type', 'application/json');

@@ -19,9 +19,11 @@ import { RegistroClienteComponent } from './clientes/registrocliente/registrocli
 import { CircleChartComponent } from './vistaprincipal/circlechart/circlechart.component';
 import { AuthGuardService } from '../../services/authguard.service';
 import { AuthService } from '../../services/auth.service';
+import { AdminComponent } from './admin.component';
 
 @NgModule({
   declarations: [
+    AdminComponent,
     ChartlineClienteComponent,
     BarChartContratoComponent,
     PrincipalComponent,

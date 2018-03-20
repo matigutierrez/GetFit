@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.logout();
     this.redirectIfIdentity();
   }
-
+  //Redireccion si hay un usuario logeado y token
   redirectIfIdentity(){
     let identity = this._userService.getIdentity();
     let token = this._userService.getToken();
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     console.log(this.user);
-    this._userService.signup(this.user).subscribe(
+    this._userService.signin(this.user).subscribe(
       Response => {
         this.identify = Response.usuario.usu_correo;
         this.token = Response.token;
@@ -56,19 +56,13 @@ export class LoginComponent implements OnInit {
           if (!this.identify.status && !this.token.status) {
             localStorage.setItem('identity', JSON.stringify(this.identify));
             localStorage.setItem('token', JSON.stringify(this.token));
-            this._rolService.getRolSesion().subscribe(
-              Response => {
-                if(Response.tgf_rol_id == "1"){
-                  window.location.href = '/getfit';
-                }else {
-                  window.location.href = '/getfit/cliente';
-                }
-              },
-              Error => {
-                console.log(<any>Error)
-              }
-            );
-            
+          }
+          if(Response.usuario.rol.id == "1"){
+            console.log(Response);
+            window.location.href = '/getfit/principal';
+          }
+          if(Response.usuario.rol.id == "2"){
+            window.location.href = '/getfitc/cliente';
           }
         }
       },

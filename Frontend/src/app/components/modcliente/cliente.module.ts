@@ -11,9 +11,11 @@ import { AuthGuardService } from '../../services/authguard.service';
 import { AuthService } from '../../services/auth.service';
 import { VistaClienteComponent } from './vistacliente/vistacliente.component';
 import { CobranzaComponent } from './cobranzas/cobranza.component';
+import { ModClienteComponent } from './modcliente.component';
 
 @NgModule({
   declarations: [
+    ModClienteComponent,
     VistaClienteComponent,
     CobranzaComponent
   ],

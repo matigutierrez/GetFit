@@ -3,15 +3,22 @@ import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { AuthGuardService as AuthGuard } from '../../services/authguard.service';
 import { VistaClienteComponent } from './vistacliente/vistacliente.component';
 import { CobranzaComponent } from './cobranzas/cobranza.component';
+import { ModClienteComponent } from './modcliente.component';
 
 const appRoutes: Routes = [
   {
-    path:'getfit/cliente',
-    component: VistaClienteComponent
-  },
-  {
-    path: 'getfit/cobranzas',
-    component: CobranzaComponent
+  path:'getfitc',
+  component: ModClienteComponent,
+  children: [
+    {
+      path:'cliente',
+      component: VistaClienteComponent
+    },
+    {
+      path: 'cobranzas',
+      component: CobranzaComponent
+    }
+  ]
   }
 ];
 

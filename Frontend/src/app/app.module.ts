@@ -10,12 +10,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/authguard.service';
-import { AuthService } from './services/auth.service'
+import { AuthService } from './services/auth.service';
 import { AppModuleAdmin } from './components/modadmin/admin.module';
 import { AppModuleCliente } from './components/modcliente/cliente.module';
 
 export function gettoken (){
-  return localStorage.getItem('access_token');
+  return localStorage.getItem('token');
 };
 const jwtConf: JwtModuleOptions = {
   config: {

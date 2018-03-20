@@ -4,20 +4,26 @@ import { PrincipalComponent } from './vistaprincipal/principal/principal.compone
 import { PlanComponent } from './planes/plan/plan.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { AuthGuardService as AuthGuard } from '../../services/authguard.service';
+import { AdminComponent } from './admin.component';
 
 const appRoutes: Routes = [
   {
     path:'getfit',
-    component: PrincipalComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path:'clientes',
-    component: ClienteComponent
-  },
-  {
-    path: 'plan',
-    component: PlanComponent
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    children: [{
+      path:'principal',
+      component: PrincipalComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path:'clientes',
+      component: ClienteComponent
+    },
+    {
+      path: 'plan',
+      component: PlanComponent
+    }]
   }
 ];
 
