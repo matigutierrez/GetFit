@@ -20,7 +20,7 @@ export function gettoken (){
 const jwtConf: JwtModuleOptions = {
   config: {
     tokenGetter: gettoken,
-    whitelistedDomains: ['198.58.101.50:4200']
+    whitelistedDomains: ['localhost:4200']
   }
 }
 
