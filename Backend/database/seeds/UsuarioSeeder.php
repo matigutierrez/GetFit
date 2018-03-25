@@ -13,14 +13,14 @@ class UsuarioSeeder extends Seeder
     {
         DB::table('tgf_usuario')->insert([
           array(
-          	'tgf_rol_id' => '1',
-          	'tgf_cliente_id' => '1',
+            'tgf_rol_id' => '1',
+            'tgf_cliente_id' => null,
           	'usu_correo' => 'm.gutierrez06@ufromail.cl',
           	'password' => bcrypt('1234')
           ),
           array(
-          	'tgf_rol_id' => '2',
-          	'tgf_cliente_id' => '2',
+            'tgf_rol_id' => '2',
+            'tgf_cliente_id' => null,
           	'usu_correo' => 'm.pinilla03@ufromail.cl',
           	'password' => bcrypt('12345')
           ),
@@ -49,9 +49,9 @@ class UsuarioSeeder extends Seeder
             'password' => bcrypt('12345')
           ),
           array(
-            'tgf_rol_id' => '2',
+            'tgf_rol_id' => '3',
             'tgf_cliente_id' => '7',
-            'usu_correo' => 'm.hermosilla@ufromail.cl',
+            'usu_correo' => 'm.hermosilla03@ufromail.cl',
             'password' => bcrypt('12345')
           )
         ]);
