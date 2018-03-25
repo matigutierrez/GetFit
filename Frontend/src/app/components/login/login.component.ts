@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { RolService } from '../../services/rol.service';
 
 @Component({
   selector: 'login',
@@ -11,14 +10,13 @@ import { RolService } from '../../services/rol.service';
 
 export class LoginComponent implements OnInit {
   public user;
-  public identify;
+  public identity;
   public token;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService,
-    private _rolService: RolService
+    private _userService: UserService
 
   ){
     this.user = {
@@ -48,20 +46,23 @@ export class LoginComponent implements OnInit {
     console.log(this.user);
     this._userService.signin(this.user).subscribe(
       Response => {
-        this.identify = Response.usuario.usu_correo;
+        this.identity = Response.usuario.usu_correo;
         this.token = Response.token;
-        if (this.identify.length <= 1) {
+        if (this.identity.length <= 1) {
           console.log("error en el servidor")
         }{
-          if (!this.identify.status && !this.token.status) {
-            localStorage.setItem('identity', JSON.stringify(this.identify));
+          if (!this.identity.status && !this.token.status) {
+            localStorage.setItem('identity', JSON.stringify(this.identity));
             localStorage.setItem('token', JSON.stringify(this.token));
           }
-          if(Response.usuario.rol.id == "1"){
-            console.log(Response);
+          if (Response.usuario.rol.id == 1){
+            // Administrador
             window.location.href = '/getfit/principal';
-          }
-          if(Response.usuario.rol.id == "2"){
+          }else if (Response.usuario.rol.id == 2) {
+            // Profesor
+            window.location.href = '/getfit/principal';
+          }else if (Response.usuario.rol.id == 3){
+            // Cliente
             window.location.href = '/getfitc/cliente';
           }
         }
@@ -80,7 +81,7 @@ export class LoginComponent implements OnInit {
         localStorage.removeItem('identity');
         localStorage.removeItem('token');
 
-        this.identify = null;
+        this.identity = null;
         this.token = null;
 
         window.location.href = '/login';
