@@ -14,14 +14,12 @@ export class ProfesorGuardService implements CanActivate {
       Response => {
         if(Response.id == 1) {
           this.router.navigate(["/getfit/principal"]);
-          this.sesion = true;
         } else if(Response.id == 2) {
           this.router.navigate(["/getfit/profesor"]);
-          this.sesion = true;
         } else if(Response.id == 3) {
           this.router.navigate(["/getfitc/cliente"]);
-          this.sesion = false;
         }
+        this.sesion = Response.id == 2;
       }, Error => {
         console.log(<any>Error);
         this.sesion = false;

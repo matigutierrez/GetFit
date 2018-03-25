@@ -14,14 +14,12 @@ export class ClienteGuardService implements CanActivate {
       Response => {
         if(Response.id == 1) {
           this.router.navigate(["/getfit/principal"]);
-          this.sesion = false;
         } else if(Response.id == 2) {
           this.router.navigate(["/getfit/profesor"]);
-          this.sesion = false;
         } else if(Response.id == 3) {
           this.router.navigate(["/getfitc/cliente"]);
-          this.sesion = true;
         }
+        this.sesion = Response.id == 3;
       }, Error => {
         console.log(<any>Error);
         this.sesion = false;
