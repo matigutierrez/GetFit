@@ -13,6 +13,7 @@ import { AuthGuardService } from './services/authguard.service';
 import { AuthService } from './services/auth.service';
 import { AppModuleAdmin } from './components/modadmin/admin.module';
 import { AppModuleCliente } from './components/modcliente/cliente.module';
+import { AppModuleProfesor } from './components/modprofesor/profesor.module';
 
 export function gettoken (){
   return localStorage.getItem('token');
@@ -37,6 +38,7 @@ const jwtConf: JwtModuleOptions = {
     MaterializeModule,
     AppModuleAdmin,
     AppModuleCliente,
+    AppModuleProfesor,
     JwtModule.forRoot(jwtConf)
   ],
   providers: [
