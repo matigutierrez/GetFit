@@ -24,6 +24,7 @@ export class LoginGuardService implements CanActivate {
         }
       }, Error => {
         console.log(<any>Error);
+        this.router.navigate(["/login"]);
         this.sesion = true;
       }
     )
