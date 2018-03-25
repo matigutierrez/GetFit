@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { VistaClienteComponent } from './vistacliente/vistacliente.component';
 import { CobranzaComponent } from './cobranzas/cobranza.component';
 import { ModClienteComponent } from './modcliente.component';
+import { ClienteGuardService } from '../../services/clienteguard.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ModClienteComponent } from './modcliente.component';
   providers: [
     appRoutingProviders,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    ClienteGuardService
   ]
 })
 export class AppModuleCliente { }

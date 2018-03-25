@@ -5,16 +5,16 @@ import { PlanComponent } from './planes/plan/plan.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { AuthGuardService as AuthGuard } from '../../services/authguard.service';
 import { AdminComponent } from './admin.component';
+import { AdminGuardService } from '../../services/adminguard.service';
 
 const appRoutes: Routes = [
   {
     path:'getfit',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     children: [{
       path:'principal',
-      component: PrincipalComponent,
-      canActivate: [AuthGuard]
+      component: PrincipalComponent
     },
     {
       path:'clientes',

@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/cliente';
 import { PlanService } from '../../../../services/plan.service';
-import { RegistroClienteComponent} from '../registrocliente/registrocliente.component';
 import {MaterializeAction} from 'angular2-materialize';
 declare var $:any;
 declare var jQuery:any;

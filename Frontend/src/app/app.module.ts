@@ -14,6 +14,9 @@ import { AuthService } from './services/auth.service';
 import { AppModuleAdmin } from './components/modadmin/admin.module';
 import { AppModuleCliente } from './components/modcliente/cliente.module';
 import { AppModuleProfesor } from './components/modprofesor/profesor.module';
+import { LoginGuardService } from './services/loginguard.service';
+import { UserService } from './services/user.service';
+import { RolService } from './services/rol.service';
 
 export function gettoken (){
   return localStorage.getItem('token');
@@ -42,7 +45,10 @@ const jwtConf: JwtModuleOptions = {
     JwtModule.forRoot(jwtConf)
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    UserService,
+    RolService,
+    LoginGuardService
   ],
   bootstrap: [AppComponent]
 })

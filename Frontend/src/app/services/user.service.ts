@@ -9,7 +9,6 @@ export class UserService{
   public url: string;
   public identity;
   public token;
-  public rol;
 
   constructor(
     public _http: HttpClient
@@ -53,9 +52,5 @@ export class UserService{
     let headers = new HttpHeaders().set('Authorization', this.getToken());
 
     return this._http.get(this.url+'usuario', {headers: headers});
-  }
-
-  getRol(){
-    return this.rol;
   }
 }

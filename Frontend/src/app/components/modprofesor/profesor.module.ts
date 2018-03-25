@@ -11,6 +11,7 @@ import { AuthGuardService } from '../../services/authguard.service';
 import { AuthService } from '../../services/auth.service';
 import { VistaProfesorComponent } from './vistaprofesor/vistaprofesor.component';
 import { ModProfesorComponent } from './modprofesor.component';
+import { ProfesorGuardService } from '../../services/profesorguard.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ModProfesorComponent } from './modprofesor.component';
   providers: [
     appRoutingProviders,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    ProfesorGuardService
   ]
 })
 export class AppModuleProfesor { }

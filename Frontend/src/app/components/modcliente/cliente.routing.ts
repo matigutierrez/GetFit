@@ -4,11 +4,13 @@ import { AuthGuardService as AuthGuard } from '../../services/authguard.service'
 import { VistaClienteComponent } from './vistacliente/vistacliente.component';
 import { CobranzaComponent } from './cobranzas/cobranza.component';
 import { ModClienteComponent } from './modcliente.component';
+import { ClienteGuardService } from '../../services/clienteguard.service';
 
 const appRoutes: Routes = [
   {
   path:'getfitc',
   component: ModClienteComponent,
+  canActivate:[AuthGuard, ClienteGuardService],
   children: [
     {
       path:'cliente',

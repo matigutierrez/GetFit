@@ -20,6 +20,7 @@ import { CircleChartComponent } from './vistaprincipal/circlechart/circlechart.c
 import { AuthGuardService } from '../../services/authguard.service';
 import { AuthService } from '../../services/auth.service';
 import { AdminComponent } from './admin.component';
+import { AdminGuardService } from '../../services/adminguard.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AdminComponent } from './admin.component';
   providers: [
     appRoutingProviders,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    AdminGuardService
   ]
 })
 export class AppModuleAdmin { }

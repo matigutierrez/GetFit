@@ -4,8 +4,7 @@ import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'login',
-  templateUrl: 'login.html',
-  providers: [UserService]
+  templateUrl: 'login.html'
 })
 
 export class LoginComponent implements OnInit {
@@ -27,19 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(){
     console.log('el compenente login a sido cargado');
-    //console.log(this._userService.getIdentity());
-    //console.log(this._userService.getToken());
     this.logout();
-    this.redirectIfIdentity();
-  }
-  //Redireccion si hay un usuario logeado y token
-  redirectIfIdentity(){
-    let identity = this._userService.getIdentity();
-    let token = this._userService.getToken();
-
-    if (identity != null && token != null) {
-      this._router.navigate(["/getfit"]);
-    }
   }
 
   onSubmit(){
@@ -60,7 +47,7 @@ export class LoginComponent implements OnInit {
             window.location.href = '/getfit/principal';
           }else if (Response.usuario.rol.id == 2) {
             // Profesor
-            window.location.href = '/getfit/principal';
+            window.location.href = '/getfit/profesor';
           }else if (Response.usuario.rol.id == 3){
             // Cliente
             window.location.href = '/getfitc/cliente';

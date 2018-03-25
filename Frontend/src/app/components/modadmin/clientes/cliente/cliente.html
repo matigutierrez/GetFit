@@ -30,8 +30,8 @@
                 <li *ngFor="let planes of cliente.contratos"><a>{{planes.plan.pla_nombre}}</a></li>
               </ul>
             </td>
-            <td>{{cliente.usuario.usu_correo}}</td>
-            <td>{{cliente.usuario.rol.rol_nombre}}</td>
+            <td><a *ngIf="cliente.usuario">{{cliente.usuario.usu_correo}}</a></td>
+            <td><a *ngIf="cliente.usuario">{{cliente.usuario.rol.rol_nombre}}</a></td>
             <td><a><i class="material-icons">settings</i></a></td>
             <td><a><i class="material-icons">create</i></a></td>
             <td><a><i class="material-icons">close</i></a></td>
