@@ -23,7 +23,7 @@ export class RegistroPlanComponent implements OnInit {
       "pla_costo": "",
       "tgf_sede_id": "1"
     };
-    this._sedeService.getSede().subscribe(
+    this._sedeService.query().subscribe(
       Response => {
         this.selectOptions = Response;
       },

@@ -17,30 +17,27 @@ export class SedeService{
     this.url = GLOBAL.url;
   }
 
-  registry(sede): Observable<any>{
-    let params = JSON.stringify(sede);
+  save(sede): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.post(this.url+'sede', params, {headers: headers});
+    return this._http.post(this.url+'sede', sede, {headers: headers});
   }
 
-  getSede(): Observable<any>{
+  query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
     return this._http.get(this.url+'sede', {headers: headers});
   }
 
-  getSedeId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  get(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'sede/'+params, {headers: headers});
+    return this._http.get(this.url+'sede/'+id, {headers: headers});
   }
 
-  deleteSedeId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  delete(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.delete(this.url+'sede/'+params, {headers: headers});
+    return this._http.delete(this.url+'sede/'+id, {headers: headers});
   }
 }

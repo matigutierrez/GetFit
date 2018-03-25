@@ -17,16 +17,28 @@ export class ClienteService{
     this.url = GLOBAL.url;
   }
 
-  registry(cliente): Observable<any>{
-    let params = JSON.stringify(cliente);
+  save(cliente): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.post(this.url+'cliente', params, {headers: headers});
+    return this._http.post(this.url+'cliente', cliente, {headers: headers});
   }
 
-  getCliente(): Observable<any>{
+  query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
     return this._http.get(this.url+'cliente', {headers: headers});
   }
+
+  get(id): Observable<any>{
+    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
+
+    return this._http.get(this.url+'cliente/' + id, {headers: headers});
+  }
+
+  delete(id): Observable<any>{
+    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
+
+    return this._http.delete(this.url+'cliente/' + id, {headers: headers});
+  }
+
 }

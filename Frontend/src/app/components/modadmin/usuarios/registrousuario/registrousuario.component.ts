@@ -24,7 +24,7 @@ export class RegistroUsuarioComponent implements OnInit {
       "usu_correo": "",
       "password": ""
     };
-    this._rolService.getRol().subscribe(
+    this._rolService.query().subscribe(
       Response => {
         this.selectOptions = Response;
       },

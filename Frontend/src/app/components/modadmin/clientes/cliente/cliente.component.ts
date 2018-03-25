@@ -27,7 +27,7 @@ export class ClienteComponent implements OnInit {
     private _planService: PlanService
 
   ){
-    this._clienteService.getCliente().subscribe(
+    this._clienteService.query().subscribe(
       Response  => {
         console.log(Response);
         this.clientes = Response;

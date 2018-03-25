@@ -17,30 +17,27 @@ export class PlanService{
     this.url = GLOBAL.url;
   }
 
-  registry(plan): Observable<any>{
-    let params = JSON.stringify(plan);
+  save(plan): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.post(this.url+'plan', params, {headers: headers});
+    return this._http.post(this.url+'plan', plan, {headers: headers});
   }
 
-  getPlan(): Observable<any>{
+  query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
     return this._http.get(this.url+'plan', {headers: headers});
   }
 
-  getPlanId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  get(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'plan/'+params, {headers: headers});
+    return this._http.get(this.url+'plan/'+id, {headers: headers});
   }
 
-  deletePlanId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  delete(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.delete(this.url+'plan/'+params, {headers: headers});
+    return this._http.delete(this.url+'plan/'+id, {headers: headers});
   }
 }

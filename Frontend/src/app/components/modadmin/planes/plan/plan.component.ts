@@ -26,7 +26,7 @@ export class PlanComponent implements OnInit {
     private _router: Router,
     private _planService: PlanService
   ){
-    this._planService.getPlan().subscribe(
+    this._planService.query().subscribe(
       Response => {
         this.planes = Response;
         console.log(this.planes);

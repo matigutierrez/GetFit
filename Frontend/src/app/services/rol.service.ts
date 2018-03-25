@@ -17,14 +17,13 @@ export class RolService{
     this.url = GLOBAL.url;
   }
 
-  registry(rol): Observable<any>{
-    let params = JSON.stringify(rol);
+  save(rol): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.post(this.url+'rol', params, {headers: headers});
+    return this._http.post(this.url+'rol', rol, {headers: headers});
   }
 
-  getRol(): Observable<any>{
+  query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
     return this._http.get(this.url+'rol', {headers: headers});
@@ -36,17 +35,15 @@ export class RolService{
     return this._http.get(this.url+'usuariorol', {headers: headers});
   }
 
-  getRolId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  get(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'rol/'+params, {headers: headers});
+    return this._http.get(this.url+'rol/'+id, {headers: headers});
   }
 
-  deleteRolId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  delete(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.delete(this.url+'rol/'+params, {headers: headers});
+    return this._http.delete(this.url+'rol/'+id, {headers: headers});
   }
 }

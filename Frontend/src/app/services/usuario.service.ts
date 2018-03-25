@@ -17,30 +17,27 @@ export class UsuarioService{
     this.url = GLOBAL.url;
   }
 
-  registry(usuario): Observable<any>{
-    let params = JSON.stringify(usuario);
+  save(usuario): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.post(this.url+'usuario', params, {headers: headers});
+    return this._http.post(this.url+'usuario', usuario, {headers: headers});
   }
 
-  getUsuario(): Observable<any>{
+  query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
     return this._http.get(this.url+'usuario', {headers: headers});
   }
 
-  getUsuarioId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  get(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'usuario/'+params, {headers: headers});
+    return this._http.get(this.url+'usuario/'+id, {headers: headers});
   }
 
-  deleteUsuarioId(id): Observable<any>{
-    let params = JSON.stringify(id);
+  delete(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.delete(this.url+'usuario/'+params, {headers: headers});
+    return this._http.delete(this.url+'usuario/'+id, {headers: headers});
   }
 }

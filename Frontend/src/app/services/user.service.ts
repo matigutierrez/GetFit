@@ -48,7 +48,7 @@ export class UserService{
     return this.token;
   }
 
-  getUsuarios(): Observable<any>{
+  query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this.getToken());
 
     return this._http.get(this.url+'usuario', {headers: headers});

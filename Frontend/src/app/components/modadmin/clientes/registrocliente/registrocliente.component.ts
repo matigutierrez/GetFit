@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { ClienteService } from '../../../../services/cliente.service';
+import { ClienteComponent } from '../cliente/cliente.component';
 import { Cliente } from '../../../../models/cliente';
 import { Plan } from '../../../../models/plan';
 declare var $:any;
@@ -8,7 +9,7 @@ declare var jQuery:any;
 @Component({
   selector: 'registrocliente',
   templateUrl: 'registrocliente.html',
-  providers: [ClienteService]
+  providers: [ClienteService, ClienteComponent]
 })
 
 export class RegistroClienteComponent implements OnInit {
@@ -17,7 +18,8 @@ export class RegistroClienteComponent implements OnInit {
   @Input() planid: string;
 
   constructor(
-    private _clienteService: ClienteService
+    private _clienteService: ClienteService,
+    private _clienteComponent: ClienteComponent
 
   ){
     this.cliente = {
@@ -36,13 +38,25 @@ export class RegistroClienteComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.cliente);
-    $( "#tabs2" ).removeClass("tab col s3 disabled").addClass( "tab col s3");
-    $('ul.tabs').tabs('select_tab', 'test-swipe-2');
-    $( "#tabs1" ).addClass( "tab col s3 disabled" );
-    if(this.planid != undefined){
-      console.log(this.planid);
-    }
+    this._clienteService.save(this.cliente).subscribe(
+      Response => {
+
+        // Pasar a la vista de ingresar usuario
+        $( "#tabs2" ).removeClass("tab col s3 disabled").addClass( "tab col s3");
+        $('ul.tabs').tabs('select_tab', 'test-swipe-2');
+        $( "#tabs1" ).addClass( "tab col s3 disabled" );
+
+        // Insertar dato al registro de clientes
+        this.cliente.id = Response.toString();
+
+        // NO FUNCIONA????
+        this._clienteComponent.clientes.unshift( JSON.parse(JSON.stringify(this.cliente)) );
+
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
   }
 
   cambio(event):void{
