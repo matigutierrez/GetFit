@@ -8,7 +8,7 @@ import { ClienteGuardService } from '../../services/clienteguard.service';
 
 const appRoutes: Routes = [
   {
-  path:'getfitc',
+  path:'getfit',
   component: ModClienteComponent,
   canActivate:[AuthGuard, ClienteGuardService],
   children: [
