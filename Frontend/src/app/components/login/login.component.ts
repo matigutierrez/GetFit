@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         this.identity = Response.usuario.usu_correo;
         this.token = Response.token;
         if (this.identity.length <= 1) {
-          console.log("error en el servidor")
+          console.log("error en el servidor");
         }{
           if (!this.identity.status && !this.token.status) {
             localStorage.setItem('identity', JSON.stringify(this.identity));
@@ -44,13 +44,13 @@ export class LoginComponent implements OnInit {
           }
           if (Response.usuario.rol.id == 1){
             // Administrador
-            window.location.href = '/getfit/principal';
+            this._router.navigate(["/getfit/principal"]);
           }else if (Response.usuario.rol.id == 2) {
             // Profesor
-            window.location.href = '/getfit/profesor';
+            this._router.navigate(["/getfit/profesor"]);
           }else if (Response.usuario.rol.id == 3){
             // Cliente
-            window.location.href = '/getfitc/cliente';
+            this._router.navigate(["/getfit/cliente"]);
           }
         }
       },

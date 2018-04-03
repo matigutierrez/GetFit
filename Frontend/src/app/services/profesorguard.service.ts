@@ -17,7 +17,7 @@ export class ProfesorGuardService implements CanActivate {
         } else if(Response.id == 2) {
           this.router.navigate(["/getfit/profesor"]);
         } else if(Response.id == 3) {
-          this.router.navigate(["/getfitc/cliente"]);
+          this.router.navigate(["/getfit/cliente"]);
         }
         this.sesion = Response.id == 2;
       }, Error => {

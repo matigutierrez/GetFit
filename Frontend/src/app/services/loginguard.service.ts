@@ -19,7 +19,7 @@ export class LoginGuardService implements CanActivate {
           this.router.navigate(["/getfit/profesor"]);
           this.sesion = false;
         } else if(Response.id == 3) {
-          this.router.navigate(["/getfitc/cliente"]);
+          this.router.navigate(["/getfit/cliente"]);
           this.sesion = false;
         }
       }, Error => {
