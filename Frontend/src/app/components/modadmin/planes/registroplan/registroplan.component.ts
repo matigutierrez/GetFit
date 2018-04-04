@@ -38,6 +38,6 @@ export class RegistroPlanComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente principal a sido cargado');
+    //console.log('el compenente registro-plan ha sido cargado');
   }
 }

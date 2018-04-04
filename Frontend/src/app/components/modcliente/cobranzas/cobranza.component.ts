@@ -34,7 +34,7 @@ export class CobranzaComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente cobranza a sido cargado');
+    //console.log('el componente cobranza ha sido cargado');
   }
 
   redirect(id) {

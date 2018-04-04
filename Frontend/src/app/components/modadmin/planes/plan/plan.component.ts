@@ -38,7 +38,7 @@ export class PlanComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente registro ha sido cargado');
+    //console.log('el componente plan ha sido cargado');
   }
 
   openModal(contratos) {

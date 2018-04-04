@@ -35,7 +35,7 @@ export class RegistroUsuarioComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente cliente a sido cargado');
+    //console.log('el compenente registro-usuario ha sido cargado');
   }
 
   onSubmit(){

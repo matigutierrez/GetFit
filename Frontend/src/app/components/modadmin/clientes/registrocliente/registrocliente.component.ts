@@ -34,7 +34,7 @@ export class RegistroClienteComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente cliente a sido cargado');
+    //console.log('el componente registro-cliente a sido cargado');
   }
 
   onSubmit(){

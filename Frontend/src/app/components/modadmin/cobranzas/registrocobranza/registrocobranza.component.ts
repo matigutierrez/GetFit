@@ -17,7 +17,7 @@ export class RegistroCobranzaComponent implements OnInit {
   ){}
 
   ngOnInit(){
-    console.log('el compenente cliente a sido cargado');
+    //console.log('el componente registro-cobranza ha sido cargado');
   }
 
   onSubmit(){

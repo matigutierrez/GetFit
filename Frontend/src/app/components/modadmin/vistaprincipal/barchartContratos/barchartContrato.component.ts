@@ -55,6 +55,6 @@ export class BarChartContratoComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente registro a sido cargado');
+    //console.log('el compenente barchartContrato ha sido cargado');
   }
 }

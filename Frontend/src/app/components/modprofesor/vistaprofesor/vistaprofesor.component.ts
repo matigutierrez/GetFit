@@ -14,6 +14,6 @@ export class VistaProfesorComponent implements OnInit {
   ){}
 
   ngOnInit(){
-    console.log('el compenente principal a sido cargado');
+    //console.log('el componente vistaprofesor ha sido cargado');
   }
 }

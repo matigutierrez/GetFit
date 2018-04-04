@@ -9,8 +9,8 @@
         <thead>
           <tr>
             <th>Rut</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
+            <th>Fecha</th>
+            <th>Monto</th>
             <th></th>
             <th></th>
             <th></th>
@@ -19,8 +19,8 @@
         <tbody>
           <tr *ngFor="let cobranza of cobranzas | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
             <td>{{cobranza}}</td>
-            <td>{{cobranza}}</td>
-            <td>{{cobranza}}</td>
+            <td>{{cobranza.cob_fecha}}</td>
+            <td>{{cobranza.cob_monto}}</td>
             <td><a><i class="material-icons">settings</i></a></td>
             <td><a><i class="material-icons">create</i></a></td>
             <td><a><i class="material-icons">close</i></a></td>

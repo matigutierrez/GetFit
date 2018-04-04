@@ -27,6 +27,6 @@ export class CircleChartComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente registro a sido cargado');
+    //console.log('el componente circlechart ha sido cargado');
   }
 }

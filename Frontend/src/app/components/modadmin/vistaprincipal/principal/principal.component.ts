@@ -14,6 +14,6 @@ export class PrincipalComponent implements OnInit {
   ){}
 
   ngOnInit(){
-    console.log('el compenente principal a sido cargado');
+    //console.log('el componente principal ha sido cargado');
   }
 }

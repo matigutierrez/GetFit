@@ -14,6 +14,6 @@ export class VistaClienteComponent implements OnInit {
   ){}
 
   ngOnInit(){
-    console.log('el compenente principal a sido cargado');
+    //console.log('el compenente vistacliente ha sido cargado');
   }
 }

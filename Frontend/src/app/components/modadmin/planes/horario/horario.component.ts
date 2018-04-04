@@ -21,6 +21,6 @@ export class HorarioComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente horario a sido cargado');
+    //console.log('el componente horario ha sido cargado');
   }
 }

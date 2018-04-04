@@ -26,8 +26,8 @@ export class CobranzasComponent implements OnInit {
   ){
     this._cobranzasService.query().subscribe(
       Response  => {
-        console.log(Response);
         this.cobranzas = Response;
+        console.log(this.cobranzas);
       }, error => {
         console.log(<any>error);
       }
@@ -35,7 +35,7 @@ export class CobranzasComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente cliente a sido cargado');
+    //console.log('el componente cobranzas ha sido cargado');
   }
 
   openModal() {

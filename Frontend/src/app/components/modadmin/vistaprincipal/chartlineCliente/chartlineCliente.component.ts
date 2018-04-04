@@ -52,6 +52,6 @@ export class ChartlineClienteComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente chart a sido cargado');
+    //console.log('el componente chartlineCliente ha sido cargado');
   }
 }

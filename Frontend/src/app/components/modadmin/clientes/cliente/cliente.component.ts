@@ -38,7 +38,7 @@ export class ClienteComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log('el compenente cliente a sido cargado');
+    //console.log('el componente cliente a sido cargado');
   }
 
   openModal() {
