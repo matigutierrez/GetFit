@@ -7,6 +7,7 @@ import { CobranzasComponent } from './cobranzas/cobranza/cobranzas.component';
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
+import { SedeComponent } from './sedes/sede/sede.component';
 
 const appRoutes: Routes = [
   {
@@ -28,7 +29,12 @@ const appRoutes: Routes = [
     {
       path: 'cobranzas',
       component: CobranzasComponent
-    }]
+    },
+    {
+      path: 'sede',
+      component: SedeComponent
+    }
+    ]
   }
 ];
 

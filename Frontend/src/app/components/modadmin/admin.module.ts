@@ -23,6 +23,7 @@ import { CobranzasComponent } from './cobranzas/cobranza/cobranzas.component';
 import { RegistroCobranzaComponent } from './cobranzas/registrocobranza/registrocobranza.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
+import { SedeComponent } from './sedes/sede/sede.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AdminGuard } from '../../guards/AdminGuard';
     RegistroUsuarioComponent,
     HorarioComponent,
     CobranzasComponent,
-    RegistroCobranzaComponent
+    RegistroCobranzaComponent,
+    SedeComponent
   ],
   imports: [
     BrowserModule,
