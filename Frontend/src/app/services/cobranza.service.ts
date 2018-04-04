@@ -20,25 +20,25 @@ export class CobranzaService{
   save(cobranza): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.post(this.url+'cobranzas', cobranza, {headers: headers});
+    return this._http.post(this.url+'cobranza', cobranza, {headers: headers});
   }
 
   query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'cobranzas', {headers: headers});
+    return this._http.get(this.url+'cobranza', {headers: headers});
   }
 
   get(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.get(this.url+'cobranzas/' + id, {headers: headers});
+    return this._http.get(this.url+'cobranza/' + id, {headers: headers});
   }
 
   delete(id): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
 
-    return this._http.delete(this.url+'cobranzas/' + id, {headers: headers});
+    return this._http.delete(this.url+'cobranza/' + id, {headers: headers});
   }
 
   getCobranzasCliente(): Observable<any>{
