@@ -3,6 +3,7 @@ import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { PrincipalComponent } from './vistaprincipal/principal/principal.component';
 import { PlanComponent } from './planes/plan/plan.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
+import { CobranzasComponent } from './cobranzas/cobranza/cobranzas.component';
 import { AuthGuardService as AuthGuard } from '../../services/authguard.service';
 import { AdminComponent } from './admin.component';
 import { AdminGuardService } from '../../services/adminguard.service';
@@ -23,6 +24,10 @@ const appRoutes: Routes = [
     {
       path: 'plan',
       component: PlanComponent
+    },
+    {
+      path: 'cobranzas',
+      component: CobranzasComponent
     }]
   }
 ];

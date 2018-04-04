@@ -21,6 +21,8 @@ import { AuthGuardService } from '../../services/authguard.service';
 import { AuthService } from '../../services/auth.service';
 import { AdminComponent } from './admin.component';
 import { AdminGuardService } from '../../services/adminguard.service';
+import { CobranzasComponent } from './cobranzas/cobranza/cobranzas.component';
+import { RegistroCobranzaComponent } from './cobranzas/registrocobranza/registrocobranza.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { AdminGuardService } from '../../services/adminguard.service';
     RegistroPlanComponent,
     RegistroClienteComponent,
     RegistroUsuarioComponent,
-    HorarioComponent
+    HorarioComponent,
+    CobranzasComponent,
+    RegistroCobranzaComponent
   ],
   imports: [
     BrowserModule,
