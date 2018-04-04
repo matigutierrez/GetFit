@@ -14,7 +14,7 @@ class CobranzaController extends Controller
      */
     public function index()
     {
-        return Cobranza::all();
+        return Cobranza::with(['contrato.cliente', 'contrato.plan'])->get();
     }
 
     /**

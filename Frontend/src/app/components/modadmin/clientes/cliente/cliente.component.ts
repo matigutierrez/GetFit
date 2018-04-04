@@ -29,7 +29,6 @@ export class ClienteComponent implements OnInit {
   ){
     this._clienteService.query().subscribe(
       Response  => {
-        console.log(Response);
         this.clientes = Response;
       }, error => {
         console.log(<any>error);
@@ -38,7 +37,7 @@ export class ClienteComponent implements OnInit {
   }
 
   ngOnInit(){
-    //console.log('el componente cliente a sido cargado');
+    //console.log('el componente cliente ha sido cargado');
   }
 
   openModal() {

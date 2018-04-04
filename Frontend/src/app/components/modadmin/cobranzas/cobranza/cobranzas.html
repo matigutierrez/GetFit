@@ -3,12 +3,13 @@
 </div>
 <div *ngIf="cobranzas" class="row">
   <div class="padtable">
-    <h4>Clientes</h4>
+    <h4>Transacciones</h4>
     <div>
       <table class="responsive-table striped highlight">
         <thead>
           <tr>
-            <th>Rut</th>
+            <th>Cliente</th>
+            <th>Plan</th>
             <th>Fecha</th>
             <th>Monto</th>
             <th></th>
@@ -18,7 +19,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let cobranza of cobranzas | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
-            <td>{{cobranza}}</td>
+            <td>{{cobranza.contrato.cliente.cli_nombres + " " + cobranza.contrato.cliente.cli_apellidos}}</td>
+            <td>{{cobranza.contrato.plan.pla_nombre}}</td>
             <td>{{cobranza.cob_fecha}}</td>
             <td>{{cobranza.cob_monto}}</td>
             <td><a><i class="material-icons">settings</i></a></td>
