@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { RolService } from './rol.service';
+import { RolService } from '../services/rol.service';
 
 @Injectable()
-export class LoginGuardService implements CanActivate {
+export class ProfesorGuard implements CanActivate {
 
   private sesion = false;
 
@@ -14,18 +14,15 @@ export class LoginGuardService implements CanActivate {
       Response => {
         if(Response.id == 1) {
           this.router.navigate(["/getfit/principal"]);
-          this.sesion = false;
         } else if(Response.id == 2) {
           this.router.navigate(["/getfit/profesor"]);
-          this.sesion = false;
         } else if(Response.id == 3) {
           this.router.navigate(["/getfit/cliente"]);
-          this.sesion = false;
         }
+        this.sesion = Response.id == 2;
       }, Error => {
         console.log(<any>Error);
-        this.router.navigate(["/login"]);
-        this.sesion = true;
+        this.sesion = false;
       }
     )
     return this.sesion;

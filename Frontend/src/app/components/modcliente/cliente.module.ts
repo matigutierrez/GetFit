@@ -7,12 +7,12 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MaterializeModule } from 'angular2-materialize';
 import { ChartsModule } from 'ng2-charts';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AuthGuardService } from '../../services/authguard.service';
 import { AuthService } from '../../services/auth.service';
 import { VistaClienteComponent } from './vistacliente/vistacliente.component';
 import { CobranzaComponent } from './cobranzas/cobranza.component';
 import { ModClienteComponent } from './modcliente.component';
-import { ClienteGuardService } from '../../services/clienteguard.service';
+import { AuthGuard } from '../../guards/AuthGuard';
+import { ClienteGuard } from '../../guards/ClienteGuard';
 
 @NgModule({
   declarations: [
@@ -32,8 +32,8 @@ import { ClienteGuardService } from '../../services/clienteguard.service';
   providers: [
     appRoutingProviders,
     AuthService,
-    AuthGuardService,
-    ClienteGuardService
+    AuthGuard,
+    ClienteGuard
   ]
 })
 export class AppModuleCliente { }

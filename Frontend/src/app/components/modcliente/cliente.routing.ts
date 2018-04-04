@@ -1,16 +1,16 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
-import { AuthGuardService as AuthGuard } from '../../services/authguard.service';
 import { VistaClienteComponent } from './vistacliente/vistacliente.component';
 import { CobranzaComponent } from './cobranzas/cobranza.component';
 import { ModClienteComponent } from './modcliente.component';
-import { ClienteGuardService } from '../../services/clienteguard.service';
+import { AuthGuard } from '../../guards/AuthGuard';
+import { ClienteGuard } from '../../guards/ClienteGuard';
 
 const appRoutes: Routes = [
   {
   path:'getfit',
   component: ModClienteComponent,
-  canActivate:[AuthGuard, ClienteGuardService],
+  canActivate:[AuthGuard, ClienteGuard],
   children: [
     {
       path:'cliente',

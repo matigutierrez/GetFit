@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { RolService } from './rol.service';
+import { RolService } from '../services/rol.service';
 
 @Injectable()
-export class AdminGuardService implements CanActivate {
+export class ClienteGuard implements CanActivate {
 
   private sesion = false;
 
@@ -19,7 +19,7 @@ export class AdminGuardService implements CanActivate {
         } else if(Response.id == 3) {
           this.router.navigate(["/getfit/cliente"]);
         }
-        this.sesion = Response.id == 1;
+        this.sesion = Response.id == 3;
       }, Error => {
         console.log(<any>Error);
         this.sesion = false;
