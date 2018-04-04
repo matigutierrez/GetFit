@@ -12,16 +12,14 @@ export class LoginGuard implements CanActivate {
   canActivate(): boolean {
     this.rolService.getRolSesion().subscribe(
       Response => {
-        if(Response.id == 1) {
-          this.router.navigate(["/getfit/principal"]);
-          this.sesion = false;
+        if (Response.id == 1) {
+          this.router.navigate(["/admin"]);
         } else if(Response.id == 2) {
-          this.router.navigate(["/getfit/profesor"]);
-          this.sesion = false;
+          this.router.navigate(["/profesor"]);
         } else if(Response.id == 3) {
-          this.router.navigate(["/getfit/cliente"]);
-          this.sesion = false;
+          this.router.navigate(["/cliente"]);
         }
+        this.sesion = false;
       }, Error => {
         console.log(<any>Error);
         this.router.navigate(["/login"]);

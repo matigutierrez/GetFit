@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'vistaprofesor',
+  selector: 'app-root',
   templateUrl: 'vistaprofesor.html'
 })
 

@@ -10,11 +10,11 @@ import { AdminGuard } from '../../guards/AdminGuard';
 
 const appRoutes: Routes = [
   {
-    path:'getfit',
+    path:'admin',
     component: AdminComponent,
     canActivate: [AuthGuard, AdminGuard],
     children: [{
-      path:'principal',
+      path:'',
       component: PrincipalComponent
     },
     {

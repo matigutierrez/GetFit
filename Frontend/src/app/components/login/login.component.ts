@@ -44,13 +44,13 @@ export class LoginComponent implements OnInit {
           }
           if (Response.usuario.rol.id == 1){
             // Administrador
-            this._router.navigate(["/getfit/principal"]);
+            this._router.navigate(["/admin"]);
           }else if (Response.usuario.rol.id == 2) {
             // Profesor
-            this._router.navigate(["/getfit/profesor"]);
+            this._router.navigate(["/profesor"]);
           }else if (Response.usuario.rol.id == 3){
             // Cliente
-            this._router.navigate(["/getfit/cliente"]);
+            this._router.navigate(["/cliente"]);
           }
         }
       },

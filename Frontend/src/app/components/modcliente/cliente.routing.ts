@@ -8,12 +8,12 @@ import { ClienteGuard } from '../../guards/ClienteGuard';
 
 const appRoutes: Routes = [
   {
-  path:'getfit',
+  path:'cliente',
   component: ModClienteComponent,
   canActivate:[AuthGuard, ClienteGuard],
   children: [
     {
-      path:'cliente',
+      path:'',
       component: VistaClienteComponent
     },
     {

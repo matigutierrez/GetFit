@@ -7,12 +7,12 @@ import { ProfesorGuard } from '../../guards/ProfesorGuard';
 
 const appRoutes: Routes = [
   {
-  path:'getfit',
+  path:'profesor',
   component: ModProfesorComponent,
   canActivate: [AuthGuard, ProfesorGuard],
   children: [
     {
-      path:'profesor',
+      path:'',
       component: VistaProfesorComponent
     }
   ]
