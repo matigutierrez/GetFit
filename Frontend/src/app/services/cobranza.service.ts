@@ -7,45 +7,31 @@ import {UserService} from './user.service';
 
 @Injectable()
 export class CobranzaService{
-  public url: string;
-
+  
   constructor(
-    private _http: HttpClient,
-    private _userService: UserService
-
+    private _http: HttpClient
   ){
-    this.url = GLOBAL.url;
+
   }
 
   save(cobranza): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.post(this.url+'cobranza', cobranza, {headers: headers});
+    return this._http.post(GLOBAL.url+'cobranza', cobranza);
   }
 
   query(): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'cobranza', {headers: headers});
+    return this._http.get(GLOBAL.url+'cobranza');
   }
 
   get(id): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'cobranza/' + id, {headers: headers});
+    return this._http.get(GLOBAL.url+'cobranza/' + id);
   }
 
   delete(id): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.delete(this.url+'cobranza/' + id, {headers: headers});
+    return this._http.delete(GLOBAL.url+'cobranza/' + id);
   }
 
   getCobranzasCliente(): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'clientecobranzas', {headers: headers});
+    return this._http.get(GLOBAL.url+'clientecobranzas');
   }
-
 
 }

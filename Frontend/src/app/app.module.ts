@@ -17,13 +17,25 @@ import { UserService } from './services/user.service';
 import { RolService } from './services/rol.service';
 import { LoginGuard } from './guards/LoginGuard';
 
-export function gettoken (){
-  return localStorage.getItem('token');
-};
+export function getToken(): string {
+
+  let token: any = localStorage.getItem('token');
+
+  if ( token != null ) {
+
+    return JSON.parse(localStorage.getItem('token'));
+
+  }
+
+  return null;
+
+}
+
 const jwtConf: JwtModuleOptions = {
   config: {
-    tokenGetter: gettoken,
-    whitelistedDomains: ['localhost:4200']
+    tokenGetter: getToken,
+    authScheme: '',
+    whitelistedDomains: ['localhost:8000']
   }
 }
 

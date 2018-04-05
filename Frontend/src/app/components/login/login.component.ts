@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'login',
@@ -8,14 +9,14 @@ import { UserService } from '../../services/user.service';
 })
 
 export class LoginComponent implements OnInit {
+
   public user;
-  public identity;
-  public token;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService,
+    private _authService: AuthService
 
   ){
     this.user = {
@@ -30,17 +31,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.user);
+    
     this._userService.signin(this.user).subscribe(
       Response => {
-        this.identity = Response.usuario.usu_correo;
-        this.token = Response.token;
-        if (this.identity.length <= 1) {
+        let identity = Response.usuario.usu_correo;
+        let token = Response.token;
+        if (identity.length <= 1) {
           console.log("error en el servidor");
         }{
-          if (!this.identity.status && !this.token.status) {
-            localStorage.setItem('identity', JSON.stringify(this.identity));
-            localStorage.setItem('token', JSON.stringify(this.token));
+          if (!identity.status && !token.status) {
+            this._authService.setIdentity(identity);
+            this._authService.setToken(token);
           }
           if (Response.usuario.rol.id == 1){
             // Administrador
@@ -67,9 +68,6 @@ export class LoginComponent implements OnInit {
       if (logout == 1) {
         localStorage.removeItem('identity');
         localStorage.removeItem('token');
-
-        this.identity = null;
-        this.token = null;
 
         window.location.href = '/login';
       }

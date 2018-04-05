@@ -7,43 +7,32 @@ import {UserService} from './user.service';
 
 @Injectable()
 export class RolService{
-  public url: string;
-
+  
   constructor(
     private _http: HttpClient,
     private _userService: UserService
 
   ){
-    this.url = GLOBAL.url;
+    
   }
 
   save(rol): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.post(this.url+'rol', rol, {headers: headers});
+    return this._http.post(GLOBAL.url+'rol', rol);
   }
 
   query(): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'rol', {headers: headers});
+    return this._http.get(GLOBAL.url+'rol');
   }
 
   getRolSesion(): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'usuariorol', {headers: headers});
+    return this._http.get(GLOBAL.url+'usuariorol');
   }
 
   get(id): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'rol/'+id, {headers: headers});
+    return this._http.get(GLOBAL.url+'rol/'+id);
   }
 
   delete(id): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.delete(this.url+'rol/'+id, {headers: headers});
+    return this._http.delete(GLOBAL.url+'rol/'+id);
   }
 }

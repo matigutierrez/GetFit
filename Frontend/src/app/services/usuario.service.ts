@@ -7,37 +7,26 @@ import {UserService} from './user.service';
 
 @Injectable()
 export class UsuarioService{
-  public url: string;
-
+  
   constructor(
-    private _http: HttpClient,
-    private _userService: UserService
-
+    private _http: HttpClient
   ){
-    this.url = GLOBAL.url;
+    
   }
 
   save(usuario): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.post(this.url+'usuario', usuario, {headers: headers});
+    return this._http.post(GLOBAL.url+'usuario', usuario);
   }
 
   query(): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'usuario', {headers: headers});
+    return this._http.get(GLOBAL.url+'usuario');
   }
 
   get(id): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.get(this.url+'usuario/'+id, {headers: headers});
+    return this._http.get(GLOBAL.url+'usuario/'+id);
   }
 
   delete(id): Observable<any>{
-    let headers = new HttpHeaders().set('Authorization', this._userService.getToken());
-
-    return this._http.delete(this.url+'usuario/'+id, {headers: headers});
+    return this._http.delete(GLOBAL.url+'usuario/'+id);
   }
 }

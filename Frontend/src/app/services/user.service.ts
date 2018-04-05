@@ -6,22 +6,18 @@ import {GLOBAL} from './global';
 
 @Injectable()
 export class UserService{
-  public url: string;
+  
   public identity;
   public token;
 
   constructor(
     public _http: HttpClient
   ){
-    this.url = GLOBAL.url;
+    
   }
 
-  signin(user_to_json): Observable<any>{
-    let json = JSON.stringify(user_to_json);
-    let params = json;
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-    return this._http.post(this.url+'login', params, {headers: headers});
+  signin(user): Observable<any>{
+    return this._http.post(GLOBAL.url+'login', user);
   }
 
   getIdentity(){
@@ -51,6 +47,6 @@ export class UserService{
   query(): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', this.getToken());
 
-    return this._http.get(this.url+'usuario', {headers: headers});
+    return this._http.get(GLOBAL.url+'usuario', {headers: headers});
   }
 }
