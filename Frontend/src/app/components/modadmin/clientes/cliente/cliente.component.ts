@@ -57,6 +57,10 @@ export class ClienteComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['close']});
   }
 
+  public deleteCliente(id:number) {
+    this._clienteService.delete(id).subscribe(null);
+  }
+
   public onCreate(data:Cliente) {
     this.clientes.unshift(data);
   }
@@ -69,10 +73,11 @@ export class ClienteComponent implements OnInit {
     }
   }
 
-  public onDelete(data:Cliente) {
+  public onDelete(id:number) {
     for (let i = 0; i < this.clientes.length; i++) {
-      if ( this.clientes[i].id == data.id ) {
-        this.clientes[i] = null;
+      if ( this.clientes[i].id == id ) {
+        this.clientes.splice(i, 1);
+        break;
       }
     }
   }

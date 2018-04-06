@@ -1,8 +1,12 @@
-export class Plan{
-	constructor(
-		public pla_nombre: string,
-		public pla_descripcion: string,
-		public pla_costo: string,
-		public tgf_sede_id: string
-	){}
+export class Sede {
+
+	public id: number;
+	public sed_nombre: string;
+
+	constructor() {
+
+		this.id = null;
+		this.sed_nombre = null;
+
+	}
 }

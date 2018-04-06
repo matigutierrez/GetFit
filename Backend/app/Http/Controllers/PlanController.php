@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Plan;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class PlanController extends Controller
 {
+
+    private $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class PlanController extends Controller
      */
     public function index()
     {
-        return Plan::with('horarios','contratos.cliente')->get();
+        return Plan::with('horarios','contratos.cliente','sede')->get();
     }
 
     /**
@@ -35,12 +43,18 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        return Plan::insertGetId([
-            'tgf_sede_id' -> $request->tgf_sede_id,
-            'pla_nombre' => $request->pla_nombre,
-            'pla_descripcion' => $request->pla_descripcion,
-            'pla_costo' => $request->pla_costo,
-        ]);
+        $plan = new Plan;
+        $plan->tgf_sede_id = $request->tgf_sede_id;
+        $plan->pla_nombre = $request->pla_nombre;
+        $plan->pla_descripcion = $request->pla_descripcion;
+        $plan->pla_costo = $request->pla_costo;
+
+        $plan->save();
+        $plan->pluck(['horarios', 'contratos.cliente', 'sede']);
+
+        $this->pusher->trigger('plan', 'create', $plan);
+
+        return $plan->id;
     }
 
     /**
@@ -76,6 +90,10 @@ class PlanController extends Controller
     {
         $plan = Plan::find($id);
         $plan->update($request->all());
+        $plan->pluck(['horarios', 'contratos.cliente', 'sede']);
+
+        $this->pusher->trigger('plan', 'update', $plan);
+
         return ['updated' => true];
     }
 
@@ -88,6 +106,9 @@ class PlanController extends Controller
     public function destroy($id)
     {
         Plan::destroy($id);
+
+        $this->pusher->trigger('plan', 'delete', $id);
+
         return ['deleted' => true];
     }
 }

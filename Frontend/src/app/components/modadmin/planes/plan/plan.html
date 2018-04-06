@@ -12,8 +12,9 @@
       <table class="responsive-table striped highlight">
         <thead>
           <tr>
-              <th>Grupo</th>
               <th>Plan</th>
+              <th>Descripción</th>
+              <th>Sede</th>
               <th>Horarios</th>
               <th>Cupos Totales</th>
               <th>Inscritos</th>
@@ -27,6 +28,7 @@
           <tr *ngFor="let plan of planes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;"> 
             <td>{{plan.pla_nombre}}</td>
             <td>{{plan.pla_descripcion}}</td>
+            <td>{{plan.sede.sed_nombre}}</td>
             <td>
               <a materialize="dropdown" href="#!" class="right-align" [attr.data-activates]="'dropdown-'+i" ><i class="material-icons">date_range</i></a>
               <ul id="dropdown-{{i}}" class='dropdown-content'>
@@ -38,7 +40,7 @@
             <td><a (click)="openModal(plan.contratos)"><i class="material-icons">person</i></a></td>
             <td><a (click)="openUser(plan.id)"><i class="material-icons">group_add</i></a></td>
             <td><a [routerLink]="['/cliente/Grupo', plan.id]"><i class="material-icons">create</i></a></td>
-            <td><a [routerLink]="['/cliente/Grupo', plan.id]"><i class="material-icons">close</i></a></td>
+            <td><a (click)="deletePlan(plan.id)"><i class="material-icons">close</i></a></td>
           </tr>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </tbody>

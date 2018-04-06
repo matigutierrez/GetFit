@@ -10,7 +10,7 @@ use Pusher\Laravel\PusherManager;
 class ClienteController extends Controller
 {
 
-    protected $pusher;
+    private $pusher;
 
     public function __construct(PusherManager $pusher) {
         $this->pusher = $pusher;
@@ -92,6 +92,8 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         $cliente->update($request->all());
+
+        $cliente->pluck(['usuario.rol', 'contratos.plan']);
 
         $this->pusher->trigger('cliente', 'update', $cliente);
 

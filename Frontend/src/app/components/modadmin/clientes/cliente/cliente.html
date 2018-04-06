@@ -20,12 +20,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+          <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 10, currentPage: p }; index as i;">
             <td>{{cliente.cli_rut}}</td>
             <td>{{cliente.cli_nombres}}</td>
             <td>{{cliente.cli_apellidos}}</td>
             <td>
-              <a materialize="dropdown" class="right-align" [attr.data-activates]="'dropdown-'+i" ><i class="material-icons">assignment</i></a>
+              <a materialize="dropdown" class="right-align" href="" [attr.data-activates]="'dropdown-'+i" >
+                <i class="material-icons">assignment</i>
+              </a>
               <ul id="dropdown-{{i}}" class='dropdown-content'>
                 <li *ngFor="let planes of cliente.contratos"><a>{{planes.plan.pla_nombre}}</a></li>
               </ul>
@@ -34,7 +36,7 @@
             <td><a *ngIf="cliente.usuario">{{cliente.usuario.rol.rol_nombre}}</a></td>
             <td><a><i class="material-icons">settings</i></a></td>
             <td><a><i class="material-icons">create</i></a></td>
-            <td><a><i class="material-icons">close</i></a></td>
+            <td><a (click)="deleteCliente(cliente.id)"><i class="material-icons">close</i></a></td>
           </tr>
         </tbody>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
