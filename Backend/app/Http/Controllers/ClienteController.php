@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use JWTAuth;
 use App\Cliente;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class ClienteController extends Controller
 {
+
+    protected $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,14 +44,19 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        return Cliente::insertGetId([       // Por ahora esta entidad no posee claves foraneas, pero si relaciones
-            'cli_rut' => $request->cli_rut,
-            'cli_nombres' => $request->cli_nombres,
-            'cli_apellidos' => $request->cli_apellidos,
-            'cli_numerotelefonico' => $request->cli_numerotelefonico,
-            'cli_direccion' => $request->cli_direccion,
-            'cli_huella' => $request->cli_huella,
-        ]);
+        $cliente = new Cliente;
+        $cliente->cli_rut = $request->cli_rut;
+        $cliente->cli_nombres = $request->cli_nombres;
+        $cliente->cli_apellidos = $request->cli_apellidos;
+        $cliente->cli_numerotelefonico = $request->cli_numerotelefonico;
+        $cliente->cli_direccion = $request->cli_direccion;
+        $cliente->cli_huella = $request->cli_huella;
+
+        $cliente->save();
+
+        $this->pusher->trigger('cliente', 'create', $cliente);
+
+        return $cliente->id;
     }
 
     /**
@@ -79,6 +92,9 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         $cliente->update($request->all());
+
+        $this->pusher->trigger('cliente', 'update', $cliente);
+
         return ['updated' => true];
     }
 
@@ -91,6 +107,9 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         Cliente::destroy($id);
+
+        $this->pusher->trigger('cliente', 'delete', $id);
+
         return ['deleted' => true];
     }
 

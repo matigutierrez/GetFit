@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Elibyy\TCPDF\ServiceProvider::class,
+        Pusher\Laravel\PusherServiceProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'PDF' => Elibyy\TCPDF\Facades\TCPDF::class,
+        'Pusher' => Pusher\Laravel\Facades\Pusher::class
 
     ],
 

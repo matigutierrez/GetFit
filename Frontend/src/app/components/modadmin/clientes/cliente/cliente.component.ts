@@ -4,6 +4,7 @@ import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/cliente';
 import { PlanService } from '../../../../services/plan.service';
 import {MaterializeAction} from 'angular2-materialize';
+import { PusherService } from '../../../../services/pusher.service';
 declare var $:any;
 declare var jQuery:any;
 
@@ -15,16 +16,19 @@ declare var jQuery:any;
 })
 
 export class ClienteComponent implements OnInit {
-  public clientes: JSON[];
+  public clientes: Cliente[];
   public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
   public p: number = 1;
+
+  private channel: any;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _clienteService: ClienteService,
-    private _planService: PlanService
+    private _planService: PlanService,
+    private _pusherService: PusherService
 
   ){
     this._clienteService.query().subscribe(
@@ -34,17 +38,42 @@ export class ClienteComponent implements OnInit {
         console.log(<any>error);
       }
     );
+
+    this.channel = this._pusherService.getPusher().subscribe('cliente');
+    this.channel.bind('create', data => { this.onCreate(data) });
+    this.channel.bind('update', data => { this.onUpdate(data) });
+    this.channel.bind('delete', data => { this.onDelete(data) });
   }
 
-  ngOnInit(){
+  public ngOnInit(){
     //console.log('el componente cliente ha sido cargado');
   }
 
-  openModal() {
+  public openModal() {
     this.modalActions.emit({action:"modal",params:['open']});
   }
   
-  closeModal() {
+  public closeModal() {
     this.modalActions.emit({action:"modal",params:['close']});
+  }
+
+  public onCreate(data:Cliente) {
+    this.clientes.unshift(data);
+  }
+
+  public onUpdate(data:Cliente) {
+    for (let i = 0; i < this.clientes.length; i++) {
+      if ( this.clientes[i].id == data.id ) {
+        this.clientes[i] = data;
+      }
+    }
+  }
+
+  public onDelete(data:Cliente) {
+    for (let i = 0; i < this.clientes.length; i++) {
+      if ( this.clientes[i].id == data.id ) {
+        this.clientes[i] = null;
+      }
+    }
   }
 }

@@ -13,6 +13,8 @@ class Cliente extends Model
 
     protected $appends = ['cobranzas'];
 
+    public $timestamps = false;
+
     public function usuario() {
     	return $this->hasOne('App\Usuario', 'tgf_cliente_id');
     }
