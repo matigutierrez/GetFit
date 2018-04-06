@@ -3,15 +3,12 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from './global';
-import {UserService} from './user.service';
 
 @Injectable()
 export class RolService{
   
   constructor(
-    private _http: HttpClient,
-    private _userService: UserService
-
+    private _http: HttpClient
   ){
     
   }

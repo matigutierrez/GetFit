@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="cobranzas" class="row">
   <div class="padtable">
-    <h4>Transacciones</h4>
+    <h4>Cobranzas</h4>
     <div>
       <table class="responsive-table striped highlight">
         <thead>
@@ -12,6 +12,7 @@
             <th>Plan</th>
             <th>Fecha</th>
             <th>Monto</th>
+            <th>Estado</th>
             <th></th>
             <th></th>
             <th></th>
@@ -23,9 +24,13 @@
             <td>{{cobranza.contrato.plan.pla_nombre}}</td>
             <td>{{cobranza.cob_fecha}}</td>
             <td>{{cobranza.cob_monto}}</td>
+            <td>
+              <i *ngIf="cobranza.pago" class="material-icons">check</i>
+              <i *ngIf="!cobranza.pago" class="material-icons">close</i>
+            </td>
             <td><a><i class="material-icons">settings</i></a></td>
             <td><a><i class="material-icons">create</i></a></td>
-            <td><a><i class="material-icons">close</i></a></td>
+            <td><a (click)="deleteCobranza(cobranza.id)"><i class="material-icons">close</i></a></td>
           </tr>
         </tbody>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>

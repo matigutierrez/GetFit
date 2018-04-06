@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Cobranza;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class CobranzaController extends Controller
 {
+
+    private $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,10 +43,16 @@ class CobranzaController extends Controller
      */
     public function store(Request $request)
     {
-        return Cobranza::insertGetId([
-            'tgf_contrato_id' => $request->tgf_contrato_id,
-            'cob_monto' => $request->cob_monto,
-        ]);
+        $cobranza = new Cobranza;
+        $cobranza->tgf_contrato_id = $request->tgf_contrato_id;
+        $cobranza->cob_monto = $request->cob_monto;
+
+        $cobranza->save();
+        $cobranza->pluck(['contrato.cliente', 'contrato.plan']);
+
+        $this->pusher->trigger('cobranza', 'create', $cobranza);
+
+        return $cobranza->id;
     }
 
     /**
@@ -74,6 +88,11 @@ class CobranzaController extends Controller
     {
         $cobranza = Cobranza::find($id);
         $cobranza->update($request->all());
+        $cobranza->pluck(['contrato.cliente', 'contrato.plan']);
+
+        $this->pusher->trigger('cobranza', 'update', $cobranza);
+
+
         return ['updated' => true];
     }
 
@@ -86,6 +105,10 @@ class CobranzaController extends Controller
     public function destroy($id)
     {
         Cobranza::destroy($id);
+
+        $this->pusher->trigger('cobranza', 'delete', $id);
+
         return ['deleted' => true];
     }
+    
 }

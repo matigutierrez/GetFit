@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { CobranzaService } from '../../../../services/cobranza.service';
+import { ContratoService } from '../../../../services/contrato.service';
 declare var $:any;
 declare var jQuery:any;
 
@@ -12,7 +13,8 @@ declare var jQuery:any;
 export class RegistroCobranzaComponent implements OnInit {
 
   constructor(
-    private _cobranzaeService: CobranzaService
+    private _cobranzaService: CobranzaService,
+    private _contratoService: ContratoService
 
   ){}
 

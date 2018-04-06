@@ -10,7 +10,6 @@
           <tr>
             <th>Rut</th>
             <th>Nombre</th>
-            <th>Apellido</th>
             <th>Contratos</th>
             <th>Correo</th>
             <th>Rol</th>
@@ -20,10 +19,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 10, currentPage: p }; index as i;">
+          <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
             <td>{{cliente.cli_rut}}</td>
-            <td>{{cliente.cli_nombres}}</td>
-            <td>{{cliente.cli_apellidos}}</td>
+            <td>{{cliente.cli_nombres + " " + cliente.cli_apellidos}}</td>
             <td>
               <a materialize="dropdown" class="right-align" href="" [attr.data-activates]="'dropdown-'+i" >
                 <i class="material-icons">assignment</i>

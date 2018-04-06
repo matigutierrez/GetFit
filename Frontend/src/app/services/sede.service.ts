@@ -1,9 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
-import {GLOBAL} from './global';
-import {UserService} from './user.service';
+import { Observable } from 'rxjs/Observable';
+import { GLOBAL } from './global';
 
 @Injectable()
 export class SedeService{

@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from './global';
 import {UserService} from './user.service';
+import { Cobranza } from '../models/Cobranza';
 
 @Injectable()
 export class CobranzaService{
@@ -14,24 +15,24 @@ export class CobranzaService{
 
   }
 
-  save(cobranza): Observable<any>{
-    return this._http.post(GLOBAL.url+'cobranza', cobranza);
+  save(cobranza:Cobranza): Observable<number>{
+    return this._http.post<number>(GLOBAL.url+'cobranza', cobranza);
   }
 
-  query(): Observable<any>{
-    return this._http.get(GLOBAL.url+'cobranza');
+  query(): Observable<Cobranza[]>{
+    return this._http.get<Cobranza[]>(GLOBAL.url+'cobranza');
   }
 
-  get(id): Observable<any>{
-    return this._http.get(GLOBAL.url+'cobranza/' + id);
+  get(id:number): Observable<Cobranza>{
+    return this._http.get<Cobranza>(GLOBAL.url+'cobranza/' + id);
   }
 
-  delete(id): Observable<any>{
+  delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'cobranza/' + id);
   }
 
-  getCobranzasCliente(): Observable<any>{
-    return this._http.get(GLOBAL.url+'clientecobranzas');
+  getCobranzasCliente(): Observable<Cobranza[]>{
+    return this._http.get<Cobranza[]>(GLOBAL.url+'clientecobranzas');
   }
 
 }
