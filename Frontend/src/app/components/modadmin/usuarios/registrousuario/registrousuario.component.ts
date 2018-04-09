@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { UsuarioService } from '../../../../services/usuario.service';
 import { RolService } from '../../../../services/rol.service';
+import { Rol } from "../../../../models/Rol";
 
 @Component({
   selector: 'registrousuario',
@@ -10,7 +11,7 @@ import { RolService } from '../../../../services/rol.service';
 
 export class RegistroUsuarioComponent implements OnInit {
   public usuario;
-  public selectOptions: JSON[];
+  public selectOptions: Rol[];
   @Output() modal = new EventEmitter();
   @Input() client: string;
 

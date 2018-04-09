@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
-import {GLOBAL} from './global';
+import { Observable } from 'rxjs/Observable';
+import { GLOBAL } from './global';
+import { Rol } from "../models/Rol";
 
 @Injectable()
 export class RolService{
@@ -13,23 +14,23 @@ export class RolService{
     
   }
 
-  save(rol): Observable<any>{
-    return this._http.post(GLOBAL.url+'rol', rol);
+  save(rol:Rol): Observable<number>{
+    return this._http.post<number>(GLOBAL.url+'rol', rol);
   }
 
-  query(): Observable<any>{
-    return this._http.get(GLOBAL.url+'rol');
+  query(): Observable<Rol[]>{
+    return this._http.get<Rol[]>(GLOBAL.url+'rol');
   }
 
-  getRolSesion(): Observable<any>{
-    return this._http.get(GLOBAL.url+'usuariorol');
+  getRolSesion(): Observable<Rol>{
+    return this._http.get<Rol>(GLOBAL.url+'usuariorol');
   }
 
-  get(id): Observable<any>{
-    return this._http.get(GLOBAL.url+'rol/'+id);
+  get(id:number): Observable<Rol>{
+    return this._http.get<Rol>(GLOBAL.url+'rol/'+id);
   }
 
-  delete(id): Observable<any>{
+  delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'rol/'+id);
   }
 }

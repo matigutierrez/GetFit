@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PlanService } from '../../../../services/plan.service';
 import { SedeService } from '../../../../services/sede.service';
-import { Plan } from '../../../../models/plan';
+import { Plan } from '../../../../models/Plan';
+import { Sede } from '../../../../models/Sede';
 
 @Component({
   selector: 'registroplan',
   templateUrl: 'registroplan.html',
-  providers:[PlanService, SedeService]
+  providers: [PlanService, SedeService]
 })
 
 export class RegistroPlanComponent implements OnInit {
   public plan;
-  public selectOptions: JSON[];
+  public selectOptions: Sede[];
 
   constructor(
     private _planService: PlanService,

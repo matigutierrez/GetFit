@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
-import { Plan } from '../models/plan';
+import { Plan } from '../models/Plan';
 
 @Injectable()
 export class PlanService {

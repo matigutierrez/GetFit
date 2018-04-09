@@ -17,8 +17,9 @@ import { UserService } from './services/user.service';
 import { RolService } from './services/rol.service';
 import { LoginGuard } from './guards/LoginGuard';
 import { PusherService } from './services/pusher.service';
-import { GLOBAL } from './services/global';
 import { ContratoService } from './services/contrato.service';
+import { NotificacionService } from './services/notificacion.service';
+import { GLOBAL } from './services/global';
 
 export function getToken(): string {
 
@@ -64,6 +65,7 @@ const jwtConf: JwtModuleOptions = {
     RolService,
     ContratoService,
     PusherService,
+    NotificacionService,
     LoginGuard
   ],
   bootstrap: [AppComponent]

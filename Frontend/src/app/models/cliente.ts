@@ -1,4 +1,6 @@
-export class Cliente{
+import { Usuario } from "./usuario";
+
+export class Cliente {
 
 	public id: number;
 	public cli_rut: string;
@@ -8,7 +10,9 @@ export class Cliente{
 	public cli_direccion: string;
 	public cli_huella: ByteString;
 
-	constructor(){
+	public usuario: Usuario;
+
+	constructor() {
 		this.id = null;
 		this.cli_rut = null;
 		this.cli_nombres = null;
@@ -16,5 +20,7 @@ export class Cliente{
 		this.cli_numerotelefonico = null;
 		this.cli_direccion = null;
 		this.cli_huella = null;
+
+		this.usuario = null;
 	}
 }

@@ -1,0 +1,40 @@
+<div *ngIf="!notificaciones" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="notificaciones" class="row">
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12  left-align">
+                <h4>Notificaciones</h4>
+            </div>
+        </div>
+        <div>
+            <table class="responsive-table striped highlight">
+                <thead>
+                    <tr>
+                        <th>Notificacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let notificacion of notificaciones | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                        <td>{{notificacion.not_titulo}}</td>
+                    </tr>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue" (click)="openCreate()">
+                <i class="material-icons">people</i>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SedeService } from '../../../../services/sede.service';
-import { Cliente } from '../../../../models/cliente';
+import { Cliente } from '../../../../models/Cliente';
+import { Sede } from '../../../../models/Sede';
 import { MaterializeAction } from 'angular2-materialize';
 declare var $:any;
 declare var jQuery:any;
@@ -14,7 +15,7 @@ declare var jQuery:any;
 })
 
 export class SedeComponent implements OnInit {
-  public sedes: JSON[];
+  public sedes: Sede[];
   public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
   public p: number = 1;

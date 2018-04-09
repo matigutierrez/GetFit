@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PlanService } from '../../../../services/plan.service'
 import {MaterializeAction} from 'angular2-materialize';
-import { Plan } from '../../../../models/plan';
+import { Plan } from '../../../../models/Plan';
 import { Cliente } from '../../../../models/cliente';
 import { PusherService } from '../../../../services/pusher.service';
 

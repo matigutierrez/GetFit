@@ -8,6 +8,7 @@ import { AdminComponent } from './admin.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
 import { SedeComponent } from './sedes/sede/sede.component';
+import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 
 const appRoutes: Routes = [
   {
@@ -33,6 +34,10 @@ const appRoutes: Routes = [
     {
       path: 'sede',
       component: SedeComponent
+    },
+    {
+      path: 'notificacion',
+      component: NotificacionComponent
     }
     ]
   }

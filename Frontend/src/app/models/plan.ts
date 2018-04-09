@@ -1,4 +1,4 @@
-import { Sede } from "./sede";
+import { Sede } from "./Sede";
 
 export class Plan {
 

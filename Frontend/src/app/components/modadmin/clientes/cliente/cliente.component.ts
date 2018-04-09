@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClienteService } from '../../../../services/cliente.service';
-import { Cliente } from '../../../../models/cliente';
+import { Cliente } from '../../../../models/Cliente';
 import { PlanService } from '../../../../services/plan.service';
 import {MaterializeAction} from 'angular2-materialize';
 import { PusherService } from '../../../../services/pusher.service';

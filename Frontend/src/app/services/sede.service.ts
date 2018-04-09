@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
+import { Sede } from "../models/Sede";
 
 @Injectable()
 export class SedeService{
@@ -13,19 +14,19 @@ export class SedeService{
     
   }
 
-  save(sede): Observable<any>{
-    return this._http.post(GLOBAL.url+'sede', sede);
+  save(sede:Sede): Observable<number>{
+    return this._http.post<number>(GLOBAL.url+'sede', sede);
   }
 
-  query(): Observable<any>{
-    return this._http.get(GLOBAL.url+'sede');
+  query(): Observable<Sede[]>{
+    return this._http.get<Sede[]>(GLOBAL.url+'sede');
   }
 
-  get(id): Observable<any>{
-    return this._http.get(GLOBAL.url+'sede/'+id);
+  get(id:number): Observable<Sede>{
+    return this._http.get<Sede>(GLOBAL.url+'sede/'+id);
   }
 
-  delete(id): Observable<any>{
+  delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'sede/'+id);
   }
 }

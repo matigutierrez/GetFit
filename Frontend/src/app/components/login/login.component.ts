@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'login',
@@ -19,14 +20,11 @@ export class LoginComponent implements OnInit {
     private _authService: AuthService
 
   ){
-    this.user = {
-      "usu_correo": "",
-      "password": ""
-    };
+    this.user = new Usuario();
   }
 
   ngOnInit(){
-    console.log('el compenente login a sido cargado');
+    //console.log('el componente login ha sido cargado');
     this.logout();
   }
 
