@@ -25,6 +25,7 @@ import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
 import { SedeComponent } from './sedes/sede/sede.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
+import { NotificacionViewerComponent } from './notificaciones/notificacionviewer/notificacionviewer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NotificacionComponent } from './notificaciones/notificacion/notificacio
     CobranzasComponent,
     RegistroCobranzaComponent,
     SedeComponent,
-    NotificacionComponent
+    NotificacionComponent,
+    NotificacionViewerComponent
   ],
   imports: [
     BrowserModule,

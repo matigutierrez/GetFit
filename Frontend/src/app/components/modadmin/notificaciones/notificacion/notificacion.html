@@ -8,21 +8,10 @@
                 <h4>Notificaciones</h4>
             </div>
         </div>
-        <div>
-            <table class="responsive-table striped highlight">
-                <thead>
-                    <tr>
-                        <th>Notificacion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let notificacion of notificaciones | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
-                        <td>{{notificacion.not_titulo}}</td>
-                    </tr>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </tbody>
-            </table>
+        <div class="collection" *ngFor="let notificacion of notificaciones | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+            <a (click)="openModal(notificacion)" class="collection-item">{{notificacion.not_titulo}}</a>
         </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 </div>
 
@@ -37,4 +26,20 @@
             </a>
         </li>
     </ul>
+</div>
+
+<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modal-content modalback">
+        <div class="row">
+            <div class=" col s10 m6 left-align">
+                <h5>Notificacion</h5>
+            </div>
+            <div class="col s2 m6 right-align">
+                <a (click)="closeModal()">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+        </div>
+        <notificacionviewer></notificacionviewer>
+    </div>
 </div>
