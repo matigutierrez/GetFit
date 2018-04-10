@@ -29,4 +29,8 @@ export class PlanService {
   public delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'plan/'+id);
   }
+
+  public getPlanes(): Observable<Plan[]> {
+    return null;
+  }
 }

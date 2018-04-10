@@ -13,12 +13,14 @@ import { CobranzaComponent } from './cobranzas/cobranza.component';
 import { ModClienteComponent } from './modcliente.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { ClienteGuard } from '../../guards/ClienteGuard';
+import { PlanesComponent } from './planes/planes.component';
 
 @NgModule({
   declarations: [
     ModClienteComponent,
     VistaClienteComponent,
-    CobranzaComponent
+    CobranzaComponent,
+    PlanesComponent
   ],
   imports: [
     BrowserModule,

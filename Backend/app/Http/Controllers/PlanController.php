@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Plan;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;
+use JWTAuth;
 
 class PlanController extends Controller
 {
@@ -20,9 +21,30 @@ class PlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(AuthenticateController $auth)
     {
-        return Plan::with('horarios','contratos.cliente','sede')->get();
+        $usuario = $auth->getAuthenticatedUser();
+        
+        switch ($usuario->rol->rol_nombre) {
+            case 'Administrador':
+                return Plan::with('horarios','contratos.cliente','sede')->get();
+            case 'Profesor':
+                return Plan::with('horarios', 'sede')->get();
+            case 'Cliente':
+                $contratos = $usuario->cliente->contratos;
+                $planes = $contratos->pluck('plan');
+
+                foreach ($planes as $plan) {
+                    $plan->contratado = true;
+                }
+
+                $planes = $planes->merge( Plan::all() );
+                $planes->pluck('horarios');
+                $planes->pluck('sede');
+
+                return $planes->unique('id');
+        }
+        return null;
     }
 
     /**
