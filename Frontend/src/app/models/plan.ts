@@ -9,6 +9,7 @@ export class Plan {
 	public pla_costo: string;
 
 	public sede: Sede;
+	public horarios: string[];
 	
 	constructor() {
 
@@ -16,6 +17,9 @@ export class Plan {
 		this.pla_descripcion = null;
 		this.pla_costo = null;
 		this.tgf_sede_id = null;
+
+		this.sede = null;
+		this.horarios = null;
 
 	}
 }

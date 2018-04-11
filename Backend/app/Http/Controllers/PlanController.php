@@ -34,6 +34,7 @@ class PlanController extends Controller
                 $contratos = $usuario->cliente->contratos;
                 $planes = $contratos->pluck('plan');
 
+                // Indicar que el plan fue contratado
                 foreach ($planes as $plan) {
                     $plan->contratado = true;
                 }

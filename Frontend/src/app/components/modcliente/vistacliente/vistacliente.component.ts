@@ -8,12 +8,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 export class VistaClienteComponent implements OnInit {
 
-  constructor(
+  public constructor(
     private _route: ActivatedRoute,
     private _router: Router
   ){}
 
-  ngOnInit(){
+  public ngOnInit(){
     //console.log('el compenente vistacliente ha sido cargado');
   }
 }

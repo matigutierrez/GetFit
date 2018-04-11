@@ -9,12 +9,35 @@ import { Plan } from "../../../models/Plan";
 })
 export class PlanesComponent {
 
-    private planes: Plan[];
+    private contratados: Plan[];
+    private disponibles: Plan[];
 
     public constructor(
         private _planService: PlanService
     ) {
+        
+        this.contratados = null;
+        this.disponibles = null;
 
+        // Obtener planes contratados
+        this._planService.getPlanesContratados().subscribe(
+            Response => {
+                this.contratados = Response;
+            },
+            error => {
+                console.log(error);
+            }
+        )
+
+        // Obtener planes no contratados
+        this._planService.getPlanesNoContratados().subscribe(
+            Response => {
+                this.disponibles = Response;
+            },
+            error => {
+                console.log(error);
+            }
+        )
     }
 
 

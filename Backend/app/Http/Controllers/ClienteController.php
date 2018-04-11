@@ -184,4 +184,20 @@ class ClienteController extends Controller
         return $auth->getAuthenticatedUser()->cliente->cobranzas;
     }
 
+    public function planesToken(AuthenticateController $auth) {
+        $planes = $auth->getAuthenticatedUser()->cliente->contratos->pluck('plan');
+        $planes->pluck('horarios');
+        $planes->pluck('sede');
+
+        return $planes;
+    }
+
+    public function noPlanesToken(AuthenticateController $auth) {
+        $planes = $auth->getAuthenticatedUser()->cliente->noPlanes;
+        $planes->pluck('horarios');
+        $planes->pluck('sede');
+
+        return $planes;
+    }
+
 }

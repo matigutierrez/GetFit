@@ -30,7 +30,12 @@ export class PlanService {
     return this._http.delete(GLOBAL.url+'plan/'+id);
   }
 
-  public getPlanes(): Observable<Plan[]> {
-    return null;
+  public getPlanesContratados(): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url+'clienteplanes');
   }
+
+  public getPlanesNoContratados(): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url+'clientenoplanes');
+  }
+  
 }

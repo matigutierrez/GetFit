@@ -17,7 +17,7 @@ export class CobranzaComponent implements OnInit {
   public API: string;
   
 
-  constructor(
+  public constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _cobranzaService: CobranzaService
@@ -34,11 +34,11 @@ export class CobranzaComponent implements OnInit {
     this.API = GLOBAL.url;
   }
 
-  ngOnInit(){
+  public ngOnInit(){
     //console.log('el componente cobranza ha sido cargado');
   }
 
-  redirect(id) {
+  public redirect(id) {
     window.location.href = this.API+'webpay/pagar/'+ id;
   }
 }
