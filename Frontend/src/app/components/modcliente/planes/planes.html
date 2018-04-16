@@ -26,22 +26,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let plan of contratados | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                        <tr *ngFor="let plan of contratados | paginate: { id: 'pag_contratados', itemsPerPage: 5, currentPage: p1 }; index as i;">
                             <td>{{plan.pla_nombre}}</td>
                             <td>{{plan.pla_descripcion}}</td>
                             <td>{{plan.sede.sed_nombre}}</td>
                             <td>
-                                <a materialize="dropdown" href="#!" class="right-align" [attr.data-activates]="'dropdown-'+i">
+                                <a materialize="dropdown" class="right-align" [attr.data-activates]="'dropdown-'+i+'-1'">
                                     <i class="material-icons">date_range</i>
                                 </a>
-                                <ul id="dropdown-{{i}}" class='dropdown-content'>
+                                <ul id="dropdown-{{i}}-1" class='dropdown-content'>
                                     <li *ngFor="let horario of plan.horarios">
                                         <a>{{horario.hor_hora}}</a>
                                     </li>
                                 </ul>
                             </td>
                         </tr>
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        <pagination-controls id="pag_contratados" (pageChange)="p1 = $event"></pagination-controls>
                     </tbody>
                 </table>
             </div>
@@ -56,22 +56,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let plan of disponibles | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                        <tr *ngFor="let plan of disponibles | paginate: { id: 'pag_disponibles', itemsPerPage: 5, currentPage: p2 }; index as i;">
                             <td>{{plan.pla_nombre}}</td>
                             <td>{{plan.pla_descripcion}}</td>
                             <td>{{plan.sede.sed_nombre}}</td>
                             <td>
-                                <a materialize="dropdown" href="#!" class="right-align" [attr.data-activates]="'dropdown-'+i">
+                                <a materialize="dropdown" class="right-align" [attr.data-activates]="'dropdown-'+i+'-2'">
                                     <i class="material-icons">date_range</i>
                                 </a>
-                                <ul id="dropdown-{{i}}" class='dropdown-content'>
+                                <ul id="dropdown-{{i}}-2" class='dropdown-content'>
                                     <li *ngFor="let horario of plan.horarios">
                                         <a>{{horario.hor_hora}}</a>
                                     </li>
                                 </ul>
                             </td>
                         </tr>
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        <pagination-controls id="pag_disponibles" (pageChange)="p2 = $event"></pagination-controls>
                     </tbody>
                 </table>
             </div>
