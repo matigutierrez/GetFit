@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../models/usuario';
+import { Usuario } from '../../models/Usuario';
 
 @Component({
   selector: 'login',

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
-import { Usuario } from '../models/usuario';
+import { Usuario } from '../models/Usuario';
 
 @Injectable()
 export class UserService{

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Cliente } from "../../../../models/cliente";
+import { Cliente } from "../../../../models/Cliente";
 import { ClienteService } from "../../../../services/cliente.service";
 
 import * as $ from 'jquery';
