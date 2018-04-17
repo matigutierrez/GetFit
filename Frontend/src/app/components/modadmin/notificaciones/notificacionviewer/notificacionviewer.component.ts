@@ -8,7 +8,7 @@ import { Notificacion } from "../../../../models/Notificacion";
 })
 export class NotificacionViewerComponent implements OnInit {
     
-    private notificacion:Notificacion;
+    public notificacion:Notificacion;
 
     public constructor() {
         this.notificacion = null;
@@ -16,10 +16,6 @@ export class NotificacionViewerComponent implements OnInit {
 
     public ngOnInit() {
 
-    }
-
-    public setNotificacion(notificacion:Notificacion) {
-        this.notificacion = notificacion;
     }
     
 }

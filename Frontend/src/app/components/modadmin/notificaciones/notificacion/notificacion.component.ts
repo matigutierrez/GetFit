@@ -13,10 +13,10 @@ export class NotificacionComponent implements OnInit {
 
     // Componente NotificacionViewerComponent
     @ViewChild(NotificacionViewerComponent)
-    private _notificacionViewerComponent: NotificacionViewerComponent;
+    public _notificacionViewerComponent: NotificacionViewerComponent;
 
     public notificaciones: Notificacion[];
-    private modalActions = new EventEmitter<string|MaterializeAction>();
+    public modalActions = new EventEmitter<string|MaterializeAction>();
 
     public constructor(
         private _notificacionService: NotificacionService
@@ -44,7 +44,7 @@ export class NotificacionComponent implements OnInit {
     }
 
     public openModal(notificacion:Notificacion) {
-        this._notificacionViewerComponent.setNotificacion(notificacion);
+        this._notificacionViewerComponent.notificacion = notificacion;
         this.modalActions.emit({action:"modal",params:['open']});
     }
 
