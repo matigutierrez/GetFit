@@ -9,8 +9,8 @@ import { Plan } from "../../../models/Plan";
 })
 export class PlanesComponent {
 
-    private contratados: Plan[];
-    private disponibles: Plan[];
+    public contratados: Plan[];
+    public disponibles: Plan[];
 
     public constructor(
         private _planService: PlanService

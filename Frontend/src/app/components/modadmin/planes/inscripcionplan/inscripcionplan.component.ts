@@ -14,8 +14,7 @@ export class InscripcionPlanComponent {
     @Input()
     public plan_id: number;
 
-    private clientes: Cliente[];
-    private clientesMap: any;
+    public clientes: Cliente[];
 
     private autocomplete: any;
     private clienteSeleccionado: Cliente;

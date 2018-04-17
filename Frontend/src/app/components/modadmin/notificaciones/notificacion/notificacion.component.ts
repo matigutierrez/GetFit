@@ -15,7 +15,7 @@ export class NotificacionComponent implements OnInit {
     @ViewChild(NotificacionViewerComponent)
     private _notificacionViewerComponent: NotificacionViewerComponent;
 
-    private notificaciones: Notificacion[];
+    public notificaciones: Notificacion[];
     private modalActions = new EventEmitter<string|MaterializeAction>();
 
     public constructor(
