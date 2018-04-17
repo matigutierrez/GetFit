@@ -1,0 +1,40 @@
+<ul id="slide-out" class="side-nav fixed" *ngIf="identity && token">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="../../assets/img/bluegrey.png">
+      </div>
+      <h5 class="white-text">GetFit</h5>
+      <a href="#!email"><span class="white-text email">{{identity}}</span></a>
+    </div>
+  </li>
+  <li><a class="subheader">Administración</a></li>
+  <li><a [routerLink]="['clientes']"><i class="material-icons">people</i>Clientes</a></li>
+  <li><a [routerLink]="['plan']"><i class="material-icons">assignment</i>Planes</a></li>
+  <li><a [routerLink]="['notificacion']"><i class="material-icons">notifications_active</i>Notificaciones</a></li>
+  <li><a [routerLink]="['sede']"><i class="material-icons">place</i>Sedes</a></li>
+  <li><a [routerLink]="['cobranzas']"><i class="material-icons">attach_money</i>Cobranzas</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">Cuenta</a></li>
+  <li><a href="#!"><i class="material-icons">person</i>Perfil</a></li>
+  <li><a href="#!" [routerLink]="['/login', 1]" class="waves-effect"><i class="material-icons">close</i>Cerrar Sesion</a></li>
+</ul>
+<header class="navbar-fixed">
+  <nav class="blue-grey darken-2">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo"></a>
+      <div class="row">
+        <div class="col s3 m1 l1">
+          <div class="container">
+            <a  materialize="sideNav" [materializeParams]="[{edge:'left', menuWidth: '300'}]" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+          </div>
+        </div>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

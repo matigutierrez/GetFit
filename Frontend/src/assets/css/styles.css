@@ -1,0 +1,96 @@
+.login {
+  height: 80%;
+  width: 80%;
+  margin-top: 10%;
+}
+
+a {
+  cursor: pointer;
+}
+
+button {
+  width: 100%
+}
+
+.fond {
+  border: 1px solid #E6E6E6;
+  padding: 0.01em 16px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+nav{
+  margin-bottom: 1%;
+}
+
+.check{
+  font-size: 5px;
+}
+
+body {
+  background-color: white;
+}
+
+html{
+  width: 100%;
+  height: 100%;
+}
+
+.padlog{
+  margin-top: 4%
+}
+
+input{
+  border: 1px solid #ccc;
+  background-color: #E6E6E6;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+.pad{
+ padding: 1%;
+}
+
+.cards{
+  height: 50px;
+  width: 50px;
+}
+
+canvas{
+  width: 600px;
+  height: 300px;
+}
+
+.paddingcard{
+  padding: 4%;
+}
+
+.sizecard{
+  height: 150px;
+}
+
+.fondo {
+  border: 1px solid #E6E6E6;
+  padding: 0.01em 16px;
+  background-color: white;
+}
+
+.principal{
+  height: 210px;
+}
+
+.padtable{
+  padding: 2%;
+}
+
+.modalback{
+  background-color: white;
+}
