@@ -1,0 +1,14 @@
+<div *ngIf="!clientes" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="clientes" class="row">
+    <div class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" id="autocomplete-input" materialize="autocomplete" [materializeParams]="[autocomplete]">
+                <label for="autocomplete-input">Nombre del Cliente</label>
+            </div>
+            <button class="waves-effect waves-light btn-large blue-grey darken-2" type="submit" (click)="inscribir()" name="action">Inscribir</button>
+        </div>
+    </div>
+</div>

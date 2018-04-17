@@ -9,7 +9,7 @@ import { PusherService } from '../../../../services/pusher.service';
 @Component({
   selector: 'plan',
   templateUrl: 'plan.html',
-  providers:[PlanService]
+  providers: [PlanService]
 })
 
 export class PlanComponent implements OnInit {
@@ -25,7 +25,7 @@ export class PlanComponent implements OnInit {
 
   private channel: any;
 
-  constructor(
+  public constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _planService: PlanService,

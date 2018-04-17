@@ -26,6 +26,7 @@ import { AdminGuard } from '../../guards/AdminGuard';
 import { SedeComponent } from './sedes/sede/sede.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 import { NotificacionViewerComponent } from './notificaciones/notificacionviewer/notificacionviewer.component';
+import { InscripcionPlanComponent } from './planes/inscripcionplan/inscripcionplan.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { NotificacionViewerComponent } from './notificaciones/notificacionviewer
     RegistroCobranzaComponent,
     SedeComponent,
     NotificacionComponent,
-    NotificacionViewerComponent
+    NotificacionViewerComponent,
+    InscripcionPlanComponent
   ],
   imports: [
     BrowserModule,
