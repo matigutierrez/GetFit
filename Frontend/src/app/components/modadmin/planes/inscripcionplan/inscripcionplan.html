@@ -5,8 +5,15 @@
     <div class="col s12">
         <div class="row">
             <div class="input-field col s12">
-                <input type="text" id="autocomplete-input" materialize="autocomplete" [materializeParams]="[autocomplete]">
-                <label for="autocomplete-input">Nombre del Cliente</label>
+                <input type="text" id="inscripcion-plan-cliente-input" materialize="autocomplete" [materializeParams]="[autocompleteInit]">
+                <label for="inscripcion-plan-cliente-input">Nombre del Cliente</label>
+            </div>
+            <div class="file-field input-field col s12">
+                <input type="file" (change)="seleccionarArchivo($event)">
+                <div class="file-path-wrapper">
+                    <input id="inscripcion-plan-acta-input" class="file-path validate" type="text">
+                    <label for="inscripcion-plan-acta-input">Acta de Contrato</label>
+                </div>
             </div>
             <button class="waves-effect waves-light btn-large blue-grey darken-2" type="submit" (click)="inscribir()" name="action">Inscribir</button>
         </div>

@@ -15,19 +15,19 @@ export class ClienteService{
     
   }
 
-  save(cliente:Cliente): Observable<number>{
+  public save(cliente:Cliente): Observable<number>{
     return this._http.post<number>(GLOBAL.url+'cliente', cliente);
   }
 
-  query(): Observable<Cliente[]>{
+  public query(): Observable<Cliente[]>{
     return this._http.get<Cliente[]>(GLOBAL.url+'cliente');
   }
 
-  get(id:number): Observable<Cliente>{
+  public get(id:number): Observable<Cliente>{
     return this._http.get<Cliente>(GLOBAL.url+'cliente/' + id);
   }
 
-  delete(id:number): Observable<any>{
+  public delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'cliente/' + id);
   }
 
