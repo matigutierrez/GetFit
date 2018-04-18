@@ -3,6 +3,7 @@ import { Cliente } from "../../../../models/Cliente";
 import { ClienteService } from "../../../../services/cliente.service";
 import { Contrato } from "../../../../models/Contrato";
 import { ContratoService } from "../../../../services/contrato.service";
+import { HttpHeaders } from "@angular/common/http";
 
 @Component({
     selector: 'inscripcionplan',
@@ -22,6 +23,8 @@ export class InscripcionPlanComponent {
 
     // Cliente seleccionado para inscribir a algun plan
     private cliente: Cliente;
+
+    private archivo: any;
     
     public constructor(
         private _clienteService: ClienteService,
@@ -60,19 +63,30 @@ export class InscripcionPlanComponent {
         this.cliente = this.clientesPorNombre[nombre];
     }
 
-    public seleccionarArchivo(arg:any) {
-        console.log(arg);
+    public seleccionarArchivo(event:any) {
+        this.archivo = event.target.files[0];
     }
 
     public inscribir() {
-        if ( this.cliente != null ) {
+        // Inscribir cliente al plan
+        if ( this.cliente != null && this.archivo != null ) {
             // Inscribir al cliente: this.clienteSeleccionado
             let contrato: Contrato = new Contrato();
 
             contrato.tgf_cliente_id = this.cliente.id;
             contrato.tgf_plan_id = this.plan_id;
 
+            this._contratoService.save(contrato, this.archivo).subscribe(
+                Response => {
+                    
+                },
+                error => {
+
+                }
+            );
+
         }
+
     }
 
 }

@@ -35,6 +35,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('cobranza', 'CobranzaController');
 
 	Route::apiResource('contrato', 'ContratoController');
+	Route::get('contrato/{id}/acta', 'ContratoController@acta');
 
 	Route::apiResource('descuentoCobranza', 'DescuentoCobranzaController');
 

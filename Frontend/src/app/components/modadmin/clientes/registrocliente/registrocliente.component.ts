@@ -14,7 +14,6 @@ declare var jQuery:any;
 
 export class RegistroClienteComponent implements OnInit {
   public cliente;
-  public client:string;
   @Input() planid: string;
 
   constructor(
@@ -22,15 +21,7 @@ export class RegistroClienteComponent implements OnInit {
     private _clienteComponent: ClienteComponent
 
   ){
-    this.cliente = {
-      "cli_rut": "",
-      "cli_nombres": "",
-      "cli_apellidos": "",
-      "cli_numerotelefonico": "",
-      "cli_direccion": "",
-      "cli_huella": "",
-    };
-    this.client = "2";
+    this.cliente = new Cliente();
   }
 
   ngOnInit(){
@@ -58,10 +49,5 @@ export class RegistroClienteComponent implements OnInit {
       }
     );
   }
-
-  cambio(event):void{
-    $( "#tabs1" ).removeClass("tab col s3 disabled").addClass( "tab col s3");
-    $( "#tabs2" ).addClass( "tab col s3 disabled" );
-    $('ul.tabs').tabs('select_tab', 'test-swipe-1');
-  }
+  
 }

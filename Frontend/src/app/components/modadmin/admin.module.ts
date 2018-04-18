@@ -27,6 +27,7 @@ import { SedeComponent } from './sedes/sede/sede.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 import { NotificacionViewerComponent } from './notificaciones/notificacionviewer/notificacionviewer.component';
 import { InscripcionPlanComponent } from './planes/inscripcionplan/inscripcionplan.component';
+import { ActaComponent } from './planes/acta/acta.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { InscripcionPlanComponent } from './planes/inscripcionplan/inscripcionpl
     SedeComponent,
     NotificacionComponent,
     NotificacionViewerComponent,
-    InscripcionPlanComponent
+    InscripcionPlanComponent,
+    ActaComponent
   ],
   imports: [
     BrowserModule,

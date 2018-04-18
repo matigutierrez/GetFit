@@ -15,6 +15,8 @@ export class Contrato {
     public plan: Plan;
     public cobranzas: Cobranza[];
 
+    public archivo: any;
+
     public constructor() {
 
         this.id = null;
@@ -27,6 +29,8 @@ export class Contrato {
         this.cliente = null;
         this.plan = null;
         this.cobranzas = null;
+
+        this.archivo = null;
 
     }
 

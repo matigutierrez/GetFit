@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Contrato;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Pusher\Laravel\PusherManager;
 
 class ContratoController extends Controller
 {
+
+    private $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,11 +45,30 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
-        return Contrato::insertGetId([
-            'tgf_cliente_id' => $request->tgf_cliente_id,
-            'tgf_plan_id' => $request->tgf_plan_id,
-            'con_acta' => $request->con_acta,
-        ]);
+        $requestContrato = json_decode(File::get($request->file('contrato')));
+        
+        $contrato = new Contrato;
+        $contrato->tgf_cliente_id = $requestContrato->tgf_cliente_id;
+        $contrato->tgf_plan_id = $requestContrato->tgf_plan_id;
+
+        if ( $request->hasFile('acta') ) {
+
+            $file = $request->file('acta');
+
+            // El archivo se guarda en /storage/app/actas
+            $contrato->con_acta = Storage::put('actas', $file);
+
+        }
+
+        // Guardar contrato
+        $contrato->save();
+
+        // Agregar cliente a cache
+        $contrato->cliente;
+
+        $this->pusher->trigger('contrato', 'create', $contrato);
+        
+        return $contrato->id;
     }
 
     /**
@@ -74,7 +103,13 @@ class ContratoController extends Controller
     public function update(Request $request, $id)
     {
         $contrato = Contrato::find($id);
-        $contrato->update($request->all());
+        $contrato->update( $request->all() );
+
+        // Agregar 'cliente' a cache
+        $contrato->cliente;
+
+        $this->pusher->trigger('contrato', 'create', $contrato);
+
         return ['updated' => true];
     }
 
@@ -87,6 +122,17 @@ class ContratoController extends Controller
     public function destroy($id)
     {
         Contrato::destroy($id);
+
+        $this->pusher->trigger('contrato', 'delete', $id);
+
         return ['deleted' => true];
+    }
+
+    public function acta($id) {
+        $contrato = Contrato::find($id);
+        if ( isset($contrato) ) {
+            return Storage::get($contrato->con_acta);
+        }
+        return null;
     }
 }

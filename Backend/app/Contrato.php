@@ -12,6 +12,7 @@ class Contrato extends Model
     protected $fillable = ['con_fecha_inicio', 'con_acta'];
 
     const CREATED_AT = 'con_fecha_inicio';
+    const UPDATED_AT = null;
 
     public function cliente() {
     	return $this->belongsTo('App\Cliente', 'tgf_cliente_id');

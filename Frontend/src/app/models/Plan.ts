@@ -1,4 +1,5 @@
 import { Sede } from "./Sede";
+import { Contrato } from "./Contrato";
 
 export class Plan {
 
@@ -10,6 +11,7 @@ export class Plan {
 
 	public sede: Sede;
 	public horarios: string[];
+	public contratos: Contrato[];
 	
 	constructor() {
 
@@ -20,6 +22,7 @@ export class Plan {
 
 		this.sede = null;
 		this.horarios = null;
+		this.contratos = null;
 
 	}
 }
