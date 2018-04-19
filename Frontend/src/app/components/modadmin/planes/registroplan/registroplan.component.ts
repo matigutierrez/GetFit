@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MaterializeAction } from 'angular2-materialize';
 import { PlanService } from '../../../../services/plan.service';
 import { SedeService } from '../../../../services/sede.service';
 import { Plan } from '../../../../models/Plan';
@@ -12,6 +13,9 @@ import { Sede } from '../../../../models/Sede';
 })
 
 export class RegistroPlanComponent implements OnInit {
+
+  public modalRegistroPlan = new EventEmitter<string|MaterializeAction>();
+
   public plan;
   public selectOptions: Sede[];
 
@@ -32,11 +36,20 @@ export class RegistroPlanComponent implements OnInit {
     );
   }
 
-  onSubmit(){
+  public onSubmit(){
     console.log(this.plan);
   }
 
-  ngOnInit(){
+  public ngOnInit(){
     //console.log('el compenente registro-plan ha sido cargado');
   }
+
+  public abrir() {
+    this.modalRegistroPlan.emit({ action:"modal", params:['open'] });
+  }
+
+  public cerrar() {
+    this.modalRegistroPlan.emit({ action:"modal", params:['close'] });
+  }
+
 }

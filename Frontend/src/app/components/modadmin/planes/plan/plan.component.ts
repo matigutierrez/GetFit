@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PlanService } from '../../../../services/plan.service'
 import { MaterializeAction } from 'angular2-materialize';
@@ -7,6 +7,8 @@ import { Cliente } from '../../../../models/Cliente';
 import { PusherService } from '../../../../services/pusher.service';
 import { GLOBAL } from '../../../../services/global';
 import { Contrato } from '../../../../models/Contrato';
+import { InscripcionPlanComponent } from '../inscripcionplan/inscripcionplan.component';
+import { RegistroPlanComponent } from '../registroplan/registroplan.component';
 
 @Component({
   selector: 'plan',
@@ -16,13 +18,17 @@ import { Contrato } from '../../../../models/Contrato';
 
 export class PlanComponent implements OnInit {
 
+  @ViewChild(RegistroPlanComponent)
+  public registroPlan: RegistroPlanComponent;
+
+  @ViewChild(InscripcionPlanComponent)
+  public inscripcionPlan: InscripcionPlanComponent;
+
   public planes: Plan[];
   public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalCreate = new EventEmitter<string|MaterializeAction>();
-  public modalUser = new EventEmitter<string|MaterializeAction>();
   public parametros: string;
-  public clientes: JSON[];
-  public planid: string;
+  public contratos: Contrato[];
   public p: number = 1;
 
   private channel: any;
@@ -59,30 +65,13 @@ export class PlanComponent implements OnInit {
     //console.log('el componente plan ha sido cargado');
   }
 
-  public openModal(contratos) {
+  public openModal(contratos: Contrato[]) {
     this.modalActions.emit({action:"modal",params:['open']});
-    this.clientes = contratos;
+    this.contratos = contratos;
   }
 
   public closeModal() {
     this.modalActions.emit({action:"modal",params:['close']});
-  }
-
-  public openCreate() {
-    this.modalCreate.emit({action:"modal",params:['open']});
-  }
-
-  public closeCreate() {
-    this.modalCreate.emit({action:"modal",params:['close']});
-  }
-
-  public openUser(id) {
-    this.planid = id;
-    this.modalUser.emit({action:"modal",params:['open']});
-  }
-
-  public closeUser() {
-    this.modalUser.emit({action:"modal",params:['close']});
   }
 
   public deletePlan(id:number) {

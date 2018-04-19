@@ -131,7 +131,7 @@ class ContratoController extends Controller
     public function acta($id) {
         $contrato = Contrato::find($id);
         if ( isset($contrato) ) {
-            return Storage::get($contrato->con_acta);
+            return response()->file(storage_path("app/" . $contrato->con_acta));
         }
         return null;
     }

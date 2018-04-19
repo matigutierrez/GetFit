@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpRequest, HttpEvent } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { Contrato } from "../models/Contrato";
 import { GLOBAL } from "./global";
@@ -13,14 +13,16 @@ export class ContratoService {
 
     }
 
-    public save(contrato:Contrato, acta:File): Observable<number> {
+    public save(contrato:Contrato, acta:File): Observable<HttpEvent<number>> {
 
         let formulario: FormData = new FormData();
 
         formulario.append('contrato', new Blob([JSON.stringify(contrato)], {type: 'application/json'}) );
         formulario.append('acta', acta);
 
-        return this._http.post<number>(GLOBAL.url+"contrato", formulario);
+        let req = new HttpRequest('POST', GLOBAL.url+"contrato", formulario, {reportProgress: true});
+
+        return this._http.request<number>(req);
     }
 
     public update(contrato:Contrato): Observable<number> {
@@ -39,8 +41,18 @@ export class ContratoService {
         return this._http.delete(GLOBAL.url+"contrato/" + id);
     }
 
-    public getActa(id:number): Observable<Blob> {
-        return this._http.get(GLOBAL.url+"contrato/" + id + "/acta", {responseType: 'blob'});
+    public getActa(id:number): Observable<HttpEvent<Blob>> {
+
+        let req = new HttpRequest(
+            'GET',
+            GLOBAL.url+"contrato/" + id + "/acta",
+            {
+                responseType: 'blob',
+                reportProgress: true
+            }
+        );
+
+        return this._http.request<Blob>(req);
     }
 
 }

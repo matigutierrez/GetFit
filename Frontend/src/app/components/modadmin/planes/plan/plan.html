@@ -47,7 +47,7 @@
               </a>
             </td>
             <td>
-              <a (click)="openUser(plan.id)">
+              <a (click)="inscripcionPlan.abrir(plan.id)">
                 <i class="material-icons">group_add</i>
               </a>
             </td>
@@ -75,7 +75,7 @@
   </a>
   <ul>
     <li>
-      <a class="btn-floating light-blue" (click)="openCreate()">
+      <a class="btn-floating light-blue" (click)="registroPlan.abrir()">
         <i class="material-icons">people</i>
       </a>
     </li>
@@ -94,11 +94,11 @@
         </a>
       </div>
     </div>
-    <div *ngIf="!clientes" class="progress">
+    <div *ngIf="!contratos" class="progress">
       <div class="indeterminate"></div>
     </div>
-    <ul *ngIf="clientes" materialize="collapsible" class="collapsible" data-collapsible="accordion">
-      <li *ngFor="let contrato of clientes; index as i;">
+    <ul *ngIf="contratos" materialize="collapsible" class="collapsible" data-collapsible="accordion">
+      <li *ngFor="let contrato of contratos; index as i;">
         <div class="collapsible-header">
           <i class="material-icons">person</i>{{contrato.cliente.cli_nombres}} {{contrato.cliente.cli_apellidos}}</div>
         <div class="collapsible-body">
@@ -119,7 +119,9 @@
               <tr>
                 <th>Acta</th>
                 <!--<td><iframe width="100%" height="100%" src="{{GLOBAL.url}}"></iframe></td>-->
-                <td><acta [contrato_id]="contrato.id"></acta></td>
+                <td>
+                  <acta [contrato_id]="contrato.id"></acta>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -129,34 +131,6 @@
   </div>
 </div>
 
-<div id="modal2" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalCreate">
-  <div class="modal-content modalback">
-    <div class="row">
-      <div class=" col s10 m6 left-align">
-        <h5>Registro Planes</h5>
-      </div>
-      <div class="col s2 m6 right-align">
-        <a (click)="closeCreate()">
-          <i class="material-icons">close</i>
-        </a>
-      </div>
-    </div>
-    <registroplan></registroplan>
-  </div>
-</div>
+<registroplan></registroplan>
 
-<div id="modal3" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalUser">
-  <div class="modal-content modalback">
-    <div class="row">
-      <div class=" col s10 m6 left-align">
-        <h5>Registro</h5>
-      </div>
-      <div class="col s2 m6 right-align">
-        <a (click)="closeUser()">
-          <i class="material-icons">close</i>
-        </a>
-      </div>
-    </div>
-    <inscripcionplan [plan_id]="planid"></inscripcionplan>
-  </div>
-</div>
+<inscripcionplan></inscripcionplan>

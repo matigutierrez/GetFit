@@ -1,4 +1,5 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input } from "@angular/core";
+import { MaterializeAction } from 'angular2-materialize';
 import { Cliente } from "../../../../models/Cliente";
 import { ClienteService } from "../../../../services/cliente.service";
 import { Contrato } from "../../../../models/Contrato";
@@ -12,8 +13,9 @@ import { HttpHeaders } from "@angular/common/http";
 })
 export class InscripcionPlanComponent {
 
-    @Input()
     public plan_id: number;
+
+    public modalInscripcionPlan = new EventEmitter<string|MaterializeAction>();
 
     public clientes: Cliente[];
     private clientesPorNombre: any;
@@ -25,7 +27,7 @@ export class InscripcionPlanComponent {
     private cliente: Cliente;
 
     private archivo: any;
-    
+
     public constructor(
         private _clienteService: ClienteService,
         private _contratoService: ContratoService
@@ -33,9 +35,9 @@ export class InscripcionPlanComponent {
 
         this.autocompleteInit = {};
         this.autocompleteInit.data = {};
-        this.autocompleteInit.onAutocomplete = (nombre:string) => this.seleccionar(nombre);
+        this.autocompleteInit.onAutocomplete = (nombre: string) => this.seleccionar(nombre);
         this.clientesPorNombre = {};
-        
+
         this._clienteService.query().subscribe(
             Response => {
                 this.clientes = Response;
@@ -56,20 +58,20 @@ export class InscripcionPlanComponent {
                 console.error(error);
             }
         );
-        
+
     }
 
-    public seleccionar(nombre:string) {
+    public seleccionar(nombre: string) {
         this.cliente = this.clientesPorNombre[nombre];
     }
 
-    public seleccionarArchivo(event:any) {
+    public seleccionarArchivo(event: any) {
         this.archivo = event.target.files[0];
     }
 
     public inscribir() {
         // Inscribir cliente al plan
-        if ( this.cliente != null && this.archivo != null ) {
+        if (this.cliente != null && this.archivo != null) {
             // Inscribir al cliente: this.clienteSeleccionado
             let contrato: Contrato = new Contrato();
 
@@ -78,15 +80,24 @@ export class InscripcionPlanComponent {
 
             this._contratoService.save(contrato, this.archivo).subscribe(
                 Response => {
-                    
+                    this.cerrar();
                 },
                 error => {
-
+                    //this.cerrar();
                 }
             );
 
         }
 
+    }
+
+    public cerrar() {
+        this.modalInscripcionPlan.emit({ action: "modal", params: ['close'] });
+    }
+
+    public abrir(plan_id: number) {
+        this.plan_id = plan_id;
+        this.modalInscripcionPlan.emit({ action:"modal", params:['open'] });
     }
 
 }
