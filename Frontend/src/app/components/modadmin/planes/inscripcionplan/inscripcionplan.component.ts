@@ -4,7 +4,7 @@ import { Cliente } from "../../../../models/Cliente";
 import { ClienteService } from "../../../../services/cliente.service";
 import { Contrato } from "../../../../models/Contrato";
 import { ContratoService } from "../../../../services/contrato.service";
-import { HttpHeaders } from "@angular/common/http";
+import { HttpHeaders, HttpEventType } from "@angular/common/http";
 
 @Component({
     selector: 'inscripcionplan',
@@ -13,11 +13,16 @@ import { HttpHeaders } from "@angular/common/http";
 })
 export class InscripcionPlanComponent {
 
+    // Id del plan al cual se inscribirá un cliente
     public plan_id: number;
 
+    // Modal del componente
     public modalInscripcionPlan = new EventEmitter<string|MaterializeAction>();
 
+    // Lista de clientes
     public clientes: Cliente[];
+
+    // Mapeo de clientes por nombre y apellido
     private clientesPorNombre: any;
 
     // Datos para el componente autocomplete
@@ -26,7 +31,20 @@ export class InscripcionPlanComponent {
     // Cliente seleccionado para inscribir a algun plan
     private cliente: Cliente;
 
+    // El archivo del acta
     private archivo: any;
+
+    // Se envió la inscripcion del acta?
+    public sent: boolean;
+
+    // Error al enviar la inscripcion?
+    public sentError: boolean;
+
+    // Porcentaje de subida del acta
+    public porcentaje: number;
+
+    // Esperando respuesta del servidor
+    public esperar: boolean;
 
     public constructor(
         private _clienteService: ClienteService,
@@ -71,19 +89,52 @@ export class InscripcionPlanComponent {
 
     public inscribir() {
         // Inscribir cliente al plan
-        if (this.cliente != null && this.archivo != null) {
+        if ( this.cliente != null ) {
             // Inscribir al cliente: this.clienteSeleccionado
             let contrato: Contrato = new Contrato();
 
             contrato.tgf_cliente_id = this.cliente.id;
             contrato.tgf_plan_id = this.plan_id;
 
+            this.sent = false;
+            this.sentError = false;
+            this.esperar = false;
+            this.porcentaje = 0;
+
+            // Crear contrato
             this._contratoService.save(contrato, this.archivo).subscribe(
-                Response => {
-                    this.cerrar();
+                Event => {
+
+                    if ( Event.type == HttpEventType.Sent ) {
+
+                        this.sent = true;
+                        this.porcentaje = 0;
+
+                    } else if ( Event.type == HttpEventType.UploadProgress ) {
+
+                        this.porcentaje = 100 * Event.loaded / Event.total;
+
+                        if ( this.porcentaje >= 100 ) {
+                            // Esperar que el servidor responda
+                            this.esperar = true;
+                        }
+
+                    } else if ( Event.type == HttpEventType.Response ) {
+
+                        this.sent = false;
+                        this.esperar = false;
+                        this.porcentaje = 0;
+
+                        this.cerrar();
+
+                    }
+                    
                 },
                 error => {
-                    //this.cerrar();
+                    this.sentError = true;
+                    this.sent = false;
+                    this.esperar = false;
+                    this.porcentaje = 0;
                 }
             );
 
@@ -97,6 +148,10 @@ export class InscripcionPlanComponent {
 
     public abrir(plan_id: number) {
         this.plan_id = plan_id;
+        this.sent = false;
+        this.sentError = false;
+        this.esperar = false;
+        this.porcentaje = 0;
         this.modalInscripcionPlan.emit({ action:"modal", params:['open'] });
     }
 
