@@ -20,6 +20,7 @@ import { PusherService } from './services/pusher.service';
 import { ContratoService } from './services/contrato.service';
 import { NotificacionService } from './services/notificacion.service';
 import { GLOBAL } from './services/global';
+import { ProfesorService } from './services/profesor.service';
 
 export function getToken(): string {
 

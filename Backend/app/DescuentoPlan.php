@@ -11,6 +11,8 @@ class DescuentoPlan extends Model
 
     protected $fillable = ['dep_inactivo'];
 
+    public $timestamps = false;
+
     public function plan() {
     	return $this->belongsTo('App\Plan', 'tgf_plan_id');
     }

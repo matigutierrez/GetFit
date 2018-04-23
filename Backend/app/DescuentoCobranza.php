@@ -11,6 +11,8 @@ class DescuentoCobranza extends Model
 
     protected $fillable = ['cda_descripcion', 'cda_monto'];
 
+    public $timestamps = false;
+
     public function cobranza() {
     	return $this->belongsTo('App\Cobranza', 'tgf_cobranza_id');
     }

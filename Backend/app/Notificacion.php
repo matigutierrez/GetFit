@@ -11,6 +11,8 @@ class Notificacion extends Model
 
     protected $fillable = ['not_titulo', 'not_contenido'];
 
+    public $timestamps = false;
+
     public function usuarios() {
     	return $this->hasMany('App\Usuario', 'tgf_notificacion_usuario', 'tgf_not_id', 'tgf_usu_id');
     }

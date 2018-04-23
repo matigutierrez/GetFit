@@ -11,6 +11,8 @@ class Rol extends Model
 
     protected $fillable = ['rol_nombre', 'rol_descripcion'];
 
+    public $timestamps = false;
+
     public function usuarios() {
     	return $this->hasMany('App\Usuario', 'tgf_rol_id');
     }

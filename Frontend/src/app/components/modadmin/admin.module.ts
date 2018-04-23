@@ -28,6 +28,8 @@ import { NotificacionComponent } from './notificaciones/notificacion/notificacio
 import { NotificacionViewerComponent } from './notificaciones/notificacionviewer/notificacionviewer.component';
 import { InscripcionPlanComponent } from './planes/inscripcionplan/inscripcionplan.component';
 import { ActaComponent } from './planes/acta/acta.component';
+import { ProfesorComponent } from './profesores/profesor/profesor.component';
+import { RegistroProfesorComponent } from './profesores/registroprofesor/registroprofesor.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { ActaComponent } from './planes/acta/acta.component';
     NotificacionComponent,
     NotificacionViewerComponent,
     InscripcionPlanComponent,
-    ActaComponent
+    ActaComponent,
+    ProfesorComponent,
+    RegistroProfesorComponent
   ],
   imports: [
     BrowserModule,

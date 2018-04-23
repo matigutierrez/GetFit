@@ -12,6 +12,7 @@ class Evaluacion extends Model
     protected $fillable = ['eva_archivo', 'eva_fecha'];
 
     const CREATED_AT = 'eva_fecha';
+    const UPDATED_AT = null;
 
     public function cliente() {
     	return $this->belongsTo('App\Cliente', 'tgf_cliente_id');

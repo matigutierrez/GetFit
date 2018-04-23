@@ -11,6 +11,8 @@ class Plan extends Model
 
     protected $fillable = ['pla_nombre', 'pla_descripcion', 'pla_costo'];
 
+    public $timestamps = false;
+
     public function sede() {
     	return $this->belongsTo('App\Sede', 'tgf_sede_id');
     }

@@ -12,7 +12,8 @@ export class Cliente {
 
 	public usuario: Usuario;
 
-	constructor() {
+	public constructor() {
+		
 		this.id = null;
 		this.cli_rut = null;
 		this.cli_nombres = null;
@@ -22,5 +23,7 @@ export class Cliente {
 		this.cli_huella = null;
 
 		this.usuario = null;
+
 	}
+	
 }

@@ -11,6 +11,9 @@ class CapturaHuella extends Model
 
     protected $fillable = ['cah_fecha', 'cah_muestra'];
 
+    const CREATED_AT = 'cah_fecha';
+    const UPDATED_AT = null;
+
     public function sede() {
     	return $this->belongsTo('App\Sede', 'tgf_sede_id');
     }

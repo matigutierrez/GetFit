@@ -11,6 +11,8 @@ class MetodoPago extends Model
 
     protected $fillable = ['mep_nombre'];
 
+    public $timestamps = false;
+
     public function pagos() {
     	return $this->hasMany('App\Pago', 'tgf_metodo_pago_id');
     }

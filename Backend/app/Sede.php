@@ -10,6 +10,8 @@ class Sede extends Model
     protected $primarykey = 'id';
 
     protected $fillable = ['sed_nombre', 'sed_direccion'];
+
+    public $timestamps = false;
     
     public function usuarios() {
     	return $this->belongsToMany('App\Usuario', 'tgf_sede_usuario', 'tgf_sede_id', 'tgf_usuario_id');

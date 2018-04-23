@@ -1,10 +1,11 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/Cliente';
 import { PlanService } from '../../../../services/plan.service';
-import {MaterializeAction} from 'angular2-materialize';
+import { MaterializeAction } from 'angular2-materialize';
 import { PusherService } from '../../../../services/pusher.service';
+import { RegistroClienteComponent } from '../registrocliente/registrocliente.component';
 declare var $:any;
 declare var jQuery:any;
 
@@ -16,8 +17,13 @@ declare var jQuery:any;
 })
 
 export class ClienteComponent implements OnInit {
+
+  // Lista de clientes
   public clientes: Cliente[];
-  public modalActions = new EventEmitter<string|MaterializeAction>();
+
+  @ViewChild(RegistroClienteComponent)
+  public registroCliente: RegistroClienteComponent;
+
   public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
   public p: number = 1;
 
@@ -47,14 +53,6 @@ export class ClienteComponent implements OnInit {
 
   public ngOnInit(){
     //console.log('el componente cliente ha sido cargado');
-  }
-
-  public openModal() {
-    this.modalActions.emit({action:"modal",params:['open']});
-  }
-  
-  public closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
   }
 
   public deleteCliente(id:number) {

@@ -13,10 +13,19 @@ class Usuario extends Authenticatable
     protected $table = 'tgf_usuario';
     protected $primarykey = 'id';
 
-    protected $fillable = ['usu_fecha_registro', 'usu_correo', 'password'];
+    protected $fillable = [
+        'usu_fecha_registro',
+        'usu_correo',
+        'password',
+
+        'tgf_cliente_id',
+        'tgf_profesor_id'
+    ];
+
     protected $hidden = ['password', 'remember_token',];
 
     const CREATED_AT = 'usu_fecha_registro';
+    const UPDATED_AT = null;
 
     public function rol() {
         return $this->belongsTo('App\Rol', 'tgf_rol_id');
@@ -24,6 +33,10 @@ class Usuario extends Authenticatable
 
     public function cliente() {
     	return $this->belongsTo('App\Cliente', 'tgf_cliente_id');
+    }
+
+    public function profesor() {
+        return $this->belongsTo('App\Profesor', 'tgf_profesor_id');
     }
 
     public function sedes() {

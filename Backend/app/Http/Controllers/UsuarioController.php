@@ -39,6 +39,7 @@ class UsuarioController extends Controller
         return Usuario::insertGetId([
             'tgf_rol_id' => $request->tgf_rol_id,
             'tgf_cliente_id' => $request->tgf_cliente_id,
+            'tgf_profesor_id' => $request->tgf_profesor_id,
             'usu_correo' => $request->usu_correo,
             'password' => bcrypt($request->usu_pass),
         ]);

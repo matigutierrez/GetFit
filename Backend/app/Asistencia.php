@@ -11,6 +11,8 @@ class Asistencia extends Model
 
     protected $fillable = ['asi_presente'];
 
+    public $timestamps = false;
+
     public function contrato() {
     	return $this->belongsTo('App\Contrato', 'tgf_contrato_id');
     }
