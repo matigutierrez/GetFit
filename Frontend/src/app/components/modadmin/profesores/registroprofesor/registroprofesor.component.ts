@@ -16,6 +16,7 @@ export class RegistroProfesorComponent {
     public usuario: Usuario;
 
     public modalRegistroProfesor = new EventEmitter<string | MaterializeAction>();
+    public error: boolean;
 
     public constructor(
         private _profesorService: ProfesorService,
@@ -33,6 +34,8 @@ export class RegistroProfesorComponent {
             Response => {
 
                 this.profesor.id = Response;
+                this.error = false;
+                this.cerrar();
 
                 if (this.usuario.usu_correo.length > 0 && this.usuario.password.length > 0) {
 
@@ -44,15 +47,18 @@ export class RegistroProfesorComponent {
             },
             error => {
                 console.log(<any>error);
+                this.error = true;
             }
         );
     }
 
     public abrir() {
+        this.error = false;
         this.modalRegistroProfesor.emit({ action: "modal", params: ['open'] });
     }
 
     public cerrar() {
+        this.error = false;
         this.modalRegistroProfesor.emit({ action: "modal", params: ['close'] });
     }
 

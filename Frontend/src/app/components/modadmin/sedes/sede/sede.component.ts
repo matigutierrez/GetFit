@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SedeService } from '../../../../services/sede.service';
 import { Cliente } from '../../../../models/Cliente';
 import { Sede } from '../../../../models/Sede';
 import { MaterializeAction } from 'angular2-materialize';
+import { RegistroSedeComponent } from '../registrosede/registrosede.component';
 declare var $:any;
 declare var jQuery:any;
 
@@ -15,12 +16,15 @@ declare var jQuery:any;
 })
 
 export class SedeComponent implements OnInit {
+
+  @ViewChild(RegistroSedeComponent)
+  public registroSede: RegistroSedeComponent;
+
   public sedes: Sede[];
-  public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
   public p: number = 1;
 
-  constructor(
+  public constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _sedeService: SedeService
@@ -35,15 +39,8 @@ export class SedeComponent implements OnInit {
     );
   }
 
-  ngOnInit(){
+  public ngOnInit(){
     //console.log('el componente sede ha sido cargado');
   }
-
-  openModal() {
-    this.modalActions.emit({action:"modal",params:['open']});
-  }
   
-  closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
-  }
 }

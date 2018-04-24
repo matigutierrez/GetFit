@@ -30,6 +30,7 @@ import { InscripcionPlanComponent } from './planes/inscripcionplan/inscripcionpl
 import { ActaComponent } from './planes/acta/acta.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
 import { RegistroProfesorComponent } from './profesores/registroprofesor/registroprofesor.component';
+import { RegistroSedeComponent } from './sedes/registrosede/registrosede.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { RegistroProfesorComponent } from './profesores/registroprofesor/registr
     CobranzasComponent,
     RegistroCobranzaComponent,
     SedeComponent,
+    RegistroSedeComponent,
     NotificacionComponent,
     NotificacionViewerComponent,
     InscripcionPlanComponent,

@@ -90,6 +90,8 @@ class ProfesorController extends Controller
         $profesor = Profesor::find($id);
         $profesor->update($request->all());
 
+        $profesor->pluck('usuario.rol');
+
         $this->pusher->trigger('profesor', 'update', $profesor);
 
         return ['updated' => true];
