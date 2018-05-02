@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../models/Usuario';
 
@@ -8,48 +7,55 @@ import { Usuario } from '../../models/Usuario';
   selector: 'login',
   templateUrl: 'login.html'
 })
-
 export class LoginComponent implements OnInit {
 
   public user;
 
-  constructor(
+  public constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService,
     private _authService: AuthService
+  ) {
 
-  ){
     this.user = new Usuario();
+
   }
 
-  ngOnInit(){
+  public ngOnInit() {
     //console.log('el componente login ha sido cargado');
-    this.logout();
   }
 
-  onSubmit(){
-    
-    this._userService.signin(this.user).subscribe(
+  public onSubmit() {
+
+    this._authService.login(this.user).subscribe(
       Response => {
+
         let identity = Response.usuario.usu_correo;
         let token = Response.token;
+
         if (identity.length <= 1) {
           console.log("error en el servidor");
-        }{
+        } {
+
           if (!identity.status && !token.status) {
             this._authService.setIdentity(identity);
             this._authService.setToken(token);
+            this._authService.setRolID(Response.usuario.rol.id);
           }
-          if (Response.usuario.rol.id == 1){
-            // Administrador
-            this._router.navigate(["/admin"]);
-          }else if (Response.usuario.rol.id == 2) {
-            // Profesor
-            this._router.navigate(["/profesor"]);
-          }else if (Response.usuario.rol.id == 3){
-            // Cliente
-            this._router.navigate(["/cliente"]);
+
+          switch (this._authService.getRolID()) {
+            case 1:
+              // Administrador
+              this._router.navigate(["/admin"]);
+              break;
+            case 2:
+              // Profesor
+              this._router.navigate(["/profesor"]);
+              break;
+            case 3:
+              // Cliente
+              this._router.navigate(["/cliente"]);
+              break;
           }
         }
       },
@@ -58,17 +64,5 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  logout(){
-    this._route.params.forEach((params: Params) => {
-      let logout = +params['id'];
-
-      if (logout == 1) {
-        localStorage.removeItem('identity');
-        localStorage.removeItem('token');
-
-        window.location.href = '/login';
-      }
-    })
-  }
+  
 }

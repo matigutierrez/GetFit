@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 declare var $:any;
 declare var jQuery:any;
 
@@ -7,28 +7,36 @@ declare var jQuery:any;
 @Component({
   selector: 'app-root',
   templateUrl: './admin.component.html',
-  providers: [UserService]
+  providers: [AuthService]
 })
 export class AdminComponent {
+  
   public identity;
   public token;
 
-  constructor(
-  	private _userService: UserService
-
+  public constructor(
+    public _authService: AuthService
   ){
-  	this.identity = this._userService.getIdentity();
-    this.token = this._userService.getToken();
+    
+  	this.identity = this._authService.getIdentity();
+    this.token = this._authService.getToken();
+
   }
 
-  ngOnInit(){
+  public ngOnInit(){
+
     this.ajusteLogin();
+
   }
 
-  ajusteLogin(){
+  public ajusteLogin(){
+
     if (!this.identity && !this.token) {
+
       $("main").css("padding-left", "0px");
       $("header").css("padding-left", "0px");
+
     }
+
   }
 }

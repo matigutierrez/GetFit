@@ -1,44 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { RolService } from '../services/rol.service';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
 
-  constructor(
+  public constructor(
     public router: Router,
-    private rolService: RolService,
     private authService: AuthService
   ) {
 
   }
 
-  canActivate(): boolean {
+  public canActivate(): boolean {
 
     if ( this.authService.isAuthenticated() ) {
 
-      let sesion: boolean = true;
-      
-      this.rolService.getRolSesion().subscribe(
-        Response => {
-          if (Response.id == 1) {
-            this.router.navigate(["/admin"]);
-          } else if(Response.id == 2) {
-            this.router.navigate(["/profesor"]);
-          } else if(Response.id == 3) {
-            this.router.navigate(["/cliente"]);
-          }
-          sesion = false;
-        }, Error => {
-          sesion = true;
-        }
-      )
+      switch ( this.authService.getRolID() ) {
 
-      return sesion;
+        case 1:
+          this.router.navigate(["/admin"]);
+          return false;
+        case 2:
+          this.router.navigate(["/profesor"]);
+          return false;
+        case 3:
+          this.router.navigate(["/cliente"]);
+          return false;
+        default:
+          // Si no tiene rol, enviar a vista de login
+          return true;
+        
+      }
 
     }
 
+    // Si no hay token, enviar a vista de login
     return true;
+
   }
+
 }

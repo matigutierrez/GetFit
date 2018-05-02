@@ -1,9 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
-import {GLOBAL} from './global';
-import {UserService} from './user.service';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { GLOBAL } from './global';
 
 @Injectable()
 export class UsuarioService{

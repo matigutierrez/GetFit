@@ -11,11 +11,8 @@ const appRoutes: Routes = [
   },
   {
     path:'login',
-    component: LoginComponent
-  },
-  {
-    path:'login/:id',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [LoginGuard]
   }
 ];
 
