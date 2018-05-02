@@ -14,7 +14,7 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        return Horario::all();
+        return Horario::with(['hora', 'dia'])->get();
     }
 
     /**
@@ -50,7 +50,7 @@ class HorarioController extends Controller
      */
     public function show($id)
     {
-        return Horario::find($id);
+        return Horario::with(['hora', 'dia'])->find($id);
     }
 
     /**

@@ -111,4 +111,14 @@ class ProfesorController extends Controller
 
         return ['deleted' => true];
     }
+
+    /**
+     * Retorna los planes de un profesor
+     * 
+     * @param  int  $id
+     * @return \App\Plan
+     */
+    public function planes($id) {
+        return Profesor::find($id)->planes;
+    }
 }

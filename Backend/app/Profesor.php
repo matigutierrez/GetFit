@@ -22,4 +22,9 @@ class Profesor extends Model
     public function usuario() {
         return $this->hasOne('App\Usuario', 'tgf_profesor_id');
     }
+
+    public function planes() {
+        return $this->belongsToMany('App\Plan', 'profesor_imparte_plan', 'tgf_profesor_id', 'tgf_plan_id');
+    }
+
 }

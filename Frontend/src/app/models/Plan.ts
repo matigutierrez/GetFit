@@ -1,5 +1,6 @@
 import { Sede } from "./Sede";
 import { Contrato } from "./Contrato";
+import { Horario } from "./Horario";
 
 export class Plan {
 
@@ -10,7 +11,7 @@ export class Plan {
 	public pla_costo: string;
 
 	public sede: Sede;
-	public horarios: string[];
+	public horarios: Horario[];
 	public contratos: Contrato[];
 	
 	constructor() {

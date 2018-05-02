@@ -33,6 +33,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('clientenoplanes', 'ClienteController@noPlanesToken');
 
 	Route::apiResource('profesor', 'ProfesorController');
+	Route::get('profesor/{id}/planes', 'ProfesorController@planes');
 
 	Route::apiResource('cobranza', 'CobranzaController');
 
@@ -56,6 +57,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('pago', 'PagoController');
 
 	Route::apiResource('plan', 'PlanController');
+	Route::get('plan/{id}/profesores', 'PlanController@profesores');
 
 	Route::apiResource('rol', 'RolController');
 

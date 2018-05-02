@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RolSeeder::class);
         $this->call(SedeSeeder::class);
         $this->call(PlanSeeder::class);
+
+        $this->call(HoraDiaSeeder::class);
+        $this->call(DiaSemanaSeeder::class);
         $this->call(HorarioSeeder::class);
         $this->call(ContratoSeeder::class);
         $this->call(AsistenciaSeeder::class);

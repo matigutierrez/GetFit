@@ -35,7 +35,7 @@
               </a>
               <ul id="dropdown-{{i}}" class='dropdown-content'>
                 <li *ngFor="let horario of plan.horarios">
-                  <a>{{horario.hor_hora}}</a>
+                  <a>{{horario.dia.dia_nombre + " " + horario.hora.hor_inicio + " " + horario.hora.hor_fin}}</a>
                 </li>
               </ul>
             </td>

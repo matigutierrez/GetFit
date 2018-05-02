@@ -27,9 +27,9 @@ class PlanController extends Controller
         
         switch ($usuario->rol->rol_nombre) {
             case 'Administrador':
-                return Plan::with('horarios','contratos.cliente','sede')->get();
+                return Plan::with(['horarios','horarios.dia','horarios.hora','contratos.cliente','sede'])->get();
             case 'Profesor':
-                return Plan::with('horarios', 'sede')->get();
+                return Plan::with(['horarios','horarios.dia','horarios.hora','sede'])->get();
             case 'Cliente':
                 $contratos = $usuario->cliente->contratos;
                 $planes = $contratos->pluck('plan');
@@ -45,6 +45,7 @@ class PlanController extends Controller
 
                 return $planes->unique('id');
         }
+
         return null;
     }
 
@@ -88,7 +89,7 @@ class PlanController extends Controller
      */
     public function show($id)
     {
-        return Plan::find($id);
+        return Plan::with(['horarios', 'horarios.hora', 'horarios.dia'])->find($id);
     }
 
     /**
@@ -111,9 +112,8 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plan = Plan::find($id);
+        $plan = Plan::with('horarios', 'contratos.cliente', 'sede')->find($id);
         $plan->update($request->all());
-        $plan->pluck(['horarios', 'contratos.cliente', 'sede']);
 
         $this->pusher->trigger('plan', 'update', $plan);
 
@@ -134,4 +134,17 @@ class PlanController extends Controller
 
         return ['deleted' => true];
     }
+
+    /**
+     * Obtener los profesores de un plan
+     * 
+     * @param  int  $id
+     * @return \App\Profesor
+     */
+    public function profesores($id) {
+        
+        return Plan::find($id)->profesores;
+
+    }
+    
 }

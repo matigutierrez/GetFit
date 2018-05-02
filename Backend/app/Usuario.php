@@ -44,7 +44,7 @@ class Usuario extends Authenticatable
     }
 
     public function notificaciones() {
-        return $this->hasMany('App\Notificacion', 'tgf_notificacion_usuario', 'tgf_usu_id', 'tgf_not_id');
+        return $this->belongsToMany('App\Notificacion', 'tgf_notificacion_usuario', 'tgf_usu_id', 'tgf_not_id');
     }
     
 }

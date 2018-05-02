@@ -26,7 +26,11 @@ class Plan extends Model
     }
 
     public function descuentos() {
-        return $this-hasMany('App\Descuento', 'tgf_plan_id');
+        return $this->hasMany('App\Descuento', 'tgf_plan_id');
+    }
+
+    public function profesores() {
+        return $this->belongsToMany('App\Profesor', 'profesor_imparte_plan', 'tgf_plan_id', 'tgf_profesor_id');
     }
 
 }
