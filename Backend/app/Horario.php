@@ -3,13 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\HoraDia;
+use App\DiaSemana;
 
 class Horario extends Model
 {
     protected $table = 'tgf_horario';
     protected $primarykey = 'id';
 
-    protected $fillable = ['hor_recuperativo', 'hor_inactivo'];
+    protected $fillable = [
+        'tgf_hora_dia_id',
+        'tgf_dia_semana_id',
+        'hor_recuperativo',
+        'hor_inactivo'
+    ];
+
+    protected $appends = ['hora', 'dia'];
 
     public $timestamps = false;
 
@@ -21,12 +30,18 @@ class Horario extends Model
     	return $this->hasMany('App\Asistencia', 'tgf_horario_id');
     }
 
-    public function hora() {
-        return $this->belongsTo('App\HoraDia', 'tgf_hora_dia_id');
+    /**
+     * Este campo siempre va con el horario
+     */
+    public function getHoraAttribute() {
+        return HoraDia::find($this->tgf_hora_dia_id);
     }
 
-    public function dia() {
-        return $this->belongsTo('App\DiaSemana', 'tgf_dia_semana_id');
+    /**
+     * Este campo siempre va con el horario
+     */
+    public function getDiaAttribute() {
+        return DiaSemana::find($this->tgf_dia_semana_id);
     }
 
 }

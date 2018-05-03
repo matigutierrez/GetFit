@@ -186,7 +186,7 @@ class ClienteController extends Controller
 
     public function planesToken(AuthenticateController $auth) {
         $planes = $auth->getAuthenticatedUser()->cliente->contratos->pluck('plan');
-        $planes->pluck('horarios')->collapse()->pluck('dia', 'hora');
+        $planes->pluck('horarios');
         $planes->pluck('sede');
 
         return $planes;
@@ -194,7 +194,7 @@ class ClienteController extends Controller
 
     public function noPlanesToken(AuthenticateController $auth) {
         $planes = $auth->getAuthenticatedUser()->cliente->noPlanes;
-        $planes->pluck('horarios')->collapse()->pluck('dia', 'hora');
+        $planes->pluck('horarios');
         $planes->pluck('sede');
 
         return $planes;

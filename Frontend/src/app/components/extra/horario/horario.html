@@ -1,0 +1,36 @@
+<div id="modal3" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalHorario">
+    <div class="modal-content modalback">
+        <div class="row">
+            <div class=" col s10 m6 left-align">
+                <h5>Horarios</h5>
+            </div>
+            <div class="col s2 m6 right-align">
+                <a (click)="cerrar()">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+        </div>
+        <div *ngIf="!horario || !dias || !horas" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <div *ngIf="horario && dias && horas" class="row">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th *ngFor="let dia of dias">{{dia.dia_nombre}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let hora of horas">
+                        <td>{{hora.hor_inicio + " " + hora.hor_fin}}</td>
+                        <td *ngFor="let dia of dias">
+                            <p *ngIf="mapHorario[hora.id] && mapHorario[hora.id][dia.id]">{{mapHorario[hora.id][dia.id].plan.pla_nombre}}</p>
+                            <p *ngIf="!mapHorario[hora.id] || !mapHorario[hora.id][dia.id]"></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

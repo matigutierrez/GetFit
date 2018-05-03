@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Horario;
 use Illuminate\Http\Request;
+use App\DiaSemana;
 
-class HorarioController extends Controller
+class DiaSemanaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        return Horario::get();
+        return DiaSemana::all();
     }
 
     /**
@@ -35,11 +35,7 @@ class HorarioController extends Controller
      */
     public function store(Request $request)
     {
-        return Horario::insertGetId([
-            'tgf_plan_id' => $request->tgf_plan_id,
-            'hor_recuperativo' => $request->hor_recuperativo,
-            'hor_inactivo' => $request->hor_inactivo,
-        ]);
+        //
     }
 
     /**
@@ -50,7 +46,7 @@ class HorarioController extends Controller
      */
     public function show($id)
     {
-        return Horario::find($id);
+        //
     }
 
     /**
@@ -73,9 +69,7 @@ class HorarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $horario = Horario::find($id);
-        $horario->update($request->all());
-        return ['updated' => true];
+        //
     }
 
     /**
@@ -86,7 +80,6 @@ class HorarioController extends Controller
      */
     public function destroy($id)
     {
-        Horario::destroy($id);
-        return ['deleted' => true];
+        //
     }
 }

@@ -20,6 +20,7 @@ import { ContratoService } from './services/contrato.service';
 import { NotificacionService } from './services/notificacion.service';
 import { GLOBAL } from './services/global';
 import { ProfesorService } from './services/profesor.service';
+import { ExtraModule } from './components/extra/extra.module';
 
 export function getToken(): string {
 
@@ -57,6 +58,7 @@ const jwtConf: JwtModuleOptions = {
     AppModuleAdmin,
     AppModuleCliente,
     AppModuleProfesor,
+    ExtraModule,
     JwtModule.forRoot(jwtConf)
   ],
   providers: [

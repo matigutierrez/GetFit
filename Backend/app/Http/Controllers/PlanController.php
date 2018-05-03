@@ -27,9 +27,9 @@ class PlanController extends Controller
         
         switch ($usuario->rol->rol_nombre) {
             case 'Administrador':
-                return Plan::with(['horarios','horarios.dia','horarios.hora','contratos.cliente','sede'])->get();
+                return Plan::with(['horarios','contratos.cliente','sede'])->get();
             case 'Profesor':
-                return Plan::with(['horarios','horarios.dia','horarios.hora','sede'])->get();
+                return Plan::with(['horarios','sede'])->get();
             case 'Cliente':
                 $contratos = $usuario->cliente->contratos;
                 $planes = $contratos->pluck('plan');
@@ -89,7 +89,7 @@ class PlanController extends Controller
      */
     public function show($id)
     {
-        return Plan::with(['horarios', 'horarios.hora', 'horarios.dia'])->find($id);
+        return Plan::with('horarios')->find($id);
     }
 
     /**

@@ -36,10 +36,13 @@ class Cliente extends Model
     }
 
     public function getPlanesAttribute() {
+
         return $this->contratos->pluck('plan');
+
     }
 
     public function getNoPlanesAttribute() {
+        
         return Plan::whereNotIn('tgf_plan.id',
             function ($query) {
                 $query
@@ -48,6 +51,7 @@ class Cliente extends Model
                     ->where('tgf_contrato.tgf_cliente_id', $this->id);
             }
         )->get();
+
     }
 
     // $cliente->cobranzas;

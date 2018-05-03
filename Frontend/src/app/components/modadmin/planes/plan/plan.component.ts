@@ -9,6 +9,8 @@ import { GLOBAL } from '../../../../services/global';
 import { Contrato } from '../../../../models/Contrato';
 import { InscripcionPlanComponent } from '../inscripcionplan/inscripcionplan.component';
 import { RegistroPlanComponent } from '../registroplan/registroplan.component';
+import { HorarioComponent } from '../../../extra/horario/horario.component';
+import { Horario } from '../../../../models/Horario';
 
 @Component({
   selector: 'plan',
@@ -23,6 +25,9 @@ export class PlanComponent implements OnInit {
 
   @ViewChild(InscripcionPlanComponent)
   public inscripcionPlan: InscripcionPlanComponent;
+
+  @ViewChild(HorarioComponent)
+  public horario: HorarioComponent;
 
   public planes: Plan[];
   public modalActions = new EventEmitter<string|MaterializeAction>();
@@ -63,6 +68,12 @@ export class PlanComponent implements OnInit {
 
   public ngOnInit(){
     //console.log('el componente plan ha sido cargado');
+  }
+
+  public abrirHorarios(plan:Plan) {
+    
+    this.horario.abrir([plan]);
+
   }
 
   public openModal(contratos: Contrato[]) {

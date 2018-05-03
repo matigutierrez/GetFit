@@ -32,9 +32,6 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('clienteplanes', 'ClienteController@planesToken');
 	Route::get('clientenoplanes', 'ClienteController@noPlanesToken');
 
-	Route::apiResource('profesor', 'ProfesorController');
-	Route::get('profesor/{id}/planes', 'ProfesorController@planes');
-
 	Route::apiResource('cobranza', 'CobranzaController');
 
 	Route::apiResource('contrato', 'ContratoController');
@@ -44,9 +41,13 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('descuentoPlan', 'DescuentoPlanController');
 
+	Route::apiResource('diasemana', 'DiaSemanaController');
+
 	Route::apiResource('evaluacion', 'EvaluacionController');
 
 	Route::apiResource('foto', 'FotoController');
+
+	Route::apiResource('horadia', 'HoraDiaController');
 
 	Route::apiResource('horario', 'HorarioController');
 
@@ -58,6 +59,9 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('plan', 'PlanController');
 	Route::get('plan/{id}/profesores', 'PlanController@profesores');
+
+	Route::apiResource('profesor', 'ProfesorController');
+	Route::get('profesor/{id}/planes', 'ProfesorController@planes');
 
 	Route::apiResource('rol', 'RolController');
 

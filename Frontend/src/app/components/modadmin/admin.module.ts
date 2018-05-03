@@ -11,7 +11,6 @@ import { PrincipalComponent } from './vistaprincipal/principal/principal.compone
 import { ChartlineClienteComponent } from './vistaprincipal/chartlineCliente/chartlineCliente.component';
 import { BarChartContratoComponent } from './vistaprincipal/barchartContratos/barchartContrato.component';
 import { PlanComponent } from './planes/plan/plan.component';
-import { HorarioComponent } from './planes/horario/horario.component';
 import { RegistroPlanComponent } from './planes/registroplan/registroplan.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { RegistroUsuarioComponent } from './usuarios/registrousuario/registrousuario.component';
@@ -31,6 +30,7 @@ import { ActaComponent } from './planes/acta/acta.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
 import { RegistroProfesorComponent } from './profesores/registroprofesor/registroprofesor.component';
 import { RegistroSedeComponent } from './sedes/registrosede/registrosede.component';
+import { ExtraModule } from '../extra/extra.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,6 @@ import { RegistroSedeComponent } from './sedes/registrosede/registrosede.compone
     RegistroPlanComponent,
     RegistroClienteComponent,
     RegistroUsuarioComponent,
-    HorarioComponent,
     CobranzasComponent,
     RegistroCobranzaComponent,
     SedeComponent,
@@ -64,6 +63,7 @@ import { RegistroSedeComponent } from './sedes/registrosede/registrosede.compone
     MaterializeModule,
     ChartsModule,
     NgxPaginationModule,
+    ExtraModule
   ],
   providers: [
     appRoutingProviders,

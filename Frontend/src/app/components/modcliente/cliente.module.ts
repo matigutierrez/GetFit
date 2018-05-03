@@ -14,6 +14,7 @@ import { ModClienteComponent } from './modcliente.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { ClienteGuard } from '../../guards/ClienteGuard';
 import { PlanesComponent } from './planes/planes.component';
+import { ExtraModule } from '../extra/extra.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PlanesComponent } from './planes/planes.component';
     routing,
     MaterializeModule,
     ChartsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ExtraModule
   ],
   providers: [
     appRoutingProviders,
