@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { PrincipalComponent } from './vistaprincipal/principal/principal.component';
-import { PlanComponent } from './planes/plan/plan.component';
+import { PlanesComponent } from './planes/planes/planes.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { CobranzasComponent } from './cobranzas/cobranza/cobranzas.component';
 import { AdminComponent } from './admin.component';
@@ -10,6 +10,7 @@ import { AdminGuard } from '../../guards/AdminGuard';
 import { SedeComponent } from './sedes/sede/sede.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
+import { PlanComponent } from './planes/plan/plan.component';
 
 const appRoutes: Routes = [
   {
@@ -29,7 +30,11 @@ const appRoutes: Routes = [
       component: ProfesorComponent
     },
     {
-      path: 'plan',
+      path: 'planes',
+      component: PlanesComponent
+    },
+    {
+      path: 'plan/:id',
       component: PlanComponent
     },
     {

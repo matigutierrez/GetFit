@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PrincipalComponent } from './vistaprincipal/principal/principal.component';
 import { ChartlineClienteComponent } from './vistaprincipal/chartlineCliente/chartlineCliente.component';
 import { BarChartContratoComponent } from './vistaprincipal/barchartContratos/barchartContrato.component';
+import { PlanesComponent } from './planes/planes/planes.component';
 import { PlanComponent } from './planes/plan/plan.component';
 import { RegistroPlanComponent } from './planes/registroplan/registroplan.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
@@ -38,6 +39,7 @@ import { ExtraModule } from '../extra/extra.module';
     ChartlineClienteComponent,
     BarChartContratoComponent,
     PrincipalComponent,
+    PlanesComponent,
     PlanComponent,
     ClienteComponent,
     CircleChartComponent,
