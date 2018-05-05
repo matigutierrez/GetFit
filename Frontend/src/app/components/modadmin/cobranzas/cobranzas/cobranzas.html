@@ -28,8 +28,7 @@
               <i *ngIf="cobranza.pago" class="material-icons">check</i>
               <i *ngIf="!cobranza.pago" class="material-icons">close</i>
             </td>
-            <td><a><i class="material-icons">settings</i></a></td>
-            <td><a><i class="material-icons">create</i></a></td>
+            <td><a (click)="abrirCobranza(cobranza)"><i class="material-icons">check</i></a></td>
             <td><a (click)="deleteCobranza(cobranza.id)"><i class="material-icons">close</i></a></td>
           </tr>
         </tbody>
@@ -44,20 +43,9 @@
     <i class="material-icons">add</i>
   </a>
   <ul>
-    <li><a class="btn-floating light-blue" (click)="openModal()"><i class="material-icons">people</i></a></li>
+    <li><a class="btn-floating light-blue" (click)="registrar()"><i class="material-icons">people</i></a></li>
   </ul>
 </div>
 
-<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
-  <div class="modal-content modalback">
-      <div class="row">
-        <div class=" col s10 m6 left-align">
-          <h5>Registro</h5>
-        </div>
-        <div class="col s2 m6 right-align">
-          <a (click)="closeModal()"><i class="material-icons">close</i></a>
-        </div>
-      </div>
-      <registrocobranza></registrocobranza>
-  </div>
-</div>
+<registrocobranza></registrocobranza>
+<cobranza></cobranza>

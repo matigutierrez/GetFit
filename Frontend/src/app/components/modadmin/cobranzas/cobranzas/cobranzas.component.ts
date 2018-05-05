@@ -1,9 +1,11 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CobranzaService } from '../../../../services/cobranza.service';
 import {MaterializeAction} from 'angular2-materialize';
 import { PusherService } from '../../../../services/pusher.service';
 import { Cobranza } from '../../../../models/Cobranza';
+import { CobranzaComponent } from '../cobranza/cobranza.component';
+import { RegistroCobranzaComponent } from '../registrocobranza/registrocobranza.component';
 declare var $:any;
 declare var jQuery:any;
 
@@ -16,8 +18,13 @@ declare var jQuery:any;
 
 export class CobranzasComponent implements OnInit {
 
+  @ViewChild(CobranzaComponent)
+  public cobranzaComponent: CobranzaComponent;
+
+  @ViewChild(RegistroCobranzaComponent)
+  public registroCobranzaComponent: RegistroCobranzaComponent;
+
   public cobranzas: Cobranza[];
-  public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
   public p: number = 1;
 
@@ -47,23 +54,23 @@ export class CobranzasComponent implements OnInit {
     //console.log('el componente cobranzas ha sido cargado');
   }
 
-  public openModal() {
-    this.modalActions.emit({action:"modal",params:['open']});
-  }
-  
-  public closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
+  public registrar(): void {
+    this.registroCobranzaComponent.abrir();
   }
 
-  public deleteCobranza(id:number) {
+  public abrirCobranza(cobranza:Cobranza): void {
+    this.cobranzaComponent.abrir(cobranza);
+  }
+
+  public deleteCobranza(id:number): void {
     this._cobranzaService.delete(id).subscribe(null);
   }
 
-  public onCreate(cobranza:Cobranza) {
+  public onCreate(cobranza:Cobranza): void {
     this.cobranzas.unshift(cobranza);
   }
 
-  public onUpdate(cobranza:Cobranza) {
+  public onUpdate(cobranza:Cobranza): void {
     for (let i = 0; i < this.cobranzas.length; i++) {
       if ( this.cobranzas[i].id == cobranza.id ) {
         this.cobranzas[i] = cobranza;
@@ -72,7 +79,7 @@ export class CobranzasComponent implements OnInit {
     }
   }
 
-  public onDelete(id:number) {
+  public onDelete(id:number): void {
     for (let i = 0; i < this.cobranzas.length; i++) {
       if ( this.cobranzas[i].id == id ) {
         this.cobranzas.splice(i, 1);

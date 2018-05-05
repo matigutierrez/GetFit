@@ -2,15 +2,17 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { PrincipalComponent } from './vistaprincipal/principal/principal.component';
 import { PlanesComponent } from './planes/planes/planes.component';
+import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
-import { CobranzasComponent } from './cobranzas/cobranza/cobranzas.component';
+import { CobranzasComponent } from './cobranzas/cobranzas/cobranzas.component';
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
 import { SedeComponent } from './sedes/sede/sede.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
-import { ProfesorComponent } from './profesores/profesor/profesor.component';
+import { ProfesoresComponent } from './profesores/profesores/profesores.component';
 import { PlanComponent } from './planes/plan/plan.component';
+import { ProfesorComponent } from './profesores/profesor/profesor.component';
 
 const appRoutes: Routes = [
   {
@@ -23,10 +25,18 @@ const appRoutes: Routes = [
     },
     {
       path: 'clientes',
+      component: ClientesComponent
+    },
+    {
+      path: 'cliente/:id',
       component: ClienteComponent
     },
     {
       path: 'profesores',
+      component: ProfesoresComponent
+    },
+    {
+      path: 'profesor/:id',
       component: ProfesorComponent
     },
     {

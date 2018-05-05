@@ -1,64 +1,29 @@
-import { Component, ViewChild } from "@angular/core";
+import { OnInit, Component } from "@angular/core";
 import { ProfesorService } from "../../../../services/profesor.service";
-import { Profesor } from "../../../../models/Profesor";
-import { PusherService } from "../../../../services/pusher.service";
-import { RegistroProfesorComponent } from "../registroprofesor/registroprofesor.component";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'profesor',
     templateUrl: 'profesor.html',
-    providers: [ProfesorService, PusherService]
+    providers: [ProfesorService]
 })
-export class ProfesorComponent {
+export class ProfesorComponent implements OnInit {
 
-    public profesores: Profesor[];
-
-    @ViewChild(RegistroProfesorComponent)
-    public registroProfesor: RegistroProfesorComponent;
-
-    private channel: any;
+    public id: number;
 
     public constructor(
         private _profesorService: ProfesorService,
-        private _pusherService: PusherService
+        private _route: ActivatedRoute
     ) {
-        // Solicitar lista de profesores a backend
-        this._profesorService.query().subscribe(
-            Response => {
-                this.profesores = Response;
+
+    }
+
+    public ngOnInit() {
+        this._route.params.subscribe(
+            params => {
+                this.id = params["id"];
             }
-        );
-
-        this.channel = this._pusherService.getPusher().subscribe('profesor');
-        this.channel.bind('create', data => { this.onCreate(data) });
-        this.channel.bind('update', data => { this.onUpdate(data) });
-        this.channel.bind('delete', data => { this.onDelete(data) });
-
-    }
-
-    public deleteProfesor(id: number) {
-        this._profesorService.delete(id).subscribe(null);
-    }
-
-    public onCreate(data: Profesor) {
-        this.profesores.unshift(data);
-    }
-
-    public onUpdate(data: Profesor) {
-        for (let i = 0; i < this.profesores.length; i++) {
-            if (this.profesores[i].id == data.id) {
-                this.profesores[i] = data;
-            }
-        }
-    }
-
-    public onDelete(id: number) {
-        for (let i = 0; i < this.profesores.length; i++) {
-            if (this.profesores[i].id == id) {
-                this.profesores.splice(i, 1);
-                break;
-            }
-        }
+        )
     }
 
 }

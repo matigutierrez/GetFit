@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { CobranzaService } from '../../../../services/cobranza.service';
 import { ContratoService } from '../../../../services/contrato.service';
+import { MaterializeAction } from 'angular2-materialize';
 declare var $:any;
 declare var jQuery:any;
 
@@ -12,22 +13,30 @@ declare var jQuery:any;
 
 export class RegistroCobranzaComponent implements OnInit {
 
-  constructor(
+  public modal = new EventEmitter<string|MaterializeAction>();
+
+  public constructor(
     private _cobranzaService: CobranzaService,
     private _contratoService: ContratoService
 
-  ){}
+  ){
 
-  ngOnInit(){
+  }
+
+  public ngOnInit(){
     //console.log('el componente registro-cobranza ha sido cargado');
   }
 
-  onSubmit(){
+  public onSubmit(){
+    
   }
 
-  cambio(event):void{
-    $( "#tabs1" ).removeClass("tab col s3 disabled").addClass( "tab col s3");
-    $( "#tabs2" ).addClass( "tab col s3 disabled" );
-    $('ul.tabs').tabs('select_tab', 'test-swipe-1');
+  public abrir() {
+    this.modal.emit({ action:"modal", params:['open'] });
   }
+
+  public cerrar() {
+    this.modal.emit({ action:"modal", params:['close'] });
+  }
+
 }

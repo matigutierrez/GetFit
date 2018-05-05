@@ -13,13 +13,14 @@ import { BarChartContratoComponent } from './vistaprincipal/barchartContratos/ba
 import { PlanesComponent } from './planes/planes/planes.component';
 import { PlanComponent } from './planes/plan/plan.component';
 import { RegistroPlanComponent } from './planes/registroplan/registroplan.component';
+import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { RegistroUsuarioComponent } from './usuarios/registrousuario/registrousuario.component';
 import { RegistroClienteComponent } from './clientes/registrocliente/registrocliente.component';
 import { CircleChartComponent } from './vistaprincipal/circlechart/circlechart.component';
 import { AuthService } from '../../services/auth.service';
 import { AdminComponent } from './admin.component';
-import { CobranzasComponent } from './cobranzas/cobranza/cobranzas.component';
+import { CobranzasComponent } from './cobranzas/cobranzas/cobranzas.component';
 import { RegistroCobranzaComponent } from './cobranzas/registrocobranza/registrocobranza.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
@@ -28,10 +29,12 @@ import { NotificacionComponent } from './notificaciones/notificacion/notificacio
 import { NotificacionViewerComponent } from './notificaciones/notificacionviewer/notificacionviewer.component';
 import { InscripcionPlanComponent } from './planes/inscripcionplan/inscripcionplan.component';
 import { ActaComponent } from './planes/acta/acta.component';
+import { ProfesoresComponent } from './profesores/profesores/profesores.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
 import { RegistroProfesorComponent } from './profesores/registroprofesor/registroprofesor.component';
 import { RegistroSedeComponent } from './sedes/registrosede/registrosede.component';
 import { ExtraModule } from '../extra/extra.module';
+import { CobranzaComponent } from './cobranzas/cobranza/cobranza.component';
 
 @NgModule({
   declarations: [
@@ -41,19 +44,22 @@ import { ExtraModule } from '../extra/extra.module';
     PrincipalComponent,
     PlanesComponent,
     PlanComponent,
-    ClienteComponent,
-    CircleChartComponent,
     RegistroPlanComponent,
+    ClientesComponent,
+    ClienteComponent,
     RegistroClienteComponent,
-    RegistroUsuarioComponent,
     CobranzasComponent,
+    CobranzaComponent,
     RegistroCobranzaComponent,
+    CircleChartComponent,
+    RegistroUsuarioComponent,
     SedeComponent,
     RegistroSedeComponent,
     NotificacionComponent,
     NotificacionViewerComponent,
     InscripcionPlanComponent,
     ActaComponent,
+    ProfesoresComponent,
     ProfesorComponent,
     RegistroProfesorComponent
   ],
