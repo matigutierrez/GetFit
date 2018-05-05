@@ -35,6 +35,7 @@ import { RegistroProfesorComponent } from './profesores/registroprofesor/registr
 import { RegistroSedeComponent } from './sedes/registrosede/registrosede.component';
 import { ExtraModule } from '../extra/extra.module';
 import { CobranzaComponent } from './cobranzas/cobranza/cobranza.component';
+import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CobranzaComponent } from './cobranzas/cobranza/cobranza.component';
     CobranzaComponent,
     RegistroCobranzaComponent,
     CircleChartComponent,
+    UsuariosComponent,
     RegistroUsuarioComponent,
     SedeComponent,
     RegistroSedeComponent,

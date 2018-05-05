@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Rol;
 
 class Usuario extends Authenticatable
 {
@@ -24,11 +25,14 @@ class Usuario extends Authenticatable
 
     protected $hidden = ['password', 'remember_token',];
 
+    protected $appends = ['rol'];
+
     const CREATED_AT = 'usu_fecha_registro';
     const UPDATED_AT = null;
 
-    public function rol() {
-        return $this->belongsTo('App\Rol', 'tgf_rol_id');
+    public function getRolAttribute() {
+        //return $this->belongsTo('App\Rol', 'tgf_rol_id');
+        return Rol::find($this->tgf_rol_id);
     }
 
     public function cliente() {

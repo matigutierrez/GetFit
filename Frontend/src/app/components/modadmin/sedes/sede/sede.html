@@ -1,40 +1,56 @@
 <div *ngIf="!sedes" class="progress">
-    <div class="indeterminate"></div>
-  </div>
-  <div *ngIf="sedes" class="row">
-    <div class="padtable">
-      <h4>Sedes</h4>
-      <div>
-        <table class="responsive-table striped highlight">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let sede of sedes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
-              <td>{{sede.sed_nombre}}</td>
-              <td><a><i class="material-icons">settings</i></a></td>
-              <td><a><i class="material-icons">create</i></a></td>
-              <td><a><i class="material-icons">close</i></a></td>
-            </tr>
-          </tbody>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
-        </table>
-      </div>
+  <div class="indeterminate"></div>
+</div>
+<div *ngIf="sedes" class="row">
+  <div class="padtable">
+    <h4>Sedes</h4>
+    <div>
+      <table class="responsive-table striped highlight">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sede of sedes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+            <td>{{sede.sed_nombre}}</td>
+            <td>
+              <a>
+                <i class="material-icons">settings</i>
+              </a>
+            </td>
+            <td>
+              <a>
+                <i class="material-icons">create</i>
+              </a>
+            </td>
+            <td>
+              <a>
+                <i class="material-icons">close</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </table>
     </div>
   </div>
-  
-  <div class="fixed-action-btn horizontal click-to-toggle">
-    <a class="btn-floating btn-large blue-grey darken-2">
-      <i class="material-icons">add</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating light-blue" (click)="registroSede.abrir()"><i class="material-icons">people</i></a></li>
-    </ul>
-  </div>
-  
-  <registrosede></registrosede>
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+  <a class="btn-floating btn-large blue-grey darken-2">
+    <i class="material-icons">add</i>
+  </a>
+  <ul>
+    <li>
+      <a class="btn-floating light-blue" (click)="registroSede.abrir()">
+        <i class="material-icons">people</i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<registrosede></registrosede>

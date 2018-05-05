@@ -1,0 +1,37 @@
+<div *ngIf="!usuarios" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="usuarios" class="row">
+    <div class="padtable">
+        <h4>Usuarios</h4>
+        <div>
+            <table class="responsive-table striped highlight">
+                <thead>
+                    <tr>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                        <td>{{usuario.usu_correo}}</td>
+                        <td>{{usuario.rol.rol_nombre}}</td>
+                        <td>
+                            <a>
+                                <i class="material-icons">settings</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                                <i class="material-icons">close</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </table>
+        </div>
+    </div>
+</div>

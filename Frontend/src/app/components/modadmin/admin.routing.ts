@@ -13,52 +13,58 @@ import { NotificacionComponent } from './notificaciones/notificacion/notificacio
 import { ProfesoresComponent } from './profesores/profesores/profesores.component';
 import { PlanComponent } from './planes/plan/plan.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
+import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 
 const appRoutes: Routes = [
   {
-    path:'admin',
+    path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard, AdminGuard],
-    children: [{
-      path:'',
-      component: PrincipalComponent
-    },
-    {
-      path: 'clientes',
-      component: ClientesComponent
-    },
-    {
-      path: 'cliente/:id',
-      component: ClienteComponent
-    },
-    {
-      path: 'profesores',
-      component: ProfesoresComponent
-    },
-    {
-      path: 'profesor/:id',
-      component: ProfesorComponent
-    },
-    {
-      path: 'planes',
-      component: PlanesComponent
-    },
-    {
-      path: 'plan/:id',
-      component: PlanComponent
-    },
-    {
-      path: 'cobranzas',
-      component: CobranzasComponent
-    },
-    {
-      path: 'sede',
-      component: SedeComponent
-    },
-    {
-      path: 'notificacion',
-      component: NotificacionComponent
-    }
+    children: [
+      {
+        path: '',
+        component: PrincipalComponent
+      },
+      {
+        path: 'usuarios',
+        component: UsuariosComponent
+      },
+      {
+        path: 'clientes',
+        component: ClientesComponent
+      },
+      {
+        path: 'cliente/:id',
+        component: ClienteComponent
+      },
+      {
+        path: 'profesores',
+        component: ProfesoresComponent
+      },
+      {
+        path: 'profesor/:id',
+        component: ProfesorComponent
+      },
+      {
+        path: 'planes',
+        component: PlanesComponent
+      },
+      {
+        path: 'plan/:id',
+        component: PlanComponent
+      },
+      {
+        path: 'cobranzas',
+        component: CobranzasComponent
+      },
+      {
+        path: 'sede',
+        component: SedeComponent
+      },
+      {
+        path: 'notificacion',
+        component: NotificacionComponent
+      }
     ]
   }
 ];
