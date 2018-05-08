@@ -25,7 +25,7 @@ class AuthenticateController extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
         // all good so return the token
-        return response()->json(['token' => 'Bearer ' . $token, 'usuario' => Usuario::with('rol')->where('usu_correo', $request->usu_correo)->first()]);
+        return response()->json(['token' => 'Bearer ' . $token, 'usuario' => Usuario::where('usu_correo', $request->usu_correo)->first()]);
     }
 
     public function getAuthenticatedUser()
