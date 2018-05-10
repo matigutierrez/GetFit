@@ -146,5 +146,15 @@ class PlanController extends Controller
         return Plan::find($id)->profesores;
 
     }
+
+    /**
+     * Obtener la lista de clientes que solicitan un plan
+     * 
+     * @param  int  $id
+     * @return \App\Cliente
+     */
+    public function clientesSolicitando($id) {
+        return Plan::find($id)->clientesSolicitando;
+    }
     
 }

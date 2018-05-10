@@ -35,6 +35,10 @@ class Cliente extends Model
         return $this->hasOne('App\Huella', 'tgf_cliente_id');
     }
 
+    public function planesSolicitados() {
+        return $this->belongsToMany('App\Plan', 'cliente_solicita_plan', 'tgf_cliente_id', 'tgf_plan_id');
+    }
+
     public function getPlanesAttribute() {
 
         return $this->contratos->pluck('plan');

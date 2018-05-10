@@ -28,6 +28,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('cliente/{id}/contratos', 'ClienteController@contratos');
 	Route::get('cliente/{id}/huella', 'ClienteController@huella');
 	Route::get('cliente/{id}/cobranzas', 'ClienteController@cobranzas');
+	Route::get('cliente/{id}/planessolicitados', 'ClienteController@planesSolicitados');
 	Route::get('clientecobranzas', 'ClienteController@cobranzasToken');
 	Route::get('clienteplanes', 'ClienteController@planesToken');
 	Route::get('clientenoplanes', 'ClienteController@noPlanesToken');
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('plan', 'PlanController');
 	Route::get('plan/{id}/profesores', 'PlanController@profesores');
+	Route::get('plan/{id}/clientessolicitando', 'PlanController@clientesSolicitando');
 
 	Route::apiResource('profesor', 'ProfesorController');
 	Route::get('profesor/{id}/planes', 'ProfesorController@planes');

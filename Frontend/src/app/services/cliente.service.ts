@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
 import { Cliente } from '../models/Cliente';
+import { Plan } from '../models/Plan';
 
 @Injectable()
 export class ClienteService {
@@ -28,6 +29,14 @@ export class ClienteService {
 
   public delete(id: number): Observable<any> {
     return this._http.delete(GLOBAL.url + 'cliente/' + id);
+  }
+
+  public planesSolicitados(cliente:Cliente): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url+'cliente/' + cliente.id + '/planessolicitados');
+  }
+
+  public planesSolicitadosByID(id:number): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url+'cliente/' + id + '/planessolicitados');
   }
 
 }
