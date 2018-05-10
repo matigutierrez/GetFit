@@ -24,7 +24,7 @@ import { CobranzasComponent } from './cobranzas/cobranzas/cobranzas.component';
 import { RegistroCobranzaComponent } from './cobranzas/registrocobranza/registrocobranza.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
-import { SedeComponent } from './sedes/sede/sede.component';
+import { SedesComponent } from './sedes/sedes/sedes.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 import { NotificacionViewerComponent } from './notificaciones/notificacionviewer/notificacionviewer.component';
 import { InscripcionPlanComponent } from './planes/inscripcionplan/inscripcionplan.component';
@@ -55,7 +55,7 @@ import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
     CircleChartComponent,
     UsuariosComponent,
     RegistroUsuarioComponent,
-    SedeComponent,
+    SedesComponent,
     RegistroSedeComponent,
     NotificacionComponent,
     NotificacionViewerComponent,

@@ -9,13 +9,13 @@ declare var $:any;
 declare var jQuery:any;
 
 @Component({
-  selector: 'sede',
-  templateUrl: 'sede.html',
+  selector: 'sedes',
+  templateUrl: 'sedes.html',
   providers: [SedeService]
   
 })
 
-export class SedeComponent implements OnInit {
+export class SedesComponent implements OnInit {
 
   @ViewChild(RegistroSedeComponent)
   public registroSede: RegistroSedeComponent;

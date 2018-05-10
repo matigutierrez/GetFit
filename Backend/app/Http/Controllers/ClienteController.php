@@ -23,7 +23,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return Cliente::with('usuario.rol', 'contratos.plan')->get();
+        return Cliente::with('usuario', 'contratos.plan')->get();
     }
 
     /**
@@ -93,7 +93,7 @@ class ClienteController extends Controller
         $cliente = Cliente::find($id);
         $cliente->update($request->all());
 
-        $cliente->pluck(['usuario.rol', 'contratos.plan']);
+        $cliente->pluck(['usuario', 'contratos.plan']);
 
         $this->pusher->trigger('cliente', 'update', $cliente);
 

@@ -8,7 +8,7 @@ import { CobranzasComponent } from './cobranzas/cobranzas/cobranzas.component';
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { AdminGuard } from '../../guards/AdminGuard';
-import { SedeComponent } from './sedes/sede/sede.component';
+import { SedesComponent } from './sedes/sedes/sedes.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 import { ProfesoresComponent } from './profesores/profesores/profesores.component';
 import { PlanComponent } from './planes/plan/plan.component';
@@ -58,8 +58,8 @@ const appRoutes: Routes = [
         component: CobranzasComponent
       },
       {
-        path: 'sede',
-        component: SedeComponent
+        path: 'sedes',
+        component: SedesComponent
       },
       {
         path: 'notificacion',

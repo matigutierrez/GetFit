@@ -28,4 +28,8 @@ export class CobranzaComponent {
         this.modal.emit({ action:"modal", params:['close'] });
     }
 
+    public onSubmit(): void {
+        
+    }
+
 }
