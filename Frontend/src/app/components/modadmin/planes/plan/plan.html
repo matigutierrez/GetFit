@@ -6,13 +6,12 @@
         <p>{{plan.pla_descripcion}}</p>
         <p>${{plan.pla_costo}}</p>
         <div class="card-action">
-<<<<<<< HEAD
           <div class="row">
             <div class="col s12">
               <ul class="tabs" materialize="tabs">
                 <li class="tab col s3"><a href="#estadisticas">Estadisticas</a></li>
                 <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>
-                <li class="tab col s3"><a href="#test4"><a (click)="abrirHorarios(plan)">Horarios</a></a></li>
+                <li class="tab col s3"><a class="disabled" href="#test4">Horarios</a></li>
               </ul>
             </div>
             <div id="estadisticas" class="col s12">
@@ -49,19 +48,12 @@
               </div>
             </div>
             <div id="test2" class="col s12">Test 2</div>
-            <div id="test4" class="col s12">Test 4</div>
+            <div id="test4" class="col s12">
+              <horarioplan></horarioplan>
+            </div>
           </div>
-=======
-          <a href="#">Contratos</a>
-          <a href="#">Configuracion</a>
-          <a (click)="abrirHorarios()">
-            Horarios
-          </a>
->>>>>>> 6359c5293ce3a916d4435da17365ea3951ecde94
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<horario></horario>

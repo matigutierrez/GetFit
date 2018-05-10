@@ -36,6 +36,8 @@ class HorarioController extends Controller
     public function store(Request $request)
     {
         return Horario::insertGetId([
+            'tgf_hora_dia_id' => $request->tgf_hora_dia_id,
+            'tgf_dia_semana_id' => $request->tgf_dia_semana_id,
             'tgf_plan_id' => $request->tgf_plan_id,
             'hor_recuperativo' => $request->hor_recuperativo,
             'hor_inactivo' => $request->hor_inactivo,

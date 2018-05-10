@@ -1,0 +1,32 @@
+<div *ngIf="!horario || !dias || !horas" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="horario && dias && horas" class="row">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th *ngFor="let dia of dias">{{dia.dia_nombre}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hora of horas">
+                <td>{{hora.hor_inicio + " " + hora.hor_fin}}</td>
+                <td *ngFor="let dia of dias">
+                    <a (click)="deactivateHorario(mapHorario[hora.id][dia.id])" *ngIf="mapHorario[hora.id] && mapHorario[hora.id][dia.id] && !mapHorario[hora.id][dia.id].hor_inactivo && mapHorario[hora.id][dia.id].plan.id">
+                        <i class="material-icons">check_box</i>
+                    </a>
+                    <p *ngIf="mapHorario[hora.id] && mapHorario[hora.id][dia.id] && !mapHorario[hora.id][dia.id].hor_inactivo && !mapHorario[hora.id][dia.id].plan.id">
+                        <i class="material-icons">check_box</i>
+                    </p>
+                    <a (click)="activateHorario(mapHorario[hora.id][dia.id])" *ngIf="mapHorario[hora.id] && mapHorario[hora.id][dia.id] && mapHorario[hora.id][dia.id].hor_inactivo">
+                            <i class="material-icons">check_box_outline_blank</i>
+                        </a>
+                    <a (click)="createHorario(hora.id, dia.id)" *ngIf="!mapHorario[hora.id] || !mapHorario[hora.id][dia.id]">
+                        <i class="material-icons">check_box_outline_blank</i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

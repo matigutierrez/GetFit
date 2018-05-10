@@ -3,6 +3,7 @@ import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Plan } from "../../../../models/Plan";
 import { HorarioComponent } from "../../../extra/horario/horario.component";
+import { HorarioPlanComponent } from "../horarioplan/horarioplan.component";
 
 @Component({
     selector: 'plan',
@@ -11,8 +12,8 @@ import { HorarioComponent } from "../../../extra/horario/horario.component";
 })
 export class PlanComponent implements OnInit {
 
-    @ViewChild(HorarioComponent)
-    public horario: HorarioComponent;
+    @ViewChild(HorarioPlanComponent)
+    public horarioPlan: HorarioPlanComponent;
 
     public id: number;
     public plan = new Plan();
@@ -31,14 +32,10 @@ export class PlanComponent implements OnInit {
         this._planService.get(this.id).subscribe(
             Response => {
                 this.plan = Response;
+                this.horarioPlan.setPlan(this.plan);
             }
         )
-    }
 
-    public abrirHorarios() {
-    
-        this.horario.abrir([this.plan]);
-    
-      }
+    }
 
 }
