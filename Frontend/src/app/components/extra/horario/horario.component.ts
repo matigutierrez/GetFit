@@ -73,8 +73,6 @@ export class HorarioComponent {
     public cerrar(): void {
 
         this.modalHorario.emit({ action: "modal", params: ['close'] });
-        this.horario = null;
-        this.mapHorario = {};
         
     }
 

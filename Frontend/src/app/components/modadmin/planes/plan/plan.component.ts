@@ -15,7 +15,7 @@ export class PlanComponent implements OnInit {
     public horario: HorarioComponent;
 
     public id: number;
-    public plan: Plan = new Plan();
+    public plan = new Plan();
 
     public constructor(
         private _planService: PlanService,
