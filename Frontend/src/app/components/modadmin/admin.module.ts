@@ -34,7 +34,7 @@ import { ProfesorComponent } from './profesores/profesor/profesor.component';
 import { RegistroProfesorComponent } from './profesores/registroprofesor/registroprofesor.component';
 import { RegistroSedeComponent } from './sedes/registrosede/registrosede.component';
 import { ExtraModule } from '../extra/extra.module';
-import { CobranzaComponent } from './cobranzas/cobranza/cobranza.component';
+import { PagoCobranzaComponent } from './cobranzas/pagocobranza/pagocobranza.component';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { HorarioPlanComponent } from './planes/horarioplan/horarioplan.component';
 
@@ -52,7 +52,7 @@ import { HorarioPlanComponent } from './planes/horarioplan/horarioplan.component
     ClienteComponent,
     RegistroClienteComponent,
     CobranzasComponent,
-    CobranzaComponent,
+    PagoCobranzaComponent,
     RegistroCobranzaComponent,
     CircleChartComponent,
     UsuariosComponent,

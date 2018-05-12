@@ -4,7 +4,7 @@ import { CobranzaService } from '../../../../services/cobranza.service';
 import {MaterializeAction} from 'angular2-materialize';
 import { PusherService } from '../../../../services/pusher.service';
 import { Cobranza } from '../../../../models/Cobranza';
-import { CobranzaComponent } from '../cobranza/cobranza.component';
+import { PagoCobranzaComponent } from '../pagocobranza/pagocobranza.component';
 import { RegistroCobranzaComponent } from '../registrocobranza/registrocobranza.component';
 declare var $:any;
 declare var jQuery:any;
@@ -18,8 +18,8 @@ declare var jQuery:any;
 
 export class CobranzasComponent implements OnInit {
 
-  @ViewChild(CobranzaComponent)
-  public cobranzaComponent: CobranzaComponent;
+  @ViewChild(PagoCobranzaComponent)
+  public pagoCobranzaComponent: PagoCobranzaComponent;
 
   @ViewChild(RegistroCobranzaComponent)
   public registroCobranzaComponent: RegistroCobranzaComponent;
@@ -59,7 +59,7 @@ export class CobranzasComponent implements OnInit {
   }
 
   public abrirCobranza(cobranza:Cobranza): void {
-    this.cobranzaComponent.abrir(cobranza);
+    this.pagoCobranzaComponent.abrir(cobranza);
   }
 
   public deleteCobranza(id:number): void {

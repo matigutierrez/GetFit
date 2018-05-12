@@ -35,9 +35,7 @@ class MetodoPagoController extends Controller
      */
     public function store(Request $request)
     {
-        return MetodoPago::insertGetId([
-            'mep_nombre' => $request->mep_nombre,
-        ]);
+        // No permitir crear un nuevo metodo de pago
     }
 
     /**
@@ -71,9 +69,7 @@ class MetodoPagoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $metodoPago = MetodoPago::find($id);
-        $metodoPago->update($request->all());
-        return ['updated' => true];
+        // No permitir modificar los metodos de pago
     }
 
     /**
@@ -84,7 +80,6 @@ class MetodoPagoController extends Controller
      */
     public function destroy($id)
     {
-        MetodoPago::destroy($id);
-        return ['deleted' => true];
+        // No permitir eliminar los metodos de pago
     }
 }
