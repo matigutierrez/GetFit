@@ -10,4 +10,11 @@ export class DiaSemana {
 
     }
 
+    public static getJSON(dia: DiaSemana): any {
+        return {
+            id: dia.id,
+            dia_nombre: dia.dia_nombre
+        };
+    }
+
 }

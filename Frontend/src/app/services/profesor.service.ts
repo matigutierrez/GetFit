@@ -15,7 +15,11 @@ export class ProfesorService {
     }
 
     public save(profesor: Profesor): Observable<number> {
-        return this._http.post<number>(GLOBAL.url + 'profesor', profesor);
+        return this._http.post<number>(GLOBAL.url + 'profesor', Profesor.getJSON(profesor));
+    }
+
+    public update(profesor: Profesor): Observable<any> {
+        return this._http.put(GLOBAL.url + 'profesor/' + profesor.id, Profesor.getJSON(profesor));
     }
 
     public query(): Observable<Profesor[]> {

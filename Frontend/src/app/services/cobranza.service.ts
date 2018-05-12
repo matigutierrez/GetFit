@@ -7,29 +7,33 @@ import { Cobranza } from '../models/Cobranza';
 @Injectable()
 export class CobranzaService{
   
-  constructor(
+  public constructor(
     private _http: HttpClient
   ){
 
   }
 
-  save(cobranza:Cobranza): Observable<number>{
-    return this._http.post<number>(GLOBAL.url+'cobranza', cobranza);
+  public save(cobranza: Cobranza): Observable<number> {
+    return this._http.post<number>(GLOBAL.url+'cobranza', Cobranza.getJSON(cobranza));
   }
 
-  query(): Observable<Cobranza[]>{
+  public update(cobranza: Cobranza): Observable<any> {
+    return this._http.put(GLOBAL.url+'cobranza/' + cobranza.id, Cobranza.getJSON(cobranza));
+  }
+
+  public query(): Observable<Cobranza[]>{
     return this._http.get<Cobranza[]>(GLOBAL.url+'cobranza');
   }
 
-  get(id:number): Observable<Cobranza>{
+  public get(id:number): Observable<Cobranza>{
     return this._http.get<Cobranza>(GLOBAL.url+'cobranza/' + id);
   }
 
-  delete(id:number): Observable<any>{
+  public delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'cobranza/' + id);
   }
 
-  getCobranzasCliente(): Observable<Cobranza[]>{
+  public getCobranzasCliente(): Observable<Cobranza[]>{
     return this._http.get<Cobranza[]>(GLOBAL.url+'clientecobranzas');
   }
 

@@ -12,7 +12,7 @@ declare var jQuery:any;
 @Component({
   selector: 'clientes',
   templateUrl: 'clientes.html',
-  providers: [ClienteService, PlanService]
+  providers: [ClienteService, PlanService, PusherService]
   
 })
 

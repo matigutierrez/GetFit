@@ -5,21 +5,33 @@ import { Plan } from "./Plan";
 export class Horario {
 
     public id: number;
-    public hora: HoraDia;
-    public dia: DiaSemana;
-    public plan: Plan;
-
     public tgf_hora_dia_id: number;
     public tgf_dia_semana_id: number;
     public tgf_plan_id: number;
     public hor_recuperativo: boolean;
     public hor_inactivo: boolean;
 
+    public hora: HoraDia;
+    public dia: DiaSemana;
+    public plan: Plan;
+
+    // Este atributo no es persistente
+    public action: boolean;
+
     public constructor() {
 
         this.id = null;
+        this.tgf_hora_dia_id = null;
+        this.tgf_dia_semana_id = null;
+        this.tgf_plan_id = null;
+        this.hor_recuperativo = false;
+        this.hor_inactivo = false;
+
         this.hora = null;
         this.dia = null;
+        this.plan = null;
+
+        this.action = false;
 
     }
 

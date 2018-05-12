@@ -16,7 +16,11 @@ export class ClienteService {
   }
 
   public save(cliente: Cliente): Observable<number> {
-    return this._http.post<number>(GLOBAL.url + 'cliente', cliente);
+    return this._http.post<number>(GLOBAL.url + 'cliente', Cliente.getJSON(cliente));
+  }
+
+  public update(cliente: Cliente): Observable<any> {
+    return this._http.put(GLOBAL.url + 'cliente/' + cliente.id, Cliente.getJSON(cliente));
   }
 
   public query(): Observable<Cliente[]> {

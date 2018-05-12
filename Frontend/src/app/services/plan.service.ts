@@ -14,8 +14,12 @@ export class PlanService {
     
   }
 
-  public save(plan:Plan): Observable<number>{
-    return this._http.post<number>(GLOBAL.url+'plan', plan);
+  public save(plan:Plan): Observable<number> {
+    return this._http.post<number>(GLOBAL.url+'plan', Plan.getJSON(plan));
+  }
+
+  public update(plan:Plan): Observable<any> {
+    return this._http.put(GLOBAL.url+'plan/' + plan.id, Plan.getJSON(plan));
   }
 
   public query(): Observable<Plan[]>{

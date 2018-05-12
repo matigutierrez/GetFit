@@ -25,5 +25,17 @@ export class Cliente {
 		this.usuario = null;
 
 	}
+
+	public static getJSON(cliente:Cliente): any {
+		return {
+			id: cliente.id,
+			cli_rut: cliente.cli_rut,
+			cli_nombres: cliente.cli_nombres,
+			cli_apellidos: cliente.cli_apellidos,
+			cli_numerotelefonico: cliente.cli_numerotelefonico,
+			cli_direccion: cliente.cli_direccion,
+			cli_huella: cliente.cli_huella
+		};
+	}
 	
 }

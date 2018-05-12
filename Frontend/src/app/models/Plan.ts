@@ -26,4 +26,15 @@ export class Plan {
 		this.contratos = null;
 
 	}
+
+	public static getJSON(plan: Plan): any {
+		return {
+			id: plan.id,
+			tgf_sede_id: plan.tgf_sede_id,
+			pla_nombre: plan.pla_nombre,
+			pla_descripcion: plan.pla_descripcion,
+			pla_costo: plan.pla_costo
+		};
+	}
+
 }

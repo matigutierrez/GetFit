@@ -24,4 +24,15 @@ export class Profesor {
         
     }
 
+    public static getJSON(profesor: Profesor): any {
+        return {
+            id: profesor.id,
+            pro_rut: profesor.pro_rut,
+            pro_nombres: profesor.pro_nombres,
+            pro_apellidos: profesor.pro_apellidos,
+            pro_numerotelefonico: profesor.pro_numerotelefonico,
+            pro_direccion: profesor.pro_direccion
+        };
+    }
+
 }

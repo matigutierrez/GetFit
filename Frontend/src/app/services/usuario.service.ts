@@ -2,29 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
+import { Usuario } from '../models/Usuario';
 
 @Injectable()
 export class UsuarioService{
   
-  constructor(
+  public constructor(
     private _http: HttpClient
   ){
     
   }
 
-  save(usuario): Observable<any>{
-    return this._http.post(GLOBAL.url+'usuario', usuario);
+  public save(usuario: Usuario): Observable<any> {
+    return this._http.post(GLOBAL.url+'usuario', Usuario.getJSON(usuario));
   }
 
-  query(): Observable<any>{
-    return this._http.get(GLOBAL.url+'usuario');
+  public update(usuario: Usuario): Observable<any> {
+    return this._http.put(GLOBAL.url+'usuario/' + usuario.id, Usuario.getJSON(usuario));
   }
 
-  get(id): Observable<any>{
-    return this._http.get(GLOBAL.url+'usuario/'+id);
+  public query(): Observable<Usuario[]> {
+    return this._http.get<Usuario[]>(GLOBAL.url+'usuario');
   }
 
-  delete(id): Observable<any>{
+  public get(id): Observable<Usuario> {
+    return this._http.get<Usuario>(GLOBAL.url+'usuario/'+id);
+  }
+
+  public delete(id): Observable<any> {
     return this._http.delete(GLOBAL.url+'usuario/'+id);
   }
 }

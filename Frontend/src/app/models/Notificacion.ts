@@ -1,4 +1,5 @@
 import { Usuario } from "./Usuario";
+import { not } from "@angular/compiler/src/output/output_ast";
 
 export class Notificacion {
 
@@ -16,6 +17,14 @@ export class Notificacion {
 
         this.usuarios = null;
 
+    }
+
+    public static getJSON(notificacion: Notificacion): any {
+        return {
+            id: notificacion.id,
+            not_titulo: notificacion.not_titulo,
+            not_contenido: notificacion.not_contenido
+        };
     }
 
 }

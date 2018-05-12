@@ -10,4 +10,12 @@ export class Rol {
         this.rol_descripcion = null;
     }
 
+    public static getJSON(rol: Rol): any {
+        return {
+            id: rol.id,
+            rol_nombre: rol.rol_nombre,
+            rol_descripcion: rol.rol_descripcion
+        };
+    }
+
 }

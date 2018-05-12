@@ -23,4 +23,13 @@ export class Cobranza {
 
     }
 
+    public static getJSON(cobranza: Cobranza): any {
+        return {
+            id: cobranza.id,
+            tgf_contrato_id: cobranza.tgf_contrato_id,
+            cob_monto: cobranza.cob_monto,
+            cob_fecha: cobranza.cob_fecha
+        };
+    }
+
 }

@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Horario;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class HorarioController extends Controller
 {
+
+    private $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,13 +43,18 @@ class HorarioController extends Controller
      */
     public function store(Request $request)
     {
-        return Horario::insertGetId([
-            'tgf_hora_dia_id' => $request->tgf_hora_dia_id,
-            'tgf_dia_semana_id' => $request->tgf_dia_semana_id,
-            'tgf_plan_id' => $request->tgf_plan_id,
-            'hor_recuperativo' => $request->hor_recuperativo,
-            'hor_inactivo' => $request->hor_inactivo,
-        ]);
+        $horario = new Horario;
+        $horario->tgf_hora_dia_id = $request->tgf_hora_dia_id;
+        $horario->tgf_dia_semana_id = $request->tgf_dia_semana_id;
+        $horario->tgf_plan_id = $request->tgf_plan_id;
+        $horario->hor_recuperativo = $request->hor_recuperativo;
+        $horario->hor_inactivo = $request->hor_inactivo;
+
+        $horario->save();
+
+        $this->pusher->trigger('horario', 'create', $horario);
+
+        return $horario->id;
     }
 
     /**
@@ -77,6 +90,9 @@ class HorarioController extends Controller
     {
         $horario = Horario::find($id);
         $horario->update($request->all());
+
+        $this->pusher->trigger('horario', 'update', $horario);
+
         return ['updated' => true];
     }
 
@@ -89,6 +105,9 @@ class HorarioController extends Controller
     public function destroy($id)
     {
         Horario::destroy($id);
+
+        $this->pusher->trigger('horario', 'delete', $id);
+
         return ['deleted' => true];
     }
 }

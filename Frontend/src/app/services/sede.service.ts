@@ -8,25 +8,29 @@ import { Sede } from "../models/Sede";
 @Injectable()
 export class SedeService{
   
-  constructor(
+  public constructor(
     private _http: HttpClient
   ){
     
   }
 
-  save(sede:Sede): Observable<number>{
-    return this._http.post<number>(GLOBAL.url+'sede', sede);
+  public save(sede: Sede): Observable<number> {
+    return this._http.post<number>(GLOBAL.url+'sede', Sede.getJSON(sede));
   }
 
-  query(): Observable<Sede[]>{
+  public update(sede: Sede): Observable<any> {
+    return this._http.put(GLOBAL.url+'sede/' + sede.id, Sede.getJSON(sede));
+  }
+
+  public query(): Observable<Sede[]>{
     return this._http.get<Sede[]>(GLOBAL.url+'sede');
   }
 
-  get(id:number): Observable<Sede>{
+  public get(id:number): Observable<Sede>{
     return this._http.get<Sede>(GLOBAL.url+'sede/'+id);
   }
 
-  delete(id:number): Observable<any>{
+  public delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'sede/'+id);
   }
 }

@@ -7,25 +7,29 @@ import { Notificacion } from "../models/Notificacion";
 @Injectable()
 export class NotificacionService{
   
-  constructor(
+  public constructor(
     private _http: HttpClient
   ){
     
   }
 
-  save(notificacion:Notificacion): Observable<number>{
-    return this._http.post<number>(GLOBAL.url+'notificacion', notificacion);
+  public save(notificacion: Notificacion): Observable<number> {
+    return this._http.post<number>(GLOBAL.url+'notificacion', Notificacion.getJSON(notificacion));
   }
 
-  query(): Observable<Notificacion[]>{
+  public update(notificacion: Notificacion): Observable<any> {
+    return this._http.put(GLOBAL.url+'notificacion/' + notificacion.id, Notificacion.getJSON(notificacion));
+  }
+
+  public query(): Observable<Notificacion[]>{
     return this._http.get<Notificacion[]>(GLOBAL.url+'notificacion');
   }
 
-  get(id:number): Observable<Notificacion>{
+  public get(id:number): Observable<Notificacion>{
     return this._http.get<Notificacion>(GLOBAL.url+'notificacion/'+id);
   }
 
-  delete(id:number): Observable<any>{
+  public delete(id:number): Observable<any>{
     return this._http.delete(GLOBAL.url+'notificacion/'+id);
   }
 }

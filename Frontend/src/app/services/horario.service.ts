@@ -14,11 +14,11 @@ export class HorarioService {
     }
 
     public save(horario:Horario): Observable<number> {
-        return this._http.post<number>(GLOBAL.url+'horario', horario);
+        return this._http.post<number>(GLOBAL.url+'horario', Horario.getJSON(horario));
     }
 
     public update(horario:Horario): Observable<any> {
-        return this._http.put(GLOBAL.url+'horario/' + horario.id, horario);
+        return this._http.put(GLOBAL.url+'horario/' + horario.id, Horario.getJSON(horario));
     }
 
     public query(): Observable<Horario[]> {
