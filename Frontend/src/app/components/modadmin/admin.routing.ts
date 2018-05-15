@@ -14,6 +14,7 @@ import { ProfesoresComponent } from './profesores/profesores/profesores.componen
 import { PlanComponent } from './planes/plan/plan.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
+import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 
 const appRoutes: Routes = [
   {
@@ -64,6 +65,10 @@ const appRoutes: Routes = [
       {
         path: 'notificacion',
         component: NotificacionComponent
+      },
+      {
+        path: 'usuario/:id',
+        component: UsuarioComponent
       }
     ]
   }

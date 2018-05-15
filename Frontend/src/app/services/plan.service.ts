@@ -53,5 +53,9 @@ export class PlanService {
   public clientesSolicitandoByID(id:number): Observable<Cliente[]> {
     return this._http.get<Cliente[]>(GLOBAL.url+'plan/' + id + '/clientessolicitando');
   }
+
+  public getNumeroContratos(id:number): Observable<Plan>{
+    return this._http.get<Plan>(GLOBAL.url+'numcontratos/'+id);
+  }
   
 }

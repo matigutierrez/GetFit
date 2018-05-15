@@ -2,60 +2,30 @@
   <div class="col s12">
     <div class="card white">
       <div class="card-content black-text">
-        <span class="card-title">Plan {{id}}</span>
-        <p>{{plan.pla_descripcion}}</p>
-        <p>${{plan.pla_costo}}</p>
+        <div *ngIf="plan" class="row">
+          <div class="col s4">
+            <span class="card-title">{{plan.pla_descripcion}}</span>
+          </div>
+          <div class="col s4">
+            <span class="card-title">${{plan.pla_costo}}</span>
+          </div>
+          <div class="col s4">
+            <span class="card-title">N° Contratos: {{plan.contratos_count}}</span>
+          </div>
+        </div>
         <div class="card-action">
           <div class="row">
             <div class="col s12">
               <ul class="tabs" materialize="tabs">
-                <li class="tab col s3">
-                  <a class="active" href="#estadisticas">Estadisticas</a>
-                </li>
-                <li class="tab col s3">
-                  <a class="disabled" href="#clientesplan">Clientes</a>
-                </li>
-                <li class="tab col s3">
-                  <a class="disabled" href="#horarioplan">Horarios</a>
-                </li>
+                <li class="tab col s3"><a class="active" href="#estadisticas"><a><i class="material-icons orange-text">show_chart</i>  Estadisticas</a></a></li>
+                <li class="tab col s3"><a href="#contratos"><a (click)="openModal(plan.contratos)"><i class="material-icons">person</i>  Contratos</a></a></li>
+                <li class="tab col s3"><a href="#test2" (click)="editarPlan.abrir(plan)"><i class="material-icons">settings</i>  Editar Plan</a></li>
+                <li class="tab col s3"><a href="#test4"><i class="material-icons">date_range</i>  Horarios</a></li>
               </ul>
             </div>
-            <div id="estadisticas" class="col s12">
-              <div class="row">
-                <div class="col s12">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Grupo {{id}}</th>
-                        <th>Plan</th>
-                        <th>Inscritos</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Grupo </td>
-                        <td>Plan 1</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td>Grupo 2</td>
-                        <td>Plan 2</td>
-                        <td>1</td>
-                      </tr>
-                      <tr>
-                        <td>Grupo 3</td>
-                        <td>Plan 3</td>
-                        <td>0</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div id="clientesplan" class="col s12">
-              <clientesplan [plan]="plan"></clientesplan>
-            </div>
-            <div id="horarioplan" class="col s12">
+            <div id="estadisticas" class="col s12"></div>
+            <div id="test2" class="col s12"></div>
+            <div id="test4" class="col s12">
               <horarioplan></horarioplan>
             </div>
           </div>
@@ -64,3 +34,54 @@
     </div>
   </div>
 </div>
+
+<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+      <div class="row">
+        <div class=" col s10 m6 left-align">
+          <h4>Contratos</h4>
+        </div>
+        <div class="col s2 m6 right-align">
+          <a (click)="closeModal()">
+            <i class="material-icons">close</i>
+          </a>
+        </div>
+      </div>
+      <div *ngIf="!contratos" class="progress">
+        <div class="indeterminate"></div>
+      </div>
+      <ul *ngIf="contratos" materialize="collapsible" class="collapsible" data-collapsible="accordion">
+        <li *ngFor="let contrato of contratos; index as i;">
+          <div class="collapsible-header">
+            <i class="material-icons">person</i>{{contrato.cliente.cli_nombres}} {{contrato.cliente.cli_apellidos}}</div>
+          <div class="collapsible-body">
+            <table *ngIf="contrato">
+              <tbody>
+                <tr>
+                  <th>Nombre Completo</th>
+                  <td>{{contrato.cliente.cli_nombres}} {{contrato.cliente.cli_apellidos}}</td>
+                </tr>
+                <tr>
+                  <th>Telefono</th>
+                  <td>{{contrato.cliente.cli_numerotelefonico}}</td>
+                </tr>
+                <tr>
+                  <th>Dirección</th>
+                  <td>{{contrato.cliente.cli_direccion}}</td>
+                </tr>
+                <tr>
+                  <th>Acta</th>
+                  <!--<td><iframe width="100%" height="100%" src="{{GLOBAL.url}}"></iframe></td>-->
+                  <td>
+                    <acta [contrato_id]="contrato.id"></acta>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<editarplan></editarplan>

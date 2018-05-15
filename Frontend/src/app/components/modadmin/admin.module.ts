@@ -38,6 +38,8 @@ import { PagoCobranzaComponent } from './cobranzas/pagocobranza/pagocobranza.com
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { HorarioPlanComponent } from './planes/horarioplan/horarioplan.component';
 import { ClientesPlanComponent } from './planes/clientes/clientesplan.component';
+import { EditarPlanComponent } from './planes/editarplan/editarplan.component';
+import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { ClientesPlanComponent } from './planes/clientes/clientesplan.component'
     ActaComponent,
     ProfesoresComponent,
     ProfesorComponent,
-    RegistroProfesorComponent
+    RegistroProfesorComponent,
+    EditarPlanComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,

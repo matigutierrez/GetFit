@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PlanService } from '../../../../services/plan.service'
+import { PlanService } from '../../../../services/plan.service';
 import { MaterializeAction } from 'angular2-materialize';
 import { Plan } from '../../../../models/Plan';
 import { Cliente } from '../../../../models/Cliente';
@@ -63,7 +63,7 @@ export class PlanesComponent implements OnInit {
     this.contratoChannel.bind('create', data => { this.onCreateContrato(data) });
     this.contratoChannel.bind('update', data => { this.onUpdateContrato(data) });
     this.contratoChannel.bind('delete', data => { this.onDeleteContrato(data) });
-    
+
   }
 
   public ngOnInit(){
