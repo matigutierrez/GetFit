@@ -1,0 +1,38 @@
+<div *ngIf="!clientes" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="clientes" class="row">
+    <div class="padtable">
+        <table class="responsive-table striped highlight">
+            <thead>
+                <tr>
+                    <th>Rut</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                    <td>{{cliente.cli_rut}}</td>
+                    <td>{{cliente.cli_nombres + " " + cliente.cli_apellidos}}</td>
+                    <td>
+                        <a *ngIf="cliente.usuario">{{cliente.usuario.usu_correo}}</a>
+                    </td>
+                    <td>
+                        <a [routerLink]="['/admin/cliente', cliente.id]">
+                            <i class="material-icons">settings</i>
+                        </a>
+                    </td>
+                    <td>
+                        <a (click)="deleteCliente(cliente.id)">
+                            <i class="material-icons">close</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </table>
+    </div>
+</div>

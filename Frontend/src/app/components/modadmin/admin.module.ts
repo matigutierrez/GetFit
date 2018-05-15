@@ -37,6 +37,7 @@ import { ExtraModule } from '../extra/extra.module';
 import { PagoCobranzaComponent } from './cobranzas/pagocobranza/pagocobranza.component';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { HorarioPlanComponent } from './planes/horarioplan/horarioplan.component';
+import { ClientesPlanComponent } from './planes/clientes/clientesplan.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HorarioPlanComponent } from './planes/horarioplan/horarioplan.component
     PrincipalComponent,
     PlanesComponent,
     PlanComponent,
+    ClientesPlanComponent,
     RegistroPlanComponent,
     HorarioPlanComponent,
     ClientesComponent,

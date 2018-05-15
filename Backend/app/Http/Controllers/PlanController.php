@@ -148,6 +148,20 @@ class PlanController extends Controller
     }
 
     /**
+     * Obtener todos los clientes de un plan
+     * 
+     * @param  int  $id
+     * @return \App\Cliente
+     */
+    public function clientes($id) {
+
+        $clientes = Plan::find($id)->clientes;
+        $clientes->pluck('usuario');
+
+        return $clientes;
+    }
+
+    /**
      * Obtener la lista de clientes que solicitan un plan
      * 
      * @param  int  $id

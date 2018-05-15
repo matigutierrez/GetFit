@@ -33,6 +33,10 @@ class Plan extends Model
         return $this->belongsToMany('App\Profesor', 'profesor_imparte_plan', 'tgf_plan_id', 'tgf_profesor_id');
     }
 
+    public function clientes() {
+        return $this->belongsToMany('App\Cliente', 'tgf_contrato', 'tgf_plan_id', 'tgf_cliente_id');
+    }
+
     public function clientesSolicitando() {
         return $this->belongsToMany('App\Cliente', 'cliente_solicita_plan', 'tgf_plan_id', 'tgf_cliente_id');
     }

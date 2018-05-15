@@ -8,7 +8,7 @@ import { Cliente } from '../models/Cliente';
 @Injectable()
 export class PlanService {
   
-  constructor(
+  public constructor(
     private _http: HttpClient
   ){
     
@@ -40,6 +40,10 @@ export class PlanService {
 
   public getPlanesNoContratados(): Observable<Plan[]> {
     return this._http.get<Plan[]>(GLOBAL.url+'clientenoplanes');
+  }
+
+  public getClientes(plan:Plan): Observable<Cliente[]> {
+    return this._http.get<Cliente[]>(GLOBAL.url+'plan/' + plan.id + '/clientes');
   }
 
   public clientesSolicitando(plan:Plan): Observable<Cliente[]> {

@@ -1,5 +1,5 @@
 import { PlanService } from "../../../../services/plan.service";
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
+import { Component, Input, OnInit, ViewChild, Output } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Plan } from "../../../../models/Plan";
 import { HorarioComponent } from "../../../extra/horario/horario.component";
@@ -16,7 +16,8 @@ export class PlanComponent implements OnInit {
     public horarioPlan: HorarioPlanComponent;
 
     public id: number;
-    public plan = new Plan();
+    
+    public plan: Plan = new Plan();
 
     public constructor(
         private _planService: PlanService,
