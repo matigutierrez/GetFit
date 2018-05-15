@@ -48,7 +48,8 @@ class CobranzaController extends Controller
         $cobranza->cob_monto = $request->cob_monto;
 
         $cobranza->save();
-        $cobranza->pluck(['contrato.cliente', 'contrato.plan']);
+        $cobranza->contrato->cliente;
+        $cobranza->contrato->plan;
 
         $this->pusher->trigger('cobranza', 'create', $cobranza);
 

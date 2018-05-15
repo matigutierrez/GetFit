@@ -152,7 +152,7 @@ class ClienteController extends Controller
      * @return \App\Contrato
      */
     public function contratos($id) {
-        return Cliente::find($id)->contratos;
+        return Cliente::find($id)->contratos()->with('plan')->get();
     }
 
     /**

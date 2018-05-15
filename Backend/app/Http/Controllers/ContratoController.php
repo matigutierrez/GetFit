@@ -79,7 +79,7 @@ class ContratoController extends Controller
      */
     public function show($id)
     {
-        return Contrato::find($id);
+        return Contrato::with('plan')->find($id);
     }
 
     /**

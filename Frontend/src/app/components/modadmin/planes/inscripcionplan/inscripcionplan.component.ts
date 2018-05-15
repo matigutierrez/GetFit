@@ -17,7 +17,7 @@ export class InscripcionPlanComponent {
     public plan_id: number;
 
     // Modal del componente
-    public modalInscripcionPlan = new EventEmitter<string|MaterializeAction>();
+    public modalInscripcionPlan = new EventEmitter<string | MaterializeAction>();
 
     // Lista de clientes
     public clientes: Cliente[];
@@ -89,7 +89,7 @@ export class InscripcionPlanComponent {
 
     public inscribir() {
         // Inscribir cliente al plan
-        if ( this.cliente != null ) {
+        if (this.cliente != null) {
             // Inscribir al cliente: this.clienteSeleccionado
             let contrato: Contrato = new Contrato();
 
@@ -105,21 +105,21 @@ export class InscripcionPlanComponent {
             this._contratoService.save(contrato, this.archivo).subscribe(
                 Event => {
 
-                    if ( Event.type == HttpEventType.Sent ) {
+                    if (Event.type == HttpEventType.Sent) {
 
                         this.sent = true;
                         this.porcentaje = 0;
 
-                    } else if ( Event.type == HttpEventType.UploadProgress ) {
+                    } else if (Event.type == HttpEventType.UploadProgress) {
 
                         this.porcentaje = 100 * Event.loaded / Event.total;
 
-                        if ( this.porcentaje >= 100 ) {
+                        if (this.porcentaje >= 100) {
                             // Esperar que el servidor responda
                             this.esperar = true;
                         }
 
-                    } else if ( Event.type == HttpEventType.Response ) {
+                    } else if (Event.type == HttpEventType.Response) {
 
                         this.sent = false;
                         this.esperar = false;
@@ -128,7 +128,7 @@ export class InscripcionPlanComponent {
                         this.cerrar();
 
                     }
-                    
+
                 },
                 error => {
                     this.sentError = true;
@@ -152,7 +152,7 @@ export class InscripcionPlanComponent {
         this.sentError = false;
         this.esperar = false;
         this.porcentaje = 0;
-        this.modalInscripcionPlan.emit({ action:"modal", params:['open'] });
+        this.modalInscripcionPlan.emit({ action: "modal", params: ['open'] });
     }
 
 }

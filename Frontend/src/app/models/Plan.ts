@@ -8,7 +8,7 @@ export class Plan {
 	public tgf_sede_id: number;
 	public pla_nombre: string;
 	public pla_descripcion: string;
-	public pla_costo: string;
+	public pla_costo: number;
 
 	public sede: Sede;
 	public horarios: Horario[];
