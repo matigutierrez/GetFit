@@ -1,16 +1,18 @@
-import { Component, EventEmitter } from "@angular/core";
+import { Component, EventEmitter, AfterViewChecked } from "@angular/core";
 import { MaterializeAction } from "angular2-materialize";
 import { ProfesorService } from "../../../../services/profesor.service";
 import { UsuarioService } from "../../../../services/usuario.service";
 import { Profesor } from "../../../../models/Profesor";
 import { Usuario } from "../../../../models/Usuario";
 
+declare var Materialize: any;
+
 @Component({
     selector: 'registroprofesor',
     templateUrl: 'registroprofesor.html',
     providers: [ProfesorService, UsuarioService]
 })
-export class RegistroProfesorComponent {
+export class RegistroProfesorComponent implements AfterViewChecked {
 
     public profesor: Profesor;
     public usuario: Usuario;
@@ -27,6 +29,15 @@ export class RegistroProfesorComponent {
         this.profesor = new Profesor();
         this.usuario = new Usuario();
 
+        // Rol 2 (Profesor)
+        this.usuario.tgf_rol_id = 2;
+
+    }
+
+    public ngAfterViewChecked() {
+        if (Materialize.updateTextFields) {
+            Materialize.updateTextFields();
+        }
     }
 
     public onSubmit() {

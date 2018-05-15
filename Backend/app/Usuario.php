@@ -20,7 +20,8 @@ class Usuario extends Authenticatable
         'password',
 
         'tgf_cliente_id',
-        'tgf_profesor_id'
+        'tgf_profesor_id',
+        'tgf_rol_id'
     ];
 
     protected $hidden = ['password', 'remember_token',];

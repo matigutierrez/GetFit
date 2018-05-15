@@ -1,9 +1,11 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, AfterViewChecked } from '@angular/core';
 import { CobranzaService } from '../../../../services/cobranza.service';
 import { ContratoService } from '../../../../services/contrato.service';
 import { MaterializeAction } from 'angular2-materialize';
 declare var $:any;
 declare var jQuery:any;
+
+declare var Materialize: any;
 
 @Component({
   selector: 'registrocobranza',
@@ -11,7 +13,7 @@ declare var jQuery:any;
   providers: [CobranzaService]
 })
 
-export class RegistroCobranzaComponent implements OnInit {
+export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
 
   public modal = new EventEmitter<string|MaterializeAction>();
 
@@ -25,6 +27,12 @@ export class RegistroCobranzaComponent implements OnInit {
 
   public ngOnInit(){
     //console.log('el componente registro-cobranza ha sido cargado');
+  }
+
+  public ngAfterViewChecked() {
+    if ( Materialize.updateTextFields ) {
+      Materialize.updateTextFields();
+    }
   }
 
   public onSubmit(){

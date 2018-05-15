@@ -1,10 +1,12 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MaterializeAction } from 'angular2-materialize';
+import { MaterializeAction, MaterializeModule } from 'angular2-materialize';
 import { PlanService } from '../../../../services/plan.service';
 import { SedeService } from '../../../../services/sede.service';
 import { Plan } from '../../../../models/Plan';
 import { Sede } from '../../../../models/Sede';
+
+declare var Materialize: any;
 
 @Component({
   selector: 'editarplan',
@@ -12,14 +14,14 @@ import { Sede } from '../../../../models/Sede';
   providers: [PlanService, SedeService]
 })
 
-export class EditarPlanComponent implements OnInit {
+export class EditarPlanComponent implements OnInit, AfterViewChecked {
 
   public modalRegistroPlan = new EventEmitter<string|MaterializeAction>();
 
   public plan: Plan;
   public selectOptions: Sede[];
 
-  constructor(
+  public constructor(
     private _planService: PlanService,
     private _sedeService: SedeService
   ){
@@ -34,21 +36,23 @@ export class EditarPlanComponent implements OnInit {
     );
   }
 
+  public ngOnInit(){
+    //console.log('el compenente editar-plan ha sido cargado');
+  }
+
+  public ngAfterViewChecked() {
+    if ( Materialize.updateTextFields ) {
+      Materialize.updateTextFields();
+    }
+  }
+
   public onSubmit(){
     console.log(this.plan);
   }
 
-  public ngOnInit(){
-    //console.log('el compenente registro-plan ha sido cargado');
-  }
-
-  public abrir(plan: Plan) {
+  @Input("plan")
+  set setPlan(plan:Plan) {
     this.plan = plan;
-    this.modalRegistroPlan.emit({ action:"modal", params:['open'] });
-  }
-
-  public cerrar() {
-    this.modalRegistroPlan.emit({ action:"modal", params:['close'] });
   }
 
 }

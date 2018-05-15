@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, AfterViewChecked } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/Cliente';
@@ -10,13 +10,15 @@ import { RolService } from '../../../../services/rol.service';
 declare var $:any;
 declare var jQuery:any;
 
+declare var Materialize: any;
+
 @Component({
   selector: 'registrocliente',
   templateUrl: 'registrocliente.html',
   providers: [ClienteService, UsuarioService, RolService]
 })
 
-export class RegistroClienteComponent implements OnInit {
+export class RegistroClienteComponent implements OnInit, AfterViewChecked {
 
   public cliente: Cliente;
   public usuario: Usuario;
@@ -44,6 +46,12 @@ export class RegistroClienteComponent implements OnInit {
 
   public ngOnInit(){
     //console.log('el componente registro-cliente ha sido cargado');
+  }
+
+  public ngAfterViewChecked() {
+    if ( Materialize.updateTextFields ) {
+      Materialize.updateTextFields();
+    }
   }
 
   public onSubmit(){

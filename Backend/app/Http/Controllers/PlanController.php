@@ -74,7 +74,11 @@ class PlanController extends Controller
         $plan->pla_costo = $request->pla_costo;
 
         $plan->save();
-        $plan->pluck(['horarios', 'contratos.cliente', 'sede']);
+
+        // Cachear variables
+        $plan->horarios;
+        $plan->contratos->pluck('cliente');
+        $plan->sede;
 
         $this->pusher->trigger('plan', 'create', $plan);
 

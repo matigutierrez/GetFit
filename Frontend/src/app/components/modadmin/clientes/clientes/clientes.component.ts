@@ -21,11 +21,13 @@ export class ClientesComponent implements OnInit {
   // Lista de clientes
   public clientes: Cliente[];
 
+  // Pagina actual de la lista
+  public p: number = 1;
+
   @ViewChild(RegistroClienteComponent)
   public registroCliente: RegistroClienteComponent;
 
   public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
-  public p: number = 1;
 
   private channel: any;
 

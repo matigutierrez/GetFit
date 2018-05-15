@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../models/Usuario';
+
+declare var Materialize: any;
 
 @Component({
   selector: 'login',
   templateUrl: 'login.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewChecked {
 
   public user;
 
@@ -23,6 +25,12 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit() {
     //console.log('el componente login ha sido cargado');
+  }
+
+  public ngAfterViewChecked() {
+    if ( Materialize.updateTextFields ) {
+      Materialize.updateTextFields();
+    }
   }
 
   public onSubmit() {

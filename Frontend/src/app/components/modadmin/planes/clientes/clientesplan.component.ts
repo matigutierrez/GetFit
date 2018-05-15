@@ -10,12 +10,14 @@ import { Plan } from "../../../../models/Plan";
 })
 export class ClientesPlanComponent {
 
-    // Pagina actual
-    public p: number = 0;
+    // Lista de clientes
+    public clientes: Cliente[] = [];
 
-    public clientes: Cliente[];
+    // Plan actual
+    public plan: Plan;
 
-    private _plan: Plan;
+    // Numero de página
+    public p: number = 1;
     
     public constructor(
         private _planService: PlanService
@@ -23,16 +25,22 @@ export class ClientesPlanComponent {
 
     }
 
-    @Input()
-    set plan(plan:Plan) {
+    @Input("plan")
+    set setPlan(plan:Plan) {
+
+        // Si hay plan
         if ( plan != null && plan.id ) {
-            this._plan = plan;
-            this._planService.getClientes(this._plan).subscribe(
+
+            // Obtener los clientes del plan
+            this.plan = plan;
+            this._planService.getClientes(this.plan).subscribe(
                 Response => {
                     this.clientes = Response;
                 }
             );
+
         }
+
     }
 
 }

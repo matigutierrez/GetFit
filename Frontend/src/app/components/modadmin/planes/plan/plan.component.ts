@@ -40,20 +40,9 @@ export class PlanComponent implements OnInit {
     this._planService.getNumeroContratos(this.id).subscribe(
       Response => {
         this.plan = Response;
-        this.horarioPlan.setPlan(this.plan);
-        console.log(Response);
       }
     )
 
-  }
-
-  public openModal(contratos: Contrato[]) {
-    this.modalActions.emit({ action: "modal", params: ['open'] });
-    this.contratos = contratos;
-  }
-
-  public closeModal() {
-    this.modalActions.emit({ action: "modal", params: ['close'] });
   }
 
 }

@@ -15,7 +15,7 @@ export class RegistroUsuarioComponent implements OnInit {
   @Output() modal = new EventEmitter();
   @Input() client: string;
 
-  constructor(
+  public constructor(
     private _usuarioService: UsuarioService,
     private _rolService: RolService
   ){
@@ -35,12 +35,12 @@ export class RegistroUsuarioComponent implements OnInit {
     );
   }
 
-  ngOnInit(){
+  public ngOnInit(){
     //console.log('el compenente registro-usuario ha sido cargado');
   }
 
-  onSubmit(){
-    if(this.client != undefined){
+  public onSubmit(){
+    if (this.client != undefined) {
       this.usuario.tgf_cliente_id = this.client;
       console.log(this.usuario);
       this.modal.emit({modal: true});

@@ -22,11 +22,13 @@
             <td>{{cliente.cli_rut}}</td>
             <td>{{cliente.cli_nombres + " " + cliente.cli_apellidos}}</td>
             <td>
-              <a materialize="dropdown" class="right-align" href="" [attr.data-activates]="'dropdown-'+i" >
+              <a materialize="dropdown" class="right-align" href="" [attr.data-activates]="'dropdown-'+i">
                 <i class="material-icons">assignment</i>
               </a>
               <ul id="dropdown-{{i}}" class='dropdown-content'>
-                <li *ngFor="let planes of cliente.contratos"><a>{{planes.plan.pla_nombre}}</a></li>
+                <li *ngFor="let planes of cliente.contratos">
+                  <a>{{planes.plan.pla_nombre}}</a>
+                </li>
               </ul>
             </td>
             <td>
@@ -55,7 +57,11 @@
     <i class="material-icons">add</i>
   </a>
   <ul>
-    <li><a class="btn-floating light-blue" (click)="registroCliente.abrir()"><i class="material-icons">people</i></a></li>
+    <li>
+      <a class="btn-floating light-blue" (click)="registroCliente.abrir()">
+        <i class="material-icons">people</i>
+      </a>
+    </li>
   </ul>
 </div>
 

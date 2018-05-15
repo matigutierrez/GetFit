@@ -120,24 +120,29 @@ export class HorarioPlanComponent implements OnDestroy {
 
     }
 
-    public setPlan(plan: Plan): void {
+    @Input("plan")
+    set setPlan(plan: Plan) {
+        
+        if ( plan != null && plan.id != null ) {
+            
+            this.plan = plan;
+            this.horario = [];
+            this.mapHorario = {};
 
-        this.plan = plan;
-        this.horario = [];
-        this.mapHorario = {};
+            if (plan.horarios) {
 
-        if (plan.horarios) {
+                for (let j = 0; j < plan.horarios.length; j++) {
 
-            for (let j = 0; j < plan.horarios.length; j++) {
+                    // Cada horario
+                    let horario: Horario = plan.horarios[j];
 
-                // Cada horario
-                let horario: Horario = plan.horarios[j];
+                    // Horario contiene el plan
+                    horario.plan = plan;
 
-                // Horario contiene el plan
-                horario.plan = plan;
+                    // Insertar horario a la tabla
+                    this.putHorario(horario);
+                }
 
-                // Insertar horario a la tabla
-                this.putHorario(horario);
             }
 
         }

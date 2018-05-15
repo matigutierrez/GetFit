@@ -36,13 +36,16 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        return Usuario::insertGetId([
-            'tgf_rol_id' => $request->tgf_rol_id,
-            'tgf_cliente_id' => $request->tgf_cliente_id,
-            'tgf_profesor_id' => $request->tgf_profesor_id,
-            'usu_correo' => $request->usu_correo,
-            'password' => bcrypt($request->usu_pass),
-        ]);
+        $usuario = new Usuario;
+        $usuario->tgf_rol_id = $request->tgf_rol_id;
+        $usuario->tgf_cliente_id = $request->tgf_cliente_id;
+        $usuario->tgf_profesor_id = $request->tgf_profesor_id;
+        $usuario->usu_correo = $request->usu_correo;
+        $usuario->password = bcrypt($request->password);
+
+        $usuario->save();
+
+        return $usuario->id;
     }
 
     /**

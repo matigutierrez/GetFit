@@ -41,7 +41,7 @@
               <div class="input-field">
                 <i class="material-icons prefix">person</i>
                 <select name="tgf_sede_id" #tgf_sede_id="ngModel" [(ngModel)]="plan.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="selectOptions">
-                  <option *ngFor="let option of selectOptions" [value]="option.id">{{option.sed_nombre}}</option>
+                  <option *ngFor="let option of selectOptions" [ngValue]="option.id">{{option.sed_nombre}}</option>
                 </select>
                 <label for="icon_prefix">Sede</label>
               </div>
