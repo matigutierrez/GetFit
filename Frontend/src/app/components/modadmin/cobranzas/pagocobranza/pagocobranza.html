@@ -10,7 +10,7 @@
                 </a>
             </div>
         </div>
-        <form #cobranzaForm="ngForm" (ngSubmit)="onSubmit">
+        <form #cobranzaForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="row" *ngIf="metodosPago">
                 <div class="input-field col s12">
                     <select name="selectMetodoPago" [(ngModel)]="pago.tgf_metodo_pago_id" materialize="material_select">

@@ -1,22 +1,23 @@
-import { Component, EventEmitter, OnInit, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, ViewChild, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CobranzaService } from '../../../../services/cobranza.service';
-import {MaterializeAction} from 'angular2-materialize';
+import { MaterializeAction } from 'angular2-materialize';
 import { PusherService } from '../../../../services/pusher.service';
 import { Cobranza } from '../../../../models/Cobranza';
 import { PagoCobranzaComponent } from '../pagocobranza/pagocobranza.component';
 import { RegistroCobranzaComponent } from '../registrocobranza/registrocobranza.component';
-declare var $:any;
-declare var jQuery:any;
+import { Pago } from '../../../../models/Pago';
+declare var $: any;
+declare var jQuery: any;
 
 @Component({
   selector: 'cobranzas',
   templateUrl: 'cobranzas.html',
   providers: [CobranzaService]
-  
+
 })
 
-export class CobranzasComponent implements OnInit {
+export class CobranzasComponent implements OnInit, OnDestroy {
 
   @ViewChild(PagoCobranzaComponent)
   public pagoCobranzaComponent: PagoCobranzaComponent;
@@ -25,67 +26,182 @@ export class CobranzasComponent implements OnInit {
   public registroCobranzaComponent: RegistroCobranzaComponent;
 
   public cobranzas: Cobranza[];
-  public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
+  public modalActionsUsuario = new EventEmitter<string | MaterializeAction>();
   public p: number = 1;
 
-  private channel: any;
+  private cobranzaChannel: any;
+  private pagoChannel: any;
 
-  constructor(
+  public constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _cobranzaService: CobranzaService,
     private _pusherService: PusherService
-  ){
+  ) {
+
+    // Solicitar cobranzas
     this._cobranzaService.query().subscribe(
-      Response  => {
+      Response => {
         this.cobranzas = Response;
       }, error => {
         console.log(<any>error);
       }
     );
 
-    this.channel = this._pusherService.getPusher().subscribe("cobranza");
-    this.channel.bind("create", data => { this.onCreate(data) });
-    this.channel.bind("update", data => { this.onUpdate(data) });
-    this.channel.bind("delete", data => { this.onDelete(data) });
+    this.cobranzaChannel = this._pusherService.getPusher().subscribe("cobranza");
+    this.cobranzaChannel.bind("create", data => { this.onCreate(data) });
+    this.cobranzaChannel.bind("update", data => { this.onUpdate(data) });
+    this.cobranzaChannel.bind("delete", data => { this.onDelete(data) });
+
+    this.pagoChannel = this._pusherService.getPusher().subscribe("pago");
+    this.pagoChannel.bind("create", data => { this.onCreatePago(data) });
+    this.pagoChannel.bind("update", data => { this.onUpdatePago(data) });
+    this.pagoChannel.bind("delete", data => { this.onDeletePago(data) });
+
   }
 
-  public ngOnInit(){
+  public ngOnInit() {
     //console.log('el componente cobranzas ha sido cargado');
+  }
+
+  public ngOnDestroy() {
+    if (this.cobranzaChannel) {
+      this.cobranzaChannel.unbind();
+    }
+    if (this.pagoChannel) {
+      this.pagoChannel.unbind();
+    }
+  }
+
+  public onCreatePago(pago: Pago) {
+    // Una vez se ha recibido la lista de cobranzas
+    if (this.cobranzas) {
+
+      // Por cada cobranza
+      for (let i = 0; i < this.cobranzas.length; i++) {
+
+        let cobranza: Cobranza = this.cobranzas[i];
+
+        // Verificar que coincidan ids
+        if (pago.tgf_cobranza_id == cobranza.id) {
+
+          // Asignar pago a cobranza
+          cobranza.pago = pago;
+
+        }
+
+      }
+
+    }
+    
+  }
+
+  public onUpdatePago(pago: Pago) {
+    // Una vez se ha recibido la lista de cobranzas
+    if (this.cobranzas) {
+
+      // Por cada cobranza
+      for (let i = 0; i < this.cobranzas.length; i++) {
+
+        let cobranza: Cobranza = this.cobranzas[i];
+
+        // Verificar que coincidan ids
+        if (pago.tgf_cobranza_id == cobranza.id) {
+
+          // Asignar pago a cobranza
+          cobranza.pago = pago;
+
+        }
+
+      }
+
+    }
+
+  }
+
+  public onDeletePago(id: number) {
+    // Una vez se ha recibido la lista de cobranzas
+    if (this.cobranzas) {
+
+      // Por cada cobranza
+      for (let i = 0; i < this.cobranzas.length; i++) {
+
+        let cobranza: Cobranza = this.cobranzas[i];
+        let pago: Pago = cobranza.pago;
+
+        // Si hay pago, y los ids coinciden
+        if ( pago && pago.id == id ) {
+
+          // Eliminar el pago
+          cobranza.pago = null;
+          break;
+
+        }
+
+      }
+
+    }
+    
   }
 
   public registrar(): void {
     this.registroCobranzaComponent.abrir();
   }
 
-  public abrirCobranza(cobranza:Cobranza): void {
+  public abrirCobranza(cobranza: Cobranza): void {
     this.pagoCobranzaComponent.abrir(cobranza);
   }
 
-  public deleteCobranza(id:number): void {
+  public deleteCobranza(id: number): void {
     this._cobranzaService.delete(id).subscribe(null);
   }
 
-  public onCreate(cobranza:Cobranza): void {
+  public onCreate(cobranza: Cobranza): void {
     this.cobranzas.unshift(cobranza);
   }
 
-  public onUpdate(cobranza:Cobranza): void {
-    for (let i = 0; i < this.cobranzas.length; i++) {
-      if ( this.cobranzas[i].id == cobranza.id ) {
-        this.cobranzas[i] = cobranza;
-        break;
+  public onUpdate(cobranza: Cobranza): void {
+    // Una vez se ha recibido la lista de cobranzas
+    if (this.cobranzas) {
+
+      // Por cada cobranza
+      for (let i = 0; i < this.cobranzas.length; i++) {
+
+        // Comparar ids
+        if (this.cobranzas[i].id == cobranza.id) {
+
+          // Asignar cobranza
+          this.cobranzas[i] = cobranza;
+          break;
+
+        }
+
       }
+
     }
+
   }
 
-  public onDelete(id:number): void {
-    for (let i = 0; i < this.cobranzas.length; i++) {
-      if ( this.cobranzas[i].id == id ) {
-        this.cobranzas.splice(i, 1);
-        break;
+  public onDelete(id: number): void {
+    // Una vez se ha recibido la lista de cobranzas
+    if (this.cobranzas) {
+
+      // Por cada cobranza
+      for (let i = 0; i < this.cobranzas.length; i++) {
+
+        // Comparar ids
+        if (this.cobranzas[i].id == id) {
+
+          // Eliminar cobranza
+          this.cobranzas.splice(i, 1);
+          break;
+
+        }
+
       }
+
     }
+
   }
 
 }

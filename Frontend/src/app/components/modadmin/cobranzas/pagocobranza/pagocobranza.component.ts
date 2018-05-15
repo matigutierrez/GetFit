@@ -35,6 +35,7 @@ export class PagoCobranzaComponent {
         private _pagoService: PagoService
     ) {
 
+        // Solicitar todos los metodos de pago disponibles
         this._metodoPagoService.query().subscribe(
             Response => {
                 this.metodosPago = Response;
@@ -60,8 +61,17 @@ export class PagoCobranzaComponent {
     }
 
     public onSubmit(): void {
-        // Realizar el pago
-        console.log(this.pago);
+        // Si se eligió un método de pago
+        if ( this.pago.tgf_metodo_pago_id ) {
+
+            // Realizar el pago
+            this._pagoService.save(this.pago).subscribe(
+                Response => {
+                    // Cerrar modal
+                    this.cerrar();
+                }
+            );
+        }
     }
 
 }

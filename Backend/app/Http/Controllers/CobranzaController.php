@@ -22,7 +22,7 @@ class CobranzaController extends Controller
      */
     public function index()
     {
-        return Cobranza::with(['contrato.cliente', 'contrato.plan'])->get();
+        return Cobranza::with(['pago', 'contrato.cliente', 'contrato.plan'])->get();
     }
 
     /**
@@ -63,7 +63,7 @@ class CobranzaController extends Controller
      */
     public function show($id)
     {
-        return Cobranza::find($id);
+        return Cobranza::with('pago')->find($id);
     }
 
     /**
@@ -88,10 +88,13 @@ class CobranzaController extends Controller
     {
         $cobranza = Cobranza::find($id);
         $cobranza->update($request->all());
-        $cobranza->pluck(['contrato.cliente', 'contrato.plan']);
+
+        // Cachear variables
+        $cobranza->contrato->cliente;
+        $cobranza->contrato->plan;
+        $cobranza->pago;
 
         $this->pusher->trigger('cobranza', 'update', $cobranza);
-
 
         return ['updated' => true];
     }
