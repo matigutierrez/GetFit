@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Pago;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class PagoController extends Controller
 {
+
+    private $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,10 +43,15 @@ class PagoController extends Controller
      */
     public function store(Request $request)
     {
-        return Pago::insertGetId([
-            'tgf_cobranza_id' => $request->tgf_cobranza_id,
-            'tgf_metodo_pago_id' => $request->tgf_metodo_pago_id,
-        ]);
+        $pago = new Pago;
+        $pago->tgf_cobranza_id = $request->tgf_cobranza_id;
+        $pago->tgf_metodo_pago_id = $request->tgf_metodo_pago_id;
+
+        $pago->save();
+
+        $this->pusher->trigger('pago', 'create', $pago);
+
+        return $pago->id;
     }
 
     /**
@@ -74,6 +87,9 @@ class PagoController extends Controller
     {
         $pago = Pago::find($id);
         $pago->update($request->all());
+
+        $this->pusher->trigger('pago', 'update', $pago);
+
         return ['updated' => true];
     }
 
@@ -86,6 +102,9 @@ class PagoController extends Controller
     public function destroy($id)
     {
         Pago::destroy($id);
+
+        $this->pusher->trigger('pago', 'delete', $id);
+
         return ['deleted' => true];
     }
 }

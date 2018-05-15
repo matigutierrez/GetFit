@@ -6,12 +6,13 @@ import { Plan } from "../../../../models/Plan";
 @Component({
     selector: 'clientesplan',
     templateUrl: 'clientesplan.html',
+    styleUrls: ['clientesplan.css'],
     providers: [PlanService]
 })
 export class ClientesPlanComponent {
 
     // Lista de clientes
-    public clientes: Cliente[] = [];
+    public clientesActuales: Cliente[] = [];
 
     // Plan actual
     public plan: Plan;
@@ -35,7 +36,7 @@ export class ClientesPlanComponent {
             this.plan = plan;
             this._planService.getClientes(this.plan).subscribe(
                 Response => {
-                    this.clientes = Response;
+                    this.clientesActuales = Response;
                 }
             );
 

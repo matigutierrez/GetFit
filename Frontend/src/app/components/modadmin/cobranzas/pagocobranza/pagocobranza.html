@@ -13,9 +13,9 @@
         <form #cobranzaForm="ngForm" (ngSubmit)="onSubmit">
             <div class="row" *ngIf="metodosPago">
                 <div class="input-field col s12">
-                    <select name="selectMetodoPago" (change)="seleccionarMetodo($event)" materialize="material_select">
+                    <select name="selectMetodoPago" [(ngModel)]="pago.tgf_metodo_pago_id" materialize="material_select">
                         <option value="" disabled selected>Seleccionar Método de Pago</option>
-                        <option *ngFor="let metodoPago of metodosPago" [value]="metodoPago.id">{{metodoPago.mep_nombre}}</option>
+                        <option *ngFor="let metodoPago of metodosPago" [ngValue]="metodoPago.id">{{metodoPago.mep_nombre}}</option>
                     </select>
                 </div>
             </div>

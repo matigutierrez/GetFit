@@ -3,6 +3,7 @@
     <div class="card white">
       <div class="card-content black-text">
         <div *ngIf="plan" class="row">
+          <!-- Contenido de cabecera -->
           <div class="col s4">
             <span class="card-title">{{plan.pla_descripcion}}</span>
           </div>
@@ -12,34 +13,41 @@
           <div class="col s4">
             <span class="card-title">N° Contratos: {{plan.contratos_count}}</span>
           </div>
+
+          <!-- Pestañas de las tablas -->
+          <div class="col s12">
+            <ul class="tabs" materialize="tabs">
+              <li class="tab col s3">
+                <a class="active" href="#estadisticas">
+                  <i class="material-icons orange-text">show_chart</i>Estadisticas
+                </a>
+              </li>
+              <li class="tab col s3">
+                <a href="#clientes">
+                  <i class="material-icons">person</i>Clientes
+                </a>
+              </li>
+              <li class="tab col s3">
+                <a href="#editarplan">
+                  <i class="material-icons">settings</i>Editar Plan
+                </a>
+              </li>
+              <li class="tab col s3">
+                <a href="#horarios">
+                  <i class="material-icons">date_range</i> Horarios</a>
+              </li>
+            </ul>
+          </div>
+
         </div>
+
         <div class="card-action">
-          <div class="row">
-            <div class="col s12">
-              <ul class="tabs" materialize="tabs">
-                <li class="tab col s3">
-                  <a class="active" href="#estadisticas">
-                    <a>
-                      <i class="material-icons orange-text">show_chart</i>Estadisticas</a>
-                  </a>
-                </li>
-                <li class="tab col s3">
-                  <a href="#clientes">
-                    <i class="material-icons">person</i>Clientes
-                  </a>
-                </li>
-                <li class="tab col s3">
-                  <a href="#editarplan">
-                    <i class="material-icons">settings</i>Editar Plan
-                  </a>
-                </li>
-                <li class="tab col s3">
-                  <a href="#horarios">
-                    <i class="material-icons">date_range</i> Horarios</a>
-                </li>
-              </ul>
+          <!-- Panel inferior -->
+          <div *ngIf="plan" class="row">
+            <!-- Contenido de tabber -->
+            <div id="estadisticas" class="col s12">
+
             </div>
-            <div id="estadisticas" class="col s12"></div>
             <div id="clientes" class="col s12">
               <clientesplan [plan]="plan"></clientesplan>
             </div>
@@ -51,6 +59,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

@@ -4,35 +4,54 @@ import { MaterializeAction } from "angular2-materialize";
 import { Cobranza } from "../../../../models/Cobranza";
 import { MetodoPagoService } from "../../../../services/metodopago.service";
 import { MetodoPago } from "../../../../models/MetodoPago";
+import { PagoService } from "../../../../services/pago.service";
+import { Pago } from "../../../../models/Pago";
 
 @Component({
     selector: 'pagocobranza',
     templateUrl: 'pagocobranza.html',
-    providers: [CobranzaService, MetodoPagoService]
+    providers: [CobranzaService, MetodoPagoService, PagoService]
 })
 export class PagoCobranzaComponent {
 
+    // Modal del componente
     public modal = new EventEmitter<string|MaterializeAction>();
+
+    // Objeto cobranza
     public cobranza: Cobranza;
 
+    // Lista de metodos de pago
     public metodosPago: MetodoPago[];
 
     // Metodo de pago seleccionado
     public metodoPago: MetodoPago;
 
+    // Modelo pago (para la vista)
+    public pago: Pago = new Pago();
+
     public constructor(
         private _cobranzaService: CobranzaService,
-        private _metodoPagoService: MetodoPagoService
+        private _metodoPagoService: MetodoPagoService,
+        private _pagoService: PagoService
     ) {
+
         this._metodoPagoService.query().subscribe(
             Response => {
                 this.metodosPago = Response;
             }
         );
+
     }
 
     public abrir(cobranza:Cobranza): void {
+
+        // Guardar cobranza en variable
         this.cobranza = cobranza;
+
+        // Asignar el id de la cobranza al pago
+        this.pago.tgf_cobranza_id = this.cobranza.id;
+
+        // Abrir modal
         this.modal.emit({ action:"modal", params:['open'] });
     }
 
@@ -41,19 +60,8 @@ export class PagoCobranzaComponent {
     }
 
     public onSubmit(): void {
-        
-    }
-
-    public seleccionarMetodo(event: any) {
-        // Para cada metodo de pago
-        for (let i = 0; i < this.metodosPago.length; i++) {
-            let metodoPago: MetodoPago = this.metodosPago[i];
-
-            // Seleccionar el metodo de pago que corresponda con su ID
-            if ( metodoPago.id == event.target.value ) {
-                this.metodoPago = metodoPago;
-            }
-        }
+        // Realizar el pago
+        console.log(this.pago);
     }
 
 }

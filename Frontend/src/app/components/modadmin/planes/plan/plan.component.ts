@@ -9,40 +9,40 @@ import { MaterializeAction } from "angular2-materialize";
 import { EditarPlanComponent } from "../editarplan/editarplan.component";
 
 @Component({
-  selector: 'plan',
-  templateUrl: 'plan.html',
-  providers: [PlanService]
+    selector: 'plan',
+    templateUrl: 'plan.html',
+    providers: [PlanService]
 })
 export class PlanComponent implements OnInit {
 
-  @ViewChild(HorarioPlanComponent)
-  public horarioPlan: HorarioPlanComponent;
+    @ViewChild(HorarioPlanComponent)
+    public horarioPlan: HorarioPlanComponent;
 
-  @ViewChild(EditarPlanComponent)
-  public editarPlan: EditarPlanComponent;
+    @ViewChild(EditarPlanComponent)
+    public editarPlan: EditarPlanComponent;
 
-  public id: number;
-  public plan: Plan;
-  public modalActions = new EventEmitter<string | MaterializeAction>();
-  public contratos: Contrato[];
+    public id: number;
+    public plan: Plan;
+    public modalActions = new EventEmitter<string | MaterializeAction>();
+    public contratos: Contrato[];
 
-  public constructor(
-    private _planService: PlanService,
-    private _route: ActivatedRoute
-  ) {
-    this._route.params.subscribe(params => {
-      this.id = params["id"];
-    });
-  }
+    public constructor(
+        private _planService: PlanService,
+        private _route: ActivatedRoute
+    ) {
+        this._route.params.subscribe(params => {
+            this.id = params["id"];
+        });
+    }
 
-  public ngOnInit() {
+    public ngOnInit() {
 
-    this._planService.getNumeroContratos(this.id).subscribe(
-      Response => {
-        this.plan = Response;
-      }
-    )
+        this._planService.getNumeroContratos(this.id).subscribe(
+            Response => {
+                this.plan = Response;
+            }
+        )
 
-  }
+    }
 
 }
