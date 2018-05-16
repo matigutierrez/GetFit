@@ -37,7 +37,7 @@ export class PlanComponent implements OnInit {
 
     public ngOnInit() {
 
-        this._planService.getNumeroContratos(this.id).subscribe(
+        this._planService.get(this.id).subscribe(
             Response => {
                 this.plan = Response;
             }

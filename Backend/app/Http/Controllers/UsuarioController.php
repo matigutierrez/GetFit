@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use JWTAuth;
 use App\Usuario;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class UsuarioController extends Controller
 {
+
+    private $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,12 +46,19 @@ class UsuarioController extends Controller
     {
         $usuario = new Usuario;
         $usuario->tgf_rol_id = $request->tgf_rol_id;
-        $usuario->tgf_cliente_id = $request->tgf_cliente_id;
-        $usuario->tgf_profesor_id = $request->tgf_profesor_id;
+
+        if ( isset($request->tgf_cliente_id) ) {
+            $usuario->tgf_cliente_id = $request->tgf_cliente_id;
+        } elseif ( isset($request->tgf_profesor_id) ) {
+            $usuario->tgf_profesor_id = $request->tgf_profesor_id;
+        }
+        
         $usuario->usu_correo = $request->usu_correo;
         $usuario->password = bcrypt($request->password);
 
         $usuario->save();
+
+        $this->pusher->trigger('usuario', 'create', $usuario);
 
         return $usuario->id;
     }
@@ -81,6 +96,9 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::find($id);
         $usuario->update($request->all());
+
+        $this->pusher->trigger('usuario', 'update', $usuario);
+
         return ['updated' => true];
     }
 
@@ -93,6 +111,9 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         Usuario::destroy($id);
+
+        $this->pusher->trigger('usuario', 'delete', $id);
+
         return ['deleted' => true];
     }
 

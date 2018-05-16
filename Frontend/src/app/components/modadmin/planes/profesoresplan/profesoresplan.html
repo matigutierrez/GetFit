@@ -1,0 +1,65 @@
+<div class="row">
+    <div *ngIf="!profesores" class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <div *ngIf="profesores">
+        <div class="padtable">
+            <table class="responsive-table striped highlight">
+                <thead>
+                    <tr>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Contratos</th>
+                        <th>Correo</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let profesor of profesores | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                        <td>{{profesor.pro_rut}}</td>
+                        <td>{{profesor.pro_nombres + " " + profesor.pro_apellidos}}</td>
+                        <td>
+                            <a materialize="dropdown" class="right-align" href="" [attr.data-activates]="'dropdown-'+i">
+                                <i class="material-icons">assignment</i>
+                            </a>
+                            <ul id="dropdown-{{i}}" class='dropdown-content'>
+                                <li *ngFor="let planes of profesor.contratos">
+                                    <a>{{planes.plan.pla_nombre}}</a>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a *ngIf="profesor.usuario">{{profesor.usuario.usu_correo}}</a>
+                        </td>
+                        <td>
+                            <a [routerLink]="['/admin/profesor', profesor.id]">
+                                <i class="material-icons">settings</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                                <i class="material-icons">close</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue">
+                <i class="material-icons">assignment_ind</i>
+            </a>
+        </li>
+    </ul>
+</div>

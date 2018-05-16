@@ -40,6 +40,7 @@ import { HorarioPlanComponent } from './planes/horarioplan/horarioplan.component
 import { ClientesPlanComponent } from './planes/clientes/clientesplan.component';
 import { EditarPlanComponent } from './planes/editarplan/editarplan.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
+import { ProfesoresPlanComponent } from './planes/profesoresplan/profesoresplan.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { UsuarioComponent } from './usuarios/usuario/usuario.component';
     ClientesPlanComponent,
     RegistroPlanComponent,
     HorarioPlanComponent,
+    ProfesoresPlanComponent,
     ClientesComponent,
     ClienteComponent,
     RegistroClienteComponent,

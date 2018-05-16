@@ -9,7 +9,14 @@ class Cliente extends Model
     protected $table = 'tgf_cliente';
     protected $primarykey = 'id';
 
-    protected $fillable = ['cli_rut', 'cli_nombres', 'cli_apellidos', 'cli_numerotelefonico', 'cli_direccion', 'cli_huella'];
+    protected $fillable = [
+        'cli_rut',
+        'cli_nombres',
+        'cli_apellidos',
+        'cli_numerotelefonico',
+        'cli_direccion',
+        'cli_huella'
+    ];
 
     protected $appends = ['cobranzas', 'planes', 'noPlanes'];
 

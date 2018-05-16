@@ -62,7 +62,6 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('plan/{id}/profesores', 'PlanController@profesores');
 	Route::get('plan/{id}/clientes', 'PlanController@clientes');
 	Route::get('plan/{id}/clientessolicitando', 'PlanController@clientesSolicitando');
-	Route::get('numcontratos/{id}', 'PlanController@getNumContratos');
 
 	Route::apiResource('profesor', 'ProfesorController');
 	Route::get('profesor/{id}/planes', 'ProfesorController@planes');

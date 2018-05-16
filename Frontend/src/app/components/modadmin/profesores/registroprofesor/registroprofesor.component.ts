@@ -50,7 +50,7 @@ export class RegistroProfesorComponent implements AfterViewChecked {
 
                 if (this.usuario.usu_correo.length > 0 && this.usuario.password.length > 0) {
 
-                    this.usuario.tgf_cliente_id = this.profesor.id;
+                    this.usuario.tgf_profesor_id = this.profesor.id;
                     this._usuarioService.save(this.usuario).subscribe(null);
 
                 }

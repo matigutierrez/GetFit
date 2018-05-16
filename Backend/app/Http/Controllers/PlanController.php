@@ -93,7 +93,9 @@ class PlanController extends Controller
      */
     public function show($id)
     {
-        return Plan::with('horarios')->find($id);
+        return Plan::with('horarios', 'contratos')
+            ->withCount('contratos')
+            ->find($id);
     }
 
     /**
@@ -175,10 +177,4 @@ class PlanController extends Controller
         return Plan::find($id)->clientesSolicitando;
     }
     
-    public function getNumContratos ($id)
-    {
-        return Plan::with('horarios', 'contratos.cliente')->withCount('contratos')
-        ->where('id', $id)
-        ->first();
-    }
 }

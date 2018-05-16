@@ -17,24 +17,30 @@
           <!-- Pestañas de las tablas -->
           <div class="col s12">
             <ul class="tabs" materialize="tabs">
-              <li class="tab col s3">
+              <li class="tab col s2">
                 <a class="active" href="#estadisticas">
                   <i class="material-icons orange-text">show_chart</i>Estadisticas
                 </a>
               </li>
-              <li class="tab col s3">
+              <li class="tab col s2">
                 <a href="#clientes">
                   <i class="material-icons">person</i>Clientes
                 </a>
               </li>
-              <li class="tab col s3">
+              <li class="tab col s2">
                 <a href="#editarplan">
                   <i class="material-icons">settings</i>Editar Plan
                 </a>
               </li>
-              <li class="tab col s3">
+              <li class="tab col s2">
                 <a href="#horarios">
-                  <i class="material-icons">date_range</i> Horarios</a>
+                  <i class="material-icons">date_range</i>Horario
+                </a>
+              </li>
+              <li class="tab col s2">
+                <a href="#profesores">
+                  <i class="material-icons">assignment_ind</i>Profesores
+                </a>
               </li>
             </ul>
           </div>
@@ -56,6 +62,9 @@
             </div>
             <div id="horarios" class="col s12">
               <horarioplan [plan]="plan"></horarioplan>
+            </div>
+            <div id="profesores" class="col s12">
+              <profesoresplan [plan]="plan"></profesoresplan>
             </div>
           </div>
         </div>
