@@ -3,7 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Usuario } from '../models/Usuario';
 import { HttpClient } from '@angular/common/http';
 import { GLOBAL } from './global';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { RolService } from './rol.service';
 import { Router } from '@angular/router';
 

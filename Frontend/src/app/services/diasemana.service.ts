@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { DiaSemana } from "../models/DiaSemana";
 import { GLOBAL } from "./global";
 import { HttpClient } from "@angular/common/http";

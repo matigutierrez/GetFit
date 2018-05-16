@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { GLOBAL } from './global';
 import { Plan } from '../models/Plan';
 import { Cliente } from '../models/Cliente';

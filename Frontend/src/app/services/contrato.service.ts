@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpRequest, HttpEvent } from "@angular/common/http";
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Contrato } from "../models/Contrato";
 import { GLOBAL } from "./global";
 
