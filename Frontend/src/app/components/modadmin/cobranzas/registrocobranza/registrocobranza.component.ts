@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output, AfterViewChecked } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { CobranzaService } from '../../../../services/cobranza.service';
 import { ContratoService } from '../../../../services/contrato.service';
 import { MaterializeAction } from 'angular2-materialize';
@@ -18,6 +18,9 @@ declare var Materialize: any;
 })
 
 export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
+
+  @ViewChild("cliente")
+  public clienteInput: ElementRef;
 
   // Modal del componente
   public modal = new EventEmitter<string | MaterializeAction>();
@@ -85,6 +88,13 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  public limpiar(): void {
+    this.cliente = null;
+    this.contratos = null;
+    this.cobranza = new Cobranza();
+    this.clienteInput.nativeElement.value = "";
+  }
+
   public seleccionar(nombre: string) {
     // Al seleccionar un cliente del autocomplete
     this.cliente = this.clientesPorNombre[nombre];
@@ -128,6 +138,9 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
 
           // Cerrar modal
           this.cerrar();
+
+          // Eliminar datos de formulario
+          this.limpiar();
         },
         error => {
           console.error(error);
@@ -139,6 +152,10 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
   }
 
   public abrir() {
+    // Eliminar datos de formulario
+    this.limpiar();
+
+    // Abrir modal
     this.modal.emit({ action: "modal", params: ['open'] });
   }
 

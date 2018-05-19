@@ -24,7 +24,7 @@ export class RegistroClienteComponent implements OnInit, AfterViewChecked {
   public usuario: Usuario;
   public rol: Rol[];
 
-  public modalRegistroCliente = new EventEmitter<string|MaterializeAction>();
+  public modal = new EventEmitter<string|MaterializeAction>();
 
   public constructor(
     private _clienteService: ClienteService,
@@ -34,6 +34,9 @@ export class RegistroClienteComponent implements OnInit, AfterViewChecked {
 
     this.cliente = new Cliente();
     this.usuario = new Usuario();
+
+    // El usuario debe tener rol de cliente
+    this.usuario.tgf_rol_id = 3;
 
     // Solicitar roles a base de datos
     this._rolService.query().subscribe(
@@ -54,6 +57,14 @@ export class RegistroClienteComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  public limpiar(): void {
+    this.cliente = new Cliente();
+    this.usuario = new Usuario();
+    
+    // El usuario debe tener rol de cliente
+    this.usuario.tgf_rol_id = 3;
+  }
+
   public onSubmit(){
     this._clienteService.save(this.cliente).subscribe(
       Response => {
@@ -61,12 +72,22 @@ export class RegistroClienteComponent implements OnInit, AfterViewChecked {
         // Insertar dato al registro de clientes
         this.cliente.id = Response;
 
+        // Si el usuarioa  registrar es válido
         if ( this.usuario.usu_correo.length > 0 && this.usuario.password.length > 0 ) {
 
+          // Fijar el id del cliente para el usuario
           this.usuario.tgf_cliente_id = this.cliente.id;
+
+          // Guardar usuario
           this._usuarioService.save(this.usuario).subscribe(null);
 
         }
+
+        // Cerrar formulario
+        this.cerrar();
+
+        // Limpiar formulario
+        this.limpiar();
         
       },
       error => {
@@ -76,11 +97,15 @@ export class RegistroClienteComponent implements OnInit, AfterViewChecked {
   }
 
   public abrir() {
-    this.modalRegistroCliente.emit({ action:"modal", params:['open'] });
+    // Limpiar formulario
+    this.limpiar();
+
+    // Abrir modal
+    this.modal.emit({ action:"modal", params:['open'] });
   }
 
   public cerrar() {
-    this.modalRegistroCliente.emit({ action:"modal", params:['close'] });
+    this.modal.emit({ action:"modal", params:['close'] });
   }
   
 }

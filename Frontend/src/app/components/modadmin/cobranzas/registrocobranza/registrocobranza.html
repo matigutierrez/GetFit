@@ -17,14 +17,14 @@
                 <div class="col s12">
                     <div *ngIf="clientes" class="input-field">
                         <i class="material-icons prefix">person</i>
-                        <input id="nombre_cliente" type="text" name="cliente" materialize="autocomplete" [materializeParams]="[autocompleteInit]">
+                        <input id="nombre_cliente" type="text" #cliente name="cliente" materialize="autocomplete" [materializeParams]="[autocompleteInit]">
                         <label for="icon_prefix">Nombre del Cliente</label>
                     </div>
                 </div>
             </div>
 
             <!-- Seleccionar plan -->
-            <div class="row">
+            <div class="row tooltipped" data-position="bottom" data-tooltip="Para desplegar lista, seleccione cliente">
                 <div class="col s12">
                     <div class="input-field">
                         <i class="material-icons prefix">assignment</i>

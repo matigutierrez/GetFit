@@ -35,8 +35,7 @@ export class PlanesComponent implements OnInit {
 
   // Lista de planes
   public planes: Plan[];
-  public modalActions = new EventEmitter<string|MaterializeAction>();
-  public modalCreate = new EventEmitter<string|MaterializeAction>();
+  public modalCreate = new EventEmitter<string | MaterializeAction>();
   public parametros: string;
 
   // Lista de contratos
@@ -53,10 +52,38 @@ export class PlanesComponent implements OnInit {
     private _router: Router,
     private _planService: PlanService,
     private _pusherService: PusherService
-  ){
+  ) {
+
+    // Solicitar planes al backend
     this._planService.query().subscribe(
       Response => {
+
+        // Guardar lista de planes
         this.planes = Response;
+
+        // Para cada plan
+        for (let i = 0; i < this.planes.length; i++) {
+
+          let plan: Plan = this.planes[i];
+          
+          // Para los contratos del plan
+          let contratos: Contrato[] = plan.contratos;
+
+          // Si hay contratos
+          if (contratos && contratos.length > 0) {
+
+            // Para cada contrato
+            for (let i = 0; i < contratos.length; i++) {
+
+              // Contrato debe contener al plan
+              contratos[i].plan = plan;
+
+            }
+
+          }
+
+        }
+
       },
       Error => {
         console.log(<any>Error)
@@ -75,11 +102,11 @@ export class PlanesComponent implements OnInit {
 
   }
 
-  public ngOnInit(){
+  public ngOnInit() {
     //console.log('el componente plan ha sido cargado');
   }
 
-  public abrirHorarios(plan:Plan) {
+  public abrirHorarios(plan: Plan) {
     this.horario.abrir([plan]);
   }
 
@@ -88,78 +115,170 @@ export class PlanesComponent implements OnInit {
     this.contratosComponent.abrir();
   }
 
-  public closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
-  }
-
-  public deletePlan(id:number) {
+  public deletePlan(id: number) {
     this._planService.delete(id).subscribe(null);
   }
 
-  public onCreate(plan:Plan) {
+  public onCreate(plan: Plan) {
+
+    // Para los contratos del plan
+    let contratos: Contrato[] = plan.contratos;
+
+    // Si hay contratos
+    if (contratos && contratos.length > 0) {
+
+      // Para cada contrato
+      for (let i = 0; i < contratos.length; i++) {
+
+        // Contrato debe contener al plan
+        contratos[i].plan = plan;
+
+      }
+
+    }
+
+    // Agregar plan a la lista
     this.planes.unshift(plan);
   }
 
-  public onUpdate(plan:Plan) {
-    for (let i = 0; i < this.planes.length; i++) {
-      if ( this.planes[i].id == plan.id ) {
-        this.planes[i] = plan;
-        break;
-      }
-    }
-  }
+  public onUpdate(plan: Plan) {
+    if (this.planes) {
 
-  public onDelete(id:number) {
-    for (let i = 0; i < this.planes.length; i++) {
-      if ( this.planes[i].id == id ) {
-        this.planes.splice(i, 1);
-        break;
-      }
-    }
-  }
+      // Para los contratos del plan
+      let contratos: Contrato[] = plan.contratos;
 
-  public onCreateContrato(contrato:Contrato) {
-    for (let i = 0; i < this.planes.length; i++) {
-      let plan: Plan = this.planes[i];
-      if ( plan.id == contrato.tgf_plan_id ) {
-        plan.contratos.unshift(contrato);
-      }
-    }
-  }
+      // Si hay contratos
+      if (contratos && contratos.length > 0) {
 
-  public onUpdateContrato(contrato:Contrato) {
-    for (let i = 0; i < this.planes.length; i++) {
-      // Buscar plan
-      let plan: Plan = this.planes[i];
-      if ( plan.id == contrato.tgf_plan_id ) {
+        // Para cada contrato
+        for (let i = 0; i < contratos.length; i++) {
 
-        for (let j = 0; j < plan.contratos.length; j++) {
-          // Buscar contrato
-          if ( plan.contratos[j].id == contrato.id ) {
-            plan.contratos[j] = contrato;
-            break;
-          }
+          // Contrato debe contener al plan
+          contratos[i].plan = plan;
+
         }
 
-        break;
       }
-    }
-  }
 
-  public onDeleteContrato(id:number) {
-    for (let i = 0; i < this.planes.length; i++) {
-      // En cada plan
-      let plan: Plan = this.planes[i];
-      
-      for (let j = 0; j < plan.contratos.length; j++) {
-        // Buscar contrato
-        if ( plan.contratos[j].id == id ) {
-          // Eliminar contrato
-          plan.contratos.splice(j, 1);
+      // Para cada plan
+      for (let i = 0; i < this.planes.length; i++) {
+
+        // Buscar plan cuyo id coincida
+        if (this.planes[i].id == plan.id) {
+
+          // Actualizar el plan
+          this.planes[i] = plan;
           break;
 
         }
+
       }
+
+    }
+  }
+
+  public onDelete(id: number) {
+    if (this.planes) {
+
+      // Para cada plan
+      for (let i = 0; i < this.planes.length; i++) {
+
+        // Si hay un plan cuyo id coincida
+        if (this.planes[i].id == id) {
+
+          // Eliminar el plan
+          this.planes.splice(i, 1);
+          break;
+
+        }
+
+      }
+
+    }
+  }
+
+  public onCreateContrato(contrato: Contrato) {
+    if (this.planes) {
+
+      // Para cada plan
+      for (let i = 0; i < this.planes.length; i++) {
+
+        let plan: Plan = this.planes[i];
+
+        // Si hay un plan al que pertenezca el contrato
+        if (plan.id == contrato.tgf_plan_id) {
+
+          // Agregar contrato al plan
+          plan.contratos.unshift(contrato);
+
+          // Contrato debe contener al plan
+          contrato.plan = plan;
+
+        }
+
+      }
+
+    }
+  }
+
+  public onUpdateContrato(contrato: Contrato) {
+    if (this.planes) {
+
+      // Para cada plan
+      for (let i = 0; i < this.planes.length; i++) {
+
+        let plan: Plan = this.planes[i];
+
+        // Si hay un plan al que pertenezca el contrato
+        if (plan.id == contrato.tgf_plan_id) {
+
+          // Contrato debe contener al plan
+          contrato.plan = plan;
+
+          let contratos: Contrato[] = plan.contratos;
+
+          // Para cada contrato
+          for (let j = 0; j < contratos.length; j++) {
+
+            // Si hay un contrato cuyo id coincida
+            if (contratos[j].id == contrato.id) {
+
+              contratos[j] = contrato;
+              break;
+
+            }
+          }
+
+          break;
+        }
+      }
+    }
+  }
+
+  public onDeleteContrato(id: number) {
+    if (this.planes) {
+
+      // Para cada plan
+      for (let i = 0; i < this.planes.length; i++) {
+
+        let plan: Plan = this.planes[i];
+
+        // Para cada contrato del plan
+        for (let j = 0; j < plan.contratos.length; j++) {
+
+          // Buscar contrato cuyo id coincida
+          if (plan.contratos[j].id == id) {
+
+            // Eliminar contrato
+            plan.contratos.splice(j, 1);
+            break;
+
+          }
+
+        }
+
+      }
+
     }
   }
 
