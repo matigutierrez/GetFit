@@ -1,19 +1,20 @@
-import { Component, EventEmitter, OnInit, Input, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/Cliente';
 import { PlanService } from '../../../../services/plan.service';
-import { MaterializeAction } from 'angular2-materialize';
 import { PusherService } from '../../../../services/pusher.service';
 import { RegistroClienteComponent } from '../registrocliente/registrocliente.component';
-declare var $:any;
-declare var jQuery:any;
+import { Contrato } from '../../../../models/Contrato';
+import { ContratosComponent } from '../contratos/contratos.component';
+declare var $: any;
+declare var jQuery: any;
 
 @Component({
   selector: 'clientes',
   templateUrl: 'clientes.html',
   providers: [ClienteService, PlanService, PusherService]
-  
+
 })
 
 export class ClientesComponent implements OnInit {
@@ -25,10 +26,15 @@ export class ClientesComponent implements OnInit {
   public p: number = 1;
 
   @ViewChild(RegistroClienteComponent)
-  public registroCliente: RegistroClienteComponent;
+  public registroClienteComponent: RegistroClienteComponent;
 
-  public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
+  @ViewChild(ContratosComponent)
+  public contratosComponent: ContratosComponent;
 
+  // Lista de contratos de la tabla de contratos seleccionada
+  public contratos: Contrato[] = [];
+
+  // Canal de pusher
   private channel: any;
 
   constructor(
@@ -38,10 +44,32 @@ export class ClientesComponent implements OnInit {
     private _planService: PlanService,
     private _pusherService: PusherService
 
-  ){
+  ) {
+
+    // Solicitar clientes a backend
     this._clienteService.query().subscribe(
-      Response  => {
+      Response => {
+
         this.clientes = Response;
+
+        // Por cada cliente
+        for (let i = 0; i < this.clientes.length; i++) {
+
+          let cliente: Cliente = this.clientes[i];
+
+          // Los contratos de cada cliente
+          let contratos: Contrato[] = cliente.contratos;
+
+          // Por cada contrato
+          for (let j = 0; j < contratos.length; j++) {
+
+            // El contrato debe contener su cliente
+            contratos[j].cliente = cliente;
+
+          }
+
+        }
+
       }, error => {
         console.log(<any>error);
       }
@@ -53,32 +81,93 @@ export class ClientesComponent implements OnInit {
     this.channel.bind('delete', data => { this.onDelete(data) });
   }
 
-  public ngOnInit(){
+  public ngOnInit() {
     //console.log('el componente cliente ha sido cargado');
   }
 
-  public deleteCliente(id:number) {
+  public abrirContratos(contratos: Contrato[]) {
+    this.contratos = contratos;
+    this.contratosComponent.abrir();
+  }
+
+  public deleteCliente(id: number) {
     this._clienteService.delete(id).subscribe(null);
   }
 
-  public onCreate(data:Cliente) {
-    this.clientes.unshift(data);
+  public onCreate(cliente: Cliente) {
+
+    // Para los contratos del cliente
+    let contratos: Contrato[] = cliente.contratos;
+
+    // Si hay contratos
+    if (contratos) {
+
+      // Por cada contrato
+      for (let i = 0; i < contratos.length; i++) {
+
+        // Contrato debe contener al cliente
+        contratos[i].cliente = cliente;
+
+      }
+
+    }
+
+    this.clientes.unshift(cliente);
+
   }
 
-  public onUpdate(data:Cliente) {
-    for (let i = 0; i < this.clientes.length; i++) {
-      if ( this.clientes[i].id == data.id ) {
-        this.clientes[i] = data;
+  public onUpdate(cliente: Cliente) {
+
+    if (this.clientes) {
+
+      // Para los contratos del cliente
+      let contratos: Contrato[] = cliente.contratos;
+
+      // Si hay contratos
+      if (contratos) {
+
+        // Por cada contrato
+        for (let i = 0; i < contratos.length; i++) {
+
+          // Contrato debe contener al cliente
+          contratos[i].cliente = cliente;
+
+        }
+
       }
+
+      for (let i = 0; i < this.clientes.length; i++) {
+
+        if (this.clientes[i].id == cliente.id) {
+
+          this.clientes[i] = cliente;
+          break;
+
+        }
+
+      }
+
     }
+
   }
 
-  public onDelete(id:number) {
-    for (let i = 0; i < this.clientes.length; i++) {
-      if ( this.clientes[i].id == id ) {
-        this.clientes.splice(i, 1);
-        break;
+  public onDelete(id: number) {
+
+    if (this.clientes) {
+
+      for (let i = 0; i < this.clientes.length; i++) {
+
+        if (this.clientes[i].id == id) {
+
+          this.clientes.splice(i, 1);
+          break;
+
+        }
+
       }
+
     }
+
   }
+
 }

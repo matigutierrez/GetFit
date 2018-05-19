@@ -11,6 +11,7 @@ import { InscripcionPlanComponent } from '../inscripcionplan/inscripcionplan.com
 import { RegistroPlanComponent } from '../registroplan/registroplan.component';
 import { HorarioComponent } from '../../../extra/horario/horario.component';
 import { Horario } from '../../../../models/Horario';
+import { ContratosComponent } from '../../clientes/contratos/contratos.component';
 
 @Component({
   selector: 'planes',
@@ -19,6 +20,9 @@ import { Horario } from '../../../../models/Horario';
 })
 
 export class PlanesComponent implements OnInit {
+
+  @ViewChild(ContratosComponent)
+  public contratosComponent: ContratosComponent;
 
   @ViewChild(RegistroPlanComponent)
   public registroPlan: RegistroPlanComponent;
@@ -29,11 +33,16 @@ export class PlanesComponent implements OnInit {
   @ViewChild(HorarioComponent)
   public horario: HorarioComponent;
 
+  // Lista de planes
   public planes: Plan[];
   public modalActions = new EventEmitter<string|MaterializeAction>();
   public modalCreate = new EventEmitter<string|MaterializeAction>();
   public parametros: string;
-  public contratos: Contrato[];
+
+  // Lista de contratos
+  public contratos: Contrato[] = [];
+
+  // Pagina actual
   public p: number = 1;
 
   private channel: any;
@@ -71,14 +80,12 @@ export class PlanesComponent implements OnInit {
   }
 
   public abrirHorarios(plan:Plan) {
-    
     this.horario.abrir([plan]);
-
   }
 
-  public openModal(contratos: Contrato[]) {
-    this.modalActions.emit({action:"modal",params:['open']});
+  public abrirContratos(contratos: Contrato[]) {
     this.contratos = contratos;
+    this.contratosComponent.abrir();
   }
 
   public closeModal() {

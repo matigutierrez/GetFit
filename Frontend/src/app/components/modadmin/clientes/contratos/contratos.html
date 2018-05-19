@@ -1,0 +1,49 @@
+<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class=" col s10 m6 left-align">
+                <h4>Contratos</h4>
+            </div>
+            <div class="col s2 m6 right-align">
+                <a (click)="cerrar()">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+        </div>
+        <div *ngIf="!contratos" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <ul *ngIf="contratos" materialize="collapsible" class="collapsible" data-collapsible="accordion">
+            <li *ngFor="let contrato of contratos; index as i;">
+                <div class="collapsible-header">
+                    <i class="material-icons">person</i>{{contrato.cliente.cli_nombres}} {{contrato.cliente.cli_apellidos}}
+                </div>
+                <div class="collapsible-body">
+                    <table *ngIf="contrato">
+                        <tbody>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <td>{{contrato.cliente.cli_nombres}} {{contrato.cliente.cli_apellidos}}</td>
+                            </tr>
+                            <tr>
+                                <th>Telefono</th>
+                                <td>{{contrato.cliente.cli_numerotelefonico}}</td>
+                            </tr>
+                            <tr>
+                                <th>Dirección</th>
+                                <td>{{contrato.cliente.cli_direccion}}</td>
+                            </tr>
+                            <tr>
+                                <th>Acta</th>
+                                <!--<td><iframe width="100%" height="100%" src="{{GLOBAL.url}}"></iframe></td>-->
+                                <td>
+                                    <acta [contrato_id]="contrato.id"></acta>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

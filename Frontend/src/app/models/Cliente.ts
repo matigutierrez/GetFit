@@ -1,4 +1,5 @@
 import { Usuario } from "./Usuario";
+import { Contrato } from "./Contrato";
 
 export class Cliente {
 
@@ -11,6 +12,7 @@ export class Cliente {
 	public cli_huella: ByteString;
 
 	public usuario: Usuario;
+	public contratos: Contrato[];
 
 	public constructor() {
 		
@@ -23,6 +25,7 @@ export class Cliente {
 		this.cli_huella = null;
 
 		this.usuario = null;
+		this.contratos = null;
 
 	}
 
