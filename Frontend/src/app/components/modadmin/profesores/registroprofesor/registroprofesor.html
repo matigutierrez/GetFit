@@ -1,4 +1,4 @@
-<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRegistroProfesor">
+<div id="modal1" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modal">
     <div class="modal-content modalback">
       <div class="row">
         <div class=" col s10 m6 left-align">
@@ -13,6 +13,8 @@
       <form #profesorForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="col s12">
           <div class="row">
+
+            <!-- Rut del profesor -->
             <div class="col s12">
               <div class="input-field">
                 <i class="material-icons prefix">person</i>
@@ -20,7 +22,9 @@
                 <label for="icon_prefix">RUT del Profesor</label>
               </div>
             </div>
+
             <div class="row">
+              <!-- Nombres del profesor -->
               <div class="col m6">
                 <div class="input-field">
                   <i class="material-icons prefix">person</i>
@@ -28,6 +32,8 @@
                   <label for="icon_prefix">Nombres del Profesor</label>
                 </div>
               </div>
+
+              <!-- Apellidos del profesor -->
               <div class="col m6">
                 <div class="input-field">
                   <i class="material-icons prefix">person</i>
@@ -35,6 +41,8 @@
                   <label for="icon_prefix">Apellidos del Profesor</label>
                 </div>
               </div>
+
+              <!-- Número telefónico del profesor -->
               <div class="col m6">
                 <div class="input-field">
                   <i class="material-icons prefix">local_phone</i>
@@ -42,6 +50,8 @@
                   <label for="icon_prefix">Numero Telefonico</label>
                 </div>
               </div>
+
+              <!-- Dirección del profesor -->
               <div class="col m6">
                 <div class="input-field">
                   <i class="material-icons prefix">place</i>
@@ -49,9 +59,13 @@
                   <label for="icon_prefix">Direccion</label>
                 </div>
               </div>
+
+              <!-- Usuario del profesor -->
               <div class="col m12">
                 <p class="center-align">(CORREO Y CONTRASEÑA SON PARA USUARIO)</p>
               </div>
+
+              <!-- Nombre del usuario -->
               <div class="col m6">
                 <div class="input-field">
                   <i class="material-icons prefix">person</i>
@@ -59,6 +73,8 @@
                   <label for="icon_prefix">Correo</label>
                 </div>
               </div>
+
+              <!-- Contraseña del usuario -->
               <div class="col m6">
                 <div class="input-field">
                   <i class="material-icons prefix">person</i>
@@ -66,17 +82,23 @@
                   <label for="icon_prefix">Contraseña</label>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col s12 l3 offset-l9">
+            <!-- Indicar error al registrar -->
             <p *ngIf="error">Se ha producido un error al registrar</p>
+
+            <!-- Boton para registrar -->
             <div class="right-align">
               <button class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Entrar" name="action">Ingresar</button>
             </div>
           </div>
         </div>
+
       </form>
     </div>
   </div>

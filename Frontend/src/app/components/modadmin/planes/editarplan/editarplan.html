@@ -1,6 +1,8 @@
 <form *ngIf="plan" #planForm="ngForm" (ngSubmit)="onSubmit()">
   <div class="col s12">
     <div class="row">
+
+      <!-- Nombre del plan -->
       <div class="col s12">
         <div class="input-field">
           <i class="material-icons prefix">person</i>
@@ -8,7 +10,9 @@
           <label class="active" for="icon_prefix">Nombre del Plan</label>
         </div>
       </div>
+
       <div class="row">
+        <!-- Descripción del plan-->
         <div class="col m6">
           <div class="input-field">
             <i class="material-icons prefix">person</i>
@@ -16,14 +20,18 @@
             <label for="icon_prefix">Descripcion</label>
           </div>
         </div>
+
+        <!-- Costo del plan -->
         <div class="col m6">
           <div class="input-field">
             <i class="material-icons prefix">person</i>
-            <input id="last_name" type="text" name="pla_costo" #pla_costo="ngModel" [(ngModel)]="plan.pla_costo">
+            <input id="last_name" type="number" name="pla_costo" #pla_costo="ngModel" [(ngModel)]="plan.pla_costo">
             <label for="icon_prefix">Costo del Plan</label>
           </div>
         </div>
       </div>
+
+      <!-- Sede del plan -->
       <div class="row">
         <div class="col m6">
           <div class="input-field">
@@ -35,13 +43,33 @@
           </div>
         </div>
       </div>
+      
     </div>
   </div>
+
+  <!-- Boton para actualizar el plan-->
   <div class="row">
     <div class="col s12 l3 offset-l9">
       <div class="right-align">
-        <button class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Entrar" name="action">Editar</button>
+
+        <button *ngIf="!editando" class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Entrar" name="action">Editar</button>
+
+        <div *ngIf="editando" class="preloader-wrapper small active">
+          <div class="spinner-layer spinner-green-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
+
 </form>

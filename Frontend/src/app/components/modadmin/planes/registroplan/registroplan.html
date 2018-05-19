@@ -13,6 +13,8 @@
     <form #planForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="col s12">
         <div class="row">
+
+          <!-- Nombre del plan -->
           <div class="col s12">
             <div class="input-field">
               <i class="material-icons prefix">person</i>
@@ -20,7 +22,9 @@
               <label for="icon_prefix">Nombre del Plan</label>
             </div>
           </div>
+
           <div class="row">
+            <!-- Descripción del plan -->
             <div class="col m6">
               <div class="input-field">
                 <i class="material-icons prefix">person</i>
@@ -28,14 +32,18 @@
                 <label for="icon_prefix">Descripcion</label>
               </div>
             </div>
+
+            <!-- Costo del plan -->
             <div class="col m6">
               <div class="input-field">
                 <i class="material-icons prefix">person</i>
-                <input id="last_name" type="text" name="pla_costo" #pla_costo="ngModel" [(ngModel)]="plan.pla_costo">
+                <input id="last_name" type="number" name="pla_costo" #pla_costo="ngModel" [(ngModel)]="plan.pla_costo">
                 <label for="icon_prefix">Costo del Plan</label>
               </div>
             </div>
           </div>
+          
+          <!-- Sede del plan -->
           <div class="row">
             <div class="col m6">
               <div class="input-field">
@@ -49,6 +57,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Boton para registrar -->
       <div class="row">
         <div class="col s12 l3 offset-l9">
           <div class="right-align">

@@ -1,6 +1,5 @@
-import { Component, OnInit, EventEmitter, Input, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MaterializeAction, MaterializeModule } from 'angular2-materialize';
 import { PlanService } from '../../../../services/plan.service';
 import { SedeService } from '../../../../services/sede.service';
 import { Plan } from '../../../../models/Plan';
@@ -16,10 +15,10 @@ declare var Materialize: any;
 
 export class EditarPlanComponent implements OnInit, AfterViewChecked {
 
-  public modalRegistroPlan = new EventEmitter<string|MaterializeAction>();
-
   public plan: Plan;
   public selectOptions: Sede[];
+
+  public editando: boolean;
 
   public constructor(
     private _planService: PlanService,
@@ -47,7 +46,17 @@ export class EditarPlanComponent implements OnInit, AfterViewChecked {
   }
 
   public onSubmit(){
-    console.log(this.plan);
+
+    this.editando = true;
+
+    this._planService.update(this.plan).subscribe(
+      Response => {
+
+        this.editando = false;
+
+      }
+    )
+
   }
 
   @Input("plan")
