@@ -18,6 +18,9 @@ export class EditarProfesorComponent implements AfterViewChecked {
     // Objeto del usuario
     public usuario: Usuario = new Usuario();
 
+    // Hubo error al actualizar?
+    public error: boolean = false;
+
     public constructor(
         private _profesorService: ProfesorService,
         private _usuarioService: UsuarioService
