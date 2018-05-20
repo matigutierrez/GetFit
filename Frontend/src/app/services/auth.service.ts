@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 import { RolService } from './rol.service';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
   public constructor(
@@ -18,14 +20,14 @@ export class AuthService {
   ) {
 
   }
-  
+
   public isAuthenticated(): boolean {
 
     let token: string = this.getToken();
 
-    if ( token != null ) {
+    if (token != null) {
 
-      return !this.jwtHelper.isTokenExpired( token );
+      return !this.jwtHelper.isTokenExpired(token);
 
     }
 
@@ -33,9 +35,9 @@ export class AuthService {
 
   }
 
-  public login(user:Usuario): Observable<any> {
+  public login(user: Usuario): Observable<any> {
 
-    return this._http.post(GLOBAL.url+'login', user);
+    return this._http.post(GLOBAL.url + 'login', user);
 
   }
 
@@ -55,7 +57,7 @@ export class AuthService {
 
   }
 
-  public setRolID(rolID:number): void {
+  public setRolID(rolID: number): void {
 
     localStorage.setItem('rol', JSON.stringify(rolID));
 
@@ -73,7 +75,7 @@ export class AuthService {
 
   }
 
-  public setToken(token:string) {
+  public setToken(token: string) {
 
     localStorage.setItem('token', JSON.stringify(token));
 
@@ -91,7 +93,7 @@ export class AuthService {
 
   }
 
-  public setIdentity(identity:string): void {
+  public setIdentity(identity: string): void {
 
     localStorage.setItem('identity', JSON.stringify(identity));
 

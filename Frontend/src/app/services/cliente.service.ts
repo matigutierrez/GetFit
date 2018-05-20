@@ -6,7 +6,9 @@ import { Cliente } from '../models/Cliente';
 import { Plan } from '../models/Plan';
 import { Contrato } from '../models/Contrato';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ClienteService {
 
   public constructor(
@@ -35,20 +37,20 @@ export class ClienteService {
     return this._http.delete(GLOBAL.url + 'cliente/' + id);
   }
 
-  public planesSolicitados(cliente:Cliente): Observable<Plan[]> {
-    return this._http.get<Plan[]>(GLOBAL.url+'cliente/' + cliente.id + '/planessolicitados');
+  public planesSolicitados(cliente: Cliente): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url + 'cliente/' + cliente.id + '/planessolicitados');
   }
 
-  public planesSolicitadosByID(id:number): Observable<Plan[]> {
-    return this._http.get<Plan[]>(GLOBAL.url+'cliente/' + id + '/planessolicitados');
+  public planesSolicitadosByID(id: number): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url + 'cliente/' + id + '/planessolicitados');
   }
 
   public getContratos(cliente: Cliente): Observable<Contrato[]> {
-    return this._http.get<Contrato[]>(GLOBAL.url+'cliente/' + cliente.id + '/contratos');
+    return this._http.get<Contrato[]>(GLOBAL.url + 'cliente/' + cliente.id + '/contratos');
   }
 
   public getContratosByID(id: number): Observable<Contrato[]> {
-    return this._http.get<Contrato[]>(GLOBAL.url+'cliente/' + id + '/contratos');
+    return this._http.get<Contrato[]>(GLOBAL.url + 'cliente/' + id + '/contratos');
   }
 
 }

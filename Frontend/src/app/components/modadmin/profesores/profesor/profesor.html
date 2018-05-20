@@ -1,2 +1,46 @@
-<h1>Hola mundo!</h1>
-Profesor: {{id}}
+<div class="row">
+    <div class="col s12">
+        <div class="card white">
+            <div class="card-content black-text">
+
+                <!-- Panel superior -->
+                <div class="row" *ngIf="profesor">
+
+                    <!-- Nombre del profesor -->
+                    <div class="col s12">
+                        <span class="card-title">{{profesor.pro_nombres + " " + profesor.pro_apellidos}}</span>
+                    </div>
+
+                </div>
+
+                <div class="card-action">
+
+                    <!-- Tabs -->
+                    <div class="row" *ngIf="profesor">
+                        <ul class="tabs" materialize="tabs">
+                            <li class="tab col s2">
+                                <a class="active" href="#informacion">
+                                    <i class="material-icons">show_chart</i>Información
+                                </a>
+                            </li>
+                            <li class="tab col s2">
+                                <a href="#planes">
+                                    <i class="material-icons">assignment</i>Planes
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Panel inferior -->
+                    <div class="row" *ngIf="profesor">
+                        <div id="informacion" class="col s12">
+                            <editarprofesor [profesor]="profesor"></editarprofesor>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

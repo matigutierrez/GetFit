@@ -20,6 +20,7 @@ class CreatePlanTable extends Migration
             $table->string('pla_nombre');
             $table->string('pla_descripcion');
             $table->integer('pla_costo');
+            $table->integer('pla_capacidad');
         });
     }
 

@@ -1,7 +1,6 @@
-import { Component, OnInit, EventEmitter, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { NotificacionService } from '../../../../services/notificacion.service';
 import { Notificacion } from "../../../../models/Notificacion";
-import { MaterializeAction } from "angular2-materialize";
 import { NotificacionViewerComponent } from "../notificacionviewer/notificacionviewer.component";
 
 @Component({
@@ -13,10 +12,10 @@ export class NotificacionComponent implements OnInit {
 
     // Componente NotificacionViewerComponent
     @ViewChild(NotificacionViewerComponent)
-    public _notificacionViewerComponent: NotificacionViewerComponent;
+    public notificacionViewerComponent: NotificacionViewerComponent;
 
+    // Lista de notificaciones
     public notificaciones: Notificacion[];
-    public modalActions = new EventEmitter<string|MaterializeAction>();
 
     public constructor(
         private _notificacionService: NotificacionService
@@ -35,17 +34,12 @@ export class NotificacionComponent implements OnInit {
 
     }
 
-    public openCreate() {
+    public registrar() {
         
     }
 
-    public closeModal() {
-        this.modalActions.emit({action:"modal",params:['close']});
-    }
-
-    public openModal(notificacion:Notificacion) {
-        this._notificacionViewerComponent.notificacion = notificacion;
-        this.modalActions.emit({action:"modal",params:['open']});
+    public abrirNotificacion(notificacion: Notificacion) {
+        this.notificacionViewerComponent.abrir(notificacion);
     }
 
 }

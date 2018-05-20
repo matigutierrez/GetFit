@@ -72,6 +72,7 @@ class PlanController extends Controller
         $plan->pla_nombre = $request->pla_nombre;
         $plan->pla_descripcion = $request->pla_descripcion;
         $plan->pla_costo = $request->pla_costo;
+        $plan->pla_capacidad = $request->pla_capacidad;
 
         $plan->save();
 

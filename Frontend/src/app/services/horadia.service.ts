@@ -4,7 +4,9 @@ import { HoraDia } from "../models/HoraDia";
 import { HttpClient } from "@angular/common/http";
 import { GLOBAL } from "./global";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class HoraDiaService {
 
     public constructor(
@@ -14,7 +16,7 @@ export class HoraDiaService {
     }
 
     public query(): Observable<HoraDia[]> {
-        return this._http.get<HoraDia[]>(GLOBAL.url+"horadia");
+        return this._http.get<HoraDia[]>(GLOBAL.url + "horadia");
     }
 
 }

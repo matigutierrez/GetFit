@@ -1,0 +1,90 @@
+<form #profesorForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="col s12">
+        <div class="row">
+
+            <!-- Rut del profesor -->
+            <div class="col s12">
+                <div class="input-field">
+                    <i class="material-icons prefix">perm_identity</i>
+                    <input id="last_name" type="text" name="pro_rut" #pro_rut="ngModel" [(ngModel)]="profesor.pro_rut">
+                    <label for="icon_prefix">RUT del Profesor</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Nombres del profesor -->
+                <div class="col m6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">person</i>
+                        <input id="last_name" type="text" name="pro_nombres" #pro_nombres="ngModel" [(ngModel)]="profesor.pro_nombres">
+                        <label for="icon_prefix">Nombres del Profesor</label>
+                    </div>
+                </div>
+
+                <!-- Apellidos del profesor -->
+                <div class="col m6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">person</i>
+                        <input id="last_name" type="text" name="pro_apellidos" #pro_apellidos="ngModel" [(ngModel)]="profesor.pro_apellidos">
+                        <label for="icon_prefix">Apellidos del Profesor</label>
+                    </div>
+                </div>
+
+                <!-- Número telefónico del profesor -->
+                <div class="col m6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">local_phone</i>
+                        <input id="last_name" type="text" name="pro_numerotelefonico" #pro_numerotelefonico="ngModel" [(ngModel)]="profesor.pro_numerotelefonico">
+                        <label for="icon_prefix">Numero Telefonico</label>
+                    </div>
+                </div>
+
+                <!-- Dirección del profesor -->
+                <div class="col m6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">place</i>
+                        <input id="last_name" type="text" name="pro_direccion" #pro_direccion="ngModel" [(ngModel)]="profesor.pro_direccion">
+                        <label for="icon_prefix">Direccion</label>
+                    </div>
+                </div>
+
+                <!-- Usuario del profesor -->
+                <div class="col m12">
+                    <p class="center-align">(CORREO Y CONTRASEÑA SON PARA USUARIO)</p>
+                </div>
+
+                <!-- Nombre del usuario -->
+                <div class="col m6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">person</i>
+                        <input id="last_name" type="text" name="usu_correo" #usu_correo="ngModel" [(ngModel)]="usuario.usu_correo">
+                        <label for="icon_prefix">Correo</label>
+                    </div>
+                </div>
+
+                <!-- Contraseña del usuario -->
+                <div class="col m6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">person</i>
+                        <input id="last_name" type="password" name="password" #password="ngModel" [(ngModel)]="usuario.password">
+                        <label for="icon_prefix">Contraseña</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 l3 offset-l9">
+            <!-- Indicar error al registrar -->
+            <p *ngIf="error">Se ha producido un error al editar</p>
+
+            <!-- Boton para registrar -->
+            <div class="right-align">
+                <button class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Entrar" name="action">Editar</button>
+            </div>
+        </div>
+    </div>
+
+</form>

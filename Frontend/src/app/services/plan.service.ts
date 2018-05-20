@@ -6,61 +6,63 @@ import { Plan } from '../models/Plan';
 import { Cliente } from '../models/Cliente';
 import { Profesor } from '../models/Profesor';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PlanService {
-  
+
   public constructor(
     private _http: HttpClient
-  ){
-    
+  ) {
+
   }
 
-  public save(plan:Plan): Observable<number> {
-    return this._http.post<number>(GLOBAL.url+'plan', Plan.getJSON(plan));
+  public save(plan: Plan): Observable<number> {
+    return this._http.post<number>(GLOBAL.url + 'plan', Plan.getJSON(plan));
   }
 
-  public update(plan:Plan): Observable<any> {
-    return this._http.put(GLOBAL.url+'plan/' + plan.id, Plan.getJSON(plan));
+  public update(plan: Plan): Observable<any> {
+    return this._http.put(GLOBAL.url + 'plan/' + plan.id, Plan.getJSON(plan));
   }
 
-  public query(): Observable<Plan[]>{
-    return this._http.get<Plan[]>(GLOBAL.url+'plan');
+  public query(): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url + 'plan');
   }
 
-  public get(id:number): Observable<Plan>{
-    return this._http.get<Plan>(GLOBAL.url+'plan/'+id);
+  public get(id: number): Observable<Plan> {
+    return this._http.get<Plan>(GLOBAL.url + 'plan/' + id);
   }
 
-  public delete(id:number): Observable<any>{
-    return this._http.delete(GLOBAL.url+'plan/'+id);
+  public delete(id: number): Observable<any> {
+    return this._http.delete(GLOBAL.url + 'plan/' + id);
   }
 
   public getPlanesContratados(): Observable<Plan[]> {
-    return this._http.get<Plan[]>(GLOBAL.url+'clienteplanes');
+    return this._http.get<Plan[]>(GLOBAL.url + 'clienteplanes');
   }
 
   public getPlanesNoContratados(): Observable<Plan[]> {
-    return this._http.get<Plan[]>(GLOBAL.url+'clientenoplanes');
+    return this._http.get<Plan[]>(GLOBAL.url + 'clientenoplanes');
   }
 
-  public getClientes(plan:Plan): Observable<Cliente[]> {
-    return this._http.get<Cliente[]>(GLOBAL.url+'plan/' + plan.id + '/clientes');
+  public getClientes(plan: Plan): Observable<Cliente[]> {
+    return this._http.get<Cliente[]>(GLOBAL.url + 'plan/' + plan.id + '/clientes');
   }
 
-  public clientesSolicitando(plan:Plan): Observable<Cliente[]> {
-    return this._http.get<Cliente[]>(GLOBAL.url+'plan/' + plan.id + '/clientessolicitando');
+  public clientesSolicitando(plan: Plan): Observable<Cliente[]> {
+    return this._http.get<Cliente[]>(GLOBAL.url + 'plan/' + plan.id + '/clientessolicitando');
   }
 
-  public clientesSolicitandoByID(id:number): Observable<Cliente[]> {
-    return this._http.get<Cliente[]>(GLOBAL.url+'plan/' + id + '/clientessolicitando');
+  public clientesSolicitandoByID(id: number): Observable<Cliente[]> {
+    return this._http.get<Cliente[]>(GLOBAL.url + 'plan/' + id + '/clientessolicitando');
   }
 
   public getProfesores(plan: Plan): Observable<Profesor[]> {
-    return this._http.get<Profesor[]>(GLOBAL.url+'plan/' + plan.id + '/profesores');
+    return this._http.get<Profesor[]>(GLOBAL.url + 'plan/' + plan.id + '/profesores');
   }
 
   public getProfesoresByID(id: number): Observable<Profesor[]> {
-    return this._http.get<Profesor[]>(GLOBAL.url+'/plan/' + id + '/profesores');
+    return this._http.get<Profesor[]>(GLOBAL.url + '/plan/' + id + '/profesores');
   }
-  
+
 }

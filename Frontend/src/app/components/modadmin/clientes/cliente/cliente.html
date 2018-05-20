@@ -1,2 +1,61 @@
-<h1>Holi</h1>
-Cliente: {{id}}
+<div class="row">
+    <div class="col s12">
+        <div class="card white">
+            <div class="card-content black-text">
+
+                <!-- Panel superior -->
+                <div class="row" *ngIf="cliente">
+
+                    <!-- Nombre del cliente -->
+                    <div class="col s12">
+                        <span class="card-title">{{cliente.cli_nombres + " " + cliente.cli_apellidos}}</span>
+                    </div>
+
+                </div>
+
+                <div class="card-action">
+
+                    <!-- Tabs -->
+                    <div class="row" *ngIf="cliente">
+                        <ul class="tabs" materialize="tabs">
+                            <li class="tab col s2">
+                                <a class="active" href="#informacion">
+                                    <i class="material-icons">show_chart</i>Información
+                                </a>
+                            </li>
+                            <li class="tab col s2">
+                                <a href="#planes">
+                                    <i class="material-icons">assignment</i>Planes
+                                </a>
+                            </li>
+                            <li class="tab col s2">
+                                <a href="#notificaciones">
+                                    <i class="material-icons">notifications_active</i>Notificaciones
+                                </a>
+                            </li>
+                            <li class="tab col s2">
+                                <a href="#sedes">
+                                    <i class="material-icons">place</i>Sedes
+                                </a>
+                            </li>
+                            <li class="tab col s2">
+                                <a href="#cobranzas">
+                                    <i class="material-icons">attach_money</i>Cobranzas
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Panel inferior -->
+                    <div class="row" *ngIf="cliente">
+                        <div id="informacion" class="col s12">
+                            <editarcliente [cliente]="cliente"></editarcliente>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

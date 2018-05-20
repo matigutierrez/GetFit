@@ -4,7 +4,9 @@ import { DiaSemana } from "../models/DiaSemana";
 import { GLOBAL } from "./global";
 import { HttpClient } from "@angular/common/http";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class DiaSemanaService {
 
     public constructor(
@@ -14,7 +16,7 @@ export class DiaSemanaService {
     }
 
     public query(): Observable<DiaSemana[]> {
-        return this._http.get<DiaSemana[]>(GLOBAL.url+"diasemana");
+        return this._http.get<DiaSemana[]>(GLOBAL.url + "diasemana");
     }
 
 }

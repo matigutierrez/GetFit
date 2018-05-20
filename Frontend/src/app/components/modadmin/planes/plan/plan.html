@@ -14,12 +14,16 @@
             <span class="card-title">N° Contratos: {{plan.contratos_count}}</span>
           </div>
 
-          <!-- Pestañas de las tablas -->
-          <div class="col s12">
+        </div>
+
+        <div class="card-action">
+
+          <!-- Tabs -->
+          <div class="row" *ngIf="plan">
             <ul class="tabs" materialize="tabs">
               <li class="tab col s2">
                 <a class="active" href="#estadisticas">
-                  <i class="material-icons orange-text">show_chart</i>Estadisticas
+                  <i class="material-icons">show_chart</i>Estadisticas
                 </a>
               </li>
               <li class="tab col s2">
@@ -45,11 +49,8 @@
             </ul>
           </div>
 
-        </div>
-
-        <div class="card-action">
           <!-- Panel inferior -->
-          <div *ngIf="plan" class="row">
+          <div class="row" *ngIf="plan">
             <!-- Contenido de tabber -->
             <div id="estadisticas" class="col s12">
 

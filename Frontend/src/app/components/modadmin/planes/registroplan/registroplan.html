@@ -17,37 +17,46 @@
           <!-- Nombre del plan -->
           <div class="col s12">
             <div class="input-field">
-              <i class="material-icons prefix">person</i>
+              <i class="material-icons prefix">assignment</i>
               <input id="last_name" type="text" name="pla_nombre" #pla_nombre="ngModel" [(ngModel)]="plan.pla_nombre">
               <label for="icon_prefix">Nombre del Plan</label>
             </div>
           </div>
 
-          <div class="row">
-            <!-- Descripción del plan -->
-            <div class="col m6">
-              <div class="input-field">
-                <i class="material-icons prefix">person</i>
-                <input id="last_name" type="text" name="pla_descripcion" #pla_descripcion="ngModel" [(ngModel)]="plan.pla_descripcion">
-                <label for="icon_prefix">Descripcion</label>
-              </div>
+          <!-- Descripción del plan -->
+          <div class="col s12">
+            <div class="input-field">
+              <i class="material-icons prefix">person</i>
+              <input id="last_name" type="text" name="pla_descripcion" #pla_descripcion="ngModel" [(ngModel)]="plan.pla_descripcion">
+              <label for="icon_prefix">Descripcion</label>
             </div>
+          </div>
 
+          <div class="row">
             <!-- Costo del plan -->
             <div class="col m6">
               <div class="input-field">
-                <i class="material-icons prefix">person</i>
+                <i class="material-icons prefix">attach_money</i>
                 <input id="last_name" type="number" name="pla_costo" #pla_costo="ngModel" [(ngModel)]="plan.pla_costo">
                 <label for="icon_prefix">Costo del Plan</label>
               </div>
             </div>
+
+            <!-- Capacidad del plan -->
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input id="last_name" type="number" name="pla_capacidad" #pla_costo="ngModel" [(ngModel)]="plan.pla_capacidad">
+                <label for="icon_prefix">Cupos (Capacidad)</label>
+              </div>
+            </div>
           </div>
-          
+
           <!-- Sede del plan -->
           <div class="row">
             <div class="col m6">
               <div class="input-field">
-                <i class="material-icons prefix">person</i>
+                <i class="material-icons prefix">place</i>
                 <select name="tgf_sede_id" #tgf_sede_id="ngModel" [(ngModel)]="plan.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="selectOptions">
                   <option *ngFor="let option of selectOptions" [ngValue]="option.id">{{option.sed_nombre}}</option>
                 </select>

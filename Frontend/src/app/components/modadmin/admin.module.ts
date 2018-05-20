@@ -42,6 +42,8 @@ import { EditarPlanComponent } from './planes/editarplan/editarplan.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { ProfesoresPlanComponent } from './planes/profesoresplan/profesoresplan.component';
 import { ContratosComponent } from './clientes/contratos/contratos.component';
+import { EditarProfesorComponent } from './profesores/editarprofesor/editarprofesor.component';
+import { EditarClienteComponent } from './clientes/editarcliente/editarcliente.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { ContratosComponent } from './clientes/contratos/contratos.component';
     ProfesoresPlanComponent,
     ClientesComponent,
     ClienteComponent,
+    EditarClienteComponent,
     RegistroClienteComponent,
     ContratosComponent,
     CobranzasComponent,
@@ -73,6 +76,7 @@ import { ContratosComponent } from './clientes/contratos/contratos.component';
     ActaComponent,
     ProfesoresComponent,
     ProfesorComponent,
+    EditarProfesorComponent,
     RegistroProfesorComponent,
     EditarPlanComponent,
     UsuarioComponent

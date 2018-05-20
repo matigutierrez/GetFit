@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { MetodoPago } from "../models/MetodoPago";
 import { GLOBAL } from "./global";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MetodoPagoService {
 
     public constructor(
@@ -14,11 +16,11 @@ export class MetodoPagoService {
     }
 
     public query(): Observable<MetodoPago[]> {
-        return this._http.get<MetodoPago[]>(GLOBAL.url+'metodopago');
+        return this._http.get<MetodoPago[]>(GLOBAL.url + 'metodopago');
     }
 
     public get(id: number): Observable<MetodoPago> {
-        return this._http.get<MetodoPago>(GLOBAL.url+'metodopago/' + id);
+        return this._http.get<MetodoPago>(GLOBAL.url + 'metodopago/' + id);
     }
 
 }

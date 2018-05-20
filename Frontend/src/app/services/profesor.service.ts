@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { GLOBAL } from "./global";
 import { Profesor } from "../models/Profesor";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ProfesorService {
 
     public constructor(

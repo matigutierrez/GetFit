@@ -11,7 +11,9 @@ const environment: any = {
   }
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PusherService {
 
   private pusher: any;
