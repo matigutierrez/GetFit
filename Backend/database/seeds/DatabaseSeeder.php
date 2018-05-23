@@ -35,6 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EvaluacionSeeder::class);
         $this->call(ArchivoEvaluacionSeeder::class);
         
-        $this->call(SedeUsuarioSeeder::class);
+        $this->call(SedeClienteSeeder::class);
     }
 }
