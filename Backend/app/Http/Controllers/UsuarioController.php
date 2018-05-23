@@ -148,16 +148,6 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Obtener las sedes del usuario
-     *
-     * @param  int $id
-     * @return \App\Sede
-     */
-    public function sedes($id) {
-        return Usuario::find($id)->sedes;
-    }
-
-    /**
      * Obtener las notificaciones del usuario
      *
      * @param  int $id

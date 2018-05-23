@@ -44,10 +44,6 @@ class Usuario extends Authenticatable
         return $this->belongsTo('App\Profesor', 'tgf_profesor_id');
     }
 
-    public function sedes() {
-    	return $this->belongsToMany('App\Sede', 'tgf_sede_usuario', 'tgf_usuario_id', 'tgf_sede_id');
-    }
-
     public function notificaciones() {
         return $this->belongsToMany('App\Notificacion', 'tgf_notificacion_usuario', 'tgf_usu_id', 'tgf_not_id');
     }

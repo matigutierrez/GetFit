@@ -38,12 +38,20 @@ class Cliente extends Model
         return $this->hasMany('App\Contrato', 'tgf_cliente_id');
     }
 
+    public function planes() {
+        return $this->belongsToMany('App\Plan', 'tgf_contrato', 'tgf_cliente_id', 'tgf_plan_id');
+    }
+
     public function huella() {
         return $this->hasOne('App\Huella', 'tgf_cliente_id');
     }
 
     public function planesSolicitados() {
         return $this->belongsToMany('App\Plan', 'cliente_solicita_plan', 'tgf_cliente_id', 'tgf_plan_id');
+    }
+
+    public function sedes() {
+    	return $this->belongsToMany('App\Sede', 'tgf_sede_cliente', 'tgf_cliente_id', 'tgf_sede_id');
     }
 
     public function getPlanesAttribute() {

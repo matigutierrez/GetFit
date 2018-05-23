@@ -156,6 +156,26 @@ class ClienteController extends Controller
     }
 
     /**
+     * Obtener las sedes de un cliente
+     * 
+     * @param  int  $id
+     * @return \App\Sede
+     */
+    public function sedes($id) {
+        return Cliente::find($id)->sedes;
+    }
+
+    /**
+     * Obtener los planes de un cliente
+     * 
+     * @param  int  $id
+     * @return \App\Plan
+     */
+    public function planes($id) {
+        return Cliente::find($id)->planes;
+    }
+
+    /**
      * Obtener huella de un cliente
      * 
      * @param  int  $id

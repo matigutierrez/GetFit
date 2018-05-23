@@ -17,10 +17,10 @@
     <div class="col s9">
 
         <div id="actuales">
-            <div *ngIf="!clientesActuales" class="progress">
+            <div *ngIf="!contratos" class="progress">
                 <div class="indeterminate"></div>
             </div>
-            <div *ngIf="clientesActuales">
+            <div *ngIf="contratos">
                 <div class="padtable">
                     <div>
                         <table class="responsive-table striped highlight">
@@ -28,7 +28,6 @@
                                 <tr>
                                     <th>Rut</th>
                                     <th>Nombre</th>
-                                    <th>Contratos</th>
                                     <th>Correo</th>
                                     <th></th>
                                     <th></th>
@@ -36,29 +35,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cliente of clientesActuales | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
-                                    <td>{{cliente.cli_rut}}</td>
-                                    <td>{{cliente.cli_nombres + " " + cliente.cli_apellidos}}</td>
+                                <tr *ngFor="let contrato of contratos | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                                    <td>{{contrato.cliente.cli_rut}}</td>
+                                    <td>{{contrato.cliente.cli_nombres + " " + contrato.cliente.cli_apellidos}}</td>
                                     <td>
-                                        <a materialize="dropdown" class="right-align" href="" [attr.data-activates]="'dropdown-'+i">
-                                            <i class="material-icons">assignment</i>
-                                        </a>
-                                        <ul id="dropdown-{{i}}" class='dropdown-content'>
-                                            <li *ngFor="let planes of cliente.contratos">
-                                                <a>{{planes.plan.pla_nombre}}</a>
-                                            </li>
-                                        </ul>
+                                        <a *ngIf="contrato.cliente.usuario">{{contrato.cliente.usuario.usu_correo}}</a>
                                     </td>
                                     <td>
-                                        <a *ngIf="cliente.usuario">{{cliente.usuario.usu_correo}}</a>
-                                    </td>
-                                    <td>
-                                        <a [routerLink]="['/admin/cliente', cliente.id]">
+                                        <a [routerLink]="['/admin/cliente', contrato.cliente.id]">
                                             <i class="material-icons">settings</i>
                                         </a>
                                     </td>
                                     <td>
-                                        <a>
+                                        <a (click)="deleteContrato(contrato)">
                                             <i class="material-icons">close</i>
                                         </a>
                                     </td>

@@ -7,11 +7,11 @@ import { HoraDiaService } from "../../../services/horadia.service";
 import { DiaSemanaService } from "../../../services/diasemana.service";
 import { Plan } from "../../../models/Plan";
 import { PusherService } from "../../../services/pusher.service";
+import { PlanService } from "../../../services/plan.service";
 
 @Component({
     selector: 'horario',
-    templateUrl: 'horario.html',
-    providers: [HoraDiaService, DiaSemanaService, PusherService]
+    templateUrl: 'horario.html'
 })
 export class HorarioComponent implements OnDestroy {
 
@@ -22,13 +22,14 @@ export class HorarioComponent implements OnDestroy {
     public horas: HoraDia[];
     public dias: DiaSemana[];
 
-    public modalHorario = new EventEmitter<string | MaterializeAction>();
+    public modal = new EventEmitter<string | MaterializeAction>();
 
     private channel: any;
 
     public constructor(
         private horaDiaService: HoraDiaService,
         private diaSemanaService: DiaSemanaService,
+        private planService: PlanService,
         private pusherService: PusherService
     ) {
 
@@ -46,7 +47,7 @@ export class HorarioComponent implements OnDestroy {
     }
 
     public ngOnDestroy() {
-        if ( this.channel ) {
+        if (this.channel) {
             this.channel.unbind();
         }
     }
@@ -140,35 +141,40 @@ export class HorarioComponent implements OnDestroy {
         this.horario = [];
         this.planes = planes;
 
+        // Por cada plan
         for (let i = 0; i < planes.length; i++) {
 
             let plan: Plan = planes[i];
 
-            if (plan.horarios) {
+            // Solicitar horarios
+            this.planService.getHorarios(plan).subscribe(
+                Response => {
 
-                for (let j = 0; j < plan.horarios.length; j++) {
+                    for (let j = 0; j < Response.length; j++) {
 
-                    // Cada horario
-                    let horario: Horario = plan.horarios[j];
+                        // Cada horario
+                        let horario: Horario = Response[j];
 
-                    // Horario contiene el plan
-                    horario.plan = plan;
+                        // Horario contiene el plan
+                        horario.plan = plan;
 
-                    // Insertar horario a la tabla
-                    this.putHorario(horario);
+                        // Insertar horario a la tabla
+                        this.putHorario(horario);
+
+                    }
+
                 }
-
-            }
+            );
 
         }
 
-        this.modalHorario.emit({ action: "modal", params: ['open'] });
+        this.modal.emit({ action: "modal", params: ['open'] });
 
     }
 
     public cerrar(): void {
 
-        this.modalHorario.emit({ action: "modal", params: ['close'] });
+        this.modal.emit({ action: "modal", params: ['close'] });
 
     }
 

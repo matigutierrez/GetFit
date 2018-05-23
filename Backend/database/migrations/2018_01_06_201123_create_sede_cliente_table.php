@@ -13,12 +13,12 @@ class CreateSedeUsuarioTable extends Migration
      */
     public function up()
     {
-        Schema::create('tgf_sede_usuario', function (Blueprint $table) {
+        Schema::create('tgf_sede_cliente', function (Blueprint $table) {
             $table->integer('tgf_sede_id')->unsigned();
             $table->foreign('tgf_sede_id')->references('id')->on('tgf_sede')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('tgf_usuario_id')->unsigned();
-            $table->foreign('tgf_usuario_id')->references('id')->on('tgf_usuario')->onDelete('cascade')->onUpdate('cascade');
-            $table->primary(['tgf_usuario_id', 'tgf_sede_id']);
+            $table->integer('tgf_cliente_id')->unsigned();
+            $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onDelete('cascade')->onUpdate('cascade');
+            $table->primary(['tgf_cliente_id', 'tgf_sede_id']);
         });
     }
 
@@ -29,6 +29,6 @@ class CreateSedeUsuarioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tgf_sede_usuario');
+        Schema::dropIfExists('tgf_sede_cliente');
     }
 }

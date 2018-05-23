@@ -13,8 +13,8 @@ class Sede extends Model
 
     public $timestamps = false;
     
-    public function usuarios() {
-    	return $this->belongsToMany('App\Usuario', 'tgf_sede_usuario', 'tgf_sede_id', 'tgf_usuario_id');
+    public function clientes() {
+    	return $this->belongsToMany('App\Cliente', 'tgf_sede_cliente', 'tgf_sede_id', 'tgf_cliente_id');
     }
 
     public function planes() {

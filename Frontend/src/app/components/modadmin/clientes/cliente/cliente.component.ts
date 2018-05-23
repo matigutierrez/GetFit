@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { ClienteService } from "../../../../services/cliente.service";
 import { ActivatedRoute } from "@angular/router";
 import { Cliente } from "../../../../models/Cliente";
+import { HorarioComponent } from "../../../extra/horario/horario.component";
 
 @Component({
     selector: 'cliente',
@@ -9,6 +10,9 @@ import { Cliente } from "../../../../models/Cliente";
     providers: [ClienteService]
 })
 export class ClienteComponent {
+
+    @ViewChild(HorarioComponent)
+    public horarioComponent: HorarioComponent;
 
     // 'id' del cliente actual
     public id: number;

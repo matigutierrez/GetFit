@@ -143,15 +143,33 @@ class PlanController extends Controller
     }
 
     /**
+     * Obtener los contratos de un plan
+     * 
+     * @param  int  $id
+     * @return \App\Contrato
+     */
+    public function contratos($id) {
+        return Plan::find($id)->contratos()->with('cliente.usuario', 'plan')->get();
+    }
+
+    /**
      * Obtener los profesores de un plan
      * 
      * @param  int  $id
      * @return \App\Profesor
      */
     public function profesores($id) {
-        
         return Plan::find($id)->profesores;
+    }
 
+    /**
+     * Obtener los horarios de un plan
+     * 
+     * @param  int  $id
+     * @return \App\Horario
+     */
+    public function horarios($id) {
+        return Plan::find($id)->horarios;
     }
 
     /**

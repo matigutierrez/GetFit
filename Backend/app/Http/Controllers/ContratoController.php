@@ -63,8 +63,9 @@ class ContratoController extends Controller
         // Guardar contrato
         $contrato->save();
 
-        // Agregar cliente a cache
-        $contrato->cliente;
+        // Agregar 'cliente' y 'plan' a cache
+        $contrato->pluck('cliente.usuario');
+        $contrato->plan;
 
         $this->pusher->trigger('contrato', 'create', $contrato);
         
@@ -105,8 +106,9 @@ class ContratoController extends Controller
         $contrato = Contrato::find($id);
         $contrato->update( $request->all() );
 
-        // Agregar 'cliente' a cache
-        $contrato->cliente;
+        // Agregar 'cliente' y 'plan' a cache
+        $contrato->pluck('cliente.usuario');
+        $contrato->plan;
 
         $this->pusher->trigger('contrato', 'create', $contrato);
 

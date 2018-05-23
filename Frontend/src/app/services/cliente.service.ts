@@ -53,4 +53,8 @@ export class ClienteService {
     return this._http.get<Contrato[]>(GLOBAL.url + 'cliente/' + id + '/contratos');
   }
 
+  public getPlanes(cliente: Cliente): Observable<Plan[]> {
+    return this._http.get<Plan[]>(GLOBAL.url + '/cliente/' + cliente.id + '/planes');
+  }
+
 }

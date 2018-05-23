@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sede;
 use Illuminate\Http\Request;
+use App\SedeCliente;
 
-class SedeController extends Controller
+class SedeClienteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return Sede::all();
+        return SedeCliente::all();
     }
 
     /**
@@ -35,12 +35,13 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
-        ]);
+        $sedeCliente = new SedeCliente;
+        $sedeCliente->tgf_cliente_id = $request->tgf_cliente_id;
+        $sedeCliente->tgf_sede_id = $request->tgf_sede_id;
 
+        $sedeCliente->save();
+
+        return $sedeCliente;
     }
 
     /**
@@ -51,7 +52,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        return Sede::find($id);
+        //
     }
 
     /**
@@ -74,9 +75,7 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sede = Sede::find($id);
-        $sede->update($request->all());
-        return ['update' => true];
+        //
     }
 
     /**
@@ -87,17 +86,6 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        Sede::destroy($id);
-        return ['delete' => true];
-    }
-
-    /**
-     * Obtener los clientes de una sede
-     * 
-     * @param  int  $id
-     * @return \App\Cliente
-     */
-    public function clientes($id) {
-        return Sede::find($id)->clientes;
+        //
     }
 }

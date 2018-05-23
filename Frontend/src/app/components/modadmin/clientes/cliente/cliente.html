@@ -43,6 +43,11 @@
                                     <i class="material-icons">attach_money</i>Cobranzas
                                 </a>
                             </li>
+                            <li class="tab col s2">
+                                <a href="#cobranzas">
+                                    <i class="material-icons">poll</i>Evaluaciones
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
@@ -50,6 +55,9 @@
                     <div class="row" *ngIf="cliente">
                         <div id="informacion" class="col s12">
                             <editarcliente [cliente]="cliente"></editarcliente>
+                        </div>
+                        <div id="planes" class="col s12">
+                            <planescliente [horarioComponent]="horarioComponent" [cliente]="cliente"></planescliente>
                         </div>
                     </div>
 
@@ -59,3 +67,8 @@
         </div>
     </div>
 </div>
+
+<!-- Este componente solo se utiliza dentro del componente PlanesClienteComponent (con etiqueta planescliente) -->
+<!-- Si se instancia dentro de ese componente va a haber problemas con la vista -->
+<!-- Por lo tanto se dejó instanciado en este lugar -->
+<horario></horario>

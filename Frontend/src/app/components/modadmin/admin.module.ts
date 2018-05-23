@@ -44,6 +44,7 @@ import { ProfesoresPlanComponent } from './planes/profesoresplan/profesoresplan.
 import { ContratosComponent } from './clientes/contratos/contratos.component';
 import { EditarProfesorComponent } from './profesores/editarprofesor/editarprofesor.component';
 import { EditarClienteComponent } from './clientes/editarcliente/editarcliente.component';
+import { PlanesClienteComponent } from './clientes/planes/planescliente.component';
 
 @NgModule({
   declarations: [
@@ -51,35 +52,52 @@ import { EditarClienteComponent } from './clientes/editarcliente/editarcliente.c
     ChartlineClienteComponent,
     BarChartContratoComponent,
     PrincipalComponent,
+
+    // Componentes de plan/planes
     PlanesComponent,
     PlanComponent,
+    EditarPlanComponent,
     ClientesPlanComponent,
     RegistroPlanComponent,
     HorarioPlanComponent,
     ProfesoresPlanComponent,
+    InscripcionPlanComponent,
+    ActaComponent,
+
+    // Componentes de cliente
     ClientesComponent,
     ClienteComponent,
+    PlanesClienteComponent,
     EditarClienteComponent,
     RegistroClienteComponent,
+    
+    // Componentes de cobranza
     ContratosComponent,
     CobranzasComponent,
     PagoCobranzaComponent,
     RegistroCobranzaComponent,
+
     CircleChartComponent,
+
+    // Componentes de usuario
     UsuariosComponent,
     RegistroUsuarioComponent,
+    UsuarioComponent,
+
+    // Componentes de sede
     SedesComponent,
     RegistroSedeComponent,
+
+    // Componentes de notificacion
     NotificacionComponent,
     NotificacionViewerComponent,
-    InscripcionPlanComponent,
-    ActaComponent,
+    
+    // Componentes de profesor
     ProfesoresComponent,
     ProfesorComponent,
     EditarProfesorComponent,
     RegistroProfesorComponent,
-    EditarPlanComponent,
-    UsuarioComponent
+    
   ],
   imports: [
     BrowserModule,

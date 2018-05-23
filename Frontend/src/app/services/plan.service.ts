@@ -5,6 +5,8 @@ import { GLOBAL } from './global';
 import { Plan } from '../models/Plan';
 import { Cliente } from '../models/Cliente';
 import { Profesor } from '../models/Profesor';
+import { Horario } from '../models/Horario';
+import { Contrato } from '../models/Contrato';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,10 @@ export class PlanService {
     return this._http.delete(GLOBAL.url + 'plan/' + id);
   }
 
+  public getContratos(plan: Plan): Observable<Contrato[]> {
+    return this._http.get<Contrato[]>(GLOBAL.url + 'plan/' + plan.id + '/contratos');
+  }
+
   public getPlanesContratados(): Observable<Plan[]> {
     return this._http.get<Plan[]>(GLOBAL.url + 'clienteplanes');
   }
@@ -62,7 +68,11 @@ export class PlanService {
   }
 
   public getProfesoresByID(id: number): Observable<Profesor[]> {
-    return this._http.get<Profesor[]>(GLOBAL.url + '/plan/' + id + '/profesores');
+    return this._http.get<Profesor[]>(GLOBAL.url + 'plan/' + id + '/profesores');
+  }
+
+  public getHorarios(plan: Plan): Observable<Horario[]> {
+    return this._http.get<Horario[]>(GLOBAL.url + 'plan/' + plan.id + '/horarios');
   }
 
 }
