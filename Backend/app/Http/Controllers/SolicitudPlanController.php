@@ -56,7 +56,6 @@ class SolicitudPlanController extends Controller
         $this->pusher->trigger('solicitudPlan', 'create', $solicitudPlan);
 
         return $solicitudPlan->id;
-
     }
 
     /**
@@ -116,4 +115,25 @@ class SolicitudPlanController extends Controller
 
         return ['deleted' => true];
     }
+
+    /**
+     * Crear una solicitud de plan para el cliente
+     * 
+     */
+    public function solicitar(Request $request, AuthenticateController $auth) {
+        $solicitudPlan = new SolicitudPlan;
+        $solicitudPlan->tgf_cliente_id = $auth->getAuthenticatedUser()->cliente->id;
+        $solicitudPlan->tgf_plan_id = $request->tgf_plan_id;
+
+        $solicitudPlan->save();
+
+        // Cachear cliente y plan
+        $solicitudPlan->cliente->usuario;
+        $solicitudPlan->plan;
+
+        $this->pusher->trigger('solicitudPlan', 'create', $solicitudPlan);
+
+        return $solicitudPlan->id;
+    }
+
 }

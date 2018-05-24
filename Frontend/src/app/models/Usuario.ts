@@ -27,13 +27,22 @@ export class Usuario {
 	}
 
 	public static getJSON(usuario: Usuario): any {
+		if ( usuario.password && usuario.password.length > 0 ) {
+			return {
+				id: usuario.id,
+				tgf_cliente_id: usuario.tgf_cliente_id,
+				tgf_profesor_id: usuario.tgf_profesor_id,
+				tgf_rol_id: usuario.tgf_rol_id,
+				usu_correo: usuario.usu_correo,
+				password: usuario.password
+			};
+		}
 		return {
 			id: usuario.id,
 			tgf_cliente_id: usuario.tgf_cliente_id,
 			tgf_profesor_id: usuario.tgf_profesor_id,
 			tgf_rol_id: usuario.tgf_rol_id,
-			usu_correo: usuario.usu_correo,
-			password: usuario.password
+			usu_correo: usuario.usu_correo
 		};
 	}
 

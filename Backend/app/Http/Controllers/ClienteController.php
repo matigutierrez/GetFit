@@ -67,7 +67,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        return Cliente::find($id);
+        return Cliente::with('usuario')->find($id);
     }
 
     /**
@@ -93,7 +93,9 @@ class ClienteController extends Controller
         $cliente = Cliente::find($id);
         $cliente->update($request->all());
 
-        $cliente->pluck(['usuario', 'contratos.plan']);
+        // Cachear usuario y contratos
+        $cliente->usuario;
+        $cliente->contratos->pluck('plan');
 
         $this->pusher->trigger('cliente', 'update', $cliente);
 

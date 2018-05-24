@@ -19,6 +19,7 @@ class CreateClienteSolicitaPlanTable extends Migration
             $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('tgf_plan_id')->unsigned();
             $table->foreign('tgf_plan_id')->references('id')->on('tgf_plan')->onUpdate('cascade')->onDelete('cascade');
+            $table->unique(['tgf_cliente_id', 'tgf_plan_id']);
         });
     }
 

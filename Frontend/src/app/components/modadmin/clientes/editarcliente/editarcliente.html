@@ -48,7 +48,20 @@
                     </div>
                 </div>
                 <div class="col m6">
-                    <div class="input-field">
+                    <div *ngIf="editandoCliente || editandoUsuario" class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!editandoCliente && !editandoUsuario" class="input-field">
                         <i class="material-icons prefix">person</i>
                         <input id="last_name" type="password" name="password" #password="ngModel" [(ngModel)]="usuario.password">
                         <label for="icon_prefix">Contraseña</label>

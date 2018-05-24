@@ -194,11 +194,7 @@ class PlanController extends Controller
      * @return \App\SolicitudPlan
      */
     public function solicitudesPlan($id) {
-        $solicitudes = Plan::find($id)->solicitudesPlan;
-        $solicitudes->pluck('cliente');
-        $solicitudes->pluck('plan');
-
-        return $solicitudes;
+        return Plan::find($id)->solicitudesPlan()->with('cliente.usuario', 'plan')->get();
     }
 
     /**
