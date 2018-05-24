@@ -36,5 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ArchivoEvaluacionSeeder::class);
         
         $this->call(SedeClienteSeeder::class);
+        $this->call(ClienteSolicitaPlanSeeder::class);
     }
 }

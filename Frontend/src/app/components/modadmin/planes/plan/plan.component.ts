@@ -7,6 +7,7 @@ import { HorarioPlanComponent } from "../horarioplan/horarioplan.component";
 import { Contrato } from "../../../../models/Contrato";
 import { MaterializeAction } from "angular2-materialize";
 import { EditarPlanComponent } from "../editarplan/editarplan.component";
+import { InscripcionPlanComponent } from "../inscripcionplan/inscripcionplan.component";
 
 @Component({
     selector: 'plan',
@@ -20,6 +21,9 @@ export class PlanComponent implements OnInit {
 
     @ViewChild(EditarPlanComponent)
     public editarPlan: EditarPlanComponent;
+
+    @ViewChild(InscripcionPlanComponent)
+    public inscripcionPlanComponent: InscripcionPlanComponent;
 
     public id: number;
     public plan: Plan;

@@ -56,7 +56,10 @@
 
             </div>
             <div id="clientes" class="col s12">
-              <clientesplan [plan]="plan"></clientesplan>
+              <clientesplan
+                [inscripcionPlanComponent]="inscripcionPlanComponent"
+                [plan]="plan">
+              </clientesplan>
             </div>
             <div id="editarplan" class="col s12">
               <editarplan [plan]="plan"></editarplan>
@@ -74,3 +77,8 @@
     </div>
   </div>
 </div>
+
+<!-- Este componente debería estar dentro de "ClientesPlanComponent" (etiqueta clientesplan)-->
+<!-- Presenta defectos en HTML al utilizarlo ahí -->
+<!-- Asi que se pone aquí y inyecta con inputs -->
+<inscripcionplan></inscripcionplan>

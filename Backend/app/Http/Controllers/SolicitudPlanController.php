@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Contrato;
+use App\SolicitudPlan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Pusher\Laravel\PusherManager;
 
-class ContratoController extends Controller
+class SolicitudPlanController extends Controller
 {
 
     private $pusher;
@@ -24,7 +22,7 @@ class ContratoController extends Controller
      */
     public function index()
     {
-        return Contrato::all();
+        return SolicitudPlan::all();
     }
 
     /**
@@ -45,31 +43,20 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
-        $requestContrato = json_decode(File::get($request->file('contrato')));
-        
-        $contrato = new Contrato;
-        $contrato->tgf_cliente_id = $requestContrato->tgf_cliente_id;
-        $contrato->tgf_plan_id = $requestContrato->tgf_plan_id;
+        $solicitudPlan = new SolicitudPlan;
+        $solicitudPlan->tgf_cliente_id = $request->tgf_cliente_id;
+        $solicitudPlan->tgf_plan_id = $request->tgf_plan_id;
 
-        if ( $request->hasFile('acta') ) {
+        $solicitudPlan->save();
 
-            $file = $request->file('acta');
+        // Cachear cliente y plan
+        $solicitudPlan->cliente->usuario;
+        $solicitudPlan->plan;
 
-            // El archivo se guarda en /storage/app/actas
-            $contrato->con_acta = Storage::put('actas', $file);
+        $this->pusher->trigger('solicitudPlan', 'create', $solicitudPlan);
 
-        }
+        return $solicitudPlan->id;
 
-        // Guardar contrato
-        $contrato->save();
-
-        // Agregar 'cliente' y 'plan' a cache
-        $contrato->cliente->usuario;
-        $contrato->plan;
-
-        $this->pusher->trigger('contrato', 'create', $contrato);
-        
-        return $contrato->id;
     }
 
     /**
@@ -80,7 +67,7 @@ class ContratoController extends Controller
      */
     public function show($id)
     {
-        return Contrato::with('plan')->find($id);
+        return SolicitudPlan::find($id);
     }
 
     /**
@@ -103,14 +90,14 @@ class ContratoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $contrato = Contrato::find($id);
-        $contrato->update( $request->all() );
+        $solicitudPlan = SolicitudPlan::find($id);
+        $solicitudPlan->update($request->all());
 
-        // Agregar 'cliente' y 'plan' a cache
-        $contrato->cliente->usuario;
-        $contrato->plan;
-
-        $this->pusher->trigger('contrato', 'create', $contrato);
+        // Cachear cliente y plan
+        $solicitudPlan->cliente->usuario;
+        $solicitudPlan->plan;
+        
+        $this->pusher->trigger('solicitudPlan', 'update', $solicitudPlan);
 
         return ['updated' => true];
     }
@@ -123,18 +110,10 @@ class ContratoController extends Controller
      */
     public function destroy($id)
     {
-        Contrato::destroy($id);
+        SolicitudPlan::destroy($id);
 
-        $this->pusher->trigger('contrato', 'delete', $id);
+        $this->pusher->trigger('solicitudPlan', 'delete', $id);
 
         return ['deleted' => true];
-    }
-
-    public function acta($id) {
-        $contrato = Contrato::find($id);
-        if ( isset($contrato) ) {
-            return response()->file(storage_path("app/" . $contrato->con_acta));
-        }
-        return null;
     }
 }

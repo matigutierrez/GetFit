@@ -29,9 +29,11 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('cliente/{id}/huella', 'ClienteController@huella');
 	Route::get('cliente/{id}/cobranzas', 'ClienteController@cobranzas');
 	Route::get('cliente/{id}/planessolicitados', 'ClienteController@planesSolicitados');
+	Route::get('cliente/{id}/solicitudes', 'ClienteController@solicitudesPlan');
+	Route::get('clientecontratos', 'ClienteController@contratosToken');
 	Route::get('clientecobranzas', 'ClienteController@cobranzasToken');
-	Route::get('clienteplanes', 'ClienteController@planesToken');
 	Route::get('clientenoplanes', 'ClienteController@noPlanesToken');
+	Route::get('clientesolicitudes', 'ClienteController@solicitudesPlanToken');
 
 	Route::apiResource('cobranza', 'CobranzaController');
 
@@ -64,6 +66,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('plan/{id}/clientessolicitando', 'PlanController@clientesSolicitando');
 	Route::get('plan/{id}/horarios', 'PlanController@horarios');
 	Route::get('plan/{id}/contratos', 'PlanController@contratos');
+	Route::get('plan/{id}/solicitudes', 'PlanController@solicitudesPlan');
 
 	Route::apiResource('profesor', 'ProfesorController');
 	Route::get('profesor/{id}/planes', 'ProfesorController@planes');
@@ -77,6 +80,8 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('usuario/{id}/rol', 'UsuarioController@rol');
 	Route::get('usuario/{id}/cliente', 'UsuarioController@cliente');
 	Route::get('usuario/{id}/notificaciones', 'UsuarioController@notificaciones');
+
+	Route::apiResource('solicitudplan', 'SolicitudPlanController');
 
 });
 

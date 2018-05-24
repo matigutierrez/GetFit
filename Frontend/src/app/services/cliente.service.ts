@@ -5,6 +5,7 @@ import { GLOBAL } from './global';
 import { Cliente } from '../models/Cliente';
 import { Plan } from '../models/Plan';
 import { Contrato } from '../models/Contrato';
+import { SolicitudPlan } from '../models/SolicitudPlan';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class ClienteService {
 
   public delete(id: number): Observable<any> {
     return this._http.delete(GLOBAL.url + 'cliente/' + id);
+  }
+
+  public getSolicitudesToken(): Observable<SolicitudPlan[]> {
+    return this._http.get<SolicitudPlan[]>(GLOBAL.url + 'clientesolicitudes');
   }
 
   public planesSolicitados(cliente: Cliente): Observable<Plan[]> {

@@ -5,6 +5,7 @@ import { ClienteService } from "../../../../services/cliente.service";
 import { Contrato } from "../../../../models/Contrato";
 import { ContratoService } from "../../../../services/contrato.service";
 import { HttpHeaders, HttpEventType } from "@angular/common/http";
+import { Plan } from "../../../../models/Plan";
 
 @Component({
     selector: 'inscripcionplan',
@@ -13,11 +14,11 @@ import { HttpHeaders, HttpEventType } from "@angular/common/http";
 })
 export class InscripcionPlanComponent {
 
-    // Id del plan al cual se inscribirá un cliente
-    public plan_id: number;
+    // El plan al cual se inscribirá el cliente
+    public plan: Plan;
 
     // Modal del componente
-    public modalInscripcionPlan = new EventEmitter<string | MaterializeAction>();
+    public modal = new EventEmitter<string | MaterializeAction>();
 
     // Lista de clientes
     public clientes: Cliente[];
@@ -94,7 +95,7 @@ export class InscripcionPlanComponent {
             let contrato: Contrato = new Contrato();
 
             contrato.tgf_cliente_id = this.cliente.id;
-            contrato.tgf_plan_id = this.plan_id;
+            contrato.tgf_plan_id = this.plan.id;
 
             this.sent = false;
             this.sentError = false;
@@ -143,16 +144,16 @@ export class InscripcionPlanComponent {
     }
 
     public cerrar() {
-        this.modalInscripcionPlan.emit({ action: "modal", params: ['close'] });
+        this.modal.emit({ action: "modal", params: ['close'] });
     }
 
-    public abrir(plan_id: number) {
-        this.plan_id = plan_id;
+    public abrir(plan: Plan) {
+        this.plan = plan;
         this.sent = false;
         this.sentError = false;
         this.esperar = false;
         this.porcentaje = 0;
-        this.modalInscripcionPlan.emit({ action: "modal", params: ['open'] });
+        this.modal.emit({ action: "modal", params: ['open'] });
     }
 
 }

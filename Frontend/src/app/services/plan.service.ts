@@ -7,6 +7,7 @@ import { Cliente } from '../models/Cliente';
 import { Profesor } from '../models/Profesor';
 import { Horario } from '../models/Horario';
 import { Contrato } from '../models/Contrato';
+import { SolicitudPlan } from '../models/SolicitudPlan';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,12 @@ export class PlanService {
     return this._http.get<Contrato[]>(GLOBAL.url + 'plan/' + plan.id + '/contratos');
   }
 
-  public getPlanesContratados(): Observable<Plan[]> {
-    return this._http.get<Plan[]>(GLOBAL.url + 'clienteplanes');
+  public getContratosToken(): Observable<Contrato[]> {
+    return this._http.get<Contrato[]>(GLOBAL.url + 'clientecontratos');
+  }
+
+  public getSolicitudes(plan: Plan): Observable<SolicitudPlan[]> {
+    return this._http.get<SolicitudPlan[]>(GLOBAL.url + 'plan/' + plan.id + '/solicitudes');
   }
 
   public getPlanesNoContratados(): Observable<Plan[]> {

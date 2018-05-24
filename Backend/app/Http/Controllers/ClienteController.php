@@ -196,7 +196,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * Obteer cobranzas de cliente
+     * Obtener cobranzas de cliente
      * 
      * @return \App\Cobranza
      */
@@ -205,16 +205,43 @@ class ClienteController extends Controller
     }
 
     /**
-     * Obtener los planes de un cliente
+     * Obtener solicitudes de plan de cliente
      * 
-     * @return \App\Plan
+     * @return \App\SolicitudPlan
      */
-    public function planesToken(AuthenticateController $auth) {
-        $planes = $auth->getAuthenticatedUser()->cliente->contratos->pluck('plan');
-        $planes->pluck('horarios');
-        $planes->pluck('sede');
+    public function solicitudesPlanToken(AuthenticateController $auth) {
+        $solicitudes = $auth->getAuthenticatedUser()->cliente->solicitudesPlan;
+        $solicitudes->pluck('cliente');
+        $solicitudes->pluck('plan.horario');
+        $solicitudes->pluck('plan.sede');
 
-        return $planes;
+        return $solicitudes;
+    }
+
+    /**
+     * Obtener solicitudes de plan de un cliente
+     * 
+     * @return \App\SolicitudPlan
+     */
+    public function solicitudesPlan($id) {
+        $solicitudes = Cliente::find($id)->solicitudesPlan;
+        $solicitudes->pluck('cliente');
+        $solicitudes->pluck('plan');
+
+        return $solicitudes;
+    }
+
+    /**
+     * Obtener los contratos del cliente
+     * 
+     * @return \App\Contrato
+     */
+    public function contratosToken(AuthenticateController $auth) {
+        $contratos = $auth->getAuthenticatedUser()->cliente->contratos()->with('plan')->get();
+        $contratos->pluck('plan.horarios');
+        $contratos->pluck('plan.sede');
+
+        return $contratos;
     }
 
     /**

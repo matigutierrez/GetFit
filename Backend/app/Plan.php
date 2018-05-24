@@ -42,8 +42,12 @@ class Plan extends Model
         return $this->belongsToMany('App\Cliente', 'tgf_contrato', 'tgf_plan_id', 'tgf_cliente_id');
     }
 
+    public function solicitudesPlan() {
+        return $this->hasMany('App\SolicitudPlan', 'tgf_plan_id');
+    }
+
     public function clientesSolicitando() {
-        return $this->belongsToMany('App\Cliente', 'cliente_solicita_plan', 'tgf_plan_id', 'tgf_cliente_id');
+        return $this->belongsToMany('App\Cliente', 'tgf_cliente_solicita_plan', 'tgf_plan_id', 'tgf_cliente_id');
     }
 
 }

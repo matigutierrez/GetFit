@@ -28,7 +28,7 @@ export class PlanesComponent implements OnInit {
   public registroPlan: RegistroPlanComponent;
 
   @ViewChild(InscripcionPlanComponent)
-  public inscripcionPlan: InscripcionPlanComponent;
+  public inscripcionPlanComponent: InscripcionPlanComponent;
 
   @ViewChild(HorarioComponent)
   public horario: HorarioComponent;

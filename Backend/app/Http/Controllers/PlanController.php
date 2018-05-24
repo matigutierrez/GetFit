@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Plan;
+use App\SolicitudPlan;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;
 use JWTAuth;
@@ -184,6 +185,20 @@ class PlanController extends Controller
         $clientes->pluck('usuario');
 
         return $clientes;
+    }
+
+    /**
+     * Obtener las solicitudes de un plan
+     * 
+     * @param  int  $id
+     * @return \App\SolicitudPlan
+     */
+    public function solicitudesPlan($id) {
+        $solicitudes = Plan::find($id)->solicitudesPlan;
+        $solicitudes->pluck('cliente');
+        $solicitudes->pluck('plan');
+
+        return $solicitudes;
     }
 
     /**
