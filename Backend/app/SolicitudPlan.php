@@ -14,7 +14,8 @@ class SolicitudPlan extends Model
         'tgf_plan_id'
     ];
 
-    public $timestamps = false;
+    const CREATED_AT = 'fecha_solicitud';
+    const UPDATED_AT = null;
 
     public function cliente() {
         return $this->belongsTo('App\Cliente', 'tgf_cliente_id');

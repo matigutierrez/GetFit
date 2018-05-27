@@ -1,0 +1,15 @@
+.card-panel {
+    padding: 2px;
+    margin: 0px;
+    color: white;
+}
+
+th {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+td {
+    padding-top: 4px;
+    padding-bottom: 0px;
+}

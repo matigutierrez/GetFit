@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { GLOBAL } from './global';
 import { SolicitudPlan } from "../models/SolicitudPlan";
+import { Plan } from "../models/Plan";
 
 @Injectable({
     providedIn: 'root'
@@ -16,11 +17,11 @@ export class SolicitudPlanService {
     }
 
     public save(solicitudPlan: SolicitudPlan): Observable<number> {
-        return this._http.post<number>(GLOBAL.url + 'solicitudplan', solicitudPlan);
+        return this._http.post<number>(GLOBAL.url + 'solicitudplan', SolicitudPlan.getJSON(solicitudPlan));
     }
 
     public update(solicitudPlan: SolicitudPlan): Observable<any> {
-        return this._http.put(GLOBAL.url + 'solicitudplan/' + solicitudPlan.id, solicitudPlan);
+        return this._http.put(GLOBAL.url + 'solicitudplan/' + solicitudPlan.id, SolicitudPlan.getJSON(solicitudPlan));
     }
 
     public query(): Observable<SolicitudPlan[]> {
@@ -34,4 +35,9 @@ export class SolicitudPlanService {
     public delete(id: number): Observable<any> {
         return this._http.delete(GLOBAL.url + 'solicitudplan/' + id);
     }
+
+    public solicitar(plan: Plan): Observable<number> {
+        return this._http.post<number>(GLOBAL.url + 'solicitudplan/solicitar', Plan.getJSON(plan));
+    }
+
 }

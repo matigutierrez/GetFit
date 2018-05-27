@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12  left-align">
+                <h4>Horarios Disponibles</h4>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Tabla de horarios -->
+            <div class="col s9">
+                <table class="responsive-table" *ngIf="horarios && dias && horas">
+                    <tr>
+                        <th>
+                            <div class="card-panel teal lighten-2 center-align">
+                                HORA
+                            </div>
+                        </th>
+                        <!-- Lista de dias (horizontal) -->
+                        <th *ngFor="let dia of dias">
+                            <div class="card-panel teal lighten-2 center-align">
+                                {{dia.dia_nombre}}
+                            </div>
+                        </th>
+                    </tr>
+                    <tr *ngFor="let hora of horas">
+                        <td>
+                            <!-- Lista de horas (vertical) -->
+                            <div class="card-panel teal lighten-2 center-align">
+                                {{hora.hor_inicio}} - {{hora.hor_fin}}
+                            </div>
+                        </td>
+                        <td *ngFor="let dia of dias">
+                            <div *ngIf="getHorarioActivo(hora.id, dia.id)">
+                                <!-- Boton para solicitar el plan-->
+                                <a
+                                    materialize="tooltip"
+                                    class="card-panel tooltipped lighten-2 center-align"
+                                    style="display: block"
+                                    [ngStyle]="{'background-color': getHorario(hora.id, dia.id).plan.tipo_plan.tpl_color}"
+                                    data-position="bottom" data-tooltip="Click para solicitar!">
+                                    {{getHorario(hora.id, dia.id).plan.pla_nombre}}
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Lista con los tipos de planes -->
+            <div class="col s3">
+                <ul *ngIf="tipoPlanes">
+                    <li *ngFor="let tipoPlan of tipoPlanes">
+                        <i class="material-icons" [ngStyle]="{'color': tipoPlan.tpl_color}">assignment</i>
+                        {{tipoPlan.tpl_nombre}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col s12">
+
+    </div>
+</div>

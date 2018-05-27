@@ -10,16 +10,24 @@ class Plan extends Model
     protected $primarykey = 'id';
 
     protected $fillable = [
+        'tgf_sede_id',
+        'tgf_tipo_plan_id',
         'pla_nombre',
         'pla_descripcion',
         'pla_costo',
         'pla_capacidad'
     ];
 
+    protected $with = ['tipo_plan'];
+
     public $timestamps = false;
 
     public function sede() {
     	return $this->belongsTo('App\Sede', 'tgf_sede_id');
+    }
+
+    public function tipo_plan() {
+        return $this->belongsTo('App\TipoPlan', 'tgf_tipo_plan_id');
     }
 
     public function horarios() {

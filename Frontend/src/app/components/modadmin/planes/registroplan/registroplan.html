@@ -1,4 +1,4 @@
-<div id="modal2" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalRegistroPlan">
+<div id="modal2" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modal">
   <div class="modal-content modalback">
     <div class="row">
       <div class=" col s10 m6 left-align">
@@ -52,18 +52,30 @@
             </div>
           </div>
 
-          <!-- Sede del plan -->
           <div class="row">
+            <!-- Sede del plan -->
             <div class="col m6">
               <div class="input-field">
                 <i class="material-icons prefix">place</i>
-                <select name="tgf_sede_id" #tgf_sede_id="ngModel" [(ngModel)]="plan.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="selectOptions">
-                  <option *ngFor="let option of selectOptions" [ngValue]="option.id">{{option.sed_nombre}}</option>
+                <select name="tgf_sede_id" [(ngModel)]="plan.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="sedes">
+                  <option *ngFor="let sede of sedes" [ngValue]="sede.id">{{sede.sed_nombre}}</option>
                 </select>
                 <label for="icon_prefix">Sede</label>
               </div>
             </div>
+
+            <!-- Tipo de plan -->
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">place</i>
+                <select name="tgf_tipo_plan_id" [(ngModel)]="plan.tgf_tipo_plan_id" materialize="material_select" [materializeSelectOptions]="tipoPlanes">
+                  <option *ngFor="let tipoPlan of tipoPlanes" [ngValue]="tipoPlan.id">{{tipoPlan.tpl_nombre}}</option>
+                </select>
+                <label for="icon_prefix">Tipo de Plan</label>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 

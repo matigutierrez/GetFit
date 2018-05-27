@@ -4,6 +4,8 @@ import { PlanService } from '../../../../services/plan.service';
 import { SedeService } from '../../../../services/sede.service';
 import { Plan } from '../../../../models/Plan';
 import { Sede } from '../../../../models/Sede';
+import { TipoPlanService } from '../../../../services/tipoplan.service';
+import { TipoPlan } from '../../../../models/TipoPlan';
 
 declare var Materialize: any;
 
@@ -15,24 +17,37 @@ declare var Materialize: any;
 
 export class EditarPlanComponent implements OnInit, AfterViewChecked {
 
+  // Plan a editar
+  @Input("plan")
   public plan: Plan;
-  public selectOptions: Sede[];
 
+  // Lista de sedes
+  public sedes: Sede[];
+
+  // Lista de tipos de planes
+  public tipoPlanes: TipoPlan[];
+
+  // Indicar a la vista si se está enviando la edición
   public editando: boolean;
 
   public constructor(
     private _planService: PlanService,
-    private _sedeService: SedeService
+    private _sedeService: SedeService,
+    private _tipoPlanService: TipoPlanService
   ){
 
     this._sedeService.query().subscribe(
       Response => {
-        this.selectOptions = Response;
-      },
-      Error => {
-        console.log(<any>Error)
+        this.sedes = Response;
       }
     );
+
+    this._tipoPlanService.query().subscribe(
+      Response => {
+        this.tipoPlanes = Response;
+      }
+    );
+
   }
 
   public ngOnInit(){
@@ -46,22 +61,17 @@ export class EditarPlanComponent implements OnInit, AfterViewChecked {
   }
 
   public onSubmit(){
-
+    // Indicar que se está modificando el plan
     this.editando = true;
 
+    // Enviar modificaciones al servidor
     this._planService.update(this.plan).subscribe(
       Response => {
-
+        // Indicar a la vista que las modificaciones ya se recibieron
         this.editando = false;
-
       }
     )
 
-  }
-
-  @Input("plan")
-  set setPlan(plan:Plan) {
-    this.plan = plan;
   }
 
 }

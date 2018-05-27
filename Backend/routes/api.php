@@ -75,13 +75,15 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('sede', 'SedeController');
 
+	Route::apiResource('solicitudplan', 'SolicitudPlanController');
+
+	Route::apiResource('tipoplan', 'TipoPlanController');
+
 	Route::apiResource('usuario', 'UsuarioController');
 	Route::get('usuariorol', 'UsuarioController@rolSesion');
 	Route::get('usuario/{id}/rol', 'UsuarioController@rol');
 	Route::get('usuario/{id}/cliente', 'UsuarioController@cliente');
 	Route::get('usuario/{id}/notificaciones', 'UsuarioController@notificaciones');
-
-	Route::apiResource('solicitudplan', 'SolicitudPlanController');
 
 });
 

@@ -17,6 +17,8 @@ class CreatePlanTable extends Migration
             $table->increments('id');
             $table->integer('tgf_sede_id')->unsigned();
             $table->foreign('tgf_sede_id')->references('id')->on('tgf_sede')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('tgf_tipo_plan_id')->unsigned();
+            $table->foreign('tgf_tipo_plan_id')->references('id')->on('tgf_tipo_plan');
             $table->string('pla_nombre');
             $table->string('pla_descripcion');
             $table->integer('pla_costo');

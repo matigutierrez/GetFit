@@ -8,6 +8,7 @@ import { PusherService } from "../../../../services/pusher.service";
 import { InscripcionPlanComponent } from "../inscripcionplan/inscripcionplan.component";
 import { SolicitudPlan } from "../../../../models/SolicitudPlan";
 import { SolicitudPlanService } from "../../../../services/solicitudplan.service";
+import { Cobranza } from "../../../../models/Cobranza";
 
 @Component({
     selector: 'clientesplan',
@@ -23,7 +24,7 @@ export class ClientesPlanComponent implements OnDestroy {
     // Lista de contratos
     public contratos: Contrato[];
 
-    // Lista de solicitudesde planes
+    // Lista de solicitudes de planes
     public solicitudes: SolicitudPlan[];
 
     // Plan actual
@@ -46,7 +47,7 @@ export class ClientesPlanComponent implements OnDestroy {
         private _pusherService: PusherService
     ) {
 
-        this.contratoChannel = this._pusherService.getPusher().subscribe("contrato");
+        this.contratoChannel = this._pusherService.getPusher().subscribe('contrato');
         this.contratoChannel.bind("create", data => { this.onCreateContrato(data) });
         this.contratoChannel.bind("update", data => { this.onUpdateContrato(data) });
         this.contratoChannel.bind("delete", data => { this.onDeleteContrato(data) });
@@ -61,6 +62,9 @@ export class ClientesPlanComponent implements OnDestroy {
     public ngOnDestroy() {
         if ( this.contratoChannel ) {
             this.contratoChannel.unbind();
+        }
+        if ( this.solicitudChannel ) {
+            this.solicitudChannel.unbind();
         }
     }
 

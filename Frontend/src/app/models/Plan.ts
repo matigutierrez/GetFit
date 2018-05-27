@@ -1,11 +1,13 @@
 import { Sede } from "./Sede";
 import { Contrato } from "./Contrato";
 import { Horario } from "./Horario";
+import { TipoPlan } from "./TipoPlan";
 
 export class Plan {
 
 	public id: number;
 	public tgf_sede_id: number;
+	public tgf_tipo_plan_id: number;
 	public pla_nombre: string;
 	public pla_descripcion: string;
 	public pla_costo: number;
@@ -14,11 +16,13 @@ export class Plan {
 	public sede: Sede;
 	public horarios: Horario[];
 	public contratos: Contrato[];
+	public tipo_plan: TipoPlan;
 	
-	constructor() {
+	public constructor() {
 
 		this.id = null;
 		this.tgf_sede_id = null;
+		this.tgf_tipo_plan_id = null;
 		this.pla_nombre = null;
 		this.pla_descripcion = null;
 		this.pla_costo = null;
@@ -27,6 +31,7 @@ export class Plan {
 		this.sede = null;
 		this.horarios = null;
 		this.contratos = null;
+		this.tipo_plan = null;
 
 	}
 
@@ -34,6 +39,7 @@ export class Plan {
 		return {
 			id: plan.id,
 			tgf_sede_id: plan.tgf_sede_id,
+			tgf_tipo_plan_id: plan.tgf_tipo_plan_id,
 			pla_nombre: plan.pla_nombre,
 			pla_descripcion: plan.pla_descripcion,
 			pla_costo: plan.pla_costo,

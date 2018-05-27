@@ -5,37 +5,51 @@ import { PlanService } from '../../../../services/plan.service';
 import { SedeService } from '../../../../services/sede.service';
 import { Plan } from '../../../../models/Plan';
 import { Sede } from '../../../../models/Sede';
+import { TipoPlanService } from '../../../../services/tipoplan.service';
+import { TipoPlan } from '../../../../models/TipoPlan';
 
 declare var Materialize: any;
 
 @Component({
   selector: 'registroplan',
-  templateUrl: 'registroplan.html',
-  providers: [PlanService, SedeService]
+  templateUrl: 'registroplan.html'
 })
 
 export class RegistroPlanComponent implements OnInit, AfterViewChecked {
 
-  public modalRegistroPlan = new EventEmitter<string | MaterializeAction>();
+  // Modal del componente
+  public modal = new EventEmitter<string | MaterializeAction>();
 
-  public plan;
-  public selectOptions: Sede[];
+  // Plan que se va a registrar
+  public plan: Plan;
+
+  // Lista de sedes
+  public sedes: Sede[];
+
+  // Lista de tipos de planes
+  public tipoPlanes: TipoPlan[];
 
   public constructor(
     private _planService: PlanService,
-    private _sedeService: SedeService
+    private _sedeService: SedeService,
+    private _tipoPlanService: TipoPlanService
   ) {
     this.plan = new Plan();
     this.plan.tgf_sede_id = 1;
 
     this._sedeService.query().subscribe(
       Response => {
-        this.selectOptions = Response;
-      },
-      Error => {
-        console.log(<any>Error)
+        this.sedes = Response;
       }
     );
+
+    this._tipoPlanService.query().subscribe(
+      Response => {
+        this.tipoPlanes = Response;
+        console.log(this.tipoPlanes);
+      }
+    );
+
   }
 
   public ngOnInit() {
@@ -57,11 +71,11 @@ export class RegistroPlanComponent implements OnInit, AfterViewChecked {
   }
 
   public abrir() {
-    this.modalRegistroPlan.emit({ action: "modal", params: ['open'] });
+    this.modal.emit({ action: "modal", params: ['open'] });
   }
 
   public cerrar() {
-    this.modalRegistroPlan.emit({ action: "modal", params: ['close'] });
+    this.modal.emit({ action: "modal", params: ['close'] });
   }
 
 }

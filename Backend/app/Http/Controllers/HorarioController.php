@@ -22,7 +22,7 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        return Horario::get();
+        return Horario::with('plan')->get();
     }
 
     /**

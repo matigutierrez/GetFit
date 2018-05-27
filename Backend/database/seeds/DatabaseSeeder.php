@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RolSeeder::class);
         $this->call(SedeSeeder::class);
+        $this->call(TipoPlanSeeder::class);
         $this->call(PlanSeeder::class);
 
         $this->call(HoraDiaSeeder::class);

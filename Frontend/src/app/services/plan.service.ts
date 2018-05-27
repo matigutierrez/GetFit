@@ -8,6 +8,7 @@ import { Profesor } from '../models/Profesor';
 import { Horario } from '../models/Horario';
 import { Contrato } from '../models/Contrato';
 import { SolicitudPlan } from '../models/SolicitudPlan';
+import { Cobranza } from '../models/Cobranza';
 
 @Injectable({
   providedIn: 'root'

@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../services/cliente.service';
 import { RolService } from '../../services/rol.service';
 import { AuthService } from '../../services/auth.service';
+
 declare var $:any;
 declare var jQuery:any;
 
-
 @Component({
   selector: 'app-root',
-  templateUrl: './modcliente.component.html',
-  providers: [AuthService, ClienteService, RolService]
+  templateUrl: './modcliente.component.html'
 })
 export class ModClienteComponent {
   
@@ -17,7 +16,7 @@ export class ModClienteComponent {
   public token;
   public user;
 
-  constructor(
+  public constructor(
   	public _authService: AuthService,
     private _clienteService: ClienteService,
     private _rolService: RolService

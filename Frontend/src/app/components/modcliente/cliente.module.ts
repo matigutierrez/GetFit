@@ -15,13 +15,15 @@ import { AuthGuard } from '../../guards/AuthGuard';
 import { ClienteGuard } from '../../guards/ClienteGuard';
 import { PlanesComponent } from './planes/planes.component';
 import { ExtraModule } from '../extra/extra.module';
+import { TablaHorariosComponent } from './tablahorarios/tablahorarios.component';
 
 @NgModule({
   declarations: [
     ModClienteComponent,
     VistaClienteComponent,
     CobranzaComponent,
-    PlanesComponent
+    PlanesComponent,
+    TablaHorariosComponent
   ],
   imports: [
     BrowserModule,

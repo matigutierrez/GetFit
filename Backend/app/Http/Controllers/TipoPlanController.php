@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\SedeCliente;
+use App\TipoPlan;
 
-class SedeClienteController extends Controller
+class TipoPlanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SedeClienteController extends Controller
      */
     public function index()
     {
-        return SedeCliente::all();
+        return TipoPlan::all();
     }
 
     /**
@@ -35,13 +35,7 @@ class SedeClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $sedeCliente = new SedeCliente;
-        $sedeCliente->tgf_cliente_id = $request->tgf_cliente_id;
-        $sedeCliente->tgf_sede_id = $request->tgf_sede_id;
-
-        $sedeCliente->save();
-
-        return $sedeCliente;
+        //
     }
 
     /**
@@ -52,7 +46,7 @@ class SedeClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        return TipoPlan::find($id);
     }
 
     /**

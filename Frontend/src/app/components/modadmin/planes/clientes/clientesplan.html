@@ -1,6 +1,7 @@
 <div class="row">
 
-    <div class="col s3">
+    <!-- Tabs verticales -->
+    <div class="col s2">
         <ul class="tabs-vertical" materialize="tabs">
             <li class="tab row">
                 <a class="active" href="#actuales">Actuales</a>
@@ -8,14 +9,12 @@
             <li class="tab row">
                 <a href="#solicitando">Solicitando el Plan</a>
             </li>
-            <li class="tab">
-                <a href="#cancelacion">Cancelación de Contrato</a>
-            </li>
         </ul>
     </div>
 
-    <div class="col s9">
+    <div class="col s10">
 
+        <!-- Clientes actuales -->
         <div id="actuales">
             <div *ngIf="!contratos" class="progress">
                 <div class="indeterminate"></div>
@@ -60,6 +59,7 @@
             </div>
         </div>
 
+        <!-- Clientes solicitando el plan -->
         <div id="solicitando">
             <div *ngIf="!solicitudes" class="progress">
                 <div class="indeterminate"></div>
@@ -73,7 +73,7 @@
                                     <th>Rut</th>
                                     <th>Nombre</th>
                                     <th>Correo</th>
-                                    <th></th>
+                                    <th>Fecha</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -86,6 +86,7 @@
                                     <td>
                                         <a *ngIf="solicitud.cliente.usuario">{{solicitud.cliente.usuario.usu_correo}}</a>
                                     </td>
+                                    <td>{{solicitud.fecha_solicitud}}</td>
                                     <td>
                                         <a (click)="okSolicitud(solicitud)">
                                             <i class="material-icons">check</i>
@@ -108,10 +109,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div id="cancelacion">
-            Lista de clientes que no han pagado
         </div>
 
     </div>
