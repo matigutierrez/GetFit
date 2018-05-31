@@ -5,6 +5,9 @@
                 <h4>Horarios Disponibles</h4>
             </div>
         </div>
+        <div *ngIf="!horarios || !dias || !horas" class="progress">
+            <div class="indeterminate"></div>
+        </div>
         <div class="row">
             <!-- Tabla de horarios -->
             <div class="col s9">
@@ -37,7 +40,9 @@
                                     class="card-panel tooltipped lighten-2 center-align"
                                     style="display: block"
                                     [ngStyle]="{'background-color': getHorario(hora.id, dia.id).plan.tipo_plan.tpl_color}"
-                                    data-position="bottom" data-tooltip="Click para solicitar!">
+                                    data-position="bottom"
+                                    data-tooltip="Click para solicitar!"
+                                    (click)="solicitar(getHorario(hora.id, dia.id).plan)">
                                     {{getHorario(hora.id, dia.id).plan.pla_nombre}}
                                 </a>
                             </div>
@@ -63,3 +68,5 @@
 
     </div>
 </div>
+
+<solicitarplan></solicitarplan>

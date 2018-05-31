@@ -76,6 +76,19 @@
             </div>
           </div>
 
+          <div class="row">
+            <!-- Solicitable? -->
+            <div class="col m6">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" (change)="plan.pla_solicitable = $event.target.checked ? 1 : 0" checked="true">
+                  <span class="lever"></span>
+                  Permitir a los clientes solicitar el plan
+                </label>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 

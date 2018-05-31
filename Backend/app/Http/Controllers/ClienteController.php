@@ -247,19 +247,6 @@ class ClienteController extends Controller
     }
 
     /**
-     * Obtener los planes no inscritos por un cliente
-     * 
-     * @return \App\Plan
-     */
-    public function noPlanesToken(AuthenticateController $auth) {
-        $planes = $auth->getAuthenticatedUser()->cliente->noPlanes;
-        $planes->pluck('horarios');
-        $planes->pluck('sede');
-
-        return $planes;
-    }
-
-    /**
      * Obtener los planes solicitados por un cliente
      * 
      * @param  int  $id

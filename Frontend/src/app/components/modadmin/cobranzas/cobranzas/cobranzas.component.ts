@@ -26,7 +26,6 @@ export class CobranzasComponent implements OnInit, OnDestroy {
   public registroCobranzaComponent: RegistroCobranzaComponent;
 
   public cobranzas: Cobranza[];
-  public modalActionsUsuario = new EventEmitter<string | MaterializeAction>();
   public p: number = 1;
 
   private cobranzaChannel: any;

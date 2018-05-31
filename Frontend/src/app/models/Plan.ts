@@ -13,6 +13,9 @@ export class Plan {
 	public pla_costo: number;
 	public pla_capacidad: number;
 
+	// Laravel no trabaja con booleanos, solo con binarios (1|0)
+	public pla_solicitable: number;
+
 	public sede: Sede;
 	public horarios: Horario[];
 	public contratos: Contrato[];
@@ -43,7 +46,8 @@ export class Plan {
 			pla_nombre: plan.pla_nombre,
 			pla_descripcion: plan.pla_descripcion,
 			pla_costo: plan.pla_costo,
-			pla_capacidad: plan.pla_capacidad
+			pla_capacidad: plan.pla_capacidad,
+			pla_solicitable: plan.pla_solicitable
 		};
 	}
 

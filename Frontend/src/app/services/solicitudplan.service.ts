@@ -32,12 +32,16 @@ export class SolicitudPlanService {
         return this._http.get<SolicitudPlan>(GLOBAL.url + 'solicitudplan/' + id);
     }
 
+    public findToken(plan_id: number): Observable<SolicitudPlan> {
+        return this._http.get<SolicitudPlan>(GLOBAL.url + "solicitudplan/findtoken/" + plan_id);
+    }
+
     public delete(id: number): Observable<any> {
         return this._http.delete(GLOBAL.url + 'solicitudplan/' + id);
     }
 
-    public solicitar(plan: Plan): Observable<number> {
-        return this._http.post<number>(GLOBAL.url + 'solicitudplan/solicitar', Plan.getJSON(plan));
+    public solicitar(plan_id: number): Observable<number> {
+        return this._http.get<number>(GLOBAL.url + 'solicitudplan/solicitar/' + plan_id);
     }
 
 }

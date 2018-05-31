@@ -154,6 +154,16 @@ class PlanController extends Controller
     }
 
     /**
+     * Obtener los contratos de un plan con sus cobranzas
+     * 
+     * @param  int  $id
+     * @return \App\Contrato
+     */
+    public function contratosCobranzas($id) {
+        return Plan::find($id)->contratos()->with('cliente.usuario', 'cobranzas')->get();
+    }
+
+    /**
      * Obtener los profesores de un plan
      * 
      * @param  int  $id

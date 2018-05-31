@@ -22,7 +22,7 @@ class CobranzaController extends Controller
      */
     public function index()
     {
-        return Cobranza::with(['pago', 'contrato.cliente', 'contrato.plan'])->get();
+        return Cobranza::with(['contrato.cliente', 'contrato.plan'])->get();
     }
 
     /**
@@ -64,7 +64,7 @@ class CobranzaController extends Controller
      */
     public function show($id)
     {
-        return Cobranza::with('pago')->find($id);
+        return Cobranza::find($id);
     }
 
     /**

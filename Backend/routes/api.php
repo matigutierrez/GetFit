@@ -32,13 +32,14 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('cliente/{id}/solicitudes', 'ClienteController@solicitudesPlan');
 	Route::get('clientecontratos', 'ClienteController@contratosToken');
 	Route::get('clientecobranzas', 'ClienteController@cobranzasToken');
-	Route::get('clientenoplanes', 'ClienteController@noPlanesToken');
 	Route::get('clientesolicitudes', 'ClienteController@solicitudesPlanToken');
 
 	Route::apiResource('cobranza', 'CobranzaController');
 
 	Route::apiResource('contrato', 'ContratoController');
 	Route::get('contrato/{id}/acta', 'ContratoController@acta');
+	Route::get('contrato/find/{cliente_id}/{plan_id}', 'ContratoController@find');
+	Route::get('contrato/findtoken/{plan_id}', 'ContratoController@findToken');
 
 	Route::apiResource('descuentoCobranza', 'DescuentoCobranzaController');
 
@@ -66,6 +67,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('plan/{id}/clientessolicitando', 'PlanController@clientesSolicitando');
 	Route::get('plan/{id}/horarios', 'PlanController@horarios');
 	Route::get('plan/{id}/contratos', 'PlanController@contratos');
+	Route::get('plan/{id}/contratoscobranzas', 'PlanController@contratosCobranzas');
 	Route::get('plan/{id}/solicitudes', 'PlanController@solicitudesPlan');
 
 	Route::apiResource('profesor', 'ProfesorController');
@@ -76,6 +78,8 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('sede', 'SedeController');
 
 	Route::apiResource('solicitudplan', 'SolicitudPlanController');
+	Route::get('solicitudplan/findtoken/{plan_id}', 'SolicitudPlanController@findToken');
+	Route::get('solicitudplan/solicitar/{plan_id}', 'SolicitudPlanController@solicitar');
 
 	Route::apiResource('tipoplan', 'TipoPlanController');
 

@@ -84,6 +84,32 @@ class ContratoController extends Controller
     }
 
     /**
+     * Buscar un contrato por el ID del cliente y el ID del plan
+     * 
+     * @param  int  $cliente_id ID del plan
+     * @param  int  $plan_id ID del plan
+     */
+    public function find($cliente_id, $plan_id) {
+        return Contrato::where([
+            'tgf_cliente_id' => $cliente_id,
+            'tgf_plan_id' => $plan_id
+        ])->get()->first();
+    }
+
+    /**
+     * Buscar un contrato por el token del cliente y el ID del plan
+     * 
+     * @param  int  $cliente_id ID del plan
+     * @param  int  $plan_id ID del plan
+     */
+    public function findToken(AuthenticateController $auth, $plan_id) {
+        return Contrato::where([
+            'tgf_cliente_id' => $auth->getAuthenticatedUser()->cliente->id,
+            'tgf_plan_id' => $plan_id
+        ])->get()->first();
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

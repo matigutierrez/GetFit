@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { Plan } from "../../../models/Plan";
 import { HorarioService } from "../../../services/horario.service";
 import { Horario } from "../../../models/Horario";
@@ -8,6 +8,7 @@ import { DiaSemana } from "../../../models/DiaSemana";
 import { DiaSemanaService } from "../../../services/diasemana.service";
 import { TipoPlanService } from "../../../services/tipoplan.service";
 import { TipoPlan } from "../../../models/TipoPlan";
+import { SolicitarPlanComponent } from "./solicitarplan/solicitarplan.component";
 
 @Component({
     selector: 'tablahorarios',
@@ -15,6 +16,10 @@ import { TipoPlan } from "../../../models/TipoPlan";
     styleUrls: ['tablahorarios.css']
 })
 export class TablaHorariosComponent {
+
+    // Componente modal para solicitar planes
+    @ViewChild(SolicitarPlanComponent)
+    public solicitarPlanComponent: SolicitarPlanComponent;
 
     // Lista de horarios
     public horarios: Horario[];
@@ -124,6 +129,12 @@ export class TablaHorariosComponent {
         }
 
         return false;
+    }
+
+    public solicitar(plan: Plan) {
+
+        this.solicitarPlanComponent.abrir(plan);
+
     }
 
 }

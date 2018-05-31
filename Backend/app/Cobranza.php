@@ -9,7 +9,13 @@ class Cobranza extends Model
     protected $table = 'tgf_cobranza';
     protected $primarykey = 'id';
 
-    protected $fillable = ['cob_monto', 'cob_fecha'];
+    protected $fillable = [
+        'cob_monto',
+        'cob_fecha',
+        'tgf_contrato_id'
+    ];
+
+    protected $with = ['pago'];
 
     const CREATED_AT = 'cob_fecha';
     const UPDATED_AT = null;

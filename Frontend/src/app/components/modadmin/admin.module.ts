@@ -46,6 +46,7 @@ import { EditarProfesorComponent } from './profesores/editarprofesor/editarprofe
 import { EditarClienteComponent } from './clientes/editarcliente/editarcliente.component';
 import { PlanesClienteComponent } from './clientes/planes/planescliente.component';
 import { CobranzasPlanComponent } from './planes/cobranzasplan/cobranzasplan.component';
+import { RegistroCobranzaPlanComponent } from './planes/registrocobranzaplan/registrocobranzaplan.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CobranzasPlanComponent } from './planes/cobranzasplan/cobranzasplan.com
     EditarPlanComponent,
     ClientesPlanComponent,
     CobranzasPlanComponent,
+    RegistroCobranzaPlanComponent,
     RegistroPlanComponent,
     HorarioPlanComponent,
     ProfesoresPlanComponent,

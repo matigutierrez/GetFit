@@ -39,6 +39,14 @@ export class ContratoService {
         return this._http.get<Contrato>(GLOBAL.url + "contrato/" + id);
     }
 
+    public find(cliente_id: number, plan_id: number): Observable<Contrato> {
+        return this._http.get<Contrato>(GLOBAL.url + "contrato/find/" + cliente_id + "/" + plan_id);
+    }
+
+    public findToken(plan_id: number): Observable<Contrato> {
+        return this._http.get<Contrato>(GLOBAL.url + "contrato/findtoken/" + plan_id);
+    }
+
     public delete(id: number): Observable<any> {
         return this._http.delete(GLOBAL.url + "contrato/" + id);
     }

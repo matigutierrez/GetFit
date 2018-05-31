@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnDestroy, ViewChild } from "@angular/core";
 import { Plan } from "../../../../models/Plan";
 import { Cobranza } from "../../../../models/Cobranza";
 import { CobranzaService } from "../../../../services/cobranza.service";
@@ -6,13 +6,24 @@ import { PlanService } from "../../../../services/plan.service";
 import { Contrato } from "../../../../models/Contrato";
 import { PusherService } from "../../../../services/pusher.service";
 import { Pago } from "../../../../models/Pago";
+import { PagoCobranzaComponent } from "../../cobranzas/pagocobranza/pagocobranza.component";
+import { RegistroCobranzaPlanComponent } from "../registrocobranzaplan/registrocobranzaplan.component";
+import { ContratoService } from "../../../../services/contrato.service";
 
 
 @Component({
     selector: 'cobranzasplan',
     templateUrl: 'cobranzasplan.html'
 })
-export class CobranzasPlanComponent {
+export class CobranzasPlanComponent implements OnDestroy {
+
+    // Componente para pago de cobranzas
+    @Input("pagoCobranzaComponent")
+    public pagoCobranzaComponent: PagoCobranzaComponent;
+
+    // Componente para registro de cobranzas
+    @Input("registroCobranzaPlanComponent")
+    public registroCobranzaPlanComponent: RegistroCobranzaPlanComponent;
 
     // Plan
     public plan: Plan;
@@ -32,9 +43,13 @@ export class CobranzasPlanComponent {
     // Canal de pagos
     private pagoChannel: any;
 
+    // Pagina actual de cobranzas
+    public p: number = 1;
+
     public constructor(
         private _planService: PlanService,
         private _cobranzaService: CobranzaService,
+        private _contratoService: ContratoService,
         private _pusherService: PusherService
     ) {
 
@@ -55,40 +70,172 @@ export class CobranzasPlanComponent {
 
     }
 
-    public onCreateContrato(contrato: Contrato) {
+    public ngOnDestroy() {
+        if (this.contratoChannel) {
+            this.contratoChannel.unbind();
+        }
+        if (this.cobranzaChannel) {
+            this.cobranzaChannel.unbind();
+        }
+        if (this.pagoChannel) {
+            this.pagoChannel.unbind();
+        }
+    }
 
+    public onCreateContrato(contrato: Contrato) {
+        // Si se ha recibido la lista de contratos
+        if (this.contratos) {
+            // Agregar contrato a la lista de contratos
+            this.contratos.unshift(contrato);
+        }
     }
 
     public onUpdateContrato(contrato: Contrato) {
-
+        // Si se ha recibido la lista de contratos
+        if (this.contratos) {
+            // Por cada contrato
+            for (let i = 0; i < this.contratos.length; i++) {
+                // Si coinciden ids
+                if (this.contratos[i].id == contrato.id) {
+                    // Reemplazar contrato
+                    this.contratos[i] = contrato;
+                    break;
+                }
+            }
+        }
     }
 
     public onDeleteContrato(id: number) {
+        // Si se ha recibido la lista de contratos
+        if (this.contratos) {
+            // Por cada contrato
+            for (let i = 0; i < this.contratos.length; i++) {
+                // Si coinciden ids
+                if (this.contratos[i].id == id) {
+                    // Eliminar contrato
+                    this.contratos.splice(i, 1);
+                    break;
+                }
+            }
+        }
 
+        // Si se ha recibido la lista de cobranzas
+        if (this.cobranzas) {
+            // Por cada cobranza
+            for (let i = 0; i < this.cobranzas.length; i++) {
+                // Si la cobranza pertenece al contrato
+                if (this.cobranzas[i].tgf_contrato_id == id) {
+                    // Eliminar cobranza
+                    this.cobranzas.splice(i, 1);
+
+                    // Retroceder el contador
+                    i--;
+                }
+            }
+        }
     }
 
     public onCreateCobranza(cobranza: Cobranza) {
+        // Si se ha recibido la lista de cobranzas del plan
+        if (this.cobranzas) {
+            // Por cada contrato
+            for (let i = 0; i < this.contratos.length; i++) {
+                let contrato: Contrato = this.contratos[i];
 
+                // Si la cobranza pertenece al contrato
+                if (cobranza.tgf_contrato_id == contrato.id) {
+                    // Insertar a la lista de cobranzas
+                    this.cobranzas.unshift(cobranza);
+
+                    // Asignar contrato a cobranza
+                    cobranza.contrato = contrato;
+                }
+            }
+
+        }
     }
 
     public onUpdateCobranza(cobranza: Cobranza) {
-
+        // Si se ha recibido la lista de cobranzas
+        if (this.cobranzas) {
+            // Por cada cobranza
+            for (let i = 0; i < this.cobranzas.length; i++) {
+                // Si las cobranzas coinciden IDs
+                if (this.cobranzas[i].id == cobranza.id) {
+                    // Reemplazar cobranza
+                    this.cobranzas[i] = cobranza;
+                    break;
+                }
+            }
+        }
     }
 
     public onDeleteCobranza(id: number) {
-
+        // Si se ha recibido la lista de cobranzas
+        if (this.cobranzas) {
+            // Por cada cobranza
+            for (let i = 0; i < this.cobranzas.length; i++) {
+                // Si las cobranzas coinciden ids
+                if (this.cobranzas[i].id == id) {
+                    // Eliminar cobranza
+                    this.cobranzas.splice(i, 1);
+                    break;
+                }
+            }
+        }
     }
 
     public onCreatePago(pago: Pago) {
+        // Si se ha recibido la lista de cobrazas
+        if (this.cobranzas) {
+            // Por cada cobranza
+            for (let i = 0; i < this.cobranzas.length; i++) {
+                let cobranza: Cobranza = this.cobranzas[i];
 
+                // Si el pago pertenece a la cobranza
+                if (pago.tgf_cobranza_id == cobranza.id) {
+                    // Asignar pago a la cobranza
+                    cobranza.pago = pago;
+                    break;
+                }
+            }
+        }
     }
 
     public onUpdatePago(pago: Pago) {
+        // Si se ha recibido la lista de cobrazas
+        if (this.cobranzas) {
+            // Por cada cobranza
+            for (let i = 0; i < this.cobranzas.length; i++) {
+                let cobranza: Cobranza = this.cobranzas[i];
 
+                // Si el pago pertenece a la cobranza
+                if (pago.tgf_cobranza_id == cobranza.id) {
+                    // Asignar pago a la cobranza
+                    cobranza.pago = pago;
+                    break;
+                }
+            }
+        }
     }
 
     public onDeletePago(id: number) {
-        
+        // Si se ha recibido la lista de cobrazas
+        if (this.cobranzas) {
+            // Por cada cobranza
+            for (let i = 0; i < this.cobranzas.length; i++) {
+                let cobranza: Cobranza = this.cobranzas[i];
+
+                // Si la cobranza tiene un pago
+                if (cobranza.pago) {
+                    // Si coincide la id del pago con el id recibido
+                    if (cobranza.pago.id == id) {
+                        // Eliminar el pago
+                        cobranza.pago = null;
+                    }
+                }
+            }
+        }
     }
 
     @Input("plan")
@@ -96,13 +243,51 @@ export class CobranzasPlanComponent {
         // Guardar el plan
         this.plan = plan;
 
-        // Solicitar lista de cobranzas
-        this._planService.getContratos(plan).subscribe(
+        // Solicitar lista de contratos
+        this._planService.getContratosCobranzas(plan).subscribe(
             Response => {
+                // Guardar contratos
                 this.contratos = Response;
+
+                // Inicializar cobranzas
+                this.cobranzas = [];
+
+                // Por cada contrato
+                for (let i = 0; i < this.contratos.length; i++) {
+                    let contrato: Contrato = this.contratos[i];
+                    let cobranzas: Cobranza[] = contrato.cobranzas;
+
+                    // Por cada cobranza
+                    for (let j = 0; j < cobranzas.length; j++) {
+
+                        let cobranza: Cobranza = cobranzas[j];
+
+                        // Asignar contrato a cobranza
+                        cobranza.contrato = contrato;
+
+                        // Agregar a la lista de cobranzas
+                        this.cobranzas.push(cobranza);
+                    }
+                }
             }
         );
 
+    }
+
+    public registrar(): void {
+        this.registroCobranzaPlanComponent.abrir(this.plan);
+    }
+
+    public abrirCobranza(cobranza: Cobranza): void {
+        this.pagoCobranzaComponent.abrir(cobranza);
+    }
+
+    public deleteCobranza(id: number): void {
+        this._cobranzaService.delete(id).subscribe(null);
+    }
+
+    public deleteContrato(id: number): void {
+        this._contratoService.delete(id).subscribe(null);
     }
 
 }

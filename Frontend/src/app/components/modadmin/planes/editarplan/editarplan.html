@@ -41,28 +41,41 @@
       </div>
 
       <div class="row">
-          <!-- Sede del plan -->
-          <div class="col m6">
-            <div class="input-field">
-              <i class="material-icons prefix">place</i>
-              <select name="tgf_sede_id" [(ngModel)]="plan.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="sedes">
-                <option *ngFor="let sede of sedes" [ngValue]="sede.id">{{sede.sed_nombre}}</option>
-              </select>
-              <label for="icon_prefix">Sede</label>
-            </div>
-          </div>
-
-          <!-- Tipo de plan -->
-          <div class="col m6">
-            <div class="input-field">
-              <i class="material-icons prefix">place</i>
-              <select name="tgf_tipo_plan_id" [(ngModel)]="plan.tgf_tipo_plan_id" materialize="material_select" [materializeSelectOptions]="tipoPlanes">
-                <option *ngFor="let tipoPlan of tipoPlanes" [ngValue]="tipoPlan.id">{{tipoPlan.tpl_nombre}}</option>
-              </select>
-              <label for="icon_prefix">Tipo de Plan</label>
-            </div>
+        <!-- Sede del plan -->
+        <div class="col m6">
+          <div class="input-field">
+            <i class="material-icons prefix">place</i>
+            <select name="tgf_sede_id" [(ngModel)]="plan.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="sedes">
+              <option *ngFor="let sede of sedes" [ngValue]="sede.id">{{sede.sed_nombre}}</option>
+            </select>
+            <label for="icon_prefix">Sede</label>
           </div>
         </div>
+
+        <!-- Tipo de plan -->
+        <div class="col m6">
+          <div class="input-field">
+            <i class="material-icons prefix">place</i>
+            <select name="tgf_tipo_plan_id" [(ngModel)]="plan.tgf_tipo_plan_id" materialize="material_select" [materializeSelectOptions]="tipoPlanes">
+              <option *ngFor="let tipoPlan of tipoPlanes" [ngValue]="tipoPlan.id">{{tipoPlan.tpl_nombre}}</option>
+            </select>
+            <label for="icon_prefix">Tipo de Plan</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Solicitable? -->
+        <div class="col m6">
+          <div class="switch">
+            <label>
+              <input type="checkbox" (change)="plan.pla_solicitable = $event.target.checked ? 1 : 0" [checked]="plan.pla_solicitable == 1">
+              <span class="lever"></span>
+              Permitir a los clientes solicitar el plan
+            </label>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>

@@ -21,9 +21,6 @@ export class PlanesComponent {
     // Solicitudes actuales
     public solicitudes: SolicitudPlan[];
 
-    // Planes disponibles
-    public disponibles: Plan[];
-
     // Paginas
     public p1: number = 1;
     public p2: number = 1;
@@ -47,21 +44,11 @@ export class PlanesComponent {
                 this.solicitudes = Response;
             }
         );
-
-        // Obtener planes no contratados
-        this._planService.getPlanesNoContratados().subscribe(
-            Response => {
-                this.disponibles = Response;
-            }
-        );
+        
     }
 
     public abrirHorarios(plan: Plan) {
         this.horarioComponent.abrir([plan]);
-    }
-
-    public solicitar(plan: Plan) {
-        
     }
 
 }

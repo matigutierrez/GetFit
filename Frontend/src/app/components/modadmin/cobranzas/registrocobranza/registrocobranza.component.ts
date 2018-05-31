@@ -37,7 +37,7 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
   // Datos para el componente autocomplete
   private autocompleteInit: any;
 
-  // Cliente seleccionado para inscribir a algun plan
+  // Cliente seleccionado para cobrar
   private cliente: Cliente;
 
   // Cobranza a registrar
@@ -130,7 +130,7 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
     // Al emitir una cobranza
 
     // Validar contrato
-    if ( this.cobranza.tgf_contrato_id != null && this.cobranza.cob_monto != null ) {
+    if (this.cobranza.tgf_contrato_id != null && this.cobranza.cob_monto != null) {
 
       // Guardar cobranza
       this._cobranzaService.save(this.cobranza).subscribe(

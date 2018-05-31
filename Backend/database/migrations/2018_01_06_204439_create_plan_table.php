@@ -23,6 +23,7 @@ class CreatePlanTable extends Migration
             $table->string('pla_descripcion');
             $table->integer('pla_costo');
             $table->integer('pla_capacidad');
+            $table->boolean('pla_solicitable');
         });
     }
 

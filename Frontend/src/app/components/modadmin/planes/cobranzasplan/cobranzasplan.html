@@ -1,0 +1,65 @@
+<div class="row">
+    <div *ngIf="!cobranzas" class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <div *ngIf="cobranzas">
+        <div class="padtable">
+            <div>
+                <table class="responsive-table striped highlight">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cobranza of cobranzas | paginate: { id: 'cobranzas_plan', itemsPerPage: 6, currentPage: p }; index as i;">
+                            <td>{{cobranza.contrato.cliente.cli_nombres + " " + cobranza.contrato.cliente.cli_apellidos}}</td>
+                            <td>{{cobranza.cob_fecha}}</td>
+                            <td>{{cobranza.cob_monto}}</td>
+                            <td>
+                                <i *ngIf="cobranza.pago" class="material-icons">check</i>
+                                <i *ngIf="!cobranza.pago" class="material-icons">close</i>
+                            </td>
+                            <td>
+                                <a *ngIf="!cobranza.pago" (click)="abrirCobranza(cobranza)">
+                                    <i class="material-icons">check</i>
+                                </a>
+                            </td>
+                            <td>
+                                <a (click)="deleteCobranza(cobranza.id)">
+                                    <i class="material-icons">close</i>
+                                </a>
+                            </td>
+                            <td>
+                                <a (click)="deleteContrato(cobranza.contrato.id)" materialize="tooltip" data-position="left" data-tooltip="Cancelar contrato">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <pagination-controls id="cobranzas_plan" (pageChange)="p = $event"></pagination-controls>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue" (click)="registrar()">
+                <i class="material-icons">attach_money</i>
+            </a>
+        </li>
+    </ul>
+</div>

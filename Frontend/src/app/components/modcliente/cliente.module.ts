@@ -16,6 +16,7 @@ import { ClienteGuard } from '../../guards/ClienteGuard';
 import { PlanesComponent } from './planes/planes.component';
 import { ExtraModule } from '../extra/extra.module';
 import { TablaHorariosComponent } from './tablahorarios/tablahorarios.component';
+import { SolicitarPlanComponent } from './tablahorarios/solicitarplan/solicitarplan.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TablaHorariosComponent } from './tablahorarios/tablahorarios.component'
     VistaClienteComponent,
     CobranzaComponent,
     PlanesComponent,
-    TablaHorariosComponent
+    TablaHorariosComponent,
+    SolicitarPlanComponent
   ],
   imports: [
     BrowserModule,

@@ -15,7 +15,8 @@ class Plan extends Model
         'pla_nombre',
         'pla_descripcion',
         'pla_costo',
-        'pla_capacidad'
+        'pla_capacidad',
+        'pla_solicitable'
     ];
 
     protected $with = ['tipo_plan'];

@@ -18,7 +18,7 @@ class Cliente extends Model
         'cli_huella'
     ];
 
-    protected $appends = ['cobranzas', 'planes', 'noPlanes'];
+    protected $appends = ['cobranzas', 'planes'];
 
     public $timestamps = false;
 
@@ -61,19 +61,6 @@ class Cliente extends Model
     public function getPlanesAttribute() {
 
         return $this->contratos->pluck('plan');
-
-    }
-
-    public function getNoPlanesAttribute() {
-        
-        return Plan::whereNotIn('tgf_plan.id',
-            function ($query) {
-                $query
-                    ->select('tgf_contrato.tgf_plan_id')
-                    ->from('tgf_contrato')
-                    ->where('tgf_contrato.tgf_cliente_id', $this->id);
-            }
-        )->get();
 
     }
 

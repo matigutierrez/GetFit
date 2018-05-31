@@ -14,9 +14,6 @@
                     <li class="tab col s3">
                         <a href="#solicitados">Solicitados</a>
                     </li>
-                    <li class="tab col s3">
-                        <a href="#disponibles">Disponibles</a>
-                    </li>
                 </ul>
             </div>
             <div id="contratados" class="col s12">
@@ -75,42 +72,6 @@
                                 </td>
                             </tr>
                             <pagination-controls id="pag_solicitudes" (pageChange)="p2 = $event"></pagination-controls>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="disponibles" class="col s12">
-                <div *ngIf="!disponibles" class="progress">
-                    <div class="indeterminate"></div>
-                </div>
-                <div *ngIf="disponibles">
-                    <table class="responsive-table striped highlight">
-                        <thead>
-                            <tr>
-                                <th>Plan</th>
-                                <th>Descripción</th>
-                                <th>Sede</th>
-                                <th>Horarios</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let plan of disponibles | paginate: { id: 'pag_disponibles', itemsPerPage: 5, currentPage: p3 }; index as i;">
-                                <td>{{plan.pla_nombre}}</td>
-                                <td>{{plan.pla_descripcion}}</td>
-                                <td>{{plan.sede.sed_nombre}}</td>
-                                <td>
-                                    <a (click)="abrirHorarios(plan)">
-                                        <i class="material-icons">date_range</i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="btn" (click)="solicitarPlan(plan)">
-                                        Solicitar
-                                    </a>
-                                </td>
-                            </tr>
-                            <pagination-controls id="pag_disponibles" (pageChange)="p3 = $event"></pagination-controls>
                         </tbody>
                     </table>
                 </div>

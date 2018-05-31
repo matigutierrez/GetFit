@@ -70,6 +70,19 @@ class SolicitudPlanController extends Controller
     }
 
     /**
+     * Buscar una solicitud por el token del cliente y el ID del plan
+     * 
+     * @param  int  $cliente_id ID del plan
+     * @param  int  $plan_id ID del plan
+     */
+    public function findToken(AuthenticateController $auth, $plan_id) {
+        return SolicitudPlan::where([
+            'tgf_cliente_id' => $auth->getAuthenticatedUser()->cliente->id,
+            'tgf_plan_id' => $plan_id
+        ])->get()->first();
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -120,20 +133,32 @@ class SolicitudPlanController extends Controller
      * Crear una solicitud de plan para el cliente
      * 
      */
-    public function solicitar(Request $request, AuthenticateController $auth) {
-        $solicitudPlan = new SolicitudPlan;
-        $solicitudPlan->tgf_cliente_id = $auth->getAuthenticatedUser()->cliente->id;
-        $solicitudPlan->tgf_plan_id = $request->tgf_plan_id;
+    public function solicitar(AuthenticateController $auth, $plan_id) {
+        // Buscar el plan
+        $plan = Plan::find($plan_id);
 
-        $solicitudPlan->save();
+        // Si el plan existe y se puede inscribir
+        if ( isset($plan) && $plan->pla_solicitable == 1 ) {
 
-        // Cachear cliente y plan
-        $solicitudPlan->cliente->usuario;
-        $solicitudPlan->plan;
+            // Crear una solicitud nueva
+            $solicitudPlan = new SolicitudPlan;
+            $solicitudPlan->tgf_cliente_id = $auth->getAuthenticatedUser()->cliente->id;
+            $solicitudPlan->tgf_plan_id = $plan_id;
 
-        $this->pusher->trigger('solicitudPlan', 'create', $solicitudPlan);
+            // Guardar solicitud
+            $solicitudPlan->save();
 
-        return $solicitudPlan->id;
+            // Cachear cliente y plan
+            $solicitudPlan->cliente->usuario;
+            $solicitudPlan->plan;
+
+            // Enviar solicitud por pusher
+            $this->pusher->trigger('solicitudPlan', 'create', $solicitudPlan);
+
+            return $solicitudPlan->id;
+        }
+
+        return null;
     }
 
 }

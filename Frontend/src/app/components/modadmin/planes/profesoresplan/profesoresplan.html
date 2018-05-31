@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let profesor of profesores | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                    <tr *ngFor="let profesor of profesores | paginate: { id: 'profesores_plan', itemsPerPage: 6, currentPage: p }; index as i;">
                         <td>{{profesor.pro_rut}}</td>
                         <td>{{profesor.pro_nombres + " " + profesor.pro_apellidos}}</td>
                         <td>
@@ -45,7 +45,7 @@
                         </td>
                     </tr>
                 </tbody>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                <pagination-controls id="profesores_plan" (pageChange)="p = $event"></pagination-controls>
             </table>
         </div>
     </div>

@@ -45,16 +45,16 @@ export class PlanService {
     return this._http.get<Contrato[]>(GLOBAL.url + 'plan/' + plan.id + '/contratos');
   }
 
+  public getContratosCobranzas(plan: Plan): Observable<Contrato[]> {
+    return this._http.get<Contrato[]>(GLOBAL.url + 'plan/' + plan.id + '/contratoscobranzas');
+  }
+
   public getContratosToken(): Observable<Contrato[]> {
     return this._http.get<Contrato[]>(GLOBAL.url + 'clientecontratos');
   }
 
   public getSolicitudes(plan: Plan): Observable<SolicitudPlan[]> {
     return this._http.get<SolicitudPlan[]>(GLOBAL.url + 'plan/' + plan.id + '/solicitudes');
-  }
-
-  public getPlanesNoContratados(): Observable<Plan[]> {
-    return this._http.get<Plan[]>(GLOBAL.url + 'clientenoplanes');
   }
 
   public getClientes(plan: Plan): Observable<Cliente[]> {
