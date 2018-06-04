@@ -193,7 +193,7 @@ export class CobranzasPlanComponent implements OnDestroy {
                 let cobranza: Cobranza = this.cobranzas[i];
 
                 // Si el pago pertenece a la cobranza
-                if (pago.tgf_cobranza_id == cobranza.id) {
+                if (pago.tgf_cobranza_historica_id == cobranza.cobranza_historica.id) {
                     // Asignar pago a la cobranza
                     cobranza.cobranza_historica.pago = pago;
                     break;
@@ -210,7 +210,7 @@ export class CobranzasPlanComponent implements OnDestroy {
                 let cobranza: Cobranza = this.cobranzas[i];
 
                 // Si el pago pertenece a la cobranza
-                if (pago.tgf_cobranza_id == cobranza.id) {
+                if (pago.tgf_cobranza_historica_id == cobranza.cobranza_historica.id) {
                     // Asignar pago a la cobranza
                     cobranza.cobranza_historica.pago = pago;
                     break;

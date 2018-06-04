@@ -31,10 +31,10 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('cliente/{id}/planessolicitados', 'ClienteController@planesSolicitados');
 	Route::get('cliente/{id}/solicitudes', 'ClienteController@solicitudesPlan');
 	Route::get('clientecontratos', 'ClienteController@contratosToken');
-	Route::get('clientecobranzas', 'ClienteController@cobranzasToken');
 	Route::get('clientesolicitudes', 'ClienteController@solicitudesPlanToken');
 
 	Route::apiResource('cobranza', 'CobranzaController');
+	Route::get('cobranzastoken', 'CobranzaController@cobranzasToken');
 
 	Route::apiResource('cobranzahistorica', 'CobranzaHistoricaController');
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Freshwork\Transbank\CertificationBagFactory;
 use Freshwork\Transbank\TransbankServiceFactory;
 use Freshwork\Transbank\RedirectorHelper;
+use Pusher\Laravel\PusherManager;
 
 use App\Cobranza;
 use App\MetodoPago;
@@ -17,10 +18,12 @@ class WebpayController extends Controller
 {
 
     private $bag;
+    private $pusher;
 
-    public function __construct() {
+    public function __construct(PusherManager $pusher) {
 
         $this->bag = CertificationBagFactory::integrationWebpayNormal();
+        $this->pusher = $pusher;
 
     }
 
@@ -55,11 +58,12 @@ class WebpayController extends Controller
 
             // Buscar cobranza
             $cobranza = Cobranza::find($id);
+            $cobranzaHistorica = $cobranza->cobranza_historica;
 
             // Existe cobranza?
             if ( isset($cobranza) ) {
                 // El monto de la cobranza es el mismo?
-                if ( $cobranza->cob_monto == $monto ) {
+                if ( $cobranzaHistorica->cob_monto == $monto ) {
                     // Validar transaccion
                     $plus->acknowledgeTransaction();
 
@@ -69,10 +73,13 @@ class WebpayController extends Controller
                     // Crear nuevo pago
                     $pago = new Pago;
                     $pago->tgf_metodo_pago_id = $metodoPago->id;
-                    $pago->tgf_cobranza_id = $cobranza->id;
+                    $pago->tgf_cobranza_historica_id = $cobranzaHistorica->id;
 
                     // Guardar pago
                     $pago->save();
+
+                    $this->pusher->trigger('pago', 'create', $pago);
+
                 }
 
             }

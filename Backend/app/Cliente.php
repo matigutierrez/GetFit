@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cobranza;
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
@@ -42,6 +43,18 @@ class Cliente extends Model
         return $this->hasManyThrough('App\Contrato', 'App\ContratoHistorico', 'tgf_cliente_id', 'tgf_contrato_historico_id', 'id', 'id');
     }
 
+    public function cobranzas_historicas() {
+        return $this->hasManyThrough('App\CobranzaHistorica', 'App\ContratoHistorico', 'tgf_cliente_id', 'tgf_contrato_historico_id', 'id', 'id');
+    }
+
+    public function cobranzas() {
+        // La relación incluye 4 tablas
+        return Cobranza::
+              join('tgf_cobranza_historica', 'tgf_cobranza_historica.id', '=', 'tgf_cobranza.tgf_cobranza_historica_id')
+            ->join('tgf_contrato_historico', 'tgf_contrato_historico.id', '=', 'tgf_cobranza_historica.tgf_contrato_historico_id')
+            ->join('tgf_cliente', 'tgf_cliente.id', '=', 'tgf_contrato_historico.tgf_cliente_id');
+    }
+
     public function planes() {
         return $this->belongsToMany('App\Plan', 'tgf_contrato', 'tgf_cliente_id', 'tgf_plan_id');
     }
@@ -60,10 +73,6 @@ class Cliente extends Model
 
     public function sedes() {
     	return $this->belongsToMany('App\Sede', 'tgf_sede_cliente', 'tgf_cliente_id', 'tgf_sede_id');
-    }
-
-    public function cobranzas_historicas() {
-        return $this->belongsToMany('App\CobranzaHistorica', 'tgf_contrato_historico', 'tgf_cliente_id', 'tgf_cobranza_historica_id');
     }
 
 }

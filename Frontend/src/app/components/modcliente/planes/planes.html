@@ -32,11 +32,11 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let contrato of contratos | paginate: { id: 'pag_contratados', itemsPerPage: 5, currentPage: p1 }; index as i;">
-                                <td>{{contrato.plan.pla_nombre}}</td>
-                                <td>{{contrato.plan.pla_descripcion}}</td>
-                                <td>{{contrato.plan.sede.sed_nombre}}</td>
+                                <td>{{contrato.contrato_historico.plan.pla_nombre}}</td>
+                                <td>{{contrato.contrato_historico.plan.pla_descripcion}}</td>
+                                <td>{{contrato.contrato_historico.plan.sede.sed_nombre}}</td>
                                 <td>
-                                    <a (click)="abrirHorarios(contrato.plan)">
+                                    <a (click)="abrirHorarios(contrato.contrato_historico.plan)">
                                         <i class="material-icons">date_range</i>
                                     </a>
                                 </td>

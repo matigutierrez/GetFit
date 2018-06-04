@@ -44,7 +44,7 @@ class PagoController extends Controller
     public function store(Request $request)
     {
         $pago = new Pago;
-        $pago->tgf_cobranza_id = $request->tgf_cobranza_id;
+        $pago->tgf_cobranza_historica_id = $request->tgf_cobranza_historica_id;
         $pago->tgf_metodo_pago_id = $request->tgf_metodo_pago_id;
 
         $pago->save();

@@ -22,11 +22,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let cobranza of cobranzas | paginate: { itemsPerPage: 6, currentPage: p }; index as i;"> 
-            <td>{{cobranza.contrato.plan.pla_nombre}}</td>
-            <td>{{cobranza.cob_fecha}}</td>
-            <td>${{cobranza.cob_monto}}</td>
-            <td *ngIf="cobranza.pago"><a class="waves-effect waves-light btn">Descargar Boleta</a></td>
-            <td *ngIf="!cobranza.pago"><a class="waves-effect waves-light btn" (click)="redirect(cobranza.id)">Pagar</a></td>
+            <td>{{cobranza.contrato.contrato_historico.plan.pla_nombre}}</td>
+            <td>{{cobranza.cobranza_historica.cob_fecha}}</td>
+            <td>${{cobranza.cobranza_historica.cob_monto}}</td>
+            <td *ngIf="cobranza.cobranza_historica.pago"><a class="waves-effect waves-light btn">Descargar Boleta</a></td>
+            <td *ngIf="!cobranza.cobranza_historica.pago"><a class="waves-effect waves-light btn" (click)="redirect(cobranza.id)">Pagar</a></td>
           </tr>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </tbody>

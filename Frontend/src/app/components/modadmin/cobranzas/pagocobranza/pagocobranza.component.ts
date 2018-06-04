@@ -50,7 +50,7 @@ export class PagoCobranzaComponent {
         this.cobranza = cobranza;
 
         // Asignar el id de la cobranza al pago
-        this.pago.tgf_cobranza_id = this.cobranza.id;
+        this.pago.tgf_cobranza_historica_id = this.cobranza.cobranza_historica.id;
 
         // Abrir modal
         this.modal.emit({ action:"modal", params:['open'] });

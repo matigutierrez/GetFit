@@ -32,7 +32,7 @@ export class CobranzaService {
   }
 
   public getCobranzasCliente(): Observable<Cobranza[]> {
-    return this._http.get<Cobranza[]>(GLOBAL.url + 'clientecobranzas');
+    return this._http.get<Cobranza[]>(GLOBAL.url + 'cobranzastoken');
   }
 
 }

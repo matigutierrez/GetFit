@@ -201,15 +201,6 @@ class ClienteController extends Controller
     }
 
     /**
-     * Obtener cobranzas de cliente
-     * 
-     * @return \App\Cobranza
-     */
-    public function cobranzasToken(AuthenticateController $auth) {
-        return $auth->getAuthenticatedUser()->cliente->cobranzas;
-    }
-
-    /**
      * Obtener solicitudes de plan de cliente
      * 
      * @return \App\SolicitudPlan

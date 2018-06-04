@@ -6,6 +6,8 @@ use App\Cobranza;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;
 
+use JWTAuth;
+
 class CobranzaController extends Controller
 {
 
@@ -102,6 +104,15 @@ class CobranzaController extends Controller
         $this->pusher->trigger('cobranza', 'delete', $id);
 
         return ['deleted' => true];
+    }
+
+    /**
+     * Obtener cobranzas de cliente
+     * 
+     * @return \App\Cobranza
+     */
+    public function cobranzasToken(AuthenticateController $auth) {
+        return $auth->getAuthenticatedUser()->cliente->cobranzas()->with('contrato')->get();
     }
     
 }

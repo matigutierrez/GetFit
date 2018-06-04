@@ -19,7 +19,7 @@ class Plan extends Model
         'pla_solicitable'
     ];
 
-    protected $with = ['tipo_plan'];
+    protected $with = ['tipo_plan', 'sede'];
 
     public $timestamps = false;
 

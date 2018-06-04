@@ -82,7 +82,7 @@ export class CobranzasComponent implements OnInit, OnDestroy {
         let cobranza: Cobranza = this.cobranzas[i];
 
         // Verificar que coincidan ids
-        if (pago.tgf_cobranza_id == cobranza.id) {
+        if (pago.tgf_cobranza_historica_id == cobranza.cobranza_historica.id) {
 
           // Asignar pago a cobranza
           cobranza.cobranza_historica.pago = pago;
@@ -105,7 +105,7 @@ export class CobranzasComponent implements OnInit, OnDestroy {
         let cobranza: Cobranza = this.cobranzas[i];
 
         // Verificar que coincidan ids
-        if (pago.tgf_cobranza_id == cobranza.id) {
+        if (pago.tgf_cobranza_historica_id == cobranza.cobranza_historica.id) {
 
           // Asignar pago a cobranza
           cobranza.cobranza_historica.pago = pago;
