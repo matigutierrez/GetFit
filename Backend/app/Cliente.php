@@ -52,7 +52,8 @@ class Cliente extends Model
         return Cobranza::
               join('tgf_cobranza_historica', 'tgf_cobranza_historica.id', '=', 'tgf_cobranza.tgf_cobranza_historica_id')
             ->join('tgf_contrato_historico', 'tgf_contrato_historico.id', '=', 'tgf_cobranza_historica.tgf_contrato_historico_id')
-            ->join('tgf_cliente', 'tgf_cliente.id', '=', 'tgf_contrato_historico.tgf_cliente_id');
+            ->join('tgf_cliente', 'tgf_cliente.id', '=', 'tgf_contrato_historico.tgf_cliente_id')
+            ->where('tgf_cliente_id', '=', $this->id);
     }
 
     public function planes() {
