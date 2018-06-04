@@ -28,7 +28,7 @@ class PlanController extends Controller
         
         switch ($usuario->rol->rol_nombre) {
             case 'Administrador':
-                return Plan::with(['horarios','contratos.cliente','sede'])->get();
+                return Plan::with(['horarios','contratos','sede'])->get();
             case 'Profesor':
                 return Plan::with(['horarios','sede'])->get();
             case 'Cliente':
@@ -70,6 +70,7 @@ class PlanController extends Controller
     {
         $plan = new Plan;
         $plan->tgf_sede_id = $request->tgf_sede_id;
+        $plan->tgf_tipo_plan_id = $request->tgf_tipo_plan_id;
         $plan->pla_nombre = $request->pla_nombre;
         $plan->pla_descripcion = $request->pla_descripcion;
         $plan->pla_costo = $request->pla_costo;
@@ -80,7 +81,7 @@ class PlanController extends Controller
 
         // Cachear variables
         $plan->horarios;
-        $plan->contratos->pluck('cliente');
+        $plan->contratos;
         $plan->sede;
 
         $this->pusher->trigger('plan', 'create', $plan);
@@ -96,9 +97,7 @@ class PlanController extends Controller
      */
     public function show($id)
     {
-        return Plan::with('horarios', 'contratos')
-            ->withCount('contratos')
-            ->find($id);
+        return Plan::with('horarios', 'contratos')->find($id);
     }
 
     /**
@@ -121,8 +120,13 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plan = Plan::with('horarios', 'contratos.cliente', 'sede')->find($id);
+        $plan = Plan::find($id);
         $plan->update($request->all());
+
+        // Cachear variables
+        $plan->horarios;
+        $plan->contratos;
+        $plan->sede;
 
         $this->pusher->trigger('plan', 'update', $plan);
 
@@ -151,7 +155,7 @@ class PlanController extends Controller
      * @return \App\Contrato
      */
     public function contratos($id) {
-        return Plan::find($id)->contratos()->with('cliente.usuario', 'plan')->get();
+        return Plan::find($id)->contratos;
     }
 
     /**
@@ -161,7 +165,7 @@ class PlanController extends Controller
      * @return \App\Contrato
      */
     public function contratosCobranzas($id) {
-        return Plan::find($id)->contratos()->with('cliente.usuario', 'cobranzas')->get();
+        return Plan::find($id)->contratos()->with('cobranzas.cobranza_historica.contrato_historico')->get();
     }
 
     /**

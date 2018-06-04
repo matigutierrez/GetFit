@@ -23,7 +23,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return Cliente::with('usuario', 'contratos.plan')->get();
+        return Cliente::with('contratos')->get();
     }
 
     /**
@@ -54,6 +54,9 @@ class ClienteController extends Controller
 
         $cliente->save();
 
+        // Cachear usuario de cliente
+        $cliente->usuario;
+
         $this->pusher->trigger('cliente', 'create', $cliente);
 
         return $cliente->id;
@@ -67,7 +70,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        return Cliente::with('usuario')->find($id);
+        return Cliente::find($id);
     }
 
     /**
@@ -95,7 +98,7 @@ class ClienteController extends Controller
 
         // Cachear usuario y contratos
         $cliente->usuario;
-        $cliente->contratos->pluck('plan');
+        $cliente->contratos;
 
         $this->pusher->trigger('cliente', 'update', $cliente);
 
@@ -154,7 +157,7 @@ class ClienteController extends Controller
      * @return \App\Contrato
      */
     public function contratos($id) {
-        return Cliente::find($id)->contratos()->with('plan')->get();
+        return Cliente::find($id)->contratos;
     }
 
     /**
@@ -194,7 +197,7 @@ class ClienteController extends Controller
      * @return \App\Cobranza
      */
     public function cobranzas($id) {
-        return Cliente::find($id)->cobranzas;
+        return Cliente::find($id)->cobranzas_historicas;
     }
 
     /**
@@ -239,9 +242,7 @@ class ClienteController extends Controller
      * @return \App\Contrato
      */
     public function contratosToken(AuthenticateController $auth) {
-        $contratos = $auth->getAuthenticatedUser()->cliente->contratos()->with('plan')->get();
-        $contratos->pluck('plan.horarios');
-        $contratos->pluck('plan.sede');
+        $contratos = $auth->getAuthenticatedUser()->cliente->contratos;
 
         return $contratos;
     }

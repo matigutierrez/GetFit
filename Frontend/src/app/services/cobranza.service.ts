@@ -14,11 +14,7 @@ export class CobranzaService {
   ) {
 
   }
-
-  public save(cobranza: Cobranza): Observable<number> {
-    return this._http.post<number>(GLOBAL.url + 'cobranza', Cobranza.getJSON(cobranza));
-  }
-
+  
   public update(cobranza: Cobranza): Observable<any> {
     return this._http.put(GLOBAL.url + 'cobranza/' + cobranza.id, Cobranza.getJSON(cobranza));
   }

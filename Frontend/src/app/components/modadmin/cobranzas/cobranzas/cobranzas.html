@@ -20,15 +20,15 @@
         </thead>
         <tbody>
           <tr *ngFor="let cobranza of cobranzas | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
-            <td>{{cobranza.contrato.cliente.cli_nombres + " " + cobranza.contrato.cliente.cli_apellidos}}</td>
-            <td>{{cobranza.contrato.plan.pla_nombre}}</td>
-            <td>{{cobranza.cob_fecha}}</td>
-            <td>{{cobranza.cob_monto}}</td>
+            <td>{{cobranza.contrato.contrato_historico.cliente.cli_nombres}} {{cobranza.contrato.contrato_historico.cliente.cli_apellidos}}</td>
+            <td>{{cobranza.contrato.contrato_historico.plan.pla_nombre}}</td>
+            <td>{{cobranza.cobranza_historica.cob_fecha}}</td>
+            <td>{{cobranza.cobranza_historica.cob_monto}}</td>
             <td>
-              <i *ngIf="cobranza.pago" class="material-icons">check</i>
-              <i *ngIf="!cobranza.pago" class="material-icons">close</i>
+              <i *ngIf="cobranza.cobranza_historica.pago" class="material-icons">check</i>
+              <i *ngIf="!cobranza.cobranza_historica.pago" class="material-icons">close</i>
             </td>
-            <td><a *ngIf="!cobranza.pago" (click)="abrirCobranza(cobranza)"><i class="material-icons">check</i></a></td>
+            <td><a *ngIf="!cobranza.cobranza_historica.pago" (click)="abrirCobranza(cobranza)"><i class="material-icons">check</i></a></td>
             <td><a (click)="deleteCobranza(cobranza.id)"><i class="material-icons">close</i></a></td>
           </tr>
         </tbody>

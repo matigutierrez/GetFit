@@ -18,7 +18,7 @@ class Cliente extends Model
         'cli_huella'
     ];
 
-    protected $appends = ['cobranzas', 'planes'];
+    protected $with = ['usuario'];
 
     public $timestamps = false;
 
@@ -34,8 +34,12 @@ class Cliente extends Model
 		return $this->hasMany('App\Foto', 'tgf_cliente_id');
     }
 
+    public function contratos_historicos() {
+        return $this->hasMany('App\ContratoHistorico', 'tgf_cliente_id');
+    }
+
     public function contratos() {
-        return $this->hasMany('App\Contrato', 'tgf_cliente_id');
+        return $this->hasManyThrough('App\Contrato', 'App\ContratoHistorico', 'tgf_cliente_id', 'tgf_contrato_historico_id', 'id', 'id');
     }
 
     public function planes() {
@@ -58,27 +62,8 @@ class Cliente extends Model
     	return $this->belongsToMany('App\Sede', 'tgf_sede_cliente', 'tgf_cliente_id', 'tgf_sede_id');
     }
 
-    public function getPlanesAttribute() {
-
-        return $this->contratos->pluck('plan');
-
-    }
-
-    // $cliente->cobranzas;
-    public function getCobranzasAttribute() {
-        // Obtener cobranzas
-        $cobranzas = $this->contratos->pluck('cobranzas')->collapse();
-
-        // Incluir contratos
-        $contratos = $cobranzas->pluck('contrato');
-
-        // Incluir plan de contrato
-        $contratos->pluck('plan');
-
-        // Incluir pagos
-        $cobranzas->pluck('pago');
-
-        return $cobranzas;
+    public function cobranzas_historicas() {
+        return $this->belongsToMany('App\CobranzaHistorica', 'tgf_contrato_historico', 'tgf_cliente_id', 'tgf_cobranza_historica_id');
     }
 
 }

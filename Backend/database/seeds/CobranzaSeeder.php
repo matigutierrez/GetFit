@@ -11,10 +11,11 @@ class CobranzaSeeder extends Seeder
      */
     public function run()
     {
+        // Si se modifica algun tgf_contrato_id, tambien debe modificarse en CobranzaHistoricaSeeder
         DB::table('tgf_cobranza')->insert([
-        	['tgf_contrato_id' => 1, 'cob_monto' => 20000],
-        	['tgf_contrato_id' => 2, 'cob_monto' => 15000],
-        	['tgf_contrato_id' => 3, 'cob_monto' => 3000]
+        	['tgf_cobranza_historica_id' => 1, 'tgf_contrato_id' => 1],
+        	['tgf_cobranza_historica_id' => 2, 'tgf_contrato_id' => 2],
+        	['tgf_cobranza_historica_id' => 3, 'tgf_contrato_id' => 3]
         ]);
     }
 }

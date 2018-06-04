@@ -9,6 +9,8 @@ import { InscripcionPlanComponent } from "../inscripcionplan/inscripcionplan.com
 import { SolicitudPlan } from "../../../../models/SolicitudPlan";
 import { SolicitudPlanService } from "../../../../services/solicitudplan.service";
 import { Cobranza } from "../../../../models/Cobranza";
+import { ContratoHistorico } from "../../../../models/ContratoHistorico";
+import { ContratoHistoricoService } from "../../../../services/contratohistorico.service";
 
 @Component({
     selector: 'clientesplan',
@@ -43,6 +45,7 @@ export class ClientesPlanComponent implements OnDestroy {
     public constructor(
         private _planService: PlanService,
         private _contratoService: ContratoService,
+        private _contratoHistoricoService: ContratoHistoricoService,
         private _solicitudPlanService: SolicitudPlanService,
         private _pusherService: PusherService
     ) {
@@ -82,15 +85,15 @@ export class ClientesPlanComponent implements OnDestroy {
         // Eliminar una solicitud de plan
         this._solicitudPlanService.delete(solicitud.id).subscribe(
             Response => {
-                // Crear un contrato
-                let contrato: Contrato = new Contrato();
+                // Crear un contrato historico
+                let contratoHistorico: ContratoHistorico = new ContratoHistorico();
 
                 // Fijar cliente y plan
-                contrato.tgf_cliente_id = solicitud.tgf_cliente_id;
-                contrato.tgf_plan_id = solicitud.tgf_plan_id;
+                contratoHistorico.tgf_cliente_id = solicitud.tgf_cliente_id;
+                contratoHistorico.tgf_plan_id = solicitud.tgf_plan_id;
 
                 // Guardar contrato
-                this._contratoService.save(contrato, null).subscribe(null);
+                this._contratoHistoricoService.save(contratoHistorico, null).subscribe(null);
             }
         );
     }

@@ -16,9 +16,8 @@
             <th>Descripción</th>
             <th>Sede</th>
             <th>Horarios</th>
-            <th>Cupos Totales</th>
+            <th>Cupos Disponibles</th>
             <th>Inscritos</th>
-            <th>Contratos</th>
             <th></th>
             <th></th>
             <th></th>
@@ -35,8 +34,8 @@
               </a>
             </td>
             <td>{{plan.pla_capacidad - plan.contratos.length}}</td>
-            <td>{{plan.contratos.length}}</td>
             <td>
+              {{plan.contratos.length}}
               <a (click)="abrirContratos(plan.contratos)">
                 <i class="material-icons">assignment</i>
               </a>

@@ -64,7 +64,7 @@ export class ClientesComponent implements OnInit {
           for (let j = 0; j < contratos.length; j++) {
 
             // El contrato debe contener su cliente
-            contratos[j].cliente = cliente;
+            contratos[j].contrato_historico.cliente = cliente;
 
           }
 
@@ -106,7 +106,7 @@ export class ClientesComponent implements OnInit {
       for (let i = 0; i < contratos.length; i++) {
 
         // Contrato debe contener al cliente
-        contratos[i].cliente = cliente;
+        contratos[i].contrato_historico.cliente = cliente;
 
       }
 
@@ -130,7 +130,7 @@ export class ClientesComponent implements OnInit {
         for (let i = 0; i < contratos.length; i++) {
 
           // Contrato debe contener al cliente
-          contratos[i].cliente = cliente;
+          contratos[i].contrato_historico.cliente = cliente;
 
         }
 

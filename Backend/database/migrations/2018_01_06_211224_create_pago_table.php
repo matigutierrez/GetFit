@@ -15,8 +15,8 @@ class CreatePagoTable extends Migration
     {
         Schema::create('tgf_pago', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tgf_cobranza_id')->unsigned();
-            $table->foreign('tgf_cobranza_id')->references('id')->on('tgf_cobranza')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('tgf_cobranza_historica_id')->unsigned();
+            $table->foreign('tgf_cobranza_historica_id')->references('id')->on('tgf_cobranza_historica')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('tgf_metodo_pago_id')->unsigned();
             $table->foreign('tgf_metodo_pago_id')->references('id')->on('tgf_metodo_pago')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('pag_fecha');

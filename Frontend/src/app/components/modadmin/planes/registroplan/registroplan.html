@@ -81,7 +81,7 @@
             <div class="col m6">
               <div class="switch">
                 <label>
-                  <input type="checkbox" (change)="plan.pla_solicitable = $event.target.checked ? 1 : 0" checked="true">
+                  <input type="checkbox" (change)="plan.pla_solicitable = $event.target.checked ? 1 : 0" [checked]="plan.pla_solicitable == 1">
                   <span class="lever"></span>
                   Permitir a los clientes solicitar el plan
                 </label>

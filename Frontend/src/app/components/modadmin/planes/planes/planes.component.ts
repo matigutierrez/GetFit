@@ -76,7 +76,7 @@ export class PlanesComponent implements OnInit {
             for (let i = 0; i < contratos.length; i++) {
 
               // Contrato debe contener al plan
-              contratos[i].plan = plan;
+              contratos[i].contrato_historico.plan = plan;
 
             }
 
@@ -131,7 +131,7 @@ export class PlanesComponent implements OnInit {
       for (let i = 0; i < contratos.length; i++) {
 
         // Contrato debe contener al plan
-        contratos[i].plan = plan;
+        contratos[i].contrato_historico.plan = plan;
 
       }
 
@@ -154,7 +154,7 @@ export class PlanesComponent implements OnInit {
         for (let i = 0; i < contratos.length; i++) {
 
           // Contrato debe contener al plan
-          contratos[i].plan = plan;
+          contratos[i].contrato_historico.plan = plan;
 
         }
 
@@ -212,7 +212,7 @@ export class PlanesComponent implements OnInit {
           plan.contratos.unshift(contrato);
 
           // Contrato debe contener al plan
-          contrato.plan = plan;
+          contrato.contrato_historico.plan = plan;
 
         }
 
@@ -233,7 +233,7 @@ export class PlanesComponent implements OnInit {
         if (plan.id == contrato.tgf_plan_id) {
 
           // Contrato debe contener al plan
-          contrato.plan = plan;
+          contrato.contrato_historico.plan = plan;
 
           let contratos: Contrato[] = plan.contratos;
 

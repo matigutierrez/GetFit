@@ -34,19 +34,20 @@ export class RegistroPlanComponent implements OnInit, AfterViewChecked {
     private _sedeService: SedeService,
     private _tipoPlanService: TipoPlanService
   ) {
-    this.plan = new Plan();
-    this.plan.tgf_sede_id = 1;
 
+    this.limpiar();
+
+    // Solicitar sedes
     this._sedeService.query().subscribe(
       Response => {
         this.sedes = Response;
       }
     );
 
+    // Solicitar tipos de planes
     this._tipoPlanService.query().subscribe(
       Response => {
         this.tipoPlanes = Response;
-        console.log(this.tipoPlanes);
       }
     );
 
@@ -62,12 +63,25 @@ export class RegistroPlanComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  public limpiar() {
+    this.plan = new Plan();
+    this.plan.pla_solicitable = 1;
+    this.plan.tgf_sede_id = 1;
+    this.plan.tgf_tipo_plan_id = 1;
+  }
+
   public onSubmit() {
-    this._planService.save(this.plan).subscribe(
-      Response => {
-        this.cerrar();
-      }
-    );
+    // Si la sede y el tipo de plan no son nulos
+    if ( this.plan.tgf_sede_id != null && this.plan.tgf_tipo_plan_id != null ) {
+
+      // Registrar plan
+      this._planService.save(this.plan).subscribe(
+        Response => {
+          this.cerrar();
+          this.limpiar();
+        }
+      );
+    }
   }
 
   public abrir() {

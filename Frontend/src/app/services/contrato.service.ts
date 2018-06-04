@@ -15,18 +15,6 @@ export class ContratoService {
 
     }
 
-    public save(contrato: Contrato, acta: File): Observable<HttpEvent<number>> {
-
-        let formulario: FormData = new FormData();
-
-        formulario.append('contrato', new Blob([JSON.stringify(Contrato.getJSON(contrato))], { type: 'application/json' }));
-        formulario.append('acta', acta);
-
-        let req = new HttpRequest('POST', GLOBAL.url + "contrato", formulario, { reportProgress: true });
-
-        return this._http.request<number>(req);
-    }
-
     public update(contrato: Contrato): Observable<number> {
         return this._http.put<number>(GLOBAL.url + "contrato", Contrato.getJSON(contrato));
     }

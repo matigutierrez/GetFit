@@ -16,26 +16,26 @@
         <ul *ngIf="contratos" materialize="collapsible" class="collapsible" data-collapsible="accordion">
             <li *ngFor="let contrato of contratos; index as i;">
                 <div class="collapsible-header">
-                    <i class="material-icons">person</i>{{contrato.cliente.cli_nombres}} {{contrato.cliente.cli_apellidos}}
+                    <i class="material-icons">person</i>{{contrato.contrato_historico.cliente.cli_nombres}} {{contrato.contrato_historico.cliente.cli_apellidos}}
                 </div>
                 <div class="collapsible-body">
                     <table *ngIf="contrato">
                         <tbody>
                             <tr>
                                 <th>Nombre Completo</th>
-                                <td>{{contrato.cliente.cli_nombres}} {{contrato.cliente.cli_apellidos}}</td>
+                                <td>{{contrato.contrato_historico.cliente.cli_nombres}} {{contrato.contrato_historico.cliente.cli_apellidos}}</td>
                             </tr>
                             <tr>
                                 <th>Telefono</th>
-                                <td>{{contrato.cliente.cli_numerotelefonico}}</td>
+                                <td>{{contrato.contrato_historico.cliente.cli_numerotelefonico}}</td>
                             </tr>
                             <tr>
                                 <th>Dirección</th>
-                                <td>{{contrato.cliente.cli_direccion}}</td>
+                                <td>{{contrato.contrato_historico.cliente.cli_direccion}}</td>
                             </tr>
                             <tr>
                                 <th>Plan</th>
-                                <td>{{contrato.plan.pla_nombre}}</td>
+                                <td>{{contrato.contrato_historico.plan.pla_nombre}}</td>
                             </tr>
                             <tr>
                                 <th>Acta</th>

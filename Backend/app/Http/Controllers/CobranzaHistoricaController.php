@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Cobranza;
+use App\CobranzaHistorica;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;
 
-class CobranzaController extends Controller
+class CobranzaHistoricaController extends Controller
 {
 
     private $pusher;
@@ -22,7 +23,7 @@ class CobranzaController extends Controller
      */
     public function index()
     {
-        return Cobranza::with('contrato')->get();
+        return CobranzaHistorica::with('contrato_historico')->get();
     }
 
     /**
@@ -43,7 +44,29 @@ class CobranzaController extends Controller
      */
     public function store(Request $request)
     {
-        // Para crear una cobranza, hacerlo atraves de CobranzaHistoricaController
+        $cobranzaHist = new CobranzaHistorica;
+        $cobranzaHist->tgf_contrato_historico_id = $request->tgf_contrato_historico_id;
+        $cobranzaHist->cob_monto = $request->cob_monto;
+
+        $cobranzaHist->save();
+        $cobranzaHist->pago;
+        $cobranzaHist->contrato_historico;
+
+        $this->pusher->trigger('cobranza_historica', 'create', $cobranzaHist);
+
+        $cobranza = new Cobranza;
+        $cobranza->tgf_cobranza_historica_id = $cobranzaHist->id;
+        $cobranza->tgf_contrato_id = $cobranzaHist->contrato_historico->contrato->id;
+
+        $cobranza->save();
+
+        // Cachear variables
+        $cobranza->contrato;
+        $cobranza->cobranza_historica;
+
+        $this->pusher->trigger('cobranza', 'create', $cobranza);
+
+        return $cobranza->id;
     }
 
     /**
@@ -54,7 +77,7 @@ class CobranzaController extends Controller
      */
     public function show($id)
     {
-        return Cobranza::find($id);
+        return CobranzaHistorica::find($id);
     }
 
     /**
@@ -77,16 +100,14 @@ class CobranzaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cobranza = Cobranza::find($id);
-        $cobranza->update($request->all());
+        $cobranzaHist = CobranzaHistorica::find($id);
+        $cobranzaHist->update($request->all());
 
         // Cachear variables
-        $cobranza->cobranza_historica;
-        $cobranza->contrato;
+        $cobranzaHist->pago;
+        $cobranzaHist->contrato_historico;
 
-        $this->pusher->trigger('cobranza', 'update', $cobranza);
-
-        return ['updated' => true];
+        $this->pusher->trigger('cobranza_historica', 'create', $cobranzaHist);
     }
 
     /**
@@ -97,11 +118,6 @@ class CobranzaController extends Controller
      */
     public function destroy($id)
     {
-        Cobranza::destroy($id);
-
-        $this->pusher->trigger('cobranza', 'delete', $id);
-
-        return ['deleted' => true];
+        // No se debe eliminar una cobranza historica
     }
-    
 }

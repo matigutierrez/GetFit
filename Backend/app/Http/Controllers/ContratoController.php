@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contrato;
+use App\ContratoHistorico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -45,31 +46,7 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
-        $requestContrato = json_decode(File::get($request->file('contrato')));
-        
-        $contrato = new Contrato;
-        $contrato->tgf_cliente_id = $requestContrato->tgf_cliente_id;
-        $contrato->tgf_plan_id = $requestContrato->tgf_plan_id;
-
-        if ( $request->hasFile('acta') ) {
-
-            $file = $request->file('acta');
-
-            // El archivo se guarda en /storage/app/actas
-            $contrato->con_acta = Storage::put('actas', $file);
-
-        }
-
-        // Guardar contrato
-        $contrato->save();
-
-        // Agregar 'cliente' y 'plan' a cache
-        $contrato->cliente->usuario;
-        $contrato->plan;
-
-        $this->pusher->trigger('contrato', 'create', $contrato);
-        
-        return $contrato->id;
+        // LOS CONTRATOS SE CREAN A TRAVES DE ContratoHistoricoController
     }
 
     /**
@@ -90,10 +67,10 @@ class ContratoController extends Controller
      * @param  int  $plan_id ID del plan
      */
     public function find($cliente_id, $plan_id) {
-        return Contrato::where([
+        return ContratoHistorico::where([
             'tgf_cliente_id' => $cliente_id,
             'tgf_plan_id' => $plan_id
-        ])->get()->first();
+        ])->get()->first()->contrato;
     }
 
     /**
@@ -103,10 +80,10 @@ class ContratoController extends Controller
      * @param  int  $plan_id ID del plan
      */
     public function findToken(AuthenticateController $auth, $plan_id) {
-        return Contrato::where([
+        return ContratoHistorico::where([
             'tgf_cliente_id' => $auth->getAuthenticatedUser()->cliente->id,
             'tgf_plan_id' => $plan_id
-        ])->get()->first();
+        ])->get()->first()->contrato;
     }
 
     /**
@@ -129,14 +106,11 @@ class ContratoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Buscar un contrato
         $contrato = Contrato::find($id);
         $contrato->update( $request->all() );
 
-        // Agregar 'cliente' y 'plan' a cache
-        $contrato->cliente->usuario;
-        $contrato->plan;
-
-        $this->pusher->trigger('contrato', 'create', $contrato);
+        $this->pusher->trigger('contrato', 'update', $contrato);
 
         return ['updated' => true];
     }
@@ -157,10 +131,18 @@ class ContratoController extends Controller
     }
 
     public function acta($id) {
+        // Buscar contrato
         $contrato = Contrato::find($id);
+        
+        // Si hay contrato
         if ( isset($contrato) ) {
-            return response()->file(storage_path("app/" . $contrato->con_acta));
+            // Obtener contrato historico
+            $contratoHist = $contrato->contrato_historico;
+
+            return response()->file(storage_path("app/" . $contratoHist->con_acta));
         }
+
         return null;
     }
+    
 }

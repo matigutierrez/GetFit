@@ -36,10 +36,14 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('cobranza', 'CobranzaController');
 
+	Route::apiResource('cobranzahistorica', 'CobranzaHistoricaController');
+
 	Route::apiResource('contrato', 'ContratoController');
 	Route::get('contrato/{id}/acta', 'ContratoController@acta');
 	Route::get('contrato/find/{cliente_id}/{plan_id}', 'ContratoController@find');
 	Route::get('contrato/findtoken/{plan_id}', 'ContratoController@findToken');
+
+	Route::apiResource('contratohistorico', 'ContratoHistoricoController');
 
 	Route::apiResource('descuentoCobranza', 'DescuentoCobranzaController');
 

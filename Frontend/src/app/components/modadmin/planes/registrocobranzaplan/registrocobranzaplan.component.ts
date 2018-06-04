@@ -8,6 +8,8 @@ import { ClienteService } from "../../../../services/cliente.service";
 import { CobranzaService } from "../../../../services/cobranza.service";
 import { ContratoService } from "../../../../services/contrato.service";
 import { PlanService } from "../../../../services/plan.service";
+import { CobranzaHistorica } from "../../../../models/CobranzaHistorica";
+import { CobranzaHistoricaService } from "../../../../services/cobranzahistorica.service";
 
 declare var Materialize: any;
 
@@ -36,11 +38,12 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     private contrato: Contrato;
 
     // Cobranza a registrar
-    public cobranza: Cobranza = new Cobranza();
+    public cobranzaHistorica: CobranzaHistorica = new CobranzaHistorica();
 
     public constructor(
         private _clienteService: ClienteService,
         private _cobranzaService: CobranzaService,
+        private _cobranzaHistoricaService: CobranzaHistoricaService,
         private _contratoService: ContratoService,
         private _planService: PlanService
     ) {
@@ -62,7 +65,7 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     public limpiar(): void {
         this.contrato = null;
         this.contratos = null;
-        this.cobranza = new Cobranza();
+        this.cobranzaHistorica = new CobranzaHistorica();
     }
 
     public seleccionar(nombre: string) {
@@ -71,10 +74,10 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
 
         if (this.contrato) {
             // Actualizar id de contrato
-            this.cobranza.tgf_contrato_id = this.contrato.id;
+            this.cobranzaHistorica.tgf_contrato_historico_id = this.contrato.contrato_historico.id;
 
             // Actualizar monto
-            this.cobranza.cob_monto = this.contrato.plan.pla_costo;
+            this.cobranzaHistorica.cob_monto = this.contrato.contrato_historico.plan.pla_costo;
         }
     }
 
@@ -95,7 +98,7 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
                 for (let i = 0; i < this.contratos.length; i++) {
                     // Por cada cliente
                     let contrato: Contrato = this.contratos[i];
-                    let cliente: Cliente = contrato.cliente;
+                    let cliente: Cliente = contrato.contrato_historico.cliente;
                     let nombre: string = cliente.cli_nombres + " " + cliente.cli_apellidos;
 
                     // Agregar a autocomplete y referenciar por nombre
@@ -121,10 +124,10 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
         // Al emitir una cobranza
 
         // Validar contrato
-        if (this.cobranza.tgf_contrato_id != null && this.cobranza.cob_monto != null) {
+        if (this.cobranzaHistorica.tgf_contrato_historico_id != null && this.cobranzaHistorica.cob_monto != null) {
 
             // Guardar cobranza
-            this._cobranzaService.save(this.cobranza).subscribe(
+            this._cobranzaHistoricaService.save(this.cobranzaHistorica).subscribe(
                 Response => {
 
                     // Cerrar modal
@@ -132,9 +135,6 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
 
                     // Eliminar datos de formulario
                     this.limpiar();
-                },
-                error => {
-                    console.error(error);
                 }
             );
 

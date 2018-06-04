@@ -39,6 +39,10 @@ class Plan extends Model
     	return $this->hasMany('App\Contrato', 'tgf_plan_id');
     }
 
+    public function contratos_historicos() {
+        return $this->hasMany('App\ContratoHistorico', 'tgf_plan_id');
+    }
+
     public function descuentos() {
         return $this->hasMany('App\Descuento', 'tgf_plan_id');
     }

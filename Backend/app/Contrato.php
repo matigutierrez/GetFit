@@ -9,21 +9,21 @@ class Contrato extends Model
     protected $table = 'tgf_contrato';
     protected $primarykey = 'id';
 
-    protected $fillable = ['con_fecha_inicio', 'con_acta'];
+    protected $fillable = [
+        'tgf_contrato_historico_id',
+        'tgf_plan_id'
+    ];
 
-    const CREATED_AT = 'con_fecha_inicio';
-    const UPDATED_AT = null;
+    protected $with = ['contrato_historico'];
 
-    public function cliente() {
-    	return $this->belongsTo('App\Cliente', 'tgf_cliente_id');
-    }
+    public $timestamps = false;
 
-    public function asistencias() {
-    	return $this->hasMany('App\Asistencia', 'tgf_contrato_id');
+    public function contrato_historico() {
+        return $this->belongsTo('App\ContratoHistorico', 'tgf_contrato_historico_id');
     }
 
     public function plan() {
-    	return $this->belongsTo('App\Plan', 'tgf_plan_id');
+        return $this->belongTo('App\Plan', 'tgf_plan_id');
     }
 
     public function cobranzas() {

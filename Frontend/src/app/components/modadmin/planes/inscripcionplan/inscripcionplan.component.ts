@@ -6,6 +6,8 @@ import { Contrato } from "../../../../models/Contrato";
 import { ContratoService } from "../../../../services/contrato.service";
 import { HttpHeaders, HttpEventType } from "@angular/common/http";
 import { Plan } from "../../../../models/Plan";
+import { ContratoHistorico } from "../../../../models/ContratoHistorico";
+import { ContratoHistoricoService } from "../../../../services/contratohistorico.service";
 
 @Component({
     selector: 'inscripcionplan',
@@ -49,7 +51,8 @@ export class InscripcionPlanComponent {
 
     public constructor(
         private _clienteService: ClienteService,
-        private _contratoService: ContratoService
+        private _contratoService: ContratoService,
+        private _contratoHistoricoService: ContratoHistoricoService
     ) {
 
         this.autocompleteInit = {};
@@ -92,10 +95,10 @@ export class InscripcionPlanComponent {
         // Inscribir cliente al plan
         if (this.cliente != null) {
             // Inscribir al cliente: this.clienteSeleccionado
-            let contrato: Contrato = new Contrato();
+            let contratoHistorico: ContratoHistorico = new ContratoHistorico();
 
-            contrato.tgf_cliente_id = this.cliente.id;
-            contrato.tgf_plan_id = this.plan.id;
+            contratoHistorico.tgf_cliente_id = this.cliente.id;
+            contratoHistorico.tgf_plan_id = this.plan.id;
 
             this.sent = false;
             this.sentError = false;
@@ -103,7 +106,7 @@ export class InscripcionPlanComponent {
             this.porcentaje = 0;
 
             // Crear contrato
-            this._contratoService.save(contrato, this.archivo).subscribe(
+            this._contratoHistoricoService.save(contratoHistorico, this.archivo).subscribe(
                 Event => {
 
                     if (Event.type == HttpEventType.Sent) {

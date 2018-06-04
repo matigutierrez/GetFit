@@ -35,13 +35,13 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let contrato of contratos | paginate: { id: 'pagContratos', itemsPerPage: 6, currentPage: p1 }; index as i;">
-                                    <td>{{contrato.cliente.cli_rut}}</td>
-                                    <td>{{contrato.cliente.cli_nombres + " " + contrato.cliente.cli_apellidos}}</td>
+                                    <td>{{contrato.contrato_historico.cliente.cli_rut}}</td>
+                                    <td>{{contrato.contrato_historico.cliente.cli_nombres}} {{contrato.contrato_historico.cliente.cli_apellidos}}</td>
                                     <td>
-                                        <a *ngIf="contrato.cliente.usuario">{{contrato.cliente.usuario.usu_correo}}</a>
+                                        <a *ngIf="contrato.contrato_historico.cliente.usuario">{{contrato.contrato_historico.cliente.usuario.usu_correo}}</a>
                                     </td>
                                     <td>
-                                        <a [routerLink]="['/admin/cliente', contrato.cliente.id]">
+                                        <a [routerLink]="['/admin/cliente', contrato.contrato_historico.cliente.id]">
                                             <i class="material-icons">settings</i>
                                         </a>
                                     </td>

@@ -20,9 +20,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let cobranza of cobranzas | paginate: { id: 'cobranzas_plan', itemsPerPage: 6, currentPage: p }; index as i;">
-                            <td>{{cobranza.contrato.cliente.cli_nombres + " " + cobranza.contrato.cliente.cli_apellidos}}</td>
-                            <td>{{cobranza.cob_fecha}}</td>
-                            <td>{{cobranza.cob_monto}}</td>
+                            <td>{{cobranza.cobranza_historica.contrato_historico.cliente.cli_nombres}} {{cobranza.cobranza_historica.contrato_historico.cliente.cli_apellidos}}</td>
+                            <td>{{cobranza.cobranza_historica.cob_fecha}}</td>
+                            <td>{{cobranza.cobranza_historica.cob_monto}}</td>
                             <td>
                                 <i *ngIf="cobranza.pago" class="material-icons">check</i>
                                 <i *ngIf="!cobranza.pago" class="material-icons">close</i>

@@ -6,6 +6,8 @@ import { Cliente } from '../../../../models/Cliente';
 import { Contrato } from '../../../../models/Contrato';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cobranza } from '../../../../models/Cobranza';
+import { CobranzaHistorica } from '../../../../models/CobranzaHistorica';
+import { CobranzaHistoricaService } from '../../../../services/cobranzahistorica.service';
 declare var $: any;
 declare var jQuery: any;
 
@@ -41,11 +43,12 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
   private cliente: Cliente;
 
   // Cobranza a registrar
-  public cobranza: Cobranza = new Cobranza();
+  public cobranzaHistorica: CobranzaHistorica = new CobranzaHistorica();
 
   public constructor(
     private _clienteService: ClienteService,
     private _cobranzaService: CobranzaService,
+    private _cobranzaHistoricaService: CobranzaHistoricaService,
     private _contratoService: ContratoService
   ) {
 
@@ -89,10 +92,12 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
   }
 
   public limpiar(): void {
+
     this.cliente = null;
     this.contratos = null;
-    this.cobranza = new Cobranza();
+    this.cobranzaHistorica = new CobranzaHistorica();
     this.clienteInput.nativeElement.value = "";
+
   }
 
   public seleccionar(nombre: string) {
@@ -120,20 +125,20 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
     // Al cambiar contrato
 
     // Actualizar id de contrato
-    this.cobranza.tgf_contrato_id = this.cobranza.contrato.id;
+    this.cobranzaHistorica.tgf_contrato_historico_id = this.cobranzaHistorica.contrato_historico.id;
 
     // Actualizar monto
-    this.cobranza.cob_monto = this.cobranza.contrato.plan.pla_costo;
+    this.cobranzaHistorica.cob_monto = this.cobranzaHistorica.contrato_historico.plan.pla_costo;
   }
 
   public onSubmit() {
     // Al emitir una cobranza
 
     // Validar contrato
-    if (this.cobranza.tgf_contrato_id != null && this.cobranza.cob_monto != null) {
+    if (this.cobranzaHistorica.tgf_contrato_historico_id != null && this.cobranzaHistorica.cob_monto != null) {
 
       // Guardar cobranza
-      this._cobranzaService.save(this.cobranza).subscribe(
+      this._cobranzaHistoricaService.save(this.cobranzaHistorica).subscribe(
         Response => {
 
           // Cerrar modal

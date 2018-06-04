@@ -25,8 +25,12 @@ class DatabaseSeeder extends Seeder
         $this->call(HoraDiaSeeder::class);
         $this->call(DiaSemanaSeeder::class);
         $this->call(HorarioSeeder::class);
+
+        $this->call(ContratoHistoricoSeeder::class);
         $this->call(ContratoSeeder::class);
         $this->call(AsistenciaSeeder::class);
+
+        $this->call(CobranzaHistoricaSeeder::class);
         $this->call(CobranzaSeeder::class);
         $this->call(MetodoPagoSeeder::class);
 

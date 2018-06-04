@@ -10,26 +10,20 @@ class Cobranza extends Model
     protected $primarykey = 'id';
 
     protected $fillable = [
-        'cob_monto',
-        'cob_fecha',
+        'tgf_cobranza_historica_id',
         'tgf_contrato_id'
     ];
 
-    protected $with = ['pago'];
+    protected $with = ['cobranza_historica'];
 
-    const CREATED_AT = 'cob_fecha';
-    const UPDATED_AT = null;
+    public $timestamps = false;
+
+    public function cobranza_historica() {
+        return $this->belongsTo('App\CobranzaHistorica', 'tgf_cobranza_historica_id');
+    }
 
     public function contrato() {
-    	return $this->belongsTo('App\Contrato', 'tgf_contrato_id');
-    }
-
-    public function descuentos() {
-    	return $this->hasMany('App\DescuentoCobranza', 'tgf_cobranza_id');
-    }
-
-    public function pago() {
-    	return $this->hasOne('App\Pago', 'tgf_cobranza_id');
+        return $this->belongsTo('App\Contrato', 'tgf_contrato_id');
     }
     
 }
