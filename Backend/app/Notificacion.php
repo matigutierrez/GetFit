@@ -14,7 +14,7 @@ class Notificacion extends Model
     public $timestamps = false;
 
     public function usuarios() {
-    	return $this->hasMany('App\Usuario', 'tgf_notificacion_usuario', 'tgf_not_id', 'tgf_usu_id');
+    	return $this->belongsToMany('App\Usuario', 'tgf_notificacion_usuario', 'tgf_not_id', 'tgf_usu_id');
     }
 
     public function archivos() {

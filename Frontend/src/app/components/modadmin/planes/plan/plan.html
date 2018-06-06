@@ -7,8 +7,8 @@
     <div class="row">
       <ul class="tabs" materialize="tabs">
         <li class="tab col s2">
-          <a class="active" href="#estadisticas">
-            <i class="material-icons">show_chart</i>Estadisticas
+          <a class="active" href="#editarplan">
+            <i class="material-icons">settings</i>Editar Plan
           </a>
         </li>
         <li class="tab col s2">
@@ -19,11 +19,6 @@
         <li class="tab col s2">
           <a href="#cobranzas">
             <i class="material-icons">attach_money</i>Cobranzas
-          </a>
-        </li>
-        <li class="tab col s2">
-          <a href="#editarplan">
-            <i class="material-icons">settings</i>Editar Plan
           </a>
         </li>
         <li class="tab col s2">
@@ -42,20 +37,18 @@
     <!-- Panel inferior -->
     <div class="row">
       <!-- Contenido de tabber -->
-      <div id="estadisticas" class="col s12">
-
+      <div id="editarplan" class="col s12">
+        <editarplan [plan]="plan"></editarplan>
       </div>
       <div id="clientes" class="col s12">
-        <clientesplan [inscripcionPlanComponent]="inscripcionPlanComponent" [plan]="plan">
+        <clientesplan [inscripcionPlanComponent]="inscripcionPlanComponent" [cancelarContratoComponent]="cancelarContratoComponent"
+          [plan]="plan">
         </clientesplan>
       </div>
       <div id="cobranzas" class="col s12">
-        <cobranzasplan [pagoCobranzaComponent]="pagoCobranzaComponent" [registroCobranzaPlanComponent]="registroCobranzaPlanComponent"
+        <cobranzasplan [pagoCobranzaComponent]="pagoCobranzaComponent" [cancelarContratoComponent]="cancelarContratoComponent" [registroCobranzaPlanComponent]="registroCobranzaPlanComponent"
           [plan]="plan">
         </cobranzasplan>
-      </div>
-      <div id="editarplan" class="col s12">
-        <editarplan [plan]="plan"></editarplan>
       </div>
       <div id="horarios" class="col s12">
         <horarioplan [plan]="plan"></horarioplan>
@@ -77,3 +70,6 @@
 <pagocobranza></pagocobranza>
 
 <registrocobranzaplan></registrocobranzaplan>
+
+<!-- Este componente debería estar dentro de "ClientesPlanComponent" y "CobranzasPlanComponent" -->
+<cancelarcontrato></cancelarcontrato>

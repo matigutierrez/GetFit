@@ -9,6 +9,7 @@ import { EditarPlanComponent } from "../editarplan/editarplan.component";
 import { InscripcionPlanComponent } from "../inscripcionplan/inscripcionplan.component";
 import { PagoCobranzaComponent } from "../../cobranzas/pagocobranza/pagocobranza.component";
 import { RegistroCobranzaPlanComponent } from "../registrocobranzaplan/registrocobranzaplan.component";
+import { CancelarContratoComponent } from "../cancelarcontrato/cancelarcontrato.component";
 
 @Component({
     selector: 'plan',
@@ -31,6 +32,9 @@ export class PlanComponent implements OnInit {
 
     @ViewChild(RegistroCobranzaPlanComponent)
     public registroCobranzaPlanComponent: RegistroCobranzaPlanComponent;
+
+    @ViewChild(CancelarContratoComponent)
+    public cancelarContratoComponent: CancelarContratoComponent;
 
     // El id del plan
     public id: number;

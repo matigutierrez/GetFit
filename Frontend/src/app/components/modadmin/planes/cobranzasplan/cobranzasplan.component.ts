@@ -9,11 +9,15 @@ import { Pago } from "../../../../models/Pago";
 import { PagoCobranzaComponent } from "../../cobranzas/pagocobranza/pagocobranza.component";
 import { RegistroCobranzaPlanComponent } from "../registrocobranzaplan/registrocobranzaplan.component";
 import { ContratoService } from "../../../../services/contrato.service";
+import { CancelarContratoComponent } from "../cancelarcontrato/cancelarcontrato.component";
+import { CobranzaHistorica } from "../../../../models/CobranzaHistorica";
+import { ContratoHistorico } from "../../../../models/ContratoHistorico";
 
 
 @Component({
     selector: 'cobranzasplan',
-    templateUrl: 'cobranzasplan.html'
+    templateUrl: 'cobranzasplan.html',
+    styleUrls: ['cobranzasplan.css']
 })
 export class CobranzasPlanComponent implements OnDestroy {
 
@@ -25,20 +29,36 @@ export class CobranzasPlanComponent implements OnDestroy {
     @Input("registroCobranzaPlanComponent")
     public registroCobranzaPlanComponent: RegistroCobranzaPlanComponent;
 
+    // Componente para cancelar contratos
+    @Input("cancelarContratoComponent")
+    public cancelarContratoComponent: CancelarContratoComponent;
+
     // Plan
     public plan: Plan;
 
     // Lista de cobranzas
     public cobranzas: Cobranza[];
 
+    // Lista de cobranzas historicas
+    public cobranzasHistoricas: CobranzaHistorica[];
+
     // Lista de contratos
     public contratos: Contrato[];
+
+    // Lista de contratos historicos
+    public contratosHistoricos: ContratoHistorico[];
 
     // Canal de contratos
     private contratoChannel: any;
 
+    // Canal de contratos historicos
+    private contratoHistoricoChannel: any;
+
     // Canal de cobranzas
     private cobranzaChannel: any;
+
+    // Canal de cobranzas historicas
+    private cobranzaHistoricaChannel: any;
 
     // Canal de pagos
     private pagoChannel: any;
@@ -58,10 +78,18 @@ export class CobranzasPlanComponent implements OnDestroy {
         this.contratoChannel.bind("update", data => { this.onUpdateContrato(data) });
         this.contratoChannel.bind("delete", data => { this.onDeleteContrato(data) });
 
+        this.contratoHistoricoChannel = this._pusherService.getPusher().subscribe('contrato_historico');
+        this.contratoHistoricoChannel.bind("create", data => { this.onCreateContratoHistorico(data) });
+        this.contratoHistoricoChannel.bind("update", data => { this.onUpdateContratoHistorico(data) });
+
         this.cobranzaChannel = this._pusherService.getPusher().subscribe('cobranza');
         this.cobranzaChannel.bind("create", data => { this.onCreateCobranza(data) });
         this.cobranzaChannel.bind("update", data => { this.onUpdateCobranza(data) });
         this.cobranzaChannel.bind("delete", data => { this.onDeleteCobranza(data) });
+
+        this.cobranzaHistoricaChannel = this._pusherService.getPusher().subscribe('cobranza_historica');
+        this.cobranzaHistoricaChannel.bind("create", data => { this.onCreateCobranzaHistorica(data) });
+        this.cobranzaHistoricaChannel.bind("update", data => { this.onUpdateCobranzaHistorica(data) });
 
         this.pagoChannel = this._pusherService.getPusher().subscribe('pago');
         this.pagoChannel.bind("create", data => { this.onCreatePago(data) });
@@ -74,8 +102,14 @@ export class CobranzasPlanComponent implements OnDestroy {
         if (this.contratoChannel) {
             this.contratoChannel.unbind();
         }
+        if (this.contratoHistoricoChannel) {
+            this.contratoHistoricoChannel.unbind();
+        }
         if (this.cobranzaChannel) {
             this.cobranzaChannel.unbind();
+        }
+        if (this.cobranzaHistoricaChannel) {
+            this.cobranzaHistoricaChannel.unbind();
         }
         if (this.pagoChannel) {
             this.pagoChannel.unbind();
@@ -238,6 +272,82 @@ export class CobranzasPlanComponent implements OnDestroy {
         }
     }
 
+    public onCreateCobranzaHistorica(cobranzaHistorica: CobranzaHistorica) {
+        // Si se ha recibido la lista de cobranzas historicas
+        if (this.cobranzasHistoricas) {
+            // Agregar a lista de cobranzas historicas
+            this.cobranzasHistoricas.unshift(cobranzaHistorica);
+        }
+    }
+
+    public onUpdateCobranzaHistorica(cobranzaHistorica: CobranzaHistorica) {
+        // Si se ha recibido la lista de cobranzas historicas
+        if (this.cobranzasHistoricas) {
+            // Por cada cobranza historica
+            for (let i = 0; i < this.cobranzasHistoricas.length; i++) {
+                // Si coinciden los IDs
+                if (this.cobranzasHistoricas[i].id == cobranzaHistorica.id) {
+                    // Reemplazar cobranza historica
+                    this.cobranzasHistoricas[i] = cobranzaHistorica;
+                    break;
+                }
+            }
+        }
+
+        // Si se ha recibido la lista de cobranzas
+        if (this.cobranzas) {
+            // Por cada cobranza
+            for (let i = 0; i < this.cobranzas.length; i++) {
+                let cobranza: Cobranza = this.cobranzas[i];
+
+                // Si coinciden los IDs
+                if (cobranza.cobranza_historica.id == cobranzaHistorica.id) {
+                    // Reemplazar cobranza historica
+                    cobranza.cobranza_historica = cobranzaHistorica;
+                    break;
+                }
+            }
+        }
+    }
+
+    public onCreateContratoHistorico(contratoHistorico: ContratoHistorico) {
+        // Si se ha recibido la lista de contratos historicos
+        if (this.contratosHistoricos) {
+            // Agregar a la lista de contratos historicos
+            this.contratosHistoricos.unshift(contratoHistorico);
+        }
+    }
+
+    public onUpdateContratoHistorico(contratoHistorico: ContratoHistorico) {
+        // Si se ha recibido la lista de contratos historicos
+        if (this.contratosHistoricos) {
+            // Por cada contrato historico
+            for (let i = 0; i < this.contratosHistoricos.length; i++) {
+                // Si los IDs coinciden
+                if (this.contratosHistoricos[i].id == contratoHistorico.id) {
+                    // Reemplazar contrato historico
+                    this.contratosHistoricos[i] = contratoHistorico;
+                    break;
+                }
+            }
+        }
+
+        // Si se ha recibido la lista de contratos
+        if (this.contratos) {
+            // Por cada contrato
+            for (let i = 0; i < this.contratos.length; i++) {
+                let contrato: Contrato = this.contratos[i];
+
+                // Si los IDs coinciden
+                if (contrato.contrato_historico.id == contratoHistorico.id) {
+                    // Reemplazar contrato historico
+                    contrato.contrato_historico = contratoHistorico;
+                    break;
+                }
+            }
+        }
+    }
+
     @Input("plan")
     public set setPlan(plan: Plan) {
         // Guardar el plan
@@ -272,22 +382,57 @@ export class CobranzasPlanComponent implements OnDestroy {
             }
         );
 
+        this._planService.getContratosCobranzasHistoricas(plan).subscribe(
+            Response => {
+                // Guardar contratos historicos
+                this.contratosHistoricos = Response;
+
+                // Incializar cobranzas historicas
+                this.cobranzasHistoricas = [];
+
+                // Por cada contrato historico
+                for (let i = 0; i < this.contratosHistoricos.length; i++) {
+                    let contratoHistorico: ContratoHistorico = this.contratosHistoricos[i];
+                    let cobranzasHistoricas: CobranzaHistorica[] = contratoHistorico.cobranzas_historicas;
+
+                    // Por cada cobranza historica
+                    for (let j = 0; j < cobranzasHistoricas.length; j++) {
+
+                        let cobranzaHistorica: CobranzaHistorica = cobranzasHistoricas[j];
+
+                        // Asignar contrato historico a cobranza
+                        cobranzaHistorica.contrato_historico = contratoHistorico;
+
+                        // Agregar a lista de cobranzas historicas
+                        this.cobranzasHistoricas.push(cobranzaHistorica);
+
+                    }
+
+                }
+
+            }
+        );
+
     }
 
     public registrar(): void {
+        // Al registrar una cobranza
         this.registroCobranzaPlanComponent.abrir(this.plan);
     }
 
     public abrirCobranza(cobranza: Cobranza): void {
+        // Al abrir el componente de pago de una cobranza
         this.pagoCobranzaComponent.abrir(cobranza);
     }
 
     public deleteCobranza(id: number): void {
+        // Al eliminar una cobranza
         this._cobranzaService.delete(id).subscribe(null);
     }
 
-    public deleteContrato(id: number): void {
-        this._contratoService.delete(id).subscribe(null);
+    public deleteContrato(contrato: Contrato): void {
+        // Al eliminar un contrato
+        this.cancelarContratoComponent.abrir(contrato);
     }
 
 }

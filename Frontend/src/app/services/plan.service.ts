@@ -9,6 +9,7 @@ import { Horario } from '../models/Horario';
 import { Contrato } from '../models/Contrato';
 import { SolicitudPlan } from '../models/SolicitudPlan';
 import { Cobranza } from '../models/Cobranza';
+import { ContratoHistorico } from '../models/ContratoHistorico';
 
 @Injectable({
   providedIn: 'root'
@@ -45,8 +46,16 @@ export class PlanService {
     return this._http.get<Contrato[]>(GLOBAL.url + 'plan/' + plan.id + '/contratos');
   }
 
+  public getContratosHistoricos(plan: Plan): Observable<ContratoHistorico[]> {
+    return this._http.get<ContratoHistorico[]>(GLOBAL.url + 'plan/' + plan.id + '/contratoshistoricos');
+  }
+
   public getContratosCobranzas(plan: Plan): Observable<Contrato[]> {
     return this._http.get<Contrato[]>(GLOBAL.url + 'plan/' + plan.id + '/contratoscobranzas');
+  }
+
+  public getContratosCobranzasHistoricas(plan: Plan): Observable<ContratoHistorico[]> {
+    return this._http.get<ContratoHistorico[]>(GLOBAL.url + 'plan/' + plan.id + '/contratoscobranzashistoricas');
   }
 
   public getContratosToken(): Observable<Contrato[]> {

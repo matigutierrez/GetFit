@@ -58,10 +58,12 @@ class WebpayController extends Controller
 
             // Buscar cobranza
             $cobranza = Cobranza::find($id);
-            $cobranzaHistorica = $cobranza->cobranza_historica;
 
-            // Existe cobranza?
+            // Si la cobranza existe
             if ( isset($cobranza) ) {
+                // Obtener cobranza historica
+                $cobranzaHistorica = $cobranza->cobranza_historica;
+
                 // El monto de la cobranza es el mismo?
                 if ( $cobranzaHistorica->cob_monto == $monto ) {
                     // Validar transaccion
@@ -79,6 +81,12 @@ class WebpayController extends Controller
                     $pago->save();
 
                     $this->pusher->trigger('pago', 'create', $pago);
+
+                    // Eliminar cobranza
+                    Cobranza::destroy($cobranza->id);
+
+                    // Avisar por pusher
+                    $this->pusher->trigger('cobranza', 'delete', $cobranza->id);
 
                 }
 

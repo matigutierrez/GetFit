@@ -71,7 +71,9 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('plan/{id}/clientessolicitando', 'PlanController@clientesSolicitando');
 	Route::get('plan/{id}/horarios', 'PlanController@horarios');
 	Route::get('plan/{id}/contratos', 'PlanController@contratos');
+	Route::get('plan/{id}/contratoshistoricos', 'PlanController@contratosHistoricos');
 	Route::get('plan/{id}/contratoscobranzas', 'PlanController@contratosCobranzas');
+	Route::get('plan/{id}/contratoscobranzashistoricas', 'PlanController@contratosCobranzasHistoricas');
 	Route::get('plan/{id}/solicitudes', 'PlanController@solicitudesPlan');
 
 	Route::apiResource('profesor', 'ProfesorController');

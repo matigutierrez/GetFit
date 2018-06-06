@@ -107,7 +107,7 @@ class CobranzaHistoricaController extends Controller
         $cobranzaHist->pago;
         $cobranzaHist->contrato_historico;
 
-        $this->pusher->trigger('cobranza_historica', 'create', $cobranzaHist);
+        $this->pusher->trigger('cobranza_historica', 'update', $cobranzaHist);
     }
 
     /**

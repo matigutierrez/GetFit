@@ -159,6 +159,16 @@ class PlanController extends Controller
     }
 
     /**
+     * Obtener los contratos historicos de un plan
+     * 
+     * @param  int  $id
+     * @return \App\ContratoHistorico
+     */
+    public function contratosHistoricos($id) {
+        return Plan::find($id)->contratos_historicos;
+    }
+
+    /**
      * Obtener los contratos de un plan con sus cobranzas
      * 
      * @param  int  $id
@@ -166,6 +176,16 @@ class PlanController extends Controller
      */
     public function contratosCobranzas($id) {
         return Plan::find($id)->contratos()->with('cobranzas.cobranza_historica.contrato_historico')->get();
+    }
+
+    /**
+     * Obtener los contratos historicos de un plan con sus cobranzas historicas
+     * 
+     * @param  int  $id
+     * @return \App\ContratoHistorico
+     */
+    public function contratosCobranzasHistoricas($id) {
+        return Plan::find($id)->contratos_historicos()->with('cobranzas_historicas')->get();
     }
 
     /**

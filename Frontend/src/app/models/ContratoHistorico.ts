@@ -1,6 +1,7 @@
 import { Cliente } from "./Cliente";
 import { Plan } from "./Plan";
 import { Cobranza } from "./Cobranza";
+import { CobranzaHistorica } from "./CobranzaHistorica";
 
 export class ContratoHistorico {
 
@@ -12,7 +13,7 @@ export class ContratoHistorico {
 
     public cliente: Cliente;
     public plan: Plan;
-    public cobranzas: Cobranza[];
+    public cobranzas_historicas: CobranzaHistorica[];
 
     public archivo: any;
 
@@ -26,7 +27,7 @@ export class ContratoHistorico {
 
         this.cliente = null;
         this.plan = null;
-        this.cobranzas = null;
+        this.cobranzas_historicas = null;
 
         this.archivo = null;
 

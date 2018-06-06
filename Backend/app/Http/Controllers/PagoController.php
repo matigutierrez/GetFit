@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pago;
+use App\Contrato;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;
 
@@ -47,9 +48,22 @@ class PagoController extends Controller
         $pago->tgf_cobranza_historica_id = $request->tgf_cobranza_historica_id;
         $pago->tgf_metodo_pago_id = $request->tgf_metodo_pago_id;
 
+        // Guardar pago
         $pago->save();
 
+        // Avisar sobre pago por pusher
         $this->pusher->trigger('pago', 'create', $pago);
+
+        // Al registrar un pago, la cobranza debería desaparecer, pero mantenerse historica
+        $cobranza = $pago->cobranza_historica->cobranza;
+
+        if ( isset($cobranza) ) {
+            // Eliminar cobranza
+            Cobranza::destroy($cobranza->id);
+
+            // Avisar por pusher
+            $this->pusher->trigger('cobranza', 'delete', $cobranza->id);
+        }
 
         return $pago->id;
     }

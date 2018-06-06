@@ -33,7 +33,7 @@
                 <i class="material-icons">date_range</i>
               </a>
             </td>
-            <td>{{plan.pla_capacidad - plan.contratos.length}}</td>
+            <td>{{plan.pla_capacidad - plan.contratos.length}}/{{plan.pla_capacidad}}</td>
             <td>
               {{plan.contratos.length}}
               <a (click)="abrirContratos(plan.contratos)">

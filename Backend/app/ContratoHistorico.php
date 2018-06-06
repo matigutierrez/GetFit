@@ -32,7 +32,7 @@ class ContratoHistorico extends Model
     	return $this->belongsTo('App\Plan', 'tgf_plan_id');
     }
 
-    public function cobranzas() {
-        return $this->hasMany('App\Cobranza', 'tgf_contrato_id');
+    public function cobranzas_historicas() {
+        return $this->hasMany('App\CobranzaHistorica', 'tgf_contrato_historico_id');
     }
 }

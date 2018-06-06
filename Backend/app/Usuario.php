@@ -15,25 +15,23 @@ class Usuario extends Authenticatable
     protected $primarykey = 'id';
 
     protected $fillable = [
-        'usu_fecha_registro',
-        'usu_correo',
-        'password',
-
         'tgf_cliente_id',
         'tgf_profesor_id',
-        'tgf_rol_id'
+        'tgf_rol_id',
+        'usu_fecha_registro',
+        'usu_correo',
+        'password'
     ];
 
     protected $hidden = ['password', 'remember_token',];
 
-    protected $appends = ['rol'];
+    protected $with = ['rol'];
 
     const CREATED_AT = 'usu_fecha_registro';
     const UPDATED_AT = null;
 
-    public function getRolAttribute() {
-        //return $this->belongsTo('App\Rol', 'tgf_rol_id');
-        return Rol::find($this->tgf_rol_id);
+    public function rol() {
+        return $this->belongsTo('App\Rol', 'tgf_rol_id');
     }
 
     public function cliente() {

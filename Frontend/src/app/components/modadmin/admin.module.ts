@@ -37,7 +37,7 @@ import { ExtraModule } from '../extra/extra.module';
 import { PagoCobranzaComponent } from './cobranzas/pagocobranza/pagocobranza.component';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { HorarioPlanComponent } from './planes/horarioplan/horarioplan.component';
-import { ClientesPlanComponent } from './planes/clientes/clientesplan.component';
+import { ClientesPlanComponent } from './planes/clientesplan/clientesplan.component';
 import { EditarPlanComponent } from './planes/editarplan/editarplan.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { ProfesoresPlanComponent } from './planes/profesoresplan/profesoresplan.component';
@@ -47,6 +47,7 @@ import { EditarClienteComponent } from './clientes/editarcliente/editarcliente.c
 import { PlanesClienteComponent } from './clientes/planes/planescliente.component';
 import { CobranzasPlanComponent } from './planes/cobranzasplan/cobranzasplan.component';
 import { RegistroCobranzaPlanComponent } from './planes/registrocobranzaplan/registrocobranzaplan.component';
+import { CancelarContratoComponent } from './planes/cancelarcontrato/cancelarcontrato.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { RegistroCobranzaPlanComponent } from './planes/registrocobranzaplan/reg
     EditarPlanComponent,
     ClientesPlanComponent,
     CobranzasPlanComponent,
+    CancelarContratoComponent,
     RegistroCobranzaPlanComponent,
     RegistroPlanComponent,
     HorarioPlanComponent,
