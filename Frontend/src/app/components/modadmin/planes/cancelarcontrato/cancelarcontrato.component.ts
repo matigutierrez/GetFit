@@ -13,7 +13,7 @@ export class CancelarContratoComponent {
     public modal = new EventEmitter<string | MaterializeAction>();
 
     // Objeto del contrato
-    private contrato: Contrato;
+    public contrato: Contrato;
 
     public constructor(
         private _contratoService: ContratoService
