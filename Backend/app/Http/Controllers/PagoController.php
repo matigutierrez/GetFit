@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pago;
+use App\Cobranza;
 use App\Contrato;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;

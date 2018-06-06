@@ -7,6 +7,7 @@ import { Contrato } from "../../../../models/Contrato";
 import { ContratoService } from "../../../../services/contrato.service";
 import { HorarioComponent } from "../../../extra/horario/horario.component";
 import { PusherService } from "../../../../services/pusher.service";
+import { CancelarContratoComponent } from "../../planes/cancelarcontrato/cancelarcontrato.component";
 
 @Component({
     selector: 'planescliente',
@@ -17,9 +18,16 @@ export class PlanesClienteComponent implements OnDestroy {
     @Input("horarioComponent")
     public horarioComponent: HorarioComponent;
 
+    @Input("cancelarContratoComponent")
+    public cancelarContratoComponent: CancelarContratoComponent;
+
+    // Cliente actual
     public cliente: Cliente;
+
+    // Lista de contratos del cliente
     public contratos: Contrato[];
 
+    // Canal de pusher
     private contratoChannel: any;
 
     public constructor(
@@ -45,53 +53,38 @@ export class PlanesClienteComponent implements OnDestroy {
     public onCreate(contrato: Contrato) {
         // Si se han recibido contratos
         if ( this.contratos ) {
-
             this.contratos.unshift(contrato);
-
         }
     }
 
     public onUpdate(contrato: Contrato) {
         // Si se han recibido contratos
         if ( this.contratos ) {
-
             // Por cada contrato
             for (let i = 0; i < this.contratos.length; i++) {
-
                 // Comparar id de contratos
                 if ( this.contratos[i].id == contrato.id ) {
-
                     // Actualizar contrato modificado
                     this.contratos[i] = contrato;
                     break;
-
                 }
-
             }
-
         }
     }
 
     public onDelete(id: number) {
         // Si se han recibido contratos
         if ( this.contratos ) {
-
             // Por cada contrato
             for (let i = 0; i < this.contratos.length; i++) {
-
                 // Comparar id de contratos
                 if ( this.contratos[i].id == id ) {
-
                     // Eliminar contrato
                     this.contratos.splice(i, 1);
                     break;
-
                 }
-
             }
-
         }
-
     }
 
     public abrirContrato(contrato: Contrato) {
@@ -103,7 +96,7 @@ export class PlanesClienteComponent implements OnDestroy {
     }
 
     public deleteContrato(contrato: Contrato) {
-        this._contratoService.delete(contrato.id).subscribe(null);
+        this.cancelarContratoComponent.abrir(contrato);
     }
 
     @Input("cliente")

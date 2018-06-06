@@ -32,7 +32,7 @@
                         <table class="responsive-table striped highlight">
                             <thead>
                                 <tr>
-                                    <th>Cliente</th>
+                                    <th>Plan</th>
                                     <th>Fecha</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
@@ -43,8 +43,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cobranza of cobranzas | paginate: { id: 'cobranzasPlan', itemsPerPage: 6, currentPage: p }; index as i;">
-                                    <td>{{cobranza.cobranza_historica.contrato_historico.cliente.cli_nombres}} {{cobranza.cobranza_historica.contrato_historico.cliente.cli_apellidos}}</td>
+                                <tr *ngFor="let cobranza of cobranzas | paginate: { id: 'cobranzasCliente', itemsPerPage: 6, currentPage: p }; index as i;">
+                                    <td>{{cobranza.cobranza_historica.contrato_historico.plan.pla_nombre}}</td>
                                     <td>{{cobranza.cobranza_historica.cob_fecha}}</td>
                                     <td>{{cobranza.cobranza_historica.cob_monto}}</td>
                                     <td>
@@ -68,7 +68,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            <pagination-controls id="cobranzasPlan" (pageChange)="p = $event"></pagination-controls>
+                            <pagination-controls id="cobranzasCliente" (pageChange)="p = $event"></pagination-controls>
                         </table>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         <table class="responsive-table striped highlight">
                             <thead>
                                 <tr>
-                                    <th>Cliente</th>
+                                    <th>Plan</th>
                                     <th>Fecha</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
@@ -96,8 +96,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cobranza_historica of cobranzasHistoricas | paginate: { id: 'cobranzasHistPlan', itemsPerPage: 6, currentPage: p }; index as i;">
-                                    <td>{{cobranza_historica.contrato_historico.cliente.cli_nombres}} {{cobranza_historica.contrato_historico.cliente.cli_apellidos}}</td>
+                                <tr *ngFor="let cobranza_historica of cobranzasHistoricas | paginate: { id: 'cobranzasHistCliente', itemsPerPage: 6, currentPage: p }; index as i;">
+                                    <td>{{cobranza_historica.contrato_historico.plan.pla_nombre}}</td>
                                     <td>{{cobranza_historica.cob_fecha}}</td>
                                     <td>{{cobranza_historica.cob_monto}}</td>
                                     <td>
@@ -113,7 +113,7 @@
                                     -->
                                 </tr>
                             </tbody>
-                            <pagination-controls id="cobranzasHistPlan" (pageChange)="p = $event"></pagination-controls>
+                            <pagination-controls id="cobranzasHistCliente" (pageChange)="p = $event"></pagination-controls>
                         </table>
                     </div>
                 </div>
@@ -124,6 +124,7 @@
 
 </div>
 
+<!--
 <div class="fixed-action-btn horizontal click-to-toggle">
     <a class="btn-floating btn-large blue-grey darken-2">
         <i class="material-icons">add</i>
@@ -136,3 +137,4 @@
         </li>
     </ul>
 </div>
+-->

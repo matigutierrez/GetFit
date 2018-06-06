@@ -15,6 +15,8 @@ class Pago extends Model
         'pag_fecha'
     ];
 
+    protected $with = ['metodo_pago'];
+
     const CREATED_AT = 'pag_fecha';
     const UPDATED_AT = null;
 
@@ -22,7 +24,7 @@ class Pago extends Model
     	return $this->belongsTo('App\CobranzaHistorica', 'tgf_cobranza_historica_id');
     }
 
-    public function metodoPago() {
+    public function metodo_pago() {
     	return $this->belongsTo('App\MetodoPago', 'tgf_metodo_pago_id');
     }
 

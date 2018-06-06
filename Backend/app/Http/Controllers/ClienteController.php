@@ -198,7 +198,17 @@ class ClienteController extends Controller
      * @return \App\Cobranza
      */
     public function cobranzas($id) {
-        return Cliente::find($id)->cobranzas_historicas;
+        return Cliente::find($id)->cobranzas()->with('cobranza_historica.contrato_historico')->get();
+    }
+
+    /**
+     * Obtener cobranzas historicas de un cliente
+     * 
+     * @param  int  $id
+     * @return \App\CobranzaHistorica
+     */
+    public function cobranzas_historicas($id) {
+        return Cliente::find($id)->cobranzas_historicas()->with('contrato_historico')->get();
     }
 
     /**

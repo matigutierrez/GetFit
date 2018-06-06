@@ -8,8 +8,6 @@ import { RegistroClienteComponent } from '../registrocliente/registrocliente.com
 import { Contrato } from '../../../../models/Contrato';
 import { ContratosComponent } from '../contratos/contratos.component';
 import { Usuario } from '../../../../models/Usuario';
-declare var $: any;
-declare var jQuery: any;
 
 @Component({
   selector: 'clientes',

@@ -25,7 +25,7 @@
             <td>{{cobranza.cobranza_historica.cob_fecha}}</td>
             <td>{{cobranza.cobranza_historica.cob_monto}}</td>
             <td>
-              <i *ngIf="cobranza.cobranza_historica.pago" class="material-icons">check</i>
+              <p *ngIf="cobranza.cobranza_historica.pago">{{cobrana.cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
               <i *ngIf="!cobranza.cobranza_historica.pago" class="material-icons">close</i>
             </td>
             <td><a *ngIf="!cobranza.cobranza_historica.pago" (click)="abrirCobranza(cobranza)"><i class="material-icons">check</i></a></td>

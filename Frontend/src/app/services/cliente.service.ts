@@ -6,6 +6,8 @@ import { Cliente } from '../models/Cliente';
 import { Plan } from '../models/Plan';
 import { Contrato } from '../models/Contrato';
 import { SolicitudPlan } from '../models/SolicitudPlan';
+import { Cobranza } from '../models/Cobranza';
+import { CobranzaHistorica } from '../models/CobranzaHistorica';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +61,15 @@ export class ClienteService {
   }
 
   public getPlanes(cliente: Cliente): Observable<Plan[]> {
-    return this._http.get<Plan[]>(GLOBAL.url + '/cliente/' + cliente.id + '/planes');
+    return this._http.get<Plan[]>(GLOBAL.url + 'cliente/' + cliente.id + '/planes');
+  }
+
+  public getCobranzas(cliente: Cliente): Observable<Cobranza[]> {
+    return this._http.get<Cobranza[]>(GLOBAL.url + 'cliente/' + cliente.id + '/cobranzas');
+  }
+
+  public getCobranzasHistoricas(cliente: Cliente): Observable<CobranzaHistorica[]> {
+    return this._http.get<CobranzaHistorica[]>(GLOBAL.url + 'cliente/' + cliente.id + '/cobranzashistoricas');
   }
 
 }

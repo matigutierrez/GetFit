@@ -1,0 +1,6 @@
+.tabs-vertical {
+    flex-direction: column;
+    height: 100%;
+    float: left;
+    width: 100%;
+}

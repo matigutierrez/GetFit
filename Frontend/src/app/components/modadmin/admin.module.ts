@@ -44,11 +44,12 @@ import { ProfesoresPlanComponent } from './planes/profesoresplan/profesoresplan.
 import { ContratosComponent } from './clientes/contratos/contratos.component';
 import { EditarProfesorComponent } from './profesores/editarprofesor/editarprofesor.component';
 import { EditarClienteComponent } from './clientes/editarcliente/editarcliente.component';
-import { PlanesClienteComponent } from './clientes/planes/planescliente.component';
+import { PlanesClienteComponent } from './clientes/planescliente/planescliente.component';
 import { CobranzasPlanComponent } from './planes/cobranzasplan/cobranzasplan.component';
 import { RegistroCobranzaPlanComponent } from './planes/registrocobranzaplan/registrocobranzaplan.component';
 import { CancelarContratoComponent } from './planes/cancelarcontrato/cancelarcontrato.component';
 import { EliminarSedeComponent } from './sedes/eliminarsede/eliminarsede.component';
+import { CobranzasClienteComponent } from './clientes/cobranzascliente/cobranzascliente.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { EliminarSedeComponent } from './sedes/eliminarsede/eliminarsede.compone
     PlanesClienteComponent,
     EditarClienteComponent,
     RegistroClienteComponent,
+    CobranzasClienteComponent,
     
     // Componentes de cobranza
     ContratosComponent,

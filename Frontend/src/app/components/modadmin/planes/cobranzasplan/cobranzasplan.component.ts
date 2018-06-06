@@ -170,8 +170,8 @@ export class CobranzasPlanComponent implements OnDestroy {
     }
 
     public onCreateCobranza(cobranza: Cobranza) {
-        // Si se ha recibido la lista de cobranzas del plan
-        if (this.cobranzas) {
+        // Si se ha recibido la lista de contratos, y la lista de cobranzas del plan
+        if (this.contratos && this.cobranzas) {
             // Por cada contrato
             for (let i = 0; i < this.contratos.length; i++) {
                 let contrato: Contrato = this.contratos[i];
@@ -234,6 +234,21 @@ export class CobranzasPlanComponent implements OnDestroy {
                 }
             }
         }
+
+        // Si se ha recibido la lista de cobranzas historicas
+        if (this.cobranzasHistoricas) {
+            // Por cada cobranza historica
+            for (let i = 0; i < this.cobranzasHistoricas.length; i++) {
+                let cobranzaHistorica: CobranzaHistorica = this.cobranzasHistoricas[i];
+
+                // Si el pago pertenece a la cobranza historica
+                if (pago.tgf_cobranza_historica_id == cobranzaHistorica.id) {
+                    // Asignar pago a la cobranza historica
+                    cobranzaHistorica.pago = pago;
+                    break;
+                }
+            }
+        }
     }
 
     public onUpdatePago(pago: Pago) {
@@ -275,8 +290,11 @@ export class CobranzasPlanComponent implements OnDestroy {
     public onCreateCobranzaHistorica(cobranzaHistorica: CobranzaHistorica) {
         // Si se ha recibido la lista de cobranzas historicas
         if (this.cobranzasHistoricas) {
-            // Agregar a lista de cobranzas historicas
-            this.cobranzasHistoricas.unshift(cobranzaHistorica);
+            // Si la cobranza historica pertenece al plan
+            if (cobranzaHistorica.contrato_historico.tgf_plan_id == this.plan.id) {
+                // Agregar a lista de cobranzas historicas
+                this.cobranzasHistoricas.unshift(cobranzaHistorica);
+            }
         }
     }
 
@@ -313,8 +331,11 @@ export class CobranzasPlanComponent implements OnDestroy {
     public onCreateContratoHistorico(contratoHistorico: ContratoHistorico) {
         // Si se ha recibido la lista de contratos historicos
         if (this.contratosHistoricos) {
-            // Agregar a la lista de contratos historicos
-            this.contratosHistoricos.unshift(contratoHistorico);
+            // Si el contrato historico pertenece al plan
+            if (contratoHistorico.tgf_plan_id == this.plan.id) {
+                // Agregar a la lista de contratos historicos
+                this.contratosHistoricos.unshift(contratoHistorico);
+            }
         }
     }
 
