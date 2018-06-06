@@ -40,6 +40,9 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     // Cobranza a registrar
     public cobranzaHistorica: CobranzaHistorica = new CobranzaHistorica();
 
+    // Indicar que se encuentra registrando la cobranza
+    public registrando: boolean;
+
     public constructor(
         private _clienteService: ClienteService,
         private _cobranzaService: CobranzaService,
@@ -65,6 +68,7 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     public limpiar(): void {
         this.contrato = null;
         this.contratos = null;
+        this.registrando = false;
         this.cobranzaHistorica = new CobranzaHistorica();
     }
 
@@ -117,6 +121,10 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     }
 
     public cerrar() {
+        // Limpiar componente
+        this.limpiar();
+
+        // Cerrar modal
         this.modal.emit({ action: "modal", params: ['close'] });
     }
 
@@ -125,21 +133,17 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
 
         // Validar contrato
         if (this.cobranzaHistorica.tgf_contrato_historico_id != null && this.cobranzaHistorica.cob_monto != null) {
+            // Indicar que se encuentra registrando la cobranza
+            this.registrando = true;
 
             // Guardar cobranza
             this._cobranzaHistoricaService.save(this.cobranzaHistorica).subscribe(
                 Response => {
-
                     // Cerrar modal
                     this.cerrar();
-
-                    // Eliminar datos de formulario
-                    this.limpiar();
                 }
             );
-
         }
-
     }
 
 }

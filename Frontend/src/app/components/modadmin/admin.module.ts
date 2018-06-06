@@ -48,6 +48,7 @@ import { PlanesClienteComponent } from './clientes/planes/planescliente.componen
 import { CobranzasPlanComponent } from './planes/cobranzasplan/cobranzasplan.component';
 import { RegistroCobranzaPlanComponent } from './planes/registrocobranzaplan/registrocobranzaplan.component';
 import { CancelarContratoComponent } from './planes/cancelarcontrato/cancelarcontrato.component';
+import { EliminarSedeComponent } from './sedes/eliminarsede/eliminarsede.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { CancelarContratoComponent } from './planes/cancelarcontrato/cancelarcon
     // Componentes de sede
     SedesComponent,
     RegistroSedeComponent,
+    EliminarSedeComponent,
 
     // Componentes de notificacion
     NotificacionComponent,

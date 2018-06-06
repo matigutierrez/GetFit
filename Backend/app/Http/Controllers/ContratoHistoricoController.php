@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contrato;
 use App\ContratoHistorico;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class ContratoHistoricoController extends Controller
 {

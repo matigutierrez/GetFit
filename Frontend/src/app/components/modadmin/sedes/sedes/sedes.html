@@ -9,27 +9,29 @@
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Dirección</th>
             <th></th>
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let sede of sedes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+          <tr *ngFor="let sede of sedes | paginate: { id: 'sedes', itemsPerPage: 6, currentPage: p }; index as i;">
             <td>{{sede.sed_nombre}}</td>
+            <td>{{sede.sed_direccion}}</td>
             <td>
               <a>
                 <i class="material-icons">settings</i>
               </a>
             </td>
             <td>
-              <a>
+              <a (click)="deleteSede(sede)">
                 <i class="material-icons">close</i>
               </a>
             </td>
           </tr>
         </tbody>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls id="sedes" (pageChange)="p = $event"></pagination-controls>
       </table>
     </div>
   </div>
@@ -41,7 +43,7 @@
   </a>
   <ul>
     <li>
-      <a class="btn-floating light-blue" (click)="registroSede.abrir()">
+      <a class="btn-floating light-blue" (click)="registrarSede()">
         <i class="material-icons">people</i>
       </a>
     </li>
@@ -49,3 +51,4 @@
 </div>
 
 <registrosede></registrosede>
+<eliminarsede></eliminarsede>

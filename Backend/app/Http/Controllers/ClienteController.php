@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use JWTAuth;
 use App\Cliente;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;
+
+use JWTAuth;
 
 class ClienteController extends Controller
 {

@@ -81,6 +81,9 @@ export class ClientesPlanComponent implements OnDestroy {
         if (this.contratoChannel) {
             this.contratoChannel.unbind();
         }
+        if (this.contratoHistoricoChannel) {
+            this.contratoHistoricoChannel.unbind();
+        }
         if (this.solicitudChannel) {
             this.solicitudChannel.unbind();
         }
@@ -98,19 +101,17 @@ export class ClientesPlanComponent implements OnDestroy {
 
     public okSolicitud(solicitud: SolicitudPlan) {
         // Eliminar una solicitud de plan
-        this._solicitudPlanService.delete(solicitud.id).subscribe(
-            Response => {
-                // Crear un contrato historico
-                let contratoHistorico: ContratoHistorico = new ContratoHistorico();
+        this._solicitudPlanService.delete(solicitud.id).subscribe(null);
 
-                // Fijar cliente y plan
-                contratoHistorico.tgf_cliente_id = solicitud.tgf_cliente_id;
-                contratoHistorico.tgf_plan_id = solicitud.tgf_plan_id;
+        // Crear un contrato historico
+        let contratoHistorico: ContratoHistorico = new ContratoHistorico();
 
-                // Guardar contrato
-                this._contratoHistoricoService.save(contratoHistorico, null).subscribe(null);
-            }
-        );
+        // Fijar cliente y plan
+        contratoHistorico.tgf_cliente_id = solicitud.tgf_cliente_id;
+        contratoHistorico.tgf_plan_id = solicitud.tgf_plan_id;
+
+        // Guardar contrato
+        this._contratoHistoricoService.save(contratoHistorico, null).subscribe(null);
     }
 
     public onCreateContrato(contrato: Contrato) {

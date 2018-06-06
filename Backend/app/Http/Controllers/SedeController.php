@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Sede;
 use Illuminate\Http\Request;
+use Pusher\Laravel\PusherManager;
 
 class SedeController extends Controller
 {
+
+    private $pusher;
+
+    public function __construct(PusherManager $pusher) {
+        $this->pusher = $pusher;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,12 +43,15 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return Sede::insertGetId([
-            'sed_nombre' => $request->sed_nombre,
-            'sed_direccion' => $request->sed_direccion,
-        ]);
+        $sede = new Sede;
+        $sede->sed_nombre = $request->sed_nombre;
+        $sede->sed_direccion = $request->sed_direccion;
 
+        $sede->save();
+
+        $this->pusher->trigger('sede', 'create', $sede);
+
+        return $sede->id;
     }
 
     /**
@@ -76,6 +87,9 @@ class SedeController extends Controller
     {
         $sede = Sede::find($id);
         $sede->update($request->all());
+
+        $this->pusher->trigger('sede', 'update', $sede);
+
         return ['update' => true];
     }
 
@@ -88,6 +102,9 @@ class SedeController extends Controller
     public function destroy($id)
     {
         Sede::destroy($id);
+
+        $this->pusher->trigger('sede', 'delete', $id);
+
         return ['delete' => true];
     }
 

@@ -1,46 +1,110 @@
-import { Component, EventEmitter, OnInit, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SedeService } from '../../../../services/sede.service';
 import { Cliente } from '../../../../models/Cliente';
 import { Sede } from '../../../../models/Sede';
 import { MaterializeAction } from 'angular2-materialize';
 import { RegistroSedeComponent } from '../registrosede/registrosede.component';
-declare var $:any;
-declare var jQuery:any;
+import { PusherService } from '../../../../services/pusher.service';
+import { EliminarSedeComponent } from '../eliminarsede/eliminarsede.component';
+declare var $: any;
+declare var jQuery: any;
 
 @Component({
   selector: 'sedes',
-  templateUrl: 'sedes.html',
-  providers: [SedeService]
-  
+  templateUrl: 'sedes.html'
 })
+export class SedesComponent implements OnDestroy {
 
-export class SedesComponent implements OnInit {
-
+  // Componente para registrar sedes
   @ViewChild(RegistroSedeComponent)
-  public registroSede: RegistroSedeComponent;
+  public registroSedeComponent: RegistroSedeComponent;
 
+  // Componente para eliminar sedes
+  @ViewChild(EliminarSedeComponent)
+  public eliminarSedeComponent: EliminarSedeComponent;
+
+  // Lista de sedes
   public sedes: Sede[];
-  public modalActionsUsuario = new EventEmitter<string|MaterializeAction>();
+
+  // Pagina actual
   public p: number = 1;
+
+  // Canal de sedes
+  private sedeChannel: any;
 
   public constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _sedeService: SedeService
+    private _sedeService: SedeService,
+    private _pusherService: PusherService
+  ) {
 
-  ){
+    // Solicitar lista de sedes a backend
     this._sedeService.query().subscribe(
-      Response  => {
+      Response => {
         this.sedes = Response;
-      }, error => {
-        console.log(<any>error);
       }
     );
+
+    // Pusher
+    this.sedeChannel = this._pusherService.getPusher().subscribe('sede');
+    this.sedeChannel.bind("create", data => { this.onCreateSede(new Sede(data)) });
+    this.sedeChannel.bind("update", data => { this.onUpdateSede(new Sede(data)) });
+    this.sedeChannel.bind("delete", data => { this.onDeleteSede(data) });
+
   }
 
-  public ngOnInit(){
-    //console.log('el componente sede ha sido cargado');
+  public ngOnDestroy() {
+    if (this.sedeChannel) {
+      this.sedeChannel.unbind();
+    }
   }
-  
+
+  public onCreateSede(sede: Sede) {
+    // Si se ha recibido la lista de sedes
+    if (this.sedes) {
+      // Agregar nueva sede
+      this.sedes.push(sede);
+    }
+  }
+
+  public onUpdateSede(sede: Sede) {
+    // Si se ha recibido la lista de sedes
+    if (this.sedes) {
+      // Por cada sede
+      for (let i = 0; i < this.sedes.length; i++) {
+        // Si los IDs coinciden
+        if (this.sedes[i].id == sede.id) {
+          // Reemplazar sede
+          this.sedes[i] = sede;
+          break;
+        }
+      }
+    }
+  }
+
+  public onDeleteSede(id: number) {
+    // Si se ha recibido la lista de sedes
+    if (this.sedes) {
+      // Por cada sede
+      for (let i = 0; i < this.sedes.length; i++) {
+        // Si los IDs coinciden
+        if (this.sedes[i].id == id) {
+          // Quitar sede de la lista
+          this.sedes.splice(i, 1);
+          break;
+        }
+      }
+    }
+  }
+
+  public registrarSede() {
+    this.registroSedeComponent.abrir();
+  }
+
+  public deleteSede(sede: Sede) {
+    this.eliminarSedeComponent.abrir(sede);
+  }
+
 }

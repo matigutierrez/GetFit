@@ -22,7 +22,7 @@ export class ContratoHistoricoService {
         formulario.append('contrato', new Blob([JSON.stringify(ContratoHistorico.getJSON(contrato))], { type: 'application/json' }));
         formulario.append('acta', acta);
 
-        let req = new HttpRequest('POST', GLOBAL.url + "contrato", formulario, { reportProgress: true });
+        let req = new HttpRequest('POST', GLOBAL.url + "contratohistorico", formulario, { reportProgress: true });
 
         return this._http.request<number>(req);
     }

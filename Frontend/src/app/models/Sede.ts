@@ -4,11 +4,9 @@ export class Sede {
 	public sed_nombre: string;
 	public sed_direccion: string;
 
-	public constructor() {
+	public constructor(json?: any) {
 
-		this.id = null;
-		this.sed_nombre = null;
-		this.sed_direccion = null;
+		Object.assign(this, json);
 
 	}
 

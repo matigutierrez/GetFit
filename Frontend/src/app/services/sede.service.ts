@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { GLOBAL } from './global';
 import { Sede } from "../models/Sede";
 
@@ -24,11 +25,13 @@ export class SedeService {
   }
 
   public query(): Observable<Sede[]> {
-    return this._http.get<Sede[]>(GLOBAL.url + 'sede');
+    return this._http.get<Sede[]>(GLOBAL.url + 'sede')
+      .pipe( map( sedes => sedes.map(sede => new Sede(sede))) );
   }
 
   public get(id: number): Observable<Sede> {
-    return this._http.get<Sede>(GLOBAL.url + 'sede/' + id);
+    return this._http.get<Sede>(GLOBAL.url + 'sede/' + id)
+      .pipe( map(sede => new Sede(sede)) );
   }
 
   public delete(id: number): Observable<any> {

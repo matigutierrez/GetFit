@@ -45,6 +45,9 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
   // Cobranza a registrar
   public cobranzaHistorica: CobranzaHistorica = new CobranzaHistorica();
 
+  // Indicar que se encuentra registrando la cobranza
+  public registrando: boolean;
+
   public constructor(
     private _clienteService: ClienteService,
     private _cobranzaService: CobranzaService,
@@ -73,9 +76,6 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
           this.autocompleteInit.data[nombre] = null;
           this.clientesPorNombre[nombre] = cliente;
         }
-      },
-      error => {
-        console.error(error);
       }
     );
 
@@ -95,6 +95,7 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
 
     this.cliente = null;
     this.contratos = null;
+    this.registrando = false;
     this.cobranzaHistorica = new CobranzaHistorica();
     this.clienteInput.nativeElement.value = "";
 
@@ -111,11 +112,8 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
       this._clienteService.getContratos(this.cliente).subscribe(
         Response => {
           this.contratos = Response;
-        },
-        error => {
-          console.error(error);
         }
-      )
+      );
 
     }
 
@@ -136,22 +134,16 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
 
     // Validar contrato
     if (this.cobranzaHistorica.tgf_contrato_historico_id != null && this.cobranzaHistorica.cob_monto != null) {
+      // Indicar que se encuentra registrando la cobranza
+      this.registrando = true;
 
-      // Guardar cobranza
+      // Registrar cobranza
       this._cobranzaHistoricaService.save(this.cobranzaHistorica).subscribe(
         Response => {
-
           // Cerrar modal
           this.cerrar();
-
-          // Eliminar datos de formulario
-          this.limpiar();
-        },
-        error => {
-          console.error(error);
         }
       );
-
     }
 
   }
@@ -165,6 +157,10 @@ export class RegistroCobranzaComponent implements OnInit, AfterViewChecked {
   }
 
   public cerrar() {
+    // Eliminar datos de formulario
+    this.limpiar();
+
+    // Cerrar modal
     this.modal.emit({ action: "modal", params: ['close'] });
   }
 
