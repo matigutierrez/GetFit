@@ -249,5 +249,4 @@ class ClienteController extends Controller
         return $contratos;
     }
 
-     * 
 }
