@@ -3,10 +3,9 @@ export class MetodoPago {
     public id: number;
     public mep_nombre: string;
 
-    public constructor() {
+    public constructor(json?: any) {
 
-        this.id = null;
-        this.mep_nombre = null;
+        Object.assign(this, json);
 
     }
 

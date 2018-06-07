@@ -17,19 +17,13 @@ export class ContratoHistorico {
 
     public archivo: any;
 
-    public constructor() {
+    public constructor(json?: any) {
 
-        this.id = null;
-        this.tgf_cliente_id = null;
-        this.tgf_plan_id = null;
-        this.con_fecha_inicio = null;
-        this.con_acta = null;
+        Object.assign(this, json);
 
-        this.cliente = null;
-        this.plan = null;
-        this.cobranzas_historicas = null;
-
-        this.archivo = null;
+        if (this.cliente) { this.cliente = new Cliente(this.cliente) };
+        if (this.plan) { this.plan = new Plan(this.plan) };
+        if (this.cobranzas_historicas) { this.cobranzas_historicas = this.cobranzas_historicas.map(cobranzaHistorica => new CobranzaHistorica(cobranzaHistorica)) };
 
     }
 

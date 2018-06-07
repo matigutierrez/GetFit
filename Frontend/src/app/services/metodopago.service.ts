@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { MetodoPago } from "../models/MetodoPago";
 import { GLOBAL } from "./global";
 
@@ -16,11 +17,13 @@ export class MetodoPagoService {
     }
 
     public query(): Observable<MetodoPago[]> {
-        return this._http.get<MetodoPago[]>(GLOBAL.url + 'metodopago');
+        return this._http.get<MetodoPago[]>(GLOBAL.url + 'metodopago')
+            .pipe(map(metodos => metodos.map(metodo => new MetodoPago(metodo))));
     }
 
     public get(id: number): Observable<MetodoPago> {
-        return this._http.get<MetodoPago>(GLOBAL.url + 'metodopago/' + id);
+        return this._http.get<MetodoPago>(GLOBAL.url + 'metodopago/' + id)
+            .pipe(map(metodo => new MetodoPago(metodo)));
     }
 
 }

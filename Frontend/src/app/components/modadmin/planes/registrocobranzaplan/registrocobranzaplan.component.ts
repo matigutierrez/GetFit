@@ -5,11 +5,14 @@ import { Cliente } from "../../../../models/Cliente";
 import { Contrato } from "../../../../models/Contrato";
 import { Cobranza } from "../../../../models/Cobranza";
 import { ClienteService } from "../../../../services/cliente.service";
-import { CobranzaService } from "../../../../services/cobranza.service";
-import { ContratoService } from "../../../../services/contrato.service";
 import { PlanService } from "../../../../services/plan.service";
 import { CobranzaHistorica } from "../../../../models/CobranzaHistorica";
 import { CobranzaHistoricaService } from "../../../../services/cobranzahistorica.service";
+import { AutocompleteList } from "../../../../extra/AutocompleteList";
+import { MetodoPago } from "../../../../models/MetodoPago";
+import { MetodoPagoService } from "../../../../services/metodopago.service";
+import { Pago } from "../../../../models/Pago";
+import { PagoService } from "../../../../services/pago.service";
 
 declare var Materialize: any;
 
@@ -22,17 +25,17 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     // El plan en el cual se está trabajando
     public plan: Plan;
 
+    // En caso de registrar un pago
+    public pago: Pago = new Pago();
+
     // Modal del componente
     public modal = new EventEmitter<string | MaterializeAction>();
 
     // Lista de contratos
     public contratos: Contrato[];
 
-    // Mapeo de contratos por nombre y apellido de cliente
-    private contratosPorNombre: any;
-
     // Datos para el componente autocomplete
-    private autocompleteInit: any;
+    private autocomplete: AutocompleteList;
 
     // Contrato seleccionado para cobrar
     private contrato: Contrato;
@@ -40,22 +43,30 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     // Cobranza a registrar
     public cobranzaHistorica: CobranzaHistorica = new CobranzaHistorica();
 
+    // Lista de metodos de pago
+    public metodos: MetodoPago[];
+
     // Indicar que se encuentra registrando la cobranza
     public registrando: boolean;
 
     public constructor(
         private _clienteService: ClienteService,
-        private _cobranzaService: CobranzaService,
         private _cobranzaHistoricaService: CobranzaHistoricaService,
-        private _contratoService: ContratoService,
-        private _planService: PlanService
+        private _planService: PlanService,
+        private _metodoPagoService: MetodoPagoService,
+        private _pagoService: PagoService
     ) {
 
         // Inicializar autocomplete
-        this.autocompleteInit = {};
-        this.autocompleteInit.data = {};
-        this.autocompleteInit.onAutocomplete = (nombre: string) => this.seleccionar(nombre);
-        this.contratosPorNombre = {};
+        this.autocomplete = new AutocompleteList();
+        this.autocomplete.onSelect = (contrato: Contrato) => this.seleccionar(contrato);
+
+        // Obtener lista de metodos de pago
+        this._metodoPagoService.query().subscribe(
+            Response => {
+                this.metodos = Response;
+            }
+        );
 
     }
 
@@ -66,15 +77,17 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
     }
 
     public limpiar(): void {
+        this.pago = new Pago();
         this.contrato = null;
         this.contratos = null;
         this.registrando = false;
         this.cobranzaHistorica = new CobranzaHistorica();
+        this.autocomplete.clean();
     }
 
-    public seleccionar(nombre: string) {
+    public seleccionar(contrato: Contrato) {
         // Al seleccionar un contrato del autocomplete
-        this.contrato = this.contratosPorNombre[nombre];
+        this.contrato = contrato;
 
         if (this.contrato) {
             // Actualizar id de contrato
@@ -90,26 +103,14 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
         this.plan = plan;
 
         // Limpiar autocomplete
-        this.autocompleteInit.data = {};
-        this.contratosPorNombre = {};
+        this.autocomplete.clean();
 
         // Obtener contratos del plan
         this._planService.getContratos(this.plan).subscribe(
             Response => {
                 // Guardar contratos
                 this.contratos = Response;
-
-                for (let i = 0; i < this.contratos.length; i++) {
-                    // Por cada cliente
-                    let contrato: Contrato = this.contratos[i];
-                    let cliente: Cliente = contrato.contrato_historico.cliente;
-                    let nombre: string = cliente.cli_nombres + " " + cliente.cli_apellidos;
-
-                    // Agregar a autocomplete y referenciar por nombre
-                    this.autocompleteInit.data[nombre] = null;
-                    this.contratosPorNombre[nombre] = contrato;
-                }
-
+                this.autocomplete.putOptions(this.contratos);
             }
         );
 
@@ -139,8 +140,23 @@ export class RegistroCobranzaPlanComponent implements AfterViewChecked {
             // Guardar cobranza
             this._cobranzaHistoricaService.save(this.cobranzaHistorica).subscribe(
                 Response => {
-                    // Cerrar modal
-                    this.cerrar();
+                    // Si hay método de pago, agregar un pago
+                    if ( this.pago.tgf_metodo_pago_id ) {
+                        // Agregar ID de cobranza historica al pago
+                        this.pago.tgf_cobranza_historica_id = Response;
+
+                        // Registrar pago
+                        this._pagoService.save(this.pago).subscribe(
+                            Response => {
+                                // Cerrar modal
+                                this.cerrar();
+                            }
+                        );
+
+                    } else {
+                        // Cerrar modal
+                        this.cerrar();
+                    }
                 }
             );
         }

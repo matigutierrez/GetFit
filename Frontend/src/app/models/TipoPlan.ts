@@ -4,11 +4,9 @@ export class TipoPlan {
     public tpl_nombre: string;
     public tpl_color: string;
 
-    public constructor() {
+    public constructor(json?: any) {
 
-        this.id = null;
-        this.tpl_nombre = null;
-        this.tpl_color = null;
+        Object.assign(this, json);
 
     }
 

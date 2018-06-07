@@ -13,21 +13,17 @@ export class Usuario {
 	public rol: Rol;
 	public cliente: Cliente;
 
-	public constructor() {
+	public constructor(json?: any) {
 
-		this.id = null;
-		this.tgf_cliente_id = null;
-		this.tgf_profesor_id = null;
-		this.usu_correo = null;
-		this.password = null;
+		Object.assign(this, json);
 
-		this.rol = null;
-		this.cliente = null;
-		
+		if (this.rol) { this.rol = new Rol(this.rol) };
+		if (this.cliente) { this.cliente = new Cliente(this.cliente) };
+
 	}
 
 	public static getJSON(usuario: Usuario): any {
-		if ( usuario.password && usuario.password.length > 0 ) {
+		if (usuario.password && usuario.password.length > 0) {
 			return {
 				id: usuario.id,
 				tgf_cliente_id: usuario.tgf_cliente_id,

@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+          <tr *ngFor="let usuario of usuarios | paginate: { id: 'usuarios', itemsPerPage: 6, currentPage: p }; index as i;">
             <td>{{usuario.usu_correo}}</td>
             <td>{{usuario.rol.rol_nombre}}</td>
             <td>
@@ -30,8 +30,23 @@
             </td>
           </tr>
         </tbody>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls id="usuarios" (pageChange)="p = $event"></pagination-controls>
       </table>
     </div>
   </div>
 </div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+  <a class="btn-floating btn-large blue-grey darken-2">
+    <i class="material-icons">add</i>
+  </a>
+  <ul>
+    <li>
+      <a class="btn-floating light-blue" (click)="registrarUsuario()">
+        <i class="material-icons">account_circle</i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<registrousuario></registrousuario>

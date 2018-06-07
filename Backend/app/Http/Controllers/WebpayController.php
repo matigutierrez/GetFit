@@ -80,6 +80,9 @@ class WebpayController extends Controller
                     // Guardar pago
                     $pago->save();
 
+                    // Cachear metodo de pago
+                    $pago->metodo_pago;
+
                     $this->pusher->trigger('pago', 'create', $pago);
 
                     // Eliminar cobranza

@@ -249,13 +249,5 @@ class ClienteController extends Controller
         return $contratos;
     }
 
-    /**
-     * Obtener los planes solicitados por un cliente
      * 
-     * @param  int  $id
-     */
-    public function planesSolicitados($id) {
-        return Cliente::find($id)->planesSolicitados;
-    }
-
 }

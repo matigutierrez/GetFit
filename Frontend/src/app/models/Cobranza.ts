@@ -10,15 +10,13 @@ export class Cobranza {
 
     public contrato: Contrato;
     public cobranza_historica: CobranzaHistorica;
-    
-    public constructor() {
 
-        this.id = null;
-        this.tgf_cobranza_historica_id = null;
-        this.tgf_contrato_id = null;
+    public constructor(json?: any) {
 
-        this.contrato = null;
-        this.cobranza_historica = null;
+        Object.assign(this, json);
+
+        if (this.contrato) { this.contrato = new Contrato(this.contrato) };
+        if (this.cobranza_historica) { this.cobranza_historica = new CobranzaHistorica(this.cobranza_historica) };
 
     }
 

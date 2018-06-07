@@ -7,8 +7,7 @@ declare var Materialize: any;
 
 @Component({
     selector: 'registrosede',
-    templateUrl: 'registrosede.html',
-    providers: [SedeService]
+    templateUrl: 'registrosede.html'
 })
 export class RegistroSedeComponent implements AfterViewChecked {
 

@@ -16,26 +16,19 @@ export class Horario {
     public plan: Plan;
 
     // Este atributo no es persistente
-    public action: boolean;
+    public action: boolean = false;
 
-    public constructor() {
+    public constructor(json?: any) {
 
-        this.id = null;
-        this.tgf_hora_dia_id = null;
-        this.tgf_dia_semana_id = null;
-        this.tgf_plan_id = null;
-        this.hor_recuperativo = false;
-        this.hor_inactivo = false;
+        Object.assign(this, json);
 
-        this.hora = null;
-        this.dia = null;
-        this.plan = null;
-
-        this.action = false;
+        if (this.hora) { this.hora = new HoraDia(this.hora) };
+        if (this.dia) { this.dia = new DiaSemana(this.dia) };
+        if (this.plan) { this.plan = new Plan(this.plan) };
 
     }
 
-    public static getJSON(horario:Horario): any {
+    public static getJSON(horario: Horario): any {
         return {
             id: horario.id,
             tgf_hora_dia_id: horario.tgf_hora_dia_id,

@@ -4,11 +4,9 @@ export class HoraDia {
     public hor_inicio: string;
     public hor_fin: string;
 
-    public constructor() {
+    public constructor(json?: any) {
 
-        this.id = null;
-        this.hor_inicio = null;
-        this.hor_fin = null;
+        Object.assign(this, json);
 
     }
 

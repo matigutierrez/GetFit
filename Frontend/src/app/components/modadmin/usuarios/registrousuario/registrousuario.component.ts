@@ -1,49 +1,63 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, AfterViewChecked } from '@angular/core';
 import { UsuarioService } from '../../../../services/usuario.service';
-import { RolService } from '../../../../services/rol.service';
 import { Rol } from "../../../../models/Rol";
+import { Usuario } from '../../../../models/Usuario';
+import { MaterializeAction } from 'angular2-materialize';
+
+declare var Materialize: any;
 
 @Component({
-  selector: 'registrousuario',
-  templateUrl: 'registrousuario.html',
-  providers: [UsuarioService, RolService]
+    selector: 'registrousuario',
+    templateUrl: 'registrousuario.html'
 })
+export class RegistroUsuarioComponent implements AfterViewChecked {
 
-export class RegistroUsuarioComponent implements OnInit {
-  public usuario;
-  public selectOptions: Rol[];
-  @Output() modal = new EventEmitter();
-  @Input() client: string;
+    // Modal del componente
+    public modal = new EventEmitter<string | MaterializeAction>();
 
-  public constructor(
-    private _usuarioService: UsuarioService,
-    private _rolService: RolService
-  ){
-    this.usuario = {
-      "tgf_rol_id": "",
-      "tgf_cliente_id": "",
-      "usu_correo": "",
-      "password": ""
-    };
-    this._rolService.query().subscribe(
-      Response => {
-        this.selectOptions = Response;
-      },
-      Error => {
-        console.log(<any>Error);
-      }
-    );
-  }
+    // Usuario a registrar
+    public usuario: Usuario;
 
-  public ngOnInit(){
-    //console.log('el compenente registro-usuario ha sido cargado');
-  }
+    // Indicar que el usuario se está registrando
+    public registrando: boolean;
 
-  public onSubmit(){
-    if (this.client != undefined) {
-      this.usuario.tgf_cliente_id = this.client;
-      console.log(this.usuario);
-      this.modal.emit({modal: true});
+    public constructor(
+        private _usuarioService: UsuarioService
+    ) {
+
+        this.limpiar();
+
     }
-  }
+
+    public ngAfterViewChecked() {
+        if (Materialize.updateTextFields) {
+            Materialize.updateTextFields();
+        }
+    }
+
+    public limpiar() {
+        // Usuario a registrar
+        this.usuario = new Usuario();
+
+        // Rol de administrador
+        this.usuario.tgf_rol_id = 1;
+
+        // Indicar que no se encuentra registrando al usuario
+        this.registrando = false;
+    }
+
+    public onSubmit() {
+
+    }
+
+    public abrir() {
+        this.limpiar();
+        this.modal.emit({ action: "modal", params: ['open'] });
+    }
+
+    public cerrar() {
+        this.limpiar();
+        this.modal.emit({ action: "modal", params: ['close'] });
+    }
+
 }

@@ -11,14 +11,12 @@ export class SolicitudPlan {
     public plan: Plan;
     public cliente: Cliente;
 
-    public constructor() {
+    public constructor(json?: any) {
 
-        this.id = null;
-        this.tgf_plan_id = null;
-        this.tgf_cliente_id = null;
+        Object.assign(this, json);
 
-        this.plan = null;
-        this.cliente = null;
+        if (this.plan) { this.plan = new Plan(this.plan) };
+        if (this.cliente) { this.cliente = new Cliente(this.cliente) };
 
     }
 

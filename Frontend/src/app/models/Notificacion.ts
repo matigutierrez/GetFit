@@ -1,21 +1,18 @@
 import { Usuario } from "./Usuario";
-import { not } from "@angular/compiler/src/output/output_ast";
 
 export class Notificacion {
 
-    public id:number;
-    public not_titulo:string;
-    public not_contenido:string;
+    public id: number;
+    public not_titulo: string;
+    public not_contenido: string;
 
-    public usuarios:Usuario[];
+    public usuarios: Usuario[];
 
-    public constructor() {
-        
-        this.id = null;
-        this.not_titulo = null;
-        this.not_contenido = null;
+    public constructor(json?: any) {
 
-        this.usuarios = null;
+        Object.assign(this, json);
+
+        if (this.usuarios) { this.usuarios = this.usuarios.map(usuario => new Usuario(usuario)) };
 
     }
 

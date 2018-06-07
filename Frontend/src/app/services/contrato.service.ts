@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpRequest, HttpEvent } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Contrato } from "../models/Contrato";
 import { GLOBAL } from "./global";
 
@@ -20,19 +21,23 @@ export class ContratoService {
     }
 
     public query(): Observable<Contrato[]> {
-        return this._http.get<Contrato[]>(GLOBAL.url + "contrato");
+        return this._http.get<Contrato[]>(GLOBAL.url + "contrato")
+            .pipe(map(contratos => contratos.map(contrato => new Contrato(contrato))));
     }
 
     public get(id: number): Observable<Contrato> {
-        return this._http.get<Contrato>(GLOBAL.url + "contrato/" + id);
+        return this._http.get<Contrato>(GLOBAL.url + "contrato/" + id)
+            .pipe(map(contrato => new Contrato(contrato)));
     }
 
     public find(cliente_id: number, plan_id: number): Observable<Contrato> {
-        return this._http.get<Contrato>(GLOBAL.url + "contrato/find/" + cliente_id + "/" + plan_id);
+        return this._http.get<Contrato>(GLOBAL.url + "contrato/find/" + cliente_id + "/" + plan_id)
+            .pipe(map(contrato => new Contrato(contrato)));
     }
 
     public findToken(plan_id: number): Observable<Contrato> {
-        return this._http.get<Contrato>(GLOBAL.url + "contrato/findtoken/" + plan_id);
+        return this._http.get<Contrato>(GLOBAL.url + "contrato/findtoken/" + plan_id)
+            .pipe(map(contrato => new Contrato(contrato)));
     }
 
     public delete(id: number): Observable<any> {

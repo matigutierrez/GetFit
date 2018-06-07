@@ -17,7 +17,7 @@
                 <div class="col s12">
                     <div *ngIf="clientes" class="input-field">
                         <i class="material-icons prefix">person</i>
-                        <input id="nombre_cliente" type="text" #cliente name="cliente" autocomplete="off" materialize="autocomplete" [materializeParams]="[autocompleteInit]">
+                        <input id="nombre_cliente" type="text" #cliente name="cliente" autocomplete="off" materialize="autocomplete" [materializeParams]="[autocomplete]">
                         <label for="icon_prefix">Nombre del Cliente</label>
                     </div>
                 </div>
@@ -40,14 +40,24 @@
 
             <!-- Indicar monto -->
             <div class="row">
-                <div class="col s12">
+                <div class="col m6">
                     <div class="input-field">
                         <i class="material-icons prefix">attach_money</i>
                         <input id="last_name" type="number" name="cob_monto" [(ngModel)]="cobranzaHistorica.cob_monto">
                         <label for="icon_prefix">Monto</label>
                     </div>
                 </div>
+                <div class="col m6">
+                    <div class="input-field">
+                        <select name="tgf_metodo_pago_id" [(ngModel)]="pago.tgf_metodo_pago_id" materialize="material_select" [materializeSelectOptions]="metodos">
+                            <option [ngValue]="null">No Agregar Pago</option>
+                            <option *ngFor="let metodo of metodos" [ngValue]="metodo.id">{{metodo.mep_nombre}}</option>
+                        </select>
+                        <label for="icon_prefix">Método de Pago</label>
+                    </div>
+                </div>
             </div>
+            
             <div class="row">
                 <div class="col s12 l3 offset-l9">
                     <div class="right-align">

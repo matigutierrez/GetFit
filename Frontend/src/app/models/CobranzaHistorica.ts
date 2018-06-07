@@ -11,16 +11,13 @@ export class CobranzaHistorica {
 
     public contrato_historico: ContratoHistorico;
     public pago: Pago;
-    
-    public constructor() {
 
-        this.id = null;
-        this.tgf_contrato_historico_id = null;
-        this.cob_monto = null;
-        this.cob_fecha = null;
+    public constructor(json?: any) {
 
-        this.contrato_historico = null;
-        this.pago = null;
+        Object.assign(this, json);
+
+        if (this.contrato_historico) { this.contrato_historico = new ContratoHistorico(this.contrato_historico) };
+        if (this.pago) { this.pago = new Pago(this.pago) };
 
     }
 

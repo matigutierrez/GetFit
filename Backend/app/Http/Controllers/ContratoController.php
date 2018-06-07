@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Contrato;
 use App\ContratoHistorico;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Pusher\Laravel\PusherManager;
 

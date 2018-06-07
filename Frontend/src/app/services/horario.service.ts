@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { GLOBAL } from "./global";
 import { Horario } from "../models/Horario";
 
@@ -24,11 +25,13 @@ export class HorarioService {
     }
 
     public query(): Observable<Horario[]> {
-        return this._http.get<Horario[]>(GLOBAL.url + 'horario');
+        return this._http.get<Horario[]>(GLOBAL.url + 'horario')
+            .pipe(map(horarios => horarios.map(horario => new Horario(horario))));
     }
 
     public get(id: number): Observable<Horario> {
-        return this._http.get<Horario>(GLOBAL.url + 'horario/' + id);
+        return this._http.get<Horario>(GLOBAL.url + 'horario/' + id)
+            .pipe(map(horario => new Horario(horario)));
     }
 
     public delete(id: number): Observable<any> {

@@ -64,7 +64,8 @@ export class CobranzasPlanComponent implements OnDestroy {
     private pagoChannel: any;
 
     // Pagina actual de cobranzas
-    public p: number = 1;
+    public p1: number = 1;
+    public p2: number = 1;
 
     public constructor(
         private _planService: PlanService,

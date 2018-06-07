@@ -62,7 +62,7 @@ class CobranzaHistoricaController extends Controller
 
         // Cachear variables
         $cobranza->contrato;
-        $cobranza->cobranza_historica;
+        $cobranza->cobranza_historica->contrato_historico;
 
         $this->pusher->trigger('cobranza', 'create', $cobranza);
 
@@ -105,7 +105,7 @@ class CobranzaHistoricaController extends Controller
 
         // Cachear variables
         $cobranzaHist->pago;
-        $cobranzaHist->contrato_historico;
+        $cobranzaHist->contrato_historico->contrato_historico;
 
         $this->pusher->trigger('cobranza_historica', 'update', $cobranzaHist);
     }

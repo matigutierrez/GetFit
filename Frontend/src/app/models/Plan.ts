@@ -20,21 +20,14 @@ export class Plan {
 	public horarios: Horario[];
 	public contratos: Contrato[];
 	public tipo_plan: TipoPlan;
-	
-	public constructor() {
 
-		this.id = null;
-		this.tgf_sede_id = null;
-		this.tgf_tipo_plan_id = null;
-		this.pla_nombre = null;
-		this.pla_descripcion = null;
-		this.pla_costo = null;
-		this.pla_capacidad = null;
+	public constructor(json?: any) {
 
-		this.sede = null;
-		this.horarios = null;
-		this.contratos = null;
-		this.tipo_plan = null;
+		Object.assign(this, json);
+
+		if (this.horarios) { this.horarios = this.horarios.map(horario => new Horario(horario)) };
+		if (this.contratos) { this.contratos = this.contratos.map(contrato => new Contrato(contrato)) };
+		if (this.tipo_plan) { this.tipo_plan = new TipoPlan(this.tipo_plan) };
 
 	}
 

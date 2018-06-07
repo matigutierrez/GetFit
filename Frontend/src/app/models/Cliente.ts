@@ -1,7 +1,8 @@
 import { Usuario } from "./Usuario";
 import { Contrato } from "./Contrato";
+import { Autocompletable } from "../extra/Autocompletable";
 
-export class Cliente {
+export class Cliente implements Autocompletable {
 
 	public id: number;
 	public cli_rut: string;
@@ -14,22 +15,20 @@ export class Cliente {
 	public usuario: Usuario;
 	public contratos: Contrato[];
 
-	public constructor() {
-		
-		this.id = null;
-		this.cli_rut = null;
-		this.cli_nombres = null;
-		this.cli_apellidos = null;
-		this.cli_numerotelefonico = null;
-		this.cli_direccion = null;
-		this.cli_huella = null;
+	public constructor(json?: any) {
 
-		this.usuario = null;
-		this.contratos = null;
+		Object.assign(this, json);
+
+		if (this.usuario) { this.usuario = new Usuario(this.usuario) };
+		if (this.contratos) { this.contratos = this.contratos.map(contrato => new Contrato(contrato)) };
 
 	}
 
-	public static getJSON(cliente:Cliente): any {
+	public getOption(): string {
+		return this.cli_nombres + " " + this.cli_apellidos;
+	}
+
+	public static getJSON(cliente: Cliente): any {
 		return {
 			id: cliente.id,
 			cli_rut: cliente.cli_rut,
@@ -40,5 +39,5 @@ export class Cliente {
 			cli_huella: cliente.cli_huella
 		};
 	}
-	
+
 }

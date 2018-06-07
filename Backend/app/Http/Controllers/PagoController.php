@@ -52,6 +52,9 @@ class PagoController extends Controller
         // Guardar pago
         $pago->save();
 
+        // Cachear metodo de pago
+        $pago->metodo_pago;
+
         // Avisar sobre pago por pusher
         $this->pusher->trigger('pago', 'create', $pago);
 
