@@ -48,17 +48,17 @@ export class CobranzasClienteComponent implements OnDestroy {
     ) {
 
         this.cobranzaChannel = this._pusherService.getPusher().subscribe('cobranza');
-        this.cobranzaChannel.bind("create", data => { this.onCreateCobranza(data) });
-        this.cobranzaChannel.bind("update", data => { this.onUpdateCobranza(data) });
+        this.cobranzaChannel.bind("create", data => { this.onCreateCobranza(new Cobranza(data)) });
+        this.cobranzaChannel.bind("update", data => { this.onUpdateCobranza(new Cobranza(data)) });
         this.cobranzaChannel.bind("delete", data => { this.onDeleteCobranza(data) });
 
         this.cobranzaHistoricaChannel = this._pusherService.getPusher().subscribe('cobranza_historica');
-        this.cobranzaHistoricaChannel.bind("create", data => { this.onCreateCobranzaHistorica(data) });
-        this.cobranzaHistoricaChannel.bind("update", data => { this.onUpdateCobranzaHistorica(data) });
+        this.cobranzaHistoricaChannel.bind("create", data => { this.onCreateCobranzaHistorica(new CobranzaHistorica(data)) });
+        this.cobranzaHistoricaChannel.bind("update", data => { this.onUpdateCobranzaHistorica(new CobranzaHistorica(data)) });
 
         this.pagoChannel = this._pusherService.getPusher().subscribe('pago');
-        this.pagoChannel.bind("create", data => { this.onCreatePago(data) });
-        this.pagoChannel.bind("update", data => { this.onUpdatePago(data) });
+        this.pagoChannel.bind("create", data => { this.onCreatePago(new Pago(data)) });
+        this.pagoChannel.bind("update", data => { this.onUpdatePago(new Pago(data)) });
         this.pagoChannel.bind("delete", data => { this.onDeletePago(data) });
 
     }

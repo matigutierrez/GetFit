@@ -34,6 +34,7 @@
                                 <tr>
                                     <th>Plan</th>
                                     <th>Fecha</th>
+                                    <th>Mes</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
                                     <th></th>
@@ -45,7 +46,8 @@
                             <tbody>
                                 <tr *ngFor="let cobranza of cobranzas | paginate: { id: 'cobranzasCliente', itemsPerPage: 6, currentPage: p }; index as i;">
                                     <td>{{cobranza.cobranza_historica.contrato_historico.plan.pla_nombre}}</td>
-                                    <td>{{cobranza.cobranza_historica.cob_fecha}}</td>
+                                    <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString()}}</td>
+                                    <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
                                     <td>{{cobranza.cobranza_historica.cob_monto}}</td>
                                     <td>
                                         <p *ngIf="cobranza.cobranza_historica.pago">{{cobrana.cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
@@ -89,6 +91,7 @@
                                 <tr>
                                     <th>Plan</th>
                                     <th>Fecha</th>
+                                    <th>Mes</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
                                     <th></th>
@@ -98,7 +101,8 @@
                             <tbody>
                                 <tr *ngFor="let cobranza_historica of cobranzasHistoricas | paginate: { id: 'cobranzasHistCliente', itemsPerPage: 6, currentPage: p }; index as i;">
                                     <td>{{cobranza_historica.contrato_historico.plan.pla_nombre}}</td>
-                                    <td>{{cobranza_historica.cob_fecha}}</td>
+                                    <td>{{cobranza_historica.cob_fecha.toLocaleString()}}</td>
+                                    <td>{{cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
                                     <td>{{cobranza_historica.cob_monto}}</td>
                                     <td>
                                         <p *ngIf="cobranza_historica.pago">{{cobranza_historica.pago.metodo_pago.mep_nombre}}</p>

@@ -14,6 +14,7 @@
           <tr>
             <th>Nombre Plan</th>
             <th>Fecha</th>
+            <th>Mes</th>
             <th>Monto</th>
             <th>Estado</th>
             <th></th>
@@ -23,7 +24,8 @@
         <tbody>
           <tr *ngFor="let cobranza of cobranzas | paginate: { itemsPerPage: 6, currentPage: p }; index as i;"> 
             <td>{{cobranza.contrato.contrato_historico.plan.pla_nombre}}</td>
-            <td>{{cobranza.cobranza_historica.cob_fecha}}</td>
+            <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString()}}</td>
+            <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
             <td>${{cobranza.cobranza_historica.cob_monto}}</td>
             <td *ngIf="cobranza.cobranza_historica.pago"><a class="waves-effect waves-light btn">Descargar Boleta</a></td>
             <td *ngIf="!cobranza.cobranza_historica.pago"><a class="waves-effect waves-light btn" (click)="redirect(cobranza.id)">Pagar</a></td>

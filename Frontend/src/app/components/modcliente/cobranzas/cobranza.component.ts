@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CobranzaService } from '../../../services/cobranza.service';
 import { GLOBAL } from '../../../services/global';
@@ -6,11 +6,9 @@ import { Cobranza } from '../../../models/Cobranza';
 
 @Component({
   selector: 'cobranza',
-  templateUrl: 'cobranza.html',
-  providers: [CobranzaService]
+  templateUrl: 'cobranza.html'
 })
-
-export class CobranzaComponent implements OnInit {
+export class CobranzaComponent {
 
   // Lista de cobranzas
   public cobranzas: Cobranza[];
@@ -23,15 +21,14 @@ export class CobranzaComponent implements OnInit {
     private _router: Router,
     private _cobranzaService: CobranzaService
   ) {
+
+    // Solicitar las cobranzas del cliente a backend
     this._cobranzaService.getCobranzasCliente().subscribe(
       Response => {
         this.cobranzas = Response;
       }
     );
-  }
-
-  public ngOnInit() {
-    //console.log('el componente cobranza ha sido cargado');
+    
   }
 
   public redirect(id) {

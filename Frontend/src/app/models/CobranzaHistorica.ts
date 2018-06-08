@@ -7,7 +7,7 @@ export class CobranzaHistorica {
     public id: number;
     public tgf_contrato_historico_id: number;
     public cob_monto: number;
-    public cob_fecha: string;
+    public cob_fecha: Date;
 
     public contrato_historico: ContratoHistorico;
     public pago: Pago;
@@ -18,6 +18,7 @@ export class CobranzaHistorica {
 
         if (this.contrato_historico) { this.contrato_historico = new ContratoHistorico(this.contrato_historico) };
         if (this.pago) { this.pago = new Pago(this.pago) };
+        if (this.cob_fecha) { this.cob_fecha = new Date(this.cob_fecha) };
 
     }
 
