@@ -11,7 +11,7 @@ class Contrato extends Model
 
     protected $fillable = [
         'tgf_contrato_historico_id',
-        'tgf_plan_id'
+        'tgf_grupo_id'
     ];
 
     protected $with = ['contrato_historico'];
@@ -22,8 +22,8 @@ class Contrato extends Model
         return $this->belongsTo('App\ContratoHistorico', 'tgf_contrato_historico_id');
     }
 
-    public function plan() {
-        return $this->belongTo('App\Plan', 'tgf_plan_id');
+    public function grupo() {
+        return $this->belongTo('App\Grupo', 'tgf_grupo_id');
     }
 
     public function cobranzas() {

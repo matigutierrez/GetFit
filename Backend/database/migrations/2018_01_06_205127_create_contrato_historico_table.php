@@ -17,9 +17,9 @@ class CreateContratoHistoricoTable extends Migration
             $table->increments('id');
             $table->integer('tgf_cliente_id')->unsigned();
             $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('tgf_plan_id')->unsigned();
-            $table->foreign('tgf_plan_id')->references('id')->on('tgf_plan')->onDelete('cascade')->onUpdate('cascade');
-            $table->unique(['tgf_cliente_id', 'tgf_plan_id']);
+            $table->integer('tgf_grupo_id')->unsigned();
+            $table->foreign('tgf_grupo_id')->references('id')->on('tgf_grupo')->onDelete('cascade')->onUpdate('cascade');
+            $table->unique(['tgf_cliente_id', 'tgf_grupo_id']);
             $table->timestamp('con_fecha_inicio');
             $table->string('con_acta')->nullable();
         });

@@ -11,7 +11,7 @@ class ContratoHistorico extends Model
 
     protected $fillable = ['con_fecha_inicio', 'con_acta'];
 
-    protected $with = ['cliente', 'plan'];
+    protected $with = ['cliente', 'grupo'];
 
     const CREATED_AT = 'con_fecha_inicio';
     const UPDATED_AT = null;
@@ -28,8 +28,8 @@ class ContratoHistorico extends Model
     	return $this->hasMany('App\Asistencia', 'tgf_contrato_id');
     }
 
-    public function plan() {
-    	return $this->belongsTo('App\Plan', 'tgf_plan_id');
+    public function grupo() {
+    	return $this->belongsTo('App\Grupo', 'tgf_grupo_id');
     }
 
     public function cobranzas_historicas() {

@@ -7,8 +7,7 @@ import { Usuario } from "../../../../models/Usuario";
 
 @Component({
     selector: 'profesores',
-    templateUrl: 'profesores.html',
-    providers: [ProfesorService, PusherService]
+    templateUrl: 'profesores.html'
 })
 export class ProfesoresComponent implements OnDestroy {
 

@@ -5,9 +5,9 @@ import { HoraDia } from "../../../models/HoraDia";
 import { DiaSemana } from "../../../models/DiaSemana";
 import { HoraDiaService } from "../../../services/horadia.service";
 import { DiaSemanaService } from "../../../services/diasemana.service";
-import { Plan } from "../../../models/Plan";
+import { Grupo } from "../../../models/Grupo";
 import { PusherService } from "../../../services/pusher.service";
-import { PlanService } from "../../../services/plan.service";
+import { GrupoService } from "../../../services/grupo.service";
 
 @Component({
     selector: 'horario',
@@ -15,7 +15,7 @@ import { PlanService } from "../../../services/plan.service";
 })
 export class HorarioComponent implements OnDestroy {
 
-    private planes: Plan[];
+    private grupos: Grupo[];
 
     public mapHorario: any;
     public horario: Horario[];
@@ -29,7 +29,7 @@ export class HorarioComponent implements OnDestroy {
     public constructor(
         private horaDiaService: HoraDiaService,
         private diaSemanaService: DiaSemanaService,
-        private planService: PlanService,
+        private grupoService: GrupoService,
         private pusherService: PusherService
     ) {
 
@@ -77,14 +77,14 @@ export class HorarioComponent implements OnDestroy {
 
     public onCreate(horario: Horario): void {
 
-        for (let i = 0; i < this.planes.length; i++) {
+        for (let i = 0; i < this.grupos.length; i++) {
 
-            let plan = this.planes[i];
+            let grupo = this.grupos[i];
 
-            if (horario.tgf_plan_id == plan.id) {
+            if (horario.tgf_grupo_id == grupo.id) {
 
-                // Fijar un plan al objeto
-                horario.plan = plan;
+                // Fijar un grupo al objeto
+                horario.grupo = grupo;
 
                 this.putHorario(horario);
 
@@ -95,14 +95,14 @@ export class HorarioComponent implements OnDestroy {
     }
 
     public onUpdate(horario: Horario): void {
-        // Si el horario actualizado pertenece al plan
-        for (let i = 0; i < this.planes.length; i++) {
+        // Si el horario actualizado pertenece al grupo
+        for (let i = 0; i < this.grupos.length; i++) {
 
-            let plan = this.planes[i];
+            let grupo = this.grupos[i];
 
-            if (horario.tgf_plan_id == plan.id) {
+            if (horario.tgf_grupo_id == grupo.id) {
 
-                horario.plan = plan;
+                horario.grupo = grupo;
                 this.putHorario(horario);
 
             }
@@ -135,19 +135,19 @@ export class HorarioComponent implements OnDestroy {
 
     }
 
-    public abrir(planes: Plan[]): void {
+    public abrir(grupos: Grupo[]): void {
 
         this.mapHorario = {};
         this.horario = [];
-        this.planes = planes;
+        this.grupos = grupos;
 
-        // Por cada plan
-        for (let i = 0; i < planes.length; i++) {
+        // Por cada grupo
+        for (let i = 0; i < grupos.length; i++) {
 
-            let plan: Plan = planes[i];
+            let grupo: Grupo = grupos[i];
 
             // Solicitar horarios
-            this.planService.getHorarios(plan).subscribe(
+            this.grupoService.getHorarios(grupo).subscribe(
                 Response => {
 
                     for (let j = 0; j < Response.length; j++) {
@@ -155,8 +155,8 @@ export class HorarioComponent implements OnDestroy {
                         // Cada horario
                         let horario: Horario = Response[j];
 
-                        // Horario contiene el plan
-                        horario.plan = plan;
+                        // Horario contiene el grupo
+                        horario.grupo = grupo;
 
                         // Insertar horario a la tabla
                         this.putHorario(horario);

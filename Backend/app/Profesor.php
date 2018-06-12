@@ -23,8 +23,8 @@ class Profesor extends Model
         return $this->hasOne('App\Usuario', 'tgf_profesor_id');
     }
 
-    public function planes() {
-        return $this->belongsToMany('App\Plan', 'profesor_imparte_plan', 'tgf_profesor_id', 'tgf_plan_id');
+    public function grupos() {
+        return $this->belongsToMany('App\Grupo', 'profesor_imparte_grupo', 'tgf_profesor_id', 'tgf_grupo_id');
     }
 
 }

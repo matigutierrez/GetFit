@@ -5,8 +5,7 @@ import { Profesor } from "../../../../models/Profesor";
 
 @Component({
     selector: 'profesor',
-    templateUrl: 'profesor.html',
-    providers: [ProfesorService]
+    templateUrl: 'profesor.html'
 })
 export class ProfesorComponent {
 

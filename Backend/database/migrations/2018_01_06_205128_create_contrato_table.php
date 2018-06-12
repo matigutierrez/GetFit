@@ -17,8 +17,8 @@ class CreateContratoTable extends Migration
             $table->increments('id');
             $table->integer('tgf_contrato_historico_id')->unsigned();
             $table->foreign('tgf_contrato_historico_id')->references('id')->on('tgf_contrato_historico')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('tgf_plan_id')->unsigned();
-            $table->foreign('tgf_plan_id')->references('id')->on('tgf_plan')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('tgf_grupo_id')->unsigned();
+            $table->foreign('tgf_grupo_id')->references('id')->on('tgf_grupo')->onDelete('cascade')->onUpdate('cascade');
             $table->unique('tgf_contrato_historico_id');
         });
     }

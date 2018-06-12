@@ -172,13 +172,13 @@ class ClienteController extends Controller
     }
 
     /**
-     * Obtener los planes de un cliente
+     * Obtener los grupos de un cliente
      * 
      * @param  int  $id
-     * @return \App\Plan
+     * @return \App\Grupo
      */
-    public function planes($id) {
-        return Cliente::find($id)->planes;
+    public function grupos($id) {
+        return Cliente::find($id)->grupos;
     }
 
     /**
@@ -212,28 +212,28 @@ class ClienteController extends Controller
     }
 
     /**
-     * Obtener solicitudes de plan de cliente
+     * Obtener solicitudes de grupo de cliente
      * 
-     * @return \App\SolicitudPlan
+     * @return \App\SolicitudGrupo
      */
-    public function solicitudesPlanToken(AuthenticateController $auth) {
-        $solicitudes = $auth->getAuthenticatedUser()->cliente->solicitudesPlan;
+    public function solicitudesGrupoToken(AuthenticateController $auth) {
+        $solicitudes = $auth->getAuthenticatedUser()->cliente->solicitudesGrupo;
         $solicitudes->pluck('cliente');
-        $solicitudes->pluck('plan.horario');
-        $solicitudes->pluck('plan.sede');
+        $solicitudes->pluck('grupo.horario');
+        $solicitudes->pluck('grupo.sede');
 
         return $solicitudes;
     }
 
     /**
-     * Obtener solicitudes de plan de un cliente
+     * Obtener solicitudes de grupo de un cliente
      * 
-     * @return \App\SolicitudPlan
+     * @return \App\SolicitudGrupo
      */
-    public function solicitudesPlan($id) {
-        $solicitudes = Cliente::find($id)->solicitudesPlan;
+    public function solicitudesGrupo($id) {
+        $solicitudes = Cliente::find($id)->solicitudesGrupo;
         $solicitudes->pluck('cliente');
-        $solicitudes->pluck('plan');
+        $solicitudes->pluck('grupo');
 
         return $solicitudes;
     }

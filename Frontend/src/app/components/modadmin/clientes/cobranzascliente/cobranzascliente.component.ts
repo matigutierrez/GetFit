@@ -3,7 +3,7 @@ import { ClienteService } from "../../../../services/cliente.service";
 import { Cliente } from "../../../../models/Cliente";
 import { Cobranza } from "../../../../models/Cobranza";
 import { CobranzaHistorica } from "../../../../models/CobranzaHistorica";
-import { CancelarContratoComponent } from "../../planes/cancelarcontrato/cancelarcontrato.component";
+import { CancelarContratoComponent } from "../../grupos/cancelarcontrato/cancelarcontrato.component";
 import { Contrato } from "../../../../models/Contrato";
 import { PagoCobranzaComponent } from "../../cobranzas/pagocobranza/pagocobranza.component";
 import { PusherService } from "../../../../services/pusher.service";
@@ -76,7 +76,7 @@ export class CobranzasClienteComponent implements OnDestroy {
     }
 
     public onCreateCobranza(cobranza: Cobranza) {
-        // Si se ha recibido la lista de contratos, y la lista de cobranzas del plan
+        // Si se ha recibido la lista de contratos, y la lista de cobranzas del grupo
         if (this.cobranzas) {
             // Si la cobranza es para el cliente
             if ( cobranza.cobranza_historica.contrato_historico.tgf_cliente_id == this.cliente.id ) {

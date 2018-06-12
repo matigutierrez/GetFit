@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../services/cliente.service';
 import { RolService } from '../../services/rol.service';
 import { AuthService } from '../../services/auth.service';
+
 declare var $:any;
 declare var jQuery:any;
 
-
 @Component({
   selector: 'app-root',
-  templateUrl: './modprofesor.component.html',
-  providers: [AuthService, ClienteService, RolService]
+  templateUrl: './modprofesor.component.html'
 })
 export class ModProfesorComponent {
 

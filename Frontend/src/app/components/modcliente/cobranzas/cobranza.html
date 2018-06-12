@@ -12,7 +12,7 @@
       <table class="responsive-table striped highlight">
         <thead>
           <tr>
-            <th>Nombre Plan</th>
+            <th>Nombre Grupo</th>
             <th>Fecha</th>
             <th>Mes</th>
             <th>Monto</th>
@@ -23,7 +23,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let cobranza of cobranzas | paginate: { itemsPerPage: 6, currentPage: p }; index as i;"> 
-            <td>{{cobranza.contrato.contrato_historico.plan.pla_nombre}}</td>
+            <td>{{cobranza.contrato.contrato_historico.grupo.gru_nombre}}</td>
             <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString()}}</td>
             <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
             <td>${{cobranza.cobranza_historica.cob_monto}}</td>

@@ -113,12 +113,12 @@ class ProfesorController extends Controller
     }
 
     /**
-     * Retorna los planes de un profesor
+     * Retorna los grupos de un profesor
      * 
      * @param  int  $id
-     * @return \App\Plan
+     * @return \App\Grupo
      */
-    public function planes($id) {
-        return Profesor::find($id)->planes;
+    public function grupos($id) {
+        return Profesor::find($id)->grupos;
     }
 }

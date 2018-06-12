@@ -22,7 +22,7 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        return Horario::with('plan')->get();
+        return Horario::with('grupo')->get();
     }
 
     /**
@@ -46,7 +46,7 @@ class HorarioController extends Controller
         $horario = new Horario;
         $horario->tgf_hora_dia_id = $request->tgf_hora_dia_id;
         $horario->tgf_dia_semana_id = $request->tgf_dia_semana_id;
-        $horario->tgf_plan_id = $request->tgf_plan_id;
+        $horario->tgf_grupo_id = $request->tgf_grupo_id;
         $horario->hor_recuperativo = $request->hor_recuperativo;
         $horario->hor_inactivo = $request->hor_inactivo;
 

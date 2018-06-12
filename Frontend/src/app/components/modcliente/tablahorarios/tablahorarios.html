@@ -34,16 +34,16 @@
                         </td>
                         <td *ngFor="let dia of dias">
                             <div *ngIf="getHorarioActivo(hora.id, dia.id)">
-                                <!-- Boton para solicitar el plan-->
+                                <!-- Boton para solicitar el grupo-->
                                 <a
                                     materialize="tooltip"
                                     class="card-panel tooltipped lighten-2 center-align"
                                     style="display: block"
-                                    [ngStyle]="{'background-color': getHorario(hora.id, dia.id).plan.tipo_plan.tpl_color}"
+                                    [ngStyle]="{'background-color': getHorario(hora.id, dia.id).grupo.tipo_grupo.tgr_color}"
                                     data-position="bottom"
                                     data-tooltip="Click para solicitar!"
-                                    (click)="solicitar(getHorario(hora.id, dia.id).plan)">
-                                    {{getHorario(hora.id, dia.id).plan.pla_nombre}}
+                                    (click)="solicitar(getHorario(hora.id, dia.id).grupo)">
+                                    {{getHorario(hora.id, dia.id).grupo.gru_nombre}}
                                 </a>
                             </div>
                         </td>
@@ -51,12 +51,12 @@
                 </table>
             </div>
 
-            <!-- Lista con los tipos de planes -->
+            <!-- Lista con los tipos de grupos -->
             <div class="col s3">
-                <ul *ngIf="tipoPlanes">
-                    <li *ngFor="let tipoPlan of tipoPlanes">
-                        <i class="material-icons" [ngStyle]="{'color': tipoPlan.tpl_color}">assignment</i>
-                        {{tipoPlan.tpl_nombre}}
+                <ul *ngIf="tipoGrupos">
+                    <li *ngFor="let tipoGrupo of tipoGrupos">
+                        <i class="material-icons" [ngStyle]="{'color': tipoGrupo.tgr_color}">assignment</i>
+                        {{tipoGrupo.tgr_nombre}}
                     </li>
                 </ul>
             </div>
@@ -69,4 +69,4 @@
     </div>
 </div>
 
-<solicitarplan></solicitarplan>
+<solicitargrupo></solicitargrupo>

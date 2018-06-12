@@ -13,19 +13,19 @@ import { CobranzaComponent } from './cobranzas/cobranza.component';
 import { ModClienteComponent } from './modcliente.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { ClienteGuard } from '../../guards/ClienteGuard';
-import { PlanesComponent } from './planes/planes.component';
+import { GruposComponent } from './grupos/grupos.component';
 import { ExtraModule } from '../extra/extra.module';
 import { TablaHorariosComponent } from './tablahorarios/tablahorarios.component';
-import { SolicitarPlanComponent } from './tablahorarios/solicitarplan/solicitarplan.component';
+import { SolicitarGrupoComponent } from './tablahorarios/solicitargrupo/solicitargrupo.component';
 
 @NgModule({
   declarations: [
     ModClienteComponent,
     VistaClienteComponent,
     CobranzaComponent,
-    PlanesComponent,
+    GruposComponent,
     TablaHorariosComponent,
-    SolicitarPlanComponent
+    SolicitarGrupoComponent
   ],
   imports: [
     BrowserModule,

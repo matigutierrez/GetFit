@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, ViewChild, OnDestroy } from '@angular
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/Cliente';
-import { PlanService } from '../../../../services/plan.service';
+import { GrupoService } from '../../../../services/grupo.service';
 import { PusherService } from '../../../../services/pusher.service';
 import { RegistroClienteComponent } from '../registrocliente/registrocliente.component';
 import { Contrato } from '../../../../models/Contrato';
@@ -11,11 +11,8 @@ import { Usuario } from '../../../../models/Usuario';
 
 @Component({
   selector: 'clientes',
-  templateUrl: 'clientes.html',
-  providers: [ClienteService, PlanService, PusherService]
-
+  templateUrl: 'clientes.html'
 })
-
 export class ClientesComponent implements OnInit, OnDestroy {
 
   // Lista de clientes
@@ -43,7 +40,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router,
     private _clienteService: ClienteService,
-    private _planService: PlanService,
+    private _grupoService: GrupoService,
     private _pusherService: PusherService
 
   ) {

@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <!-- Seleccionar plan -->
+            <!-- Seleccionar grupo -->
             <div class="row tooltipped" data-position="bottom" data-tooltip="Para desplegar lista, seleccione cliente">
                 <div class="col s12">
                     <div class="input-field">
@@ -31,8 +31,8 @@
                         <!-- Select activo -->
                         <select [disabled]="!contratos" name="tgf_contrato_historico_id" [(ngModel)]="cobranzaHistorica.contrato_historico" (ngModelChange)="onChangeContrato()"
                             materialize="material_select">
-                            <option value="" disabled selected>Seleccionar Plan</option>
-                            <option *ngFor="let contrato of contratos" [ngValue]="contrato.contrato_historico">{{contrato.contrato_historico.plan.pla_nombre}}</option>
+                            <option value="" disabled selected>Seleccionar Grupo</option>
+                            <option *ngFor="let contrato of contratos" [ngValue]="contrato.contrato_historico">{{contrato.contrato_historico.grupo.gru_nombre}}</option>
                         </select>
                     </div>
                 </div>

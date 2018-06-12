@@ -1,14 +1,14 @@
 import { Component, ViewChild } from "@angular/core";
-import { Plan } from "../../../models/Plan";
+import { Grupo } from "../../../models/Grupo";
 import { HorarioService } from "../../../services/horario.service";
 import { Horario } from "../../../models/Horario";
 import { HoraDiaService } from "../../../services/horadia.service";
 import { HoraDia } from "../../../models/HoraDia";
 import { DiaSemana } from "../../../models/DiaSemana";
 import { DiaSemanaService } from "../../../services/diasemana.service";
-import { TipoPlanService } from "../../../services/tipoplan.service";
-import { TipoPlan } from "../../../models/TipoPlan";
-import { SolicitarPlanComponent } from "./solicitarplan/solicitarplan.component";
+import { TipoGrupoService } from "../../../services/tipogrupo.service";
+import { TipoGrupo } from "../../../models/TipoGrupo";
+import { SolicitarGrupoComponent } from "./solicitargrupo/solicitargrupo.component";
 
 @Component({
     selector: 'tablahorarios',
@@ -17,9 +17,9 @@ import { SolicitarPlanComponent } from "./solicitarplan/solicitarplan.component"
 })
 export class TablaHorariosComponent {
 
-    // Componente modal para solicitar planes
-    @ViewChild(SolicitarPlanComponent)
-    public solicitarPlanComponent: SolicitarPlanComponent;
+    // Componente modal para solicitar gurpos
+    @ViewChild(SolicitarGrupoComponent)
+    public solicitarGrupoComponent: SolicitarGrupoComponent;
 
     // Lista de horarios
     public horarios: Horario[];
@@ -30,8 +30,8 @@ export class TablaHorariosComponent {
     // Lista de dias
     public dias: DiaSemana[];
 
-    // Lista de tipos de planes
-    public tipoPlanes: TipoPlan[];
+    // Lista de tipos de grupos
+    public tipoGrupos: TipoGrupo[];
 
     // Mapeo de horarios
     public mapHorario: any;
@@ -40,7 +40,7 @@ export class TablaHorariosComponent {
         private _horarioService: HorarioService,
         private _horaDiaService: HoraDiaService,
         private _diaSemanaService: DiaSemanaService,
-        private _tipoPlanService: TipoPlanService
+        private _tipoGrupoService: TipoGrupoService
     ) {
 
         this.mapHorario = {};
@@ -67,9 +67,9 @@ export class TablaHorariosComponent {
             }
         );
 
-        this._tipoPlanService.query().subscribe(
+        this._tipoGrupoService.query().subscribe(
             Response => {
-                this.tipoPlanes = Response;
+                this.tipoGrupos = Response;
             }
         );
 
@@ -131,9 +131,9 @@ export class TablaHorariosComponent {
         return false;
     }
 
-    public solicitar(plan: Plan) {
+    public solicitar(grupo: Grupo) {
 
-        this.solicitarPlanComponent.abrir(plan);
+        this.solicitarGrupoComponent.abrir(grupo);
 
     }
 

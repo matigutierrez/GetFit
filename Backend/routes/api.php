@@ -29,9 +29,9 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('cliente/{id}/huella', 'ClienteController@huella');
 	Route::get('cliente/{id}/cobranzas', 'ClienteController@cobranzas');
 	Route::get('cliente/{id}/cobranzashistoricas', 'ClienteController@cobranzas_historicas');
-	Route::get('cliente/{id}/solicitudes', 'ClienteController@solicitudesPlan');
+	Route::get('cliente/{id}/solicitudes', 'ClienteController@solicitudesGrupo');
 	Route::get('clientecontratos', 'ClienteController@contratosToken');
-	Route::get('clientesolicitudes', 'ClienteController@solicitudesPlanToken');
+	Route::get('clientesolicitudes', 'ClienteController@solicitudesGrupoToken');
 
 	Route::apiResource('cobranza', 'CobranzaController');
 	Route::get('cobranzastoken', 'CobranzaController@cobranzasToken');
@@ -40,14 +40,10 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('contrato', 'ContratoController');
 	Route::get('contrato/{id}/acta', 'ContratoController@acta');
-	Route::get('contrato/find/{cliente_id}/{plan_id}', 'ContratoController@find');
-	Route::get('contrato/findtoken/{plan_id}', 'ContratoController@findToken');
+	Route::get('contrato/find/{cliente_id}/{tgf_grupo_id}', 'ContratoController@find');
+	Route::get('contrato/findtoken/{tgf_grupo_id}', 'ContratoController@findToken');
 
 	Route::apiResource('contratohistorico', 'ContratoHistoricoController');
-
-	Route::apiResource('descuentoCobranza', 'DescuentoCobranzaController');
-
-	Route::apiResource('descuentoPlan', 'DescuentoPlanController');
 
 	Route::apiResource('diasemana', 'DiaSemanaController');
 
@@ -65,29 +61,30 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('pago', 'PagoController');
 
-	Route::apiResource('plan', 'PlanController');
-	Route::get('plan/{id}/profesores', 'PlanController@profesores');
-	Route::get('plan/{id}/clientes', 'PlanController@clientes');
-	Route::get('plan/{id}/clientessolicitando', 'PlanController@clientesSolicitando');
-	Route::get('plan/{id}/horarios', 'PlanController@horarios');
-	Route::get('plan/{id}/contratos', 'PlanController@contratos');
-	Route::get('plan/{id}/contratoshistoricos', 'PlanController@contratosHistoricos');
-	Route::get('plan/{id}/contratoscobranzas', 'PlanController@contratosCobranzas');
-	Route::get('plan/{id}/contratoscobranzashistoricas', 'PlanController@contratosCobranzasHistoricas');
-	Route::get('plan/{id}/solicitudes', 'PlanController@solicitudesPlan');
+	Route::apiResource('grupo', 'GrupoController');
+	Route::get('grupo/{id}/profesores', 'GrupoController@profesores');
+	Route::get('grupo/{id}/clientes', 'GrupoController@clientes');
+	Route::get('grupo/{id}/horarios', 'GrupoController@horarios');
+	Route::get('grupo/{id}/contratos', 'GrupoController@contratos');
+	Route::get('grupo/{id}/contratoshistoricos', 'GrupoController@contratosHistoricos');
+	Route::get('grupo/{id}/contratoscobranzas', 'GrupoController@contratosCobranzas');
+	Route::get('grupo/{id}/contratoscobranzashistoricas', 'GrupoController@contratosCobranzasHistoricas');
+	Route::get('grupo/{id}/solicitudes', 'GrupoController@solicitudes');
 
 	Route::apiResource('profesor', 'ProfesorController');
-	Route::get('profesor/{id}/planes', 'ProfesorController@planes');
+	Route::get('profesor/{id}/grupos', 'ProfesorController@grupos');
 
 	Route::apiResource('rol', 'RolController');
 
 	Route::apiResource('sede', 'SedeController');
 
-	Route::apiResource('solicitudplan', 'SolicitudPlanController');
-	Route::get('solicitudplan/findtoken/{plan_id}', 'SolicitudPlanController@findToken');
-	Route::get('solicitudplan/solicitar/{plan_id}', 'SolicitudPlanController@solicitar');
+	Route::apiResource('servicio', 'ServicioController');
 
-	Route::apiResource('tipoplan', 'TipoPlanController');
+	Route::apiResource('solicitudgrupo', 'SolicitudGrupoController');
+	Route::get('solicitudgrupo/findtoken/{tgf_grupo_id}', 'SolicitudGrupoController@findToken');
+	Route::get('solicitudgrupo/solicitar/{tgf_grupo_id}', 'SolicitudGrupoController@solicitar');
+
+	Route::apiResource('tipogrupo', 'TipoGrupoController');
 
 	Route::apiResource('usuario', 'UsuarioController');
 	Route::get('usuariorol', 'UsuarioController@rolSesion');

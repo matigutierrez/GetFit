@@ -3,13 +3,18 @@
 </div>
 <div *ngIf="cobranzas" class="row">
   <div class="padtable">
-    <h4>Cobranzas</h4>
+    <div class="row">
+      <div class="col s12 m12  left-align">
+        <h4>Cobranzas</h4>
+      </div>
+    </div>
     <div>
+      <p class="red-text">En esta sección solo se muestran cobranzas no pagadas.</p>
       <table class="responsive-table striped highlight">
         <thead>
           <tr>
             <th>Cliente</th>
-            <th>Plan</th>
+            <th>Grupo</th>
             <th>Fecha</th>
             <th>Mes</th>
             <th>Monto</th>
@@ -22,7 +27,7 @@
         <tbody>
           <tr *ngFor="let cobranza of cobranzas | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
             <td>{{cobranza.contrato.contrato_historico.cliente.cli_nombres}} {{cobranza.contrato.contrato_historico.cliente.cli_apellidos}}</td>
-            <td>{{cobranza.contrato.contrato_historico.plan.pla_nombre}}</td>
+            <td>{{cobranza.contrato.contrato_historico.grupo.gru_nombre}}</td>
             <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString()}}</td>
             <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
             <td>{{cobranza.cobranza_historica.cob_monto}}</td>
@@ -30,8 +35,16 @@
               <p *ngIf="cobranza.cobranza_historica.pago">{{cobrana.cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
               <i *ngIf="!cobranza.cobranza_historica.pago" class="material-icons">close</i>
             </td>
-            <td><a *ngIf="!cobranza.cobranza_historica.pago" (click)="abrirCobranza(cobranza)"><i class="material-icons">check</i></a></td>
-            <td><a (click)="deleteCobranza(cobranza.id)"><i class="material-icons">close</i></a></td>
+            <td>
+              <a *ngIf="!cobranza.cobranza_historica.pago" (click)="abrirCobranza(cobranza)">
+                <i class="material-icons">check</i>
+              </a>
+            </td>
+            <td>
+              <a (click)="deleteCobranza(cobranza.id)">
+                <i class="material-icons">close</i>
+              </a>
+            </td>
           </tr>
         </tbody>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -45,7 +58,11 @@
     <i class="material-icons">add</i>
   </a>
   <ul>
-    <li><a class="btn-floating light-blue" (click)="registrar()"><i class="material-icons">attach_money</i></a></li>
+    <li>
+      <a class="btn-floating light-blue" (click)="registrar()">
+        <i class="material-icons">attach_money</i>
+      </a>
+    </li>
   </ul>
 </div>
 

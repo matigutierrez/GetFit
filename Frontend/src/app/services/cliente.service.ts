@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GLOBAL } from './global';
 import { Cliente } from '../models/Cliente';
-import { Plan } from '../models/Plan';
+import { Grupo } from '../models/Grupo';
 import { Contrato } from '../models/Contrato';
-import { SolicitudPlan } from '../models/SolicitudPlan';
+import { SolicitudGrupo } from '../models/SolicitudGrupo';
 import { Cobranza } from '../models/Cobranza';
 import { CobranzaHistorica } from '../models/CobranzaHistorica';
 
@@ -43,9 +43,9 @@ export class ClienteService {
         return this._http.delete(GLOBAL.url + 'cliente/' + id);
     }
 
-    public getSolicitudesToken(): Observable<SolicitudPlan[]> {
-        return this._http.get<SolicitudPlan[]>(GLOBAL.url + 'clientesolicitudes')
-            .pipe(map(solicitudes => solicitudes.map(solicitud => new SolicitudPlan(solicitud))));
+    public getSolicitudesToken(): Observable<SolicitudGrupo[]> {
+        return this._http.get<SolicitudGrupo[]>(GLOBAL.url + 'clientesolicitudes')
+            .pipe(map(solicitudes => solicitudes.map(solicitud => new SolicitudGrupo(solicitud))));
     }
 
     public getContratos(cliente: Cliente): Observable<Contrato[]> {

@@ -122,7 +122,7 @@ export class RegistroCobranzaComponent implements AfterViewChecked {
         this.cobranzaHistorica.tgf_contrato_historico_id = this.cobranzaHistorica.contrato_historico.id;
 
         // Actualizar monto
-        this.cobranzaHistorica.cob_monto = this.cobranzaHistorica.contrato_historico.plan.pla_costo;
+        this.cobranzaHistorica.cob_monto = this.cobranzaHistorica.contrato_historico.grupo.gru_costo;
     }
 
     public onSubmit() {

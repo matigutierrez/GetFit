@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12  left-align">
+                <h4>Grupos</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <ul materialize="tabs" class="tabs">
+                    <li class="tab col s3">
+                        <a class="active" href="#contratados">Contratados</a>
+                    </li>
+                    <li class="tab col s3">
+                        <a href="#solicitados">Solicitados</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="contratados" class="col s12">
+                <div *ngIf="!contratos" class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+                <div *ngIf="contratos">
+                    <table class="responsive-table striped highlight">
+                        <thead>
+                            <tr>
+                                <th>Grupo</th>
+                                <th>Descripción</th>
+                                <th>Sede</th>
+                                <th>Horarios</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let contrato of contratos | paginate: { id: 'pag_contratados', itemsPerPage: 5, currentPage: p1 }; index as i;">
+                                <td>{{contrato.contrato_historico.grupo.gru_nombre}}</td>
+                                <td>{{contrato.contrato_historico.grupo.gru_descripcion}}</td>
+                                <td>{{contrato.contrato_historico.grupo.sede.sed_nombre}}</td>
+                                <td>
+                                    <a (click)="abrirHorarios(contrato.contrato_historico.grupo)">
+                                        <i class="material-icons">date_range</i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <pagination-controls id="pag_contratados" (pageChange)="p1 = $event"></pagination-controls>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="solicitados" class="col s12">
+                <div *ngIf="!solicitudes" class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+                <div *ngIf="solicitudes">
+                    <table class="responsive-table striped highlight">
+                        <thead>
+                            <tr>
+                                <th>Grupo</th>
+                                <th>Descripción</th>
+                                <th>Sede</th>
+                                <th>Horarios</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let solicitud of solicitudes | paginate: { id: 'pag_solicitudes', itemsPerPage: 5, currentPage: p2 }; index as i;">
+                                <td>{{solicitud.grupo.gru_nombre}}</td>
+                                <td>{{solicitud.grupo.gru_descripcion}}</td>
+                                <td>{{solicitud.grupo.sede.sed_nombre}}</td>
+                                <td>
+                                    <a (click)="abrirHorarios(solicitud.grupo)">
+                                        <i class="material-icons">date_range</i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <pagination-controls id="pag_solicitudes" (pageChange)="p2 = $event"></pagination-controls>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<horario></horario>

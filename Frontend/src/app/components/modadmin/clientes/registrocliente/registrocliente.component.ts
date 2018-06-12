@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Input, Output, AfterViewChecked } from
 import { MaterializeAction } from 'angular2-materialize';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/Cliente';
-import { Plan } from '../../../../models/Plan';
+import { Grupo } from '../../../../models/Grupo';
 import { Usuario } from '../../../../models/Usuario';
 import { UsuarioService } from '../../../../services/usuario.service';
 import { Rol } from '../../../../models/Rol';

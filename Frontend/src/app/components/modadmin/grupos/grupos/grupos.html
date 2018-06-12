@@ -1,0 +1,85 @@
+<div *ngIf="!grupos" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="grupos" class="row">
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12  left-align">
+                <h4>Grupos</h4>
+            </div>
+        </div>
+        <div>
+            <table class="responsive-table striped highlight">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Descripción</th>
+                        <th>Sede</th>
+                        <th>Horarios</th>
+                        <th>Cupos Disponibles</th>
+                        <th>Inscritos</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let grupo of grupos | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                        <td>{{grupo.gru_nombre}}</td>
+                        <td>{{grupo.gru_descripcion}}</td>
+                        <td>{{grupo.sede.sed_nombre}}</td>
+                        <td>
+                            <a (click)="abrirHorarios(grupo)">
+                                <i class="material-icons">date_range</i>
+                            </a>
+                        </td>
+                        <td>{{grupo.gru_capacidad - grupo.contratos.length}}/{{grupo.gru_capacidad}}</td>
+                        <td>
+                            {{grupo.contratos.length}}
+                            <a (click)="abrirContratos(grupo.contratos)">
+                                <i class="material-icons">assignment</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="inscripcionGrupoComponent.abrir(grupo)">
+                                <i class="material-icons">group_add</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a [routerLink]="['/admin/grupo', grupo.id]">
+                                <i class="material-icons">settings</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="deleteGrupo(grupo.id)">
+                                <i class="material-icons">close</i>
+                            </a>
+                        </td>
+                    </tr>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue" (click)="registerGrupo()">
+                <i class="material-icons">assignment</i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<contratos [contratos]="contratos"></contratos>
+
+<registrogrupo></registrogrupo>
+
+<inscripciongrupo></inscripciongrupo>
+
+<horario></horario>

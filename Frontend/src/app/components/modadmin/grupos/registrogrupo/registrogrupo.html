@@ -1,0 +1,105 @@
+<div id="modal2" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modal">
+  <div class="modal-content modalback">
+    <div class="row">
+      <div class=" col s10 m6 left-align">
+        <h5>Registro Grupos</h5>
+      </div>
+      <div class="col s2 m6 right-align">
+        <a (click)="cerrar()">
+          <i class="material-icons">close</i>
+        </a>
+      </div>
+    </div>
+    <form #grupoForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="col s12">
+        <div class="row">
+
+          <!-- Nombre del grupo -->
+          <div class="col s12">
+            <div class="input-field">
+              <i class="material-icons prefix">assignment</i>
+              <input id="last_name" type="text" name="gru_nombre" #gru_nombre="ngModel" [(ngModel)]="grupo.gru_nombre">
+              <label for="icon_prefix">Nombre del Grupo</label>
+            </div>
+          </div>
+
+          <!-- Descripción del grupo -->
+          <div class="col s12">
+            <div class="input-field">
+              <i class="material-icons prefix">person</i>
+              <input id="last_name" type="text" name="gru_descripcion" #gru_descripcion="ngModel" [(ngModel)]="grupo.gru_descripcion">
+              <label for="icon_prefix">Descripcion</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Costo del grupo -->
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">attach_money</i>
+                <input id="last_name" type="number" name="gru_costo" #gru_costo="ngModel" [(ngModel)]="grupo.gru_costo">
+                <label for="icon_prefix">Costo del Grupo</label>
+              </div>
+            </div>
+
+            <!-- Capacidad del grupo -->
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input id="last_name" type="number" name="gru_capacidad" #gru_costo="ngModel" [(ngModel)]="grupo.gru_capacidad">
+                <label for="icon_prefix">Cupos (Capacidad)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Sede del grupo -->
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">place</i>
+                <select name="tgf_sede_id" [(ngModel)]="grupo.tgf_sede_id" materialize="material_select" [materializeSelectOptions]="sedes">
+                  <option *ngFor="let sede of sedes" [ngValue]="sede.id">{{sede.sed_nombre}}</option>
+                </select>
+                <label for="icon_prefix">Sede</label>
+              </div>
+            </div>
+
+            <!-- Tipo de grupo -->
+            <div class="col m6">
+              <div class="input-field">
+                <i class="material-icons prefix">place</i>
+                <select name="tgf_tipo_grupo_id" [(ngModel)]="grupo.tgf_tipo_grupo_id" materialize="material_select" [materializeSelectOptions]="tipoGrupos">
+                  <option *ngFor="let tipoGrupo of tipoGrupos" [ngValue]="tipoGrupo.id">{{tipoGrupo.tgr_nombre}}</option>
+                </select>
+                <label for="icon_prefix">Tipo de Grupo</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Solicitable? -->
+            <div class="col m6">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" (change)="grupo.gru_solicitable = $event.target.checked ? 1 : 0" [checked]="grupo.gru_solicitable == 1">
+                  <span class="lever"></span>
+                  Permitir a los clientes solicitar el grupo
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Boton para registrar -->
+      <div class="row">
+        <div class="col s12 l3 offset-l9">
+          <div class="right-align">
+            <button class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Registrar" name="action">Registrar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

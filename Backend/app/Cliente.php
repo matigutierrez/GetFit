@@ -56,20 +56,16 @@ class Cliente extends Model
             ->where('tgf_cliente_id', '=', $this->id);
     }
 
-    public function planes() {
-        return $this->belongsToMany('App\Plan', 'tgf_contrato', 'tgf_cliente_id', 'tgf_plan_id');
+    public function grupos() {
+        return $this->belongsToMany('App\Grupo', 'tgf_contrato', 'tgf_cliente_id', 'tgf_grupo_id');
     }
 
     public function huella() {
         return $this->hasOne('App\Huella', 'tgf_cliente_id');
     }
 
-    public function solicitudesPlan() {
-        return $this->hasMany('App\SolicitudPlan', 'tgf_cliente_id');
-    }
-
-    public function planesSolicitados() {
-        return $this->belongsToMany('App\Plan', 'tgf_cliente_solicita_plan', 'tgf_cliente_id', 'tgf_plan_id');
+    public function solicitudesGrupo() {
+        return $this->hasMany('App\SolicitudGrupo', 'tgf_cliente_id');
     }
 
     public function sedes() {

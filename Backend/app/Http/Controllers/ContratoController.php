@@ -56,32 +56,32 @@ class ContratoController extends Controller
      */
     public function show($id)
     {
-        return Contrato::with('plan')->find($id);
+        return Contrato::with('grupo')->find($id);
     }
 
     /**
-     * Buscar un contrato por el ID del cliente y el ID del plan
+     * Buscar un contrato por el ID del cliente y el ID del grupo
      * 
-     * @param  int  $cliente_id ID del plan
-     * @param  int  $plan_id ID del plan
+     * @param  int  $cliente_id ID del cliente
+     * @param  int  $grupo_id ID del grupo
      */
-    public function find($cliente_id, $plan_id) {
+    public function find($tgf_cliente_id, $tgf_grupo_id) {
         return ContratoHistorico::where([
-            'tgf_cliente_id' => $cliente_id,
-            'tgf_plan_id' => $plan_id
+            'tgf_cliente_id' => $tgf_cliente_id,
+            'tgf_grupo_id' => $tgf_grupo_id
         ])->get()->first()->contrato;
     }
 
     /**
-     * Buscar un contrato por el token del cliente y el ID del plan
+     * Buscar un contrato por el token del cliente y el ID del grupo
      * 
-     * @param  int  $cliente_id ID del plan
-     * @param  int  $plan_id ID del plan
+     * @param  AuthenticateController Controlador de autenticación
+     * @param  int  $tgf_grupo_id ID del grupo
      */
-    public function findToken(AuthenticateController $auth, $plan_id) {
+    public function findToken(AuthenticateController $auth, $tgf_grupo_id) {
         return ContratoHistorico::where([
             'tgf_cliente_id' => $auth->getAuthenticatedUser()->cliente->id,
-            'tgf_plan_id' => $plan_id
+            'tgf_grupo_id' => $tgf_grupo_id
         ])->get()->first()->contrato;
     }
 

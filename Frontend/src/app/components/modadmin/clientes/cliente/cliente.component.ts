@@ -3,13 +3,12 @@ import { ClienteService } from "../../../../services/cliente.service";
 import { ActivatedRoute } from "@angular/router";
 import { Cliente } from "../../../../models/Cliente";
 import { HorarioComponent } from "../../../extra/horario/horario.component";
-import { CancelarContratoComponent } from "../../planes/cancelarcontrato/cancelarcontrato.component";
+import { CancelarContratoComponent } from "../../grupos/cancelarcontrato/cancelarcontrato.component";
 import { PagoCobranzaComponent } from "../../cobranzas/pagocobranza/pagocobranza.component";
 
 @Component({
     selector: 'cliente',
-    templateUrl: 'cliente.html',
-    providers: [ClienteService]
+    templateUrl: 'cliente.html'
 })
 export class ClienteComponent {
 

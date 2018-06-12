@@ -1,0 +1,183 @@
+<div class="row">
+
+    <!-- Tabs verticales -->
+    <div class="col s2">
+        <ul class="tabs-vertical" materialize="tabs">
+            <li class="tab row">
+                <a class="active" href="#clientes_actuales">
+                    <p *ngIf="!contratos">Actuales (0)</p>
+                    <p *ngIf="contratos">Actuales ({{contratos.length}})</p>
+                </a>
+            </li>
+            <li class="tab row">
+                <a href="#clientes_solicitando">
+                    <p *ngIf="!solicitudes">Lista de Espera (0)</p>
+                    <p *ngIf="solicitudes">Lista de Espera ({{solicitudes.length}})</p>
+                </a>
+            </li>
+            <li class="tab row">
+                <a href="#clientes_historicos">
+                    <p *ngIf="!contratosHistoricos">Históricos (0)</p>
+                    <p *ngIf="contratosHistoricos">Históricos ({{contratosHistoricos.length}})</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col s10">
+
+        <!-- Clientes actuales -->
+        <div id="clientes_actuales">
+            <div *ngIf="!contratos" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <div *ngIf="contratos">
+                <h5>Clientes Actuales</h5>
+                <div class="padtable">
+                    <div>
+                        <table class="responsive-table striped highlight">
+                            <thead>
+                                <tr>
+                                    <th>Rut</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let contrato of contratos | paginate: { id: 'pagContratos', itemsPerPage: 6, currentPage: p1 }; index as i;">
+                                    <td>{{contrato.contrato_historico.cliente.cli_rut}}</td>
+                                    <td>{{contrato.contrato_historico.cliente.cli_nombres}} {{contrato.contrato_historico.cliente.cli_apellidos}}</td>
+                                    <td>
+                                        <a *ngIf="contrato.contrato_historico.cliente.usuario">{{contrato.contrato_historico.cliente.usuario.usu_correo}}</a>
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/admin/cliente', contrato.contrato_historico.cliente.id]">
+                                            <i class="material-icons">settings</i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a (click)="deleteContrato(contrato)">
+                                            <i class="material-icons">close</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <pagination-controls id="pagContratos" (pageChange)="p1 = $event"></pagination-controls>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clientes solicitando el grupo -->
+        <div id="clientes_solicitando">
+            <h5>Clientes en Lista de Espera</h5>
+            <div *ngIf="!solicitudes" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <div *ngIf="solicitudes">
+                <div class="padtable">
+                    <div>
+                        <table class="responsive-table striped highlight">
+                            <thead>
+                                <tr>
+                                    <th>Rut</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Fecha</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let solicitud of solicitudes | paginate: { id: 'pagSolicitudes', itemsPerPage: 6, currentPage: p2 }; index as i;">
+                                    <td>{{solicitud.cliente.cli_rut}}</td>
+                                    <td>{{solicitud.cliente.cli_nombres + " " + solicitud.cliente.cli_apellidos}}</td>
+                                    <td>
+                                        <a *ngIf="solicitud.cliente.usuario">{{solicitud.cliente.usuario.usu_correo}}</a>
+                                    </td>
+                                    <td>{{solicitud.fecha_solicitud}}</td>
+                                    <td>
+                                        <a (click)="okSolicitud(solicitud)">
+                                            <i class="material-icons">check</i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/admin/cliente', solicitud.cliente.id]">
+                                            <i class="material-icons">settings</i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a (click)="deleteSolicitud(solicitud)">
+                                            <i class="material-icons">close</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <pagination-controls id="pagSolicitudes" (pageChange)="p2 = $event"></pagination-controls>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clientes historicos -->
+        <div id="clientes_historicos">
+            <h5>Clientes Históricos</h5>
+            <div *ngIf="!contratosHistoricos" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <div *ngIf="contratosHistoricos">
+                <div class="padtable">
+                    <div>
+                        <table class="responsive-table striped highlight">
+                            <thead>
+                                <tr>
+                                    <th>Rut</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let contrato_historico of contratosHistoricos | paginate: { id: 'pagContratosHist', itemsPerPage: 6, currentPage: p1 }; index as i;">
+                                    <td>{{contrato_historico.cliente.cli_rut}}</td>
+                                    <td>{{contrato_historico.cliente.cli_nombres}} {{contrato_historico.cliente.cli_apellidos}}</td>
+                                    <td>
+                                        <a *ngIf="contrato_historico.cliente.usuario">{{contrato_historico.cliente.usuario.usu_correo}}</a>
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/admin/cliente', contrato_historico.cliente.id]">
+                                            <i class="material-icons">settings</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <pagination-controls id="pagContratosHist" (pageChange)="p1 = $event"></pagination-controls>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue" (click)="inscripcionGrupoComponent.abrir(grupo)">
+                <i class="material-icons">assignment</i>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -22,8 +22,8 @@ class Horario extends Model
 
     public $timestamps = false;
 
-    public function plan() {
-    	return $this->belongsTo('App\Plan', 'tgf_plan_id');
+    public function grupo() {
+    	return $this->belongsTo('App\Grupo', 'tgf_grupo_id');
     }
 
     public function asistencias() {

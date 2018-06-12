@@ -25,7 +25,7 @@
                     <tr *ngFor="let hora of horas">
                         <td>{{hora.hor_inicio + " " + hora.hor_fin}}</td>
                         <td *ngFor="let dia of dias">
-                            <p *ngIf="mapHorario[hora.id] && mapHorario[hora.id][dia.id] && !mapHorario[hora.id][dia.id].hor_inactivo">{{mapHorario[hora.id][dia.id].plan.pla_nombre}}</p>
+                            <p *ngIf="mapHorario[hora.id] && mapHorario[hora.id][dia.id] && !mapHorario[hora.id][dia.id].hor_inactivo">{{mapHorario[hora.id][dia.id].grupo.gru_nombre}}</p>
                             <p *ngIf="!mapHorario[hora.id] || !mapHorario[hora.id][dia.id] || mapHorario[hora.id][dia.id].hor_inactivo"></p>
                         </td>
                     </tr>

@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { PrincipalComponent } from './vistaprincipal/principal/principal.component';
-import { PlanesComponent } from './planes/planes/planes.component';
+import { GruposComponent } from './grupos/grupos/grupos.component';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { CobranzasComponent } from './cobranzas/cobranzas/cobranzas.component';
@@ -11,10 +11,11 @@ import { AdminGuard } from '../../guards/AdminGuard';
 import { SedesComponent } from './sedes/sedes/sedes.component';
 import { NotificacionComponent } from './notificaciones/notificacion/notificacion.component';
 import { ProfesoresComponent } from './profesores/profesores/profesores.component';
-import { PlanComponent } from './planes/plan/plan.component';
+import { GrupoComponent } from './grupos/grupo/grupo.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
+import { ServiciosComponent } from './servicios/servicios/servicios.component';
 
 const appRoutes: Routes = [
   {
@@ -29,6 +30,14 @@ const appRoutes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosComponent
+      },
+      {
+        path: 'grupos',
+        component: GruposComponent
+      },
+      {
+        path: 'servicios',
+        component: ServiciosComponent
       },
       {
         path: 'clientes',
@@ -47,12 +56,8 @@ const appRoutes: Routes = [
         component: ProfesorComponent
       },
       {
-        path: 'planes',
-        component: PlanesComponent
-      },
-      {
-        path: 'plan/:id',
-        component: PlanComponent
+        path: 'grupo/:id',
+        component: GrupoComponent
       },
       {
         path: 'cobranzas',

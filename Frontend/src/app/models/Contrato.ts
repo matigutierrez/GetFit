@@ -1,4 +1,4 @@
-import { Plan } from "./Plan";
+import { Grupo } from "./Grupo";
 import { ContratoHistorico } from "./ContratoHistorico";
 import { Cobranza } from "./Cobranza";
 import { Autocompletable } from "../extra/Autocompletable";
@@ -8,7 +8,7 @@ export class Contrato implements Autocompletable {
 
     public id: number;
     public tgf_contrato_historico_id: number;
-    public tgf_plan_id: number;
+    public tgf_grupo_id: number;
 
     public contrato_historico: ContratoHistorico;
     public cobranzas: Cobranza[];
@@ -30,7 +30,7 @@ export class Contrato implements Autocompletable {
         return {
             id: contrato.id,
             tgf_contrato_historico_id: contrato.tgf_contrato_historico_id,
-            tgf_plan_id: contrato.tgf_plan_id
+            tgf_grupo_id: contrato.tgf_grupo_id
         };
     }
 

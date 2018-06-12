@@ -1,5 +1,5 @@
 import { Cliente } from "./Cliente";
-import { Plan } from "./Plan";
+import { Grupo } from "./Grupo";
 import { Cobranza } from "./Cobranza";
 import { CobranzaHistorica } from "./CobranzaHistorica";
 
@@ -7,12 +7,12 @@ export class ContratoHistorico {
 
     public id: number;
     public tgf_cliente_id: number;
-    public tgf_plan_id: number;
+    public tgf_grupo_id: number;
     public con_fecha_inicio: string;
     public con_acta: string;
 
     public cliente: Cliente;
-    public plan: Plan;
+    public grupo: Grupo;
     public cobranzas_historicas: CobranzaHistorica[];
 
     public archivo: any;
@@ -22,7 +22,7 @@ export class ContratoHistorico {
         Object.assign(this, json);
 
         if (this.cliente) { this.cliente = new Cliente(this.cliente) };
-        if (this.plan) { this.plan = new Plan(this.plan) };
+        if (this.grupo) { this.grupo = new Grupo(this.grupo) };
         if (this.cobranzas_historicas) { this.cobranzas_historicas = this.cobranzas_historicas.map(cobranzaHistorica => new CobranzaHistorica(cobranzaHistorica)) };
 
     }
@@ -31,7 +31,7 @@ export class ContratoHistorico {
         return {
             id: contrato.id,
             tgf_cliente_id: contrato.tgf_cliente_id,
-            tgf_plan_id: contrato.tgf_plan_id,
+            tgf_grupo_id: contrato.tgf_grupo_id,
             con_fecha_inicio: contrato.con_fecha_inicio,
             con_acta: contrato.con_acta
         };

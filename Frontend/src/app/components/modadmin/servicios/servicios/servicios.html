@@ -1,0 +1,57 @@
+<div *ngIf="!servicios" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="servicios" class="row">
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12  left-align">
+                <h4>Servicios</h4>
+            </div>
+        </div>
+        <div>
+            <table class="responsive-table striped highlight">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Descripción</th>
+                        <th>Costo</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let servicio of servicios | paginate: { id: 'servicios', itemsPerPage: 6, currentPage: p }; index as i;">
+                        <td>{{servicio.ser_nombre}}</td>
+                        <td>{{servicio.ser_descripcion}}</td>
+                        <td>{{servicio.ser_costo}}</td>
+                        <td>
+                            <a [routerLink]="['/admin/servicio', servicio.id]">
+                                <i class="material-icons">settings</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="deleteServicio(servicio)">
+                                <i class="material-icons">close</i>
+                            </a>
+                        </td>
+                    </tr>
+                    <pagination-controls id="servicios" (pageChange)="p = $event"></pagination-controls>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue" (click)="registerServicio()">
+                <i class="material-icons">work</i>
+            </a>
+        </li>
+    </ul>
+</div>

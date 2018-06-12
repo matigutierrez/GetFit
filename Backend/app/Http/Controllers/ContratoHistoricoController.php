@@ -49,7 +49,7 @@ class ContratoHistoricoController extends Controller
         
         $contratoHist = new ContratoHistorico;
         $contratoHist->tgf_cliente_id = $requestContrato->tgf_cliente_id;
-        $contratoHist->tgf_plan_id = $requestContrato->tgf_plan_id;
+        $contratoHist->tgf_grupo_id = $requestContrato->tgf_grupo_id;
 
         if ( $request->hasFile('acta') ) {
 
@@ -63,16 +63,16 @@ class ContratoHistoricoController extends Controller
         // Guardar contrato historico
         $contratoHist->save();
 
-        // Agregar 'cliente' y 'plan' a cache
+        // Agregar 'cliente' y 'grupo' a cache
         $contratoHist->cliente->usuario;
-        $contratoHist->plan;
+        $contratoHist->grupo;
 
         $this->pusher->trigger('contrato_historico', 'create', $contratoHist);
 
         // Crear contrato normal
         $contrato = new Contrato;
         $contrato->tgf_contrato_historico_id = $contratoHist->id;
-        $contrato->tgf_plan_id = $contratoHist->tgf_plan_id;
+        $contrato->tgf_grupo_id = $contratoHist->tgf_grupo_id;
 
         // Guardar contrato
         $contrato->save();

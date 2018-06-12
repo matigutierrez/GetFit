@@ -1,0 +1,53 @@
+<div *ngIf="!contratos" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="contratos" class="row">
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12  left-align">
+                <h4>Grupos</h4>
+            </div>
+        </div>
+        <div>
+            <table class="responsive-table striped highlight">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Descripción</th>
+                        <th>Contrato</th>
+                        <th>Horarios</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contrato of contratos | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                        <td>{{contrato.contrato_historico.grupo.gru_nombre}}</td>
+                        <td>{{contrato.contrato_historico.grupo.gru_descripcion}}</td>
+                        <td>
+                            <a (click)="abrirContrato(contrato)">
+                                <i class="material-icons">assignment</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="abrirHorarios(contrato.contrato_historico.grupo)">
+                                <i class="material-icons">date_range</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a [routerLink]="['/admin/grupo', contrato.contrato_historico.grupo.id]">
+                                <i class="material-icons">settings</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="deleteContrato(contrato)">
+                                <i class="material-icons">close</i>
+                            </a>
+                        </td>
+                    </tr>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

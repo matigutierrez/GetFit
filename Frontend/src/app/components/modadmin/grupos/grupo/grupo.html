@@ -1,0 +1,75 @@
+<div class="row">
+    <div *ngIf="grupo" class="padtable">
+        <h4>{{grupo.gru_nombre}}</h4>
+        <p>{{grupo.gru_descripcion}}</p>
+
+        <!-- Tabs -->
+        <div class="row">
+            <ul class="tabs" materialize="tabs">
+                <li class="tab col s2">
+                    <a class="active" href="#editargrupo">
+                        <i class="material-icons">settings</i>Editar Grupo
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#clientes">
+                        <i class="material-icons">person</i>Clientes
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#cobranzas">
+                        <i class="material-icons">attach_money</i>Cobranzas
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#horarios">
+                        <i class="material-icons">date_range</i>Horario
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#profesores">
+                        <i class="material-icons">assignment_ind</i>Profesores
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Panel inferior -->
+        <div class="row">
+            <!-- Contenido de tabber -->
+            <div id="editargrupo" class="col s12">
+                <editargrupo [grupo]="grupo"></editargrupo>
+            </div>
+            <div id="clientes" class="col s12">
+                <clientesgrupo [inscripcionGrupoComponent]="inscripcionGrupoComponent" [cancelarContratoComponent]="cancelarContratoComponent"
+                    [grupo]="grupo">
+                </clientesgrupo>
+            </div>
+            <div id="cobranzas" class="col s12">
+                <cobranzasgrupo [pagoCobranzaComponent]="pagoCobranzaComponent" [cancelarContratoComponent]="cancelarContratoComponent" [registroCobranzaGrupoComponent]="registroCobranzaGrupoComponent"
+                    [grupo]="grupo">
+                </cobranzasgrupo>
+            </div>
+            <div id="horarios" class="col s12">
+                <horariogrupo [grupo]="grupo"></horariogrupo>
+            </div>
+            <div id="profesores" class="col s12">
+                <profesoresgrupo [grupo]="grupo"></profesoresgrupo>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Este componente debería estar dentro de "ClientesGrupoComponent" (etiqueta clientesgrupo)-->
+<!-- Presenta defectos en HTML al utilizarlo ahí -->
+<!-- Asi que se pone aquí y inyecta con inputs -->
+<inscripciongrupo></inscripciongrupo>
+
+<!-- Este componente debería estar dentro de "CobranzasGrupoComponent" -->
+<pagocobranza></pagocobranza>
+
+<registrocobranzagrupo></registrocobranzagrupo>
+
+<!-- Este componente debería estar dentro de "ClientesGrupoComponent" y "CobranzasGrupoComponent" -->
+<cancelarcontrato></cancelarcontrato>

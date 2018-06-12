@@ -9,8 +9,7 @@ import { Pago } from "../../../../models/Pago";
 
 @Component({
     selector: 'pagocobranza',
-    templateUrl: 'pagocobranza.html',
-    providers: [CobranzaService, MetodoPagoService, PagoService]
+    templateUrl: 'pagocobranza.html'
 })
 export class PagoCobranzaComponent {
 

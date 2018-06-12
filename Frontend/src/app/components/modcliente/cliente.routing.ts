@@ -5,7 +5,7 @@ import { CobranzaComponent } from './cobranzas/cobranza.component';
 import { ModClienteComponent } from './modcliente.component';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { ClienteGuard } from '../../guards/ClienteGuard';
-import { PlanesComponent } from './planes/planes.component';
+import { GruposComponent } from './grupos/grupos.component';
 
 const appRoutes: Routes = [
   {
@@ -22,8 +22,8 @@ const appRoutes: Routes = [
       component: CobranzaComponent
     },
     {
-      path: 'planes',
-      component: PlanesComponent
+      path: 'grupos',
+      component: GruposComponent
     }
   ]
   }
