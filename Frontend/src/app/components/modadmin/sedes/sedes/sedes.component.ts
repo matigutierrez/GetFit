@@ -7,6 +7,7 @@ import { MaterializeAction } from 'angular2-materialize';
 import { RegistroSedeComponent } from '../registrosede/registrosede.component';
 import { PusherService } from '../../../../services/pusher.service';
 import { EliminarSedeComponent } from '../eliminarsede/eliminarsede.component';
+
 declare var $: any;
 declare var jQuery: any;
 

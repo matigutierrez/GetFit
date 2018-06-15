@@ -51,6 +51,7 @@ import { CancelarContratoComponent } from './grupos/cancelarcontrato/cancelarcon
 import { EliminarSedeComponent } from './sedes/eliminarsede/eliminarsede.component';
 import { CobranzasClienteComponent } from './clientes/cobranzascliente/cobranzascliente.component';
 import { ServiciosComponent } from './servicios/servicios/servicios.component';
+import { EliminarServicioComponent } from './servicios/eliminarservicio/eliminarservicio.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ServiciosComponent } from './servicios/servicios/servicios.component';
 
     // Componentes de servicio/servicios
     ServiciosComponent,
+    EliminarServicioComponent,
 
     // Componentes de cliente
     ClientesComponent,

@@ -1,0 +1,61 @@
+<div id="modal" class="modal col s12" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modal">
+    <div class="modal-content modalback">
+        <div class="row">
+            <div class=" col s10 m6 left-align">
+                <h5>¿Seguro que desea eliminar este servicio?</h5>
+            </div>
+            <div class="col s2 m6 right-align">
+                <a (click)="cerrar()">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+        </div>
+        <form #servicioForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="col s12">
+                <div *ngIf="servicio" class="row">
+                    <table class="responsive-table centered">
+                        <thead>
+                            <tr>
+                                <th>Servicio</th>
+                                <th>Descripción</th>
+                                <th>Costo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{servicio.ser_nombre}}</td>
+                                <td>{{servicio.ser_descripcion}}</td>
+                                <td>{{servicio.ser_costo}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="red-text right-align">Esta acción es irrevertible</p>
+                    <p class="red-text right-align">Podría eliminar información importante de la empresa</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 l3 offset-l9">
+                    <div class="right-align">
+
+                        <button *ngIf="!eliminando" class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Eliminar" name="action">Eliminar</button>
+
+                        <div *ngIf="eliminando" class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

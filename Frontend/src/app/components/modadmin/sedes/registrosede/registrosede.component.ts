@@ -1,6 +1,6 @@
 import { Component, EventEmitter, AfterViewChecked } from "@angular/core";
-import { SedeService } from "../../../../services/sede.service";
 import { MaterializeAction } from "angular2-materialize";
+import { SedeService } from "../../../../services/sede.service";
 import { Sede } from "../../../../models/Sede";
 
 declare var Materialize: any;
