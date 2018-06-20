@@ -2,24 +2,12 @@ import { Component, ViewChild } from "@angular/core";
 import { ClienteService } from "../../../../services/cliente.service";
 import { ActivatedRoute } from "@angular/router";
 import { Cliente } from "../../../../models/Cliente";
-import { HorarioComponent } from "../../../extra/horario/horario.component";
-import { CancelarContratoComponent } from "../../grupos/cancelarcontrato/cancelarcontrato.component";
-import { PagoCobranzaComponent } from "../../cobranzas/pagocobranza/pagocobranza.component";
 
 @Component({
     selector: 'cliente',
     templateUrl: 'cliente.html'
 })
 export class ClienteComponent {
-
-    @ViewChild(HorarioComponent)
-    public horarioComponent: HorarioComponent;
-
-    @ViewChild(CancelarContratoComponent)
-    public cancelarContratoComponent: CancelarContratoComponent;
-
-    @ViewChild(PagoCobranzaComponent)
-    public pagoCobranzaComponent: PagoCobranzaComponent;
 
     // 'id' del cliente actual
     public id: number;

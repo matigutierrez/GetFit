@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12  left-align">
+                <h4>Horarios Disponibles</h4>
+            </div>
+        </div>
+        <div *ngIf="!horarios || !dias || !horas" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <div *ngIf="horarios" class="row">
+            <p>Tus planes:</p>
+            <contratoshorarios></contratoshorarios>
+            <!-- Tabla de horarios -->
+            <table class="responsive-table" *ngIf="dias && horas">
+                <tr>
+                    <th>
+                        <div class="card-panel teal lighten-2 center-align">
+                            HORA
+                        </div>
+                    </th>
+                    <!-- Lista de dias (horizontal) -->
+                    <th *ngFor="let dia of dias">
+                        <div class="card-panel teal lighten-2 center-align">
+                            {{dia.dia_nombre}}
+                        </div>
+                    </th>
+                </tr>
+                <tr *ngFor="let hora of horas">
+                    <td>
+                        <!-- Lista de horas (vertical) -->
+                        <div class="card-panel teal lighten-2 center-align">
+                            {{hora.hor_inicio}} - {{hora.hor_fin}}
+                        </div>
+                    </td>
+                    <td *ngFor="let dia of dias">
+                        <div *ngIf="getHorarioActivo(hora.id, dia.id)">
+                            <!-- Boton para solicitar el grupo-->
+                            <a materialize="tooltip" class="card-panel tooltipped lighten-2 center-align" style="display: block" [ngStyle]="{'background-color': getHorario(hora.id, dia.id).grupo.tipo_grupo.tgr_color}"
+                                data-position="bottom" data-tooltip="Click para solicitar!" (click)="solicitar(getHorario(hora.id, dia.id).grupo)">
+                                {{getHorario(hora.id, dia.id).grupo.gru_nombre}}
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+            <!-- Lista con los tipos de grupos -->
+            <ul *ngIf="tipoGrupos">
+                <li *ngFor="let tipoGrupo of tipoGrupos">
+                    <i class="material-icons" [ngStyle]="{'color': tipoGrupo.tgr_color}">assignment</i>
+                    {{tipoGrupo.tgr_nombre}}
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="col s12">
+
+    </div>
+</div>
+
+<solicitargrupo></solicitargrupo>

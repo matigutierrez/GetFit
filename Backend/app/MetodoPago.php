@@ -16,5 +16,9 @@ class MetodoPago extends Model
     public function pagos() {
     	return $this->hasMany('App\Pago', 'tgf_metodo_pago_id');
     }
+
+    public function pagos_servicios() {
+        return $this->hasMany('App\PagoServicio', 'tgf_metodo_pago_id');
+    }
     
 }

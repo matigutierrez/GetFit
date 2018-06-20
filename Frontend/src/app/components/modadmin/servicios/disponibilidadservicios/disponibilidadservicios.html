@@ -1,0 +1,54 @@
+<div *ngIf="!disponibilidadServicios" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="disponibilidadServicios">
+    <table class="responsive-table striped highlight">
+        <thead>
+            <tr>
+                <th>Servicio</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Termino</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let disponibilidadServicio of disponibilidadServicios | paginate: { id: 'dispServicios', itemsPerPage: 6, currentPage: p }; index as i;">
+                <td>{{disponibilidadServicio.servicio.ser_nombre}}</td>
+                <td>{{disponibilidadServicio.dse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
+                <td>{{disponibilidadServicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</td>
+                <td>
+                    <!--
+                    <a [routerLink]="['/admin/servicio', servicio.id]">
+                        <i class="material-icons">settings</i>
+                    </a>
+                    -->
+                </td>
+                <td>
+                    <a (click)="deleteDisponibilidadServicio(disponibilidadServicio)">
+                        <i class="material-icons">close</i>
+                    </a>
+                </td>
+            </tr>
+            <pagination-controls id="dispServicios" (pageChange)="p = $event"></pagination-controls>
+        </tbody>
+    </table>
+</div>
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue" (click)="registerDisponibilidadServicio()">
+                <i class="material-icons">date_range</i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<registrodisponibilidadservicio></registrodisponibilidadservicio>
+
+<eliminardisponibilidadservicio></eliminardisponibilidadservicio>

@@ -52,6 +52,13 @@ import { EliminarSedeComponent } from './sedes/eliminarsede/eliminarsede.compone
 import { CobranzasClienteComponent } from './clientes/cobranzascliente/cobranzascliente.component';
 import { ServiciosComponent } from './servicios/servicios/servicios.component';
 import { EliminarServicioComponent } from './servicios/eliminarservicio/eliminarservicio.component';
+import { ServicioComponent } from './servicios/servicio/servicio.component';
+import { RegistroServicioComponent } from './servicios/registroservicio/registroservicio.component';
+import { SedeComponent } from './sedes/sede/sede.component';
+import { IndexServiciosComponent } from './servicios/index/indexservicios.component';
+import { DisponibilidadServiciosComponent } from './servicios/disponibilidadservicios/disponibilidadservicios.component';
+import { RegistroDisponibilidadServicioComponent } from './servicios/registrodisponibilidadservicio/registrodisponibilidadservicio.component';
+import { EliminarDisponibilidadServicioComponent } from './servicios/eliminardisponibilidadservicio/eliminardisponibilidadservicio.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +82,16 @@ import { EliminarServicioComponent } from './servicios/eliminarservicio/eliminar
     ActaComponent,
 
     // Componentes de servicio/servicios
+    IndexServiciosComponent,
     ServiciosComponent,
+    ServicioComponent,
+    RegistroServicioComponent,
     EliminarServicioComponent,
+
+    // Disponibilidad de servicios
+    DisponibilidadServiciosComponent,
+    RegistroDisponibilidadServicioComponent,
+    EliminarDisponibilidadServicioComponent,
 
     // Componentes de cliente
     ClientesComponent,
@@ -101,6 +116,7 @@ import { EliminarServicioComponent } from './servicios/eliminarservicio/eliminar
 
     // Componentes de sede
     SedesComponent,
+    SedeComponent,
     RegistroSedeComponent,
     EliminarSedeComponent,
 

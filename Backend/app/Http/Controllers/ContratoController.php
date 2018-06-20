@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Contrato;
-use App\ContratoHistorico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Pusher\Laravel\PusherManager;
@@ -66,7 +65,7 @@ class ContratoController extends Controller
      * @param  int  $grupo_id ID del grupo
      */
     public function find($tgf_cliente_id, $tgf_grupo_id) {
-        return ContratoHistorico::where([
+        return Contrato::where([
             'tgf_cliente_id' => $tgf_cliente_id,
             'tgf_grupo_id' => $tgf_grupo_id
         ])->get()->first()->contrato;
@@ -79,7 +78,7 @@ class ContratoController extends Controller
      * @param  int  $tgf_grupo_id ID del grupo
      */
     public function findToken(AuthenticateController $auth, $tgf_grupo_id) {
-        return ContratoHistorico::where([
+        return Contrato::where([
             'tgf_cliente_id' => $auth->getAuthenticatedUser()->cliente->id,
             'tgf_grupo_id' => $tgf_grupo_id
         ])->get()->first()->contrato;

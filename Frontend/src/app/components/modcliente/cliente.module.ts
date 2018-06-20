@@ -15,8 +15,9 @@ import { AuthGuard } from '../../guards/AuthGuard';
 import { ClienteGuard } from '../../guards/ClienteGuard';
 import { GruposComponent } from './grupos/grupos.component';
 import { ExtraModule } from '../extra/extra.module';
-import { TablaHorariosComponent } from './tablahorarios/tablahorarios.component';
-import { SolicitarGrupoComponent } from './tablahorarios/solicitargrupo/solicitargrupo.component';
+import { HorariosComponent } from './horarios/horarios.component';
+import { SolicitarGrupoComponent } from './horarios/solicitargrupo/solicitargrupo.component';
+import { ContratosHorariosComponent } from './horarios/contratoshorarios/contratoshorarios.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SolicitarGrupoComponent } from './tablahorarios/solicitargrupo/solicita
     VistaClienteComponent,
     CobranzaComponent,
     GruposComponent,
-    TablaHorariosComponent,
+    HorariosComponent,
+    ContratosHorariosComponent,
     SolicitarGrupoComponent
   ],
   imports: [

@@ -11,11 +11,11 @@ import { TipoGrupo } from "../../../models/TipoGrupo";
 import { SolicitarGrupoComponent } from "./solicitargrupo/solicitargrupo.component";
 
 @Component({
-    selector: 'tablahorarios',
-    templateUrl: 'tablahorarios.html',
-    styleUrls: ['tablahorarios.css']
+    selector: 'horarios',
+    templateUrl: 'horarios.html',
+    styleUrls: ['horarios.css']
 })
-export class TablaHorariosComponent {
+export class HorariosComponent {
 
     // Componente modal para solicitar gurpos
     @ViewChild(SolicitarGrupoComponent)

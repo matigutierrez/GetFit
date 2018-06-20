@@ -22,15 +22,15 @@ import { ContratoHistorico } from "../../../../models/ContratoHistorico";
 export class CobranzasGrupoComponent implements OnDestroy {
 
     // Componente para pago de cobranzas
-    @Input("pagoCobranzaComponent")
+    @ViewChild(PagoCobranzaComponent)
     public pagoCobranzaComponent: PagoCobranzaComponent;
 
     // Componente para registro de cobranzas
-    @Input("registroCobranzaGrupoComponent")
+    @ViewChild(RegistroCobranzaGrupoComponent)
     public registroCobranzaGrupoComponent: RegistroCobranzaGrupoComponent;
 
     // Componente para cancelar contratos
-    @Input("cancelarContratoComponent")
+    @ViewChild(CancelarContratoComponent)
     public cancelarContratoComponent: CancelarContratoComponent;
 
     // Grupo

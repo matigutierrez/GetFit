@@ -15,10 +15,10 @@ import { CancelarContratoComponent } from "../../grupos/cancelarcontrato/cancela
 })
 export class GruposClienteComponent implements OnDestroy {
 
-    @Input("horarioComponent")
+    @ViewChild(HorarioComponent)
     public horarioComponent: HorarioComponent;
 
-    @Input("cancelarContratoComponent")
+    @ViewChild(CancelarContratoComponent)
     public cancelarContratoComponent: CancelarContratoComponent;
 
     // Cliente actual

@@ -56,6 +56,14 @@ class Cliente extends Model
             ->where('tgf_cliente_id', '=', $this->id);
     }
 
+    public function cobranzas_servicios() {
+        return $this->hasMany('App\CobranzaServicio', 'tgf_cliente_id');
+    }
+
+    public function cobranzas_historicas_servicios() {
+        return $this->hasMany('App\CobranzaHistoricaServicio', 'tgf_cliente_id');
+    }
+
     public function grupos() {
         return $this->belongsToMany('App\Grupo', 'tgf_contrato', 'tgf_cliente_id', 'tgf_grupo_id');
     }

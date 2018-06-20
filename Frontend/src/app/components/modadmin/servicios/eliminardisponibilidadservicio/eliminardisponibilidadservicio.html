@@ -1,0 +1,62 @@
+<div id="modal" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modal">
+    <div class="modal-content modalback">
+        <div class="row">
+            <div class=" col s10 m6 left-align">
+                <h5>¿Seguro que desea eliminar la disponibilidad de este servicio?</h5>
+            </div>
+            <div class="col s2 m6 right-align">
+                <a (click)="cerrar()">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+        </div>
+        <form #servicioForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="col s12">
+                <div *ngIf="disponibilidadServicio" class="row">
+                    <table class="responsive-table centered">
+                        <thead>
+                            <tr>
+                                <th>Servicio</th>
+                                <th>Descripción</th>
+                                <th>Fecha de Inicio</th>
+                                <th>Fecha de Termino</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{disponibilidadServicio.servicio.ser_nombre}}</td>
+                                <td>{{disponibilidadServicio.servicio.ser_descripcion}}</td>
+                                <td>{{disponibilidadServicio.dse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
+                                <td>{{disponibilidadServicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="red-text right-align">Esta acción es irrevertible, podría eliminar información importante asociada a este registro (cobranzas, pagos, etc).</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 l3 offset-l9">
+                    <div class="right-align">
+
+                        <button *ngIf="!eliminando" class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Eliminar" name="action">Eliminar</button>
+
+                        <div *ngIf="eliminando" class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

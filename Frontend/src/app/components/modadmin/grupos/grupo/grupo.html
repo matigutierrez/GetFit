@@ -41,14 +41,10 @@
                 <editargrupo [grupo]="grupo"></editargrupo>
             </div>
             <div id="clientes" class="col s12">
-                <clientesgrupo [inscripcionGrupoComponent]="inscripcionGrupoComponent" [cancelarContratoComponent]="cancelarContratoComponent"
-                    [grupo]="grupo">
-                </clientesgrupo>
+                <clientesgrupo [grupo]="grupo"></clientesgrupo>
             </div>
             <div id="cobranzas" class="col s12">
-                <cobranzasgrupo [pagoCobranzaComponent]="pagoCobranzaComponent" [cancelarContratoComponent]="cancelarContratoComponent" [registroCobranzaGrupoComponent]="registroCobranzaGrupoComponent"
-                    [grupo]="grupo">
-                </cobranzasgrupo>
+                <cobranzasgrupo [grupo]="grupo"></cobranzasgrupo>
             </div>
             <div id="horarios" class="col s12">
                 <horariogrupo [grupo]="grupo"></horariogrupo>
@@ -60,16 +56,3 @@
 
     </div>
 </div>
-
-<!-- Este componente debería estar dentro de "ClientesGrupoComponent" (etiqueta clientesgrupo)-->
-<!-- Presenta defectos en HTML al utilizarlo ahí -->
-<!-- Asi que se pone aquí y inyecta con inputs -->
-<inscripciongrupo></inscripciongrupo>
-
-<!-- Este componente debería estar dentro de "CobranzasGrupoComponent" -->
-<pagocobranza></pagocobranza>
-
-<registrocobranzagrupo></registrocobranzagrupo>
-
-<!-- Este componente debería estar dentro de "ClientesGrupoComponent" y "CobranzasGrupoComponent" -->
-<cancelarcontrato></cancelarcontrato>

@@ -38,6 +38,10 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
 	Route::apiResource('cobranzahistorica', 'CobranzaHistoricaController');
 
+	Route::apiResource('cobranzahistoricaservicio', 'CobranzaHistoricaServicioController');
+
+	Route::apiResource('cobranzaservicio', 'CobranzaServicioController');
+
 	Route::apiResource('contrato', 'ContratoController');
 	Route::get('contrato/{id}/acta', 'ContratoController@acta');
 	Route::get('contrato/find/{cliente_id}/{tgf_grupo_id}', 'ContratoController@find');
@@ -46,6 +50,8 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('contratohistorico', 'ContratoHistoricoController');
 
 	Route::apiResource('diasemana', 'DiaSemanaController');
+
+	Route::apiResource('disponibilidadservicio', 'DisponibilidadServicioController');
 
 	Route::apiResource('evaluacion', 'EvaluacionController');
 

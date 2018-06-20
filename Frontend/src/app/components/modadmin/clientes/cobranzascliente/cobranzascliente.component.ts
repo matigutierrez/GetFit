@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from "@angular/core";
+import { Component, Input, OnDestroy, ViewChild } from "@angular/core";
 import { ClienteService } from "../../../../services/cliente.service";
 import { Cliente } from "../../../../models/Cliente";
 import { Cobranza } from "../../../../models/Cobranza";
@@ -17,11 +17,11 @@ import { Pago } from "../../../../models/Pago";
 export class CobranzasClienteComponent implements OnDestroy {
 
     // Componente para cancelar contratos
-    @Input("cancelarContratoComponent")
+    @ViewChild(CancelarContratoComponent)
     public cancelarContratoComponent: CancelarContratoComponent;
 
     // Componente para pago de cobranzas
-    @Input("pagoCobranzaComponent")
+    @ViewChild(PagoCobranzaComponent)
     public pagoCobranzaComponent: PagoCobranzaComponent;
 
     // El cliente actual

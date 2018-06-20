@@ -49,23 +49,12 @@
                 <editarcliente [cliente]="cliente"></editarcliente>
             </div>
             <div id="grupos" class="col s12">
-                <gruposcliente [cancelarContratoComponent]="cancelarContratoComponent" [horarioComponent]="horarioComponent" [cliente]="cliente"></gruposcliente>
+                <gruposcliente [cliente]="cliente"></gruposcliente>
             </div>
             <div id="cobranzas" class="col s12">
-                <cobranzascliente [cancelarContratoComponent]="cancelarContratoComponent" [pagoCobranzaComponent]="pagoCobranzaComponent" [cliente]="cliente"></cobranzascliente>
+                <cobranzascliente [cliente]="cliente"></cobranzascliente>
             </div>
         </div>
 
     </div>
 </div>
-
-<!-- Este componente solo se utiliza dentro del componente GruposClienteComponent (con etiqueta gruposcliente) -->
-<!-- Si se instancia dentro de ese componente va a haber problemas con la vista -->
-<!-- Por lo tanto se dejó instanciado en este lugar -->
-<horario></horario>
-
-<!-- Este componente debería estar dentro de "GruposClientesComponent" y "CobranzasClienteComponent" -->
-<cancelarcontrato></cancelarcontrato>
-
-<!-- Este componente debería estar dentro de "CobranzasClienteComponent" -->
-<pagocobranza></pagocobranza>

@@ -1,0 +1,32 @@
+<div class="row">
+    <div *ngIf="servicio" class="padtable">
+        <h4>{{servicio.ser_nombre}}</h4>
+        <p>{{servicio.ser_descripcion}}</p>
+
+        <!-- Tabs -->
+        <div class="row">
+            <ul class="tabs" materialize="tabs">
+                <li class="tab col s2">
+                    <a class="active" href="#editarservicio">
+                        <i class="material-icons">settings</i>Editar Servicio
+                    </a>
+                </li>
+                <!--
+                <li class="tab col s2">
+                    <a href="#clientes">
+                        <i class="material-icons">person</i>Clientes
+                    </a>
+                </li>
+                -->
+            </ul>
+        </div>
+
+        <!-- Panel inferior -->
+        <div class="row">
+            <!-- Contenido de tabber -->
+            <div id="editarservicio" class="col s12">
+                <!--<editargrupo [grupo]="grupo"></editargrupo>-->
+            </div>
+        </div>
+    </div>
+</div>

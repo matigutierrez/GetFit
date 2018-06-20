@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contrato;
 use App\ContratoHistorico;
+use App\SolicitudGrupo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Pusher\Laravel\PusherManager;
@@ -47,6 +48,19 @@ class ContratoHistoricoController extends Controller
     {
         $requestContrato = json_decode(File::get($request->file('contrato')));
         
+        $solicitud = SolicitudGrupo::where([
+            'tgf_cliente_id' => $requestContrato->tgf_cliente_id,
+            'tgf_plan_id' => $requestContrato->tgf_plan_id
+        ])->get()->first();
+
+        if ( isset($solicitud) ) {
+
+            SolicitudGrupo::destroy($solicitud->id);
+
+            $this->pusher->trigger('solicitudGrupo', 'delete', $solicitud->id);
+
+        }
+
         $contratoHist = new ContratoHistorico;
         $contratoHist->tgf_cliente_id = $requestContrato->tgf_cliente_id;
         $contratoHist->tgf_grupo_id = $requestContrato->tgf_grupo_id;

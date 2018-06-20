@@ -21,11 +21,11 @@ import { CancelarContratoComponent } from "../cancelarcontrato/cancelarcontrato.
 export class ClientesGrupoComponent implements OnDestroy {
 
     // Componente de inscripción de clientes a un grupo
-    @Input("inscripcionGrupoComponent")
+    @ViewChild(InscripcionGrupoComponent)
     public inscripcionGrupoComponent: InscripcionGrupoComponent;
 
     // Componente para cancelar contratos
-    @Input("cancelarContratoComponent")
+    @ViewChild(CancelarContratoComponent)
     public cancelarContratoComponent: CancelarContratoComponent;
 
     // Lista de contratos
@@ -62,17 +62,17 @@ export class ClientesGrupoComponent implements OnDestroy {
     ) {
 
         this.contratoChannel = this._pusherService.getPusher().subscribe('contrato');
-        this.contratoChannel.bind("create", data => { this.onCreateContrato(data) });
-        this.contratoChannel.bind("update", data => { this.onUpdateContrato(data) });
+        this.contratoChannel.bind("create", data => { this.onCreateContrato(new Contrato(data)) });
+        this.contratoChannel.bind("update", data => { this.onUpdateContrato(new Contrato(data)) });
         this.contratoChannel.bind("delete", data => { this.onDeleteContrato(data) });
 
         this.contratoHistoricoChannel = this._pusherService.getPusher().subscribe('contrato_historico');
-        this.contratoHistoricoChannel.bind("create", data => { this.onCreateContratoHistorico(data) });
-        this.contratoHistoricoChannel.bind("update", data => { this.onUpdateContratoHistorico(data) });
+        this.contratoHistoricoChannel.bind("create", data => { this.onCreateContratoHistorico(new ContratoHistorico(data)) });
+        this.contratoHistoricoChannel.bind("update", data => { this.onUpdateContratoHistorico(new ContratoHistorico(data)) });
 
         this.solicitudChannel = this._pusherService.getPusher().subscribe('solicitudGrupo');
-        this.solicitudChannel.bind("create", data => { this.onCreateSolicitud(data) });
-        this.solicitudChannel.bind("update", data => { this.onUpdateSolicitud(data) });
+        this.solicitudChannel.bind("create", data => { this.onCreateSolicitud(new SolicitudGrupo(data)) });
+        this.solicitudChannel.bind("update", data => { this.onUpdateSolicitud(new SolicitudGrupo(data)) });
         this.solicitudChannel.bind("delete", data => { this.onDeleteSolicitud(data) });
 
     }
@@ -100,9 +100,6 @@ export class ClientesGrupoComponent implements OnDestroy {
     }
 
     public okSolicitud(solicitud: SolicitudGrupo) {
-        // Eliminar una solicitud de grupo
-        this._solicitudGrupoService.delete(solicitud.id).subscribe(null);
-
         // Crear un contrato historico
         let contratoHistorico: ContratoHistorico = new ContratoHistorico();
 

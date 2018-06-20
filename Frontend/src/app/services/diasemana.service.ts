@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DiaSemana } from "../models/DiaSemana";
 import { GLOBAL } from "./global";
-import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'

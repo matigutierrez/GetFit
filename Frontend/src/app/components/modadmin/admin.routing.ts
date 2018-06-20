@@ -15,68 +15,78 @@ import { GrupoComponent } from './grupos/grupo/grupo.component';
 import { ProfesorComponent } from './profesores/profesor/profesor.component';
 import { UsuariosComponent } from './usuarios/usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
-import { ServiciosComponent } from './servicios/servicios/servicios.component';
+import { ServicioComponent } from './servicios/servicio/servicio.component';
+import { SedeComponent } from './sedes/sede/sede.component';
+import { IndexServiciosComponent } from './servicios/index/indexservicios.component';
 
 const appRoutes: Routes = [
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AuthGuard, AdminGuard],
-    children: [
-      {
-        path: '',
-        component: PrincipalComponent
-      },
-      {
-        path: 'usuarios',
-        component: UsuariosComponent
-      },
-      {
-        path: 'grupos',
-        component: GruposComponent
-      },
-      {
-        path: 'servicios',
-        component: ServiciosComponent
-      },
-      {
-        path: 'clientes',
-        component: ClientesComponent
-      },
-      {
-        path: 'cliente/:id',
-        component: ClienteComponent
-      },
-      {
-        path: 'profesores',
-        component: ProfesoresComponent
-      },
-      {
-        path: 'profesor/:id',
-        component: ProfesorComponent
-      },
-      {
-        path: 'grupo/:id',
-        component: GrupoComponent
-      },
-      {
-        path: 'cobranzas',
-        component: CobranzasComponent
-      },
-      {
-        path: 'sedes',
-        component: SedesComponent
-      },
-      {
-        path: 'notificacion',
-        component: NotificacionComponent
-      },
-      {
-        path: 'usuario/:id',
-        component: UsuarioComponent
-      }
-    ]
-  }
+    {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AuthGuard, AdminGuard],
+        children: [
+            {
+                path: '',
+                component: PrincipalComponent
+            },
+            {
+                path: 'usuarios',
+                component: UsuariosComponent
+            },
+            {
+                path: 'grupos',
+                component: GruposComponent
+            },
+            {
+                path: 'servicios',
+                component: IndexServiciosComponent
+            },
+            {
+                path: 'servicio/:id',
+                component: ServicioComponent
+            },
+            {
+                path: 'clientes',
+                component: ClientesComponent
+            },
+            {
+                path: 'cliente/:id',
+                component: ClienteComponent
+            },
+            {
+                path: 'profesores',
+                component: ProfesoresComponent
+            },
+            {
+                path: 'profesor/:id',
+                component: ProfesorComponent
+            },
+            {
+                path: 'grupo/:id',
+                component: GrupoComponent
+            },
+            {
+                path: 'cobranzas',
+                component: CobranzasComponent
+            },
+            {
+                path: 'sedes',
+                component: SedesComponent
+            },
+            {
+                path: 'sede/:id',
+                component: SedeComponent
+            },
+            {
+                path: 'notificacion',
+                component: NotificacionComponent
+            },
+            {
+                path: 'usuario/:id',
+                component: UsuarioComponent
+            }
+        ]
+    }
 ];
 
 export const appRoutingProviders: any[] = [];

@@ -1,14 +1,19 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, OnDestroy } from "@angular/core";
 import { PusherService } from "../../../../services/pusher.service";
 import { ServicioService } from "../../../../services/servicio.service";
 import { Servicio } from "../../../../models/Servicio";
 import { EliminarServicioComponent } from "../eliminarservicio/eliminarservicio.component";
+import { RegistroServicioComponent } from "../registroservicio/registroservicio.component";
 
 @Component({
     selector: 'servicios',
     templateUrl: 'servicios.html'
 })
-export class ServiciosComponent {
+export class ServiciosComponent implements OnDestroy {
+
+    // Componente para registrar servicios
+    @ViewChild(RegistroServicioComponent)
+    public registroServicioComponent: RegistroServicioComponent;
 
     // Componente para eliminar servicios
     @ViewChild(EliminarServicioComponent)
@@ -21,7 +26,7 @@ export class ServiciosComponent {
     public p: number = 1;
 
     // Canal de servicios
-    private serviceChannel: any;
+    private servicioChannel: any;
 
     public constructor(
         private _servicioService: ServicioService,
@@ -36,11 +41,17 @@ export class ServiciosComponent {
         );
 
         // Suscribirse a canal de pusher
-        this.serviceChannel = this._pusherService.getPusher().subscribe("servicio");
-        this.serviceChannel.bind("create", data => { this.onCreateServicio(new Servicio(data)) });
-        this.serviceChannel.bind("update", data => { this.onUpdateServicio(new Servicio(data)) });
-        this.serviceChannel.bind("delete", data => { this.onDeleteServicio(data) });
+        this.servicioChannel = this._pusherService.getPusher().subscribe("servicio");
+        this.servicioChannel.bind("create", data => { this.onCreateServicio(new Servicio(data)) });
+        this.servicioChannel.bind("update", data => { this.onUpdateServicio(new Servicio(data)) });
+        this.servicioChannel.bind("delete", data => { this.onDeleteServicio(data) });
 
+    }
+
+    public ngOnDestroy() {
+        if (this.servicioChannel) {
+            this.servicioChannel.unbind();
+        }
     }
 
     public onCreateServicio(servicio: Servicio) {
@@ -86,7 +97,7 @@ export class ServiciosComponent {
     }
 
     public registerServicio() {
-        
+        this.registroServicioComponent.abrir();
     }
 
 }
