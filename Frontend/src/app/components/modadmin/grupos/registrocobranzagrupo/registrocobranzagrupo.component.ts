@@ -1,10 +1,7 @@
-import { Component, ViewChild, ElementRef, EventEmitter, AfterViewChecked } from "@angular/core";
+import { Component, EventEmitter, AfterViewChecked } from "@angular/core";
 import { Grupo } from "../../../../models/Grupo";
 import { MaterializeAction } from "angular2-materialize";
-import { Cliente } from "../../../../models/Cliente";
 import { Contrato } from "../../../../models/Contrato";
-import { Cobranza } from "../../../../models/Cobranza";
-import { ClienteService } from "../../../../services/cliente.service";
 import { GrupoService } from "../../../../services/grupo.service";
 import { CobranzaHistorica } from "../../../../models/CobranzaHistorica";
 import { CobranzaHistoricaService } from "../../../../services/cobranzahistorica.service";
@@ -50,7 +47,6 @@ export class RegistroCobranzaGrupoComponent implements AfterViewChecked {
     public registrando: boolean;
 
     public constructor(
-        private _clienteService: ClienteService,
         private _cobranzaHistoricaService: CobranzaHistoricaService,
         private _grupoService: GrupoService,
         private _metodoPagoService: MetodoPagoService,

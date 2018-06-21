@@ -1,5 +1,4 @@
 import { Component, Input, AfterViewChecked } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GrupoService } from '../../../../services/grupo.service';
 import { SedeService } from '../../../../services/sede.service';
 import { Grupo } from '../../../../models/Grupo';

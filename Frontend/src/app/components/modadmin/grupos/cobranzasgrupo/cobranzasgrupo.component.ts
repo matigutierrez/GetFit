@@ -8,11 +8,9 @@ import { PusherService } from "../../../../services/pusher.service";
 import { Pago } from "../../../../models/Pago";
 import { PagoCobranzaComponent } from "../../cobranzas/pagocobranza/pagocobranza.component";
 import { RegistroCobranzaGrupoComponent } from "../registrocobranzagrupo/registrocobranzagrupo.component";
-import { ContratoService } from "../../../../services/contrato.service";
 import { CancelarContratoComponent } from "../cancelarcontrato/cancelarcontrato.component";
 import { CobranzaHistorica } from "../../../../models/CobranzaHistorica";
 import { ContratoHistorico } from "../../../../models/ContratoHistorico";
-
 
 @Component({
     selector: 'cobranzasgrupo',
@@ -70,7 +68,6 @@ export class CobranzasGrupoComponent implements OnDestroy {
     public constructor(
         private _grupoService: GrupoService,
         private _cobranzaService: CobranzaService,
-        private _contratoService: ContratoService,
         private _pusherService: PusherService
     ) {
 

@@ -2,9 +2,7 @@ import { Component, EventEmitter, Input } from "@angular/core";
 import { MaterializeAction } from 'angular2-materialize';
 import { Cliente } from "../../../../models/Cliente";
 import { ClienteService } from "../../../../services/cliente.service";
-import { Contrato } from "../../../../models/Contrato";
-import { ContratoService } from "../../../../services/contrato.service";
-import { HttpHeaders, HttpEventType } from "@angular/common/http";
+import { HttpEventType } from "@angular/common/http";
 import { Grupo } from "../../../../models/Grupo";
 import { ContratoHistorico } from "../../../../models/ContratoHistorico";
 import { ContratoHistoricoService } from "../../../../services/contratohistorico.service";
@@ -50,7 +48,6 @@ export class InscripcionGrupoComponent {
 
     public constructor(
         private _clienteService: ClienteService,
-        private _contratoService: ContratoService,
         private _contratoHistoricoService: ContratoHistoricoService
     ) {
 

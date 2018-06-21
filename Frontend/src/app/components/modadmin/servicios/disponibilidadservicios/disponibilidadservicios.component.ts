@@ -5,6 +5,8 @@ import { RegistroDisponibilidadServicioComponent } from "../registrodisponibilid
 import { PusherService } from "../../../../services/pusher.service";
 import { EliminarDisponibilidadServicioComponent } from "../eliminardisponibilidadservicio/eliminardisponibilidadservicio.component";
 
+declare var Materialize: any;
+
 @Component({
     selector: 'disponibilidadservicios',
     templateUrl: 'disponibilidadservicios.html'
@@ -65,6 +67,9 @@ export class DisponibilidadServiciosComponent implements OnDestroy {
         if (this.disponibilidadServicios) {
             // Agregar disponibilidad de servicio a la lista de disponibilidades de servicios
             this.disponibilidadServicios.unshift(disponibilidadServicio);
+
+            // Indicar que se ha registrado la disponibilidad de servicio
+            Materialize.toast('Se ha registrado una disponibilidad para el servicio "' + disponibilidadServicio.servicio.ser_nombre + '" al sistema', 3000);
         }
     }
 

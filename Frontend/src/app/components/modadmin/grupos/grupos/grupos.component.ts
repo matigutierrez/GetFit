@@ -1,18 +1,16 @@
 import { Component, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GrupoService } from '../../../../services/grupo.service';
 import { MaterializeAction } from 'angular2-materialize';
 import { Grupo } from '../../../../models/Grupo';
-import { Cliente } from '../../../../models/Cliente';
 import { PusherService } from '../../../../services/pusher.service';
-import { GLOBAL } from '../../../../services/global';
 import { Contrato } from '../../../../models/Contrato';
 import { InscripcionGrupoComponent } from '../inscripciongrupo/inscripciongrupo.component';
 import { RegistroGrupoComponent } from '../registrogrupo/registrogrupo.component';
 import { HorarioComponent } from '../../../extra/horario/horario.component';
-import { Horario } from '../../../../models/Horario';
 import { ContratosComponent } from '../../clientes/contratos/contratos.component';
 import { EliminarGrupoComponent } from '../eliminargrupo/eliminargrupo.component';
+
+declare var Materialize: any;
 
 @Component({
     selector: 'grupos',
@@ -58,8 +56,6 @@ export class GruposComponent implements OnDestroy {
     private contratoChannel: any;
 
     public constructor(
-        private _route: ActivatedRoute,
-        private _router: Router,
         private _grupoService: GrupoService,
         private _pusherService: PusherService
     ) {
@@ -130,18 +126,24 @@ export class GruposComponent implements OnDestroy {
     }
 
     public onCreate(grupo: Grupo) {
-        // Para los contratos del grupo
-        let contratos: Contrato[] = grupo.contratos;
-        // Si hay contratos
-        if (contratos && contratos.length > 0) {
-            // Para cada contrato
-            for (let i = 0; i < contratos.length; i++) {
-                // Contrato debe contener al grupo
-                contratos[i].contrato_historico.grupo = grupo;
+        // Si se ha recibido la lista de grupos
+        if (this.grupos) {
+            // Para los contratos del grupo
+            let contratos: Contrato[] = grupo.contratos;
+            // Si hay contratos
+            if (contratos && contratos.length > 0) {
+                // Para cada contrato
+                for (let i = 0; i < contratos.length; i++) {
+                    // Contrato debe contener al grupo
+                    contratos[i].contrato_historico.grupo = grupo;
+                }
             }
+            // Agregar grupo a la lista
+            this.grupos.unshift(grupo);
+
+            // Indicar que se creó un grupo
+            Materialize.toast('Se ha registrado el grupo "' + grupo.gru_nombre + '" al sistema', 3000);
         }
-        // Agregar grupo a la lista
-        this.grupos.unshift(grupo);
     }
 
     public onUpdate(grupo: Grupo) {
@@ -194,6 +196,7 @@ export class GruposComponent implements OnDestroy {
                     grupo.contratos.unshift(contrato);
                     // Contrato debe contener al grupo
                     contrato.contrato_historico.grupo = grupo;
+                    break;
                 }
             }
         }

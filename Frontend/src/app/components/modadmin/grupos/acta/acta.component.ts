@@ -1,6 +1,5 @@
 import { Component, Input } from "@angular/core";
 import { ContratoService } from "../../../../services/contrato.service";
-import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { HttpEventType } from "@angular/common/http";
 
 @Component({
@@ -12,15 +11,11 @@ export class ActaComponent {
     @Input()
     public contrato_id: number;
 
-    private acta: Blob;
-    private actaUrl: SafeUrl;
-
     public sent: boolean;
     public porcentaje: number;
 
     public constructor(
-        private _contratoService: ContratoService,
-        private _sanitizer: DomSanitizer
+        private _contratoService: ContratoService
     ) {
         this.sent = false;
         this.porcentaje = 0;

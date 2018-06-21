@@ -1,5 +1,5 @@
 import { GrupoService } from "../../../../services/grupo.service";
-import { Component, Input, OnInit, ViewChild, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Grupo } from "../../../../models/Grupo";
 

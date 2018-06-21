@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, Output, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
-import { ContratoService } from '../../../../services/contrato.service';
+import { Component, EventEmitter, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 import { Cliente } from '../../../../models/Cliente';
 import { Contrato } from '../../../../models/Contrato';
@@ -11,8 +10,6 @@ import { Pago } from '../../../../models/Pago';
 import { MetodoPago } from '../../../../models/MetodoPago';
 import { MetodoPagoService } from '../../../../services/metodopago.service';
 import { PagoService } from '../../../../services/pago.service';
-declare var $: any;
-declare var jQuery: any;
 
 declare var Materialize: any;
 
@@ -55,7 +52,6 @@ export class RegistroCobranzaComponent implements AfterViewChecked {
     public constructor(
         private _clienteService: ClienteService,
         private _cobranzaHistoricaService: CobranzaHistoricaService,
-        private _contratoService: ContratoService,
         private _metodoPagoService: MetodoPagoService,
         private _pagoService: PagoService
     ) {

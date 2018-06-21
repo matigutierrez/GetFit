@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { NotificacionService } from '../../../../services/notificacion.service';
 import { Notificacion } from "../../../../models/Notificacion";
 import { NotificacionViewerComponent } from "../notificacionviewer/notificacionviewer.component";
 
 @Component({
     selector: 'notificacion',
-    templateUrl: 'notificacion.html',
-    providers: [NotificacionService, NotificacionViewerComponent]
+    templateUrl: 'notificacion.html'
 })
-export class NotificacionComponent implements OnInit {
+export class NotificacionComponent {
 
     // Componente NotificacionViewerComponent
     @ViewChild(NotificacionViewerComponent)
@@ -23,15 +22,8 @@ export class NotificacionComponent implements OnInit {
         this._notificacionService.query().subscribe(
             Response => {
                 this.notificaciones = Response;
-            },
-            Error => {
-                console.log(<any>Error)
             }
         );
-    }
-
-    public ngOnInit() {
-
     }
 
     public registrar() {

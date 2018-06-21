@@ -46,8 +46,8 @@ class DisponibilidadServicioController extends Controller
     {
         $disponibilidad = new DisponibilidadServicio;
         $disponibilidad->tgf_servicio_id = $request->tgf_servicio_id;
-        $disponibilidad->dse_fecha_inicio = Carbon::parse($request->dse_fecha_inicio);
-        $disponibilidad->dse_fecha_fin = Carbon::parse($request->dse_fecha_fin);
+        $disponibilidad->dse_fecha_inicio = Carbon::parse($request->dse_fecha_inicio)->toDateTimeString();
+        $disponibilidad->dse_fecha_fin = Carbon::parse($request->dse_fecha_fin)->toDateTimeString();
 
         $disponibilidad->save();
 
@@ -94,8 +94,8 @@ class DisponibilidadServicioController extends Controller
         $disponibilidad = DisponibilidadServicio::find($id);
         $disponibilidad->update([
             'tgf_servicio_id' => $request->tgf_servicio_id,
-            'dse_fecha_inicio' => Carbon::parse($request->dse_fecha_inicio),
-            'dse_fecha_fin' => Carbon::parse($request->dse_fecha_fin)
+            'dse_fecha_inicio' => Carbon::parse($request->dse_fecha_inicio)->toDateTimeString(),
+            'dse_fecha_fin' => Carbon::parse($request->dse_fecha_fin)->toDateTimeString()
         ]);
 
         // Cachear servicio

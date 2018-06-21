@@ -5,6 +5,8 @@ import { Servicio } from "../../../../models/Servicio";
 import { EliminarServicioComponent } from "../eliminarservicio/eliminarservicio.component";
 import { RegistroServicioComponent } from "../registroservicio/registroservicio.component";
 
+declare var Materialize: any;
+
 @Component({
     selector: 'servicios',
     templateUrl: 'servicios.html'
@@ -59,6 +61,9 @@ export class ServiciosComponent implements OnDestroy {
         if (this.servicios) {
             // Agregar servicio a la lista de servicios
             this.servicios.unshift(servicio);
+
+            // Indicar que se ha creado un servicio
+            Materialize.toast('Se ha registrado el servicio "' + servicio.ser_nombre + '" al sistema');
         }
     }
 

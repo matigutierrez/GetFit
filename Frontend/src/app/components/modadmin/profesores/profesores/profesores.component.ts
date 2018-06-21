@@ -5,6 +5,8 @@ import { PusherService } from "../../../../services/pusher.service";
 import { RegistroProfesorComponent } from "../registroprofesor/registroprofesor.component";
 import { Usuario } from "../../../../models/Usuario";
 
+declare var Materialize: any;
+
 @Component({
     selector: 'profesores',
     templateUrl: 'profesores.html'
@@ -58,103 +60,69 @@ export class ProfesoresComponent implements OnDestroy {
     public onCreateUsuario(usuario: Usuario) {
         // Si el usuario es profesor
         if (usuario.tgf_profesor_id) {
-
             // Si se ha recibido la lista de profesores
             if (this.profesores) {
-
                 // Por cada profesor
                 for (let i = 0; i < this.profesores.length; i++) {
-
                     let profesor = this.profesores[i];
-
                     // Comparar ids
                     if (usuario.tgf_profesor_id == profesor.id) {
-
                         // Asignar usuario
                         profesor.usuario = usuario;
                         break;
-
                     }
-
                 }
-
             }
-
         }
 
     }
 
     public onUpdateUsuario(usuario: Usuario) {
-
         // Si se ha recibido la lista de profesores
         if (this.profesores) {
-
             // Si hay algun profesor que tiene este usuario
             for (let i = 0; i < this.profesores.length; i++) {
-
                 // Por cada profesor
                 let profesor = this.profesores[i];
-
                 // Si el profesor tiene usuario, comparar ids
                 if ( profesor.usuario && profesor.usuario.id == usuario.id ) {
-
                     // Eliminar a usuario antiguo
                     profesor.usuario = null;
                     break;
-
                 }
-
             }
 
             // Si el usuario es profesor
             if (usuario.tgf_profesor_id) {
-
                 // Por cada profesor
                 for (let i = 0; i < this.profesores.length; i++) {
-
                     let profesor = this.profesores[i];
-
                     // Comparar ids
                     if (usuario.tgf_profesor_id == profesor.id) {
-
                         // Actualizar usuario
                         profesor.usuario = usuario;
                         break;
-
                     }
-
                 }
-
             }
-
         }
-
     }
 
     public onDeleteUsuario(id: number) {
-
         // Si se ha recibido la lista de profesores
         if (this.profesores) {
-
             // Si hay algun profesor que tiene este usuario
             for (let i = 0; i < this.profesores.length; i++) {
-
                 // Por cada profesor
                 let profesor = this.profesores[i];
-
                 // Si el profesor tiene usuario, comparar ids
                 if ( profesor.usuario && profesor.usuario.id == id ) {
-
                     // Eliminar a usuario
                     profesor.usuario = null;
                     break;
-
                 }
-
             }
-
         }
-
     }
 
     public deleteProfesor(id: number) {
@@ -162,57 +130,45 @@ export class ProfesoresComponent implements OnDestroy {
         this._profesorService.delete(id).subscribe(null);
     }
 
-    public onCreate(data: Profesor) {
+    public onCreate(profesor: Profesor) {
         // Validar que existe la lista de profesores
         if (this.profesores) {
-
             // Insertar profesor nuevo
-            this.profesores.unshift(data);
+            this.profesores.unshift(profesor);
+
+            // Indicar que se ha registrado el profesor
+            Materialize.toast('Se ha registrado el profesor "' + profesor.pro_nombres + ' ' + profesor.pro_apellidos + '" al sistema', 3000);
         }
     }
 
-    public onUpdate(data: Profesor) {
+    public onUpdate(profesor: Profesor) {
         // Validar que existe la lista de profesores
         if (this.profesores) {
-
             // Por cada profesor
             for (let i = 0; i < this.profesores.length; i++) {
-
                 // Comparar ids
-                if (this.profesores[i].id == data.id) {
-
+                if (this.profesores[i].id == profesor.id) {
                     // Actualizar profesor
-                    this.profesores[i] = data;
+                    this.profesores[i] = profesor;
                     break;
-
                 }
-
             }
-
         }
-
     }
 
     public onDelete(id: number) {
         // Validar que existe la lista de profesores
         if (this.profesores) {
-
             // Por cada profesor
             for (let i = 0; i < this.profesores.length; i++) {
-
                 // Comparar ids
                 if (this.profesores[i].id == id) {
-
                     // Quitar profesor de lista
                     this.profesores.splice(i, 1);
                     break;
-
                 }
-
             }
-
         }
-
     }
 
 }

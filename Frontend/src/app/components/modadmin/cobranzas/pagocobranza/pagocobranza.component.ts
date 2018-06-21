@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { CobranzaService } from "../../../../services/cobranza.service";
 import { MaterializeAction } from "angular2-materialize";
 import { Cobranza } from "../../../../models/Cobranza";
 import { MetodoPagoService } from "../../../../services/metodopago.service";
@@ -29,7 +28,6 @@ export class PagoCobranzaComponent {
     public pago: Pago = new Pago();
 
     public constructor(
-        private _cobranzaService: CobranzaService,
         private _metodoPagoService: MetodoPagoService,
         private _pagoService: PagoService
     ) {

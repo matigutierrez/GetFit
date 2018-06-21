@@ -1,14 +1,11 @@
 import { Component, Input, OnDestroy, ViewChild } from "@angular/core";
 import { GrupoService } from "../../../../services/grupo.service";
-import { Cliente } from "../../../../models/Cliente";
 import { Grupo } from "../../../../models/Grupo";
 import { Contrato } from "../../../../models/Contrato";
-import { ContratoService } from "../../../../services/contrato.service";
 import { PusherService } from "../../../../services/pusher.service";
 import { InscripcionGrupoComponent } from "../inscripciongrupo/inscripciongrupo.component";
 import { SolicitudGrupo } from "../../../../models/SolicitudGrupo";
 import { SolicitudGrupoService } from "../../../../services/solicitudgrupo.service";
-import { Cobranza } from "../../../../models/Cobranza";
 import { ContratoHistorico } from "../../../../models/ContratoHistorico";
 import { ContratoHistoricoService } from "../../../../services/contratohistorico.service";
 import { CancelarContratoComponent } from "../cancelarcontrato/cancelarcontrato.component";
@@ -55,7 +52,6 @@ export class ClientesGrupoComponent implements OnDestroy {
 
     public constructor(
         private _grupoService: GrupoService,
-        private _contratoService: ContratoService,
         private _contratoHistoricoService: ContratoHistoricoService,
         private _solicitudGrupoService: SolicitudGrupoService,
         private _pusherService: PusherService
