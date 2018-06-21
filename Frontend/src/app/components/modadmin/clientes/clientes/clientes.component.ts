@@ -1,19 +1,18 @@
-import { Component, OnInit, Input, Output, ViewChild, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { ClienteService } from '../../../../services/cliente.service';
 import { Cliente } from '../../../../models/Cliente';
-import { GrupoService } from '../../../../services/grupo.service';
 import { PusherService } from '../../../../services/pusher.service';
 import { RegistroClienteComponent } from '../registrocliente/registrocliente.component';
 import { Contrato } from '../../../../models/Contrato';
 import { ContratosComponent } from '../contratos/contratos.component';
 import { Usuario } from '../../../../models/Usuario';
+import { EliminarClienteComponent } from '../eliminarcliente/eliminarcliente.component';
 
 @Component({
   selector: 'clientes',
   templateUrl: 'clientes.html'
 })
-export class ClientesComponent implements OnInit, OnDestroy {
+export class ClientesComponent implements OnDestroy {
 
   // Lista de clientes
   public clientes: Cliente[];
@@ -21,9 +20,15 @@ export class ClientesComponent implements OnInit, OnDestroy {
   // Pagina actual de la lista
   public p: number = 1;
 
+  // Componente para eliminar clientes
+  @ViewChild(EliminarClienteComponent)
+  public eliminarClienteComponent: EliminarClienteComponent;
+
+  // Componente para registrar clientes
   @ViewChild(RegistroClienteComponent)
   public registroClienteComponent: RegistroClienteComponent;
 
+  // Componente para visualizar contratos de clientes
   @ViewChild(ContratosComponent)
   public contratosComponent: ContratosComponent;
 
@@ -36,41 +41,27 @@ export class ClientesComponent implements OnInit, OnDestroy {
   // Canal de usuarios
   private usuarioChannel: any;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
+  public constructor(
     private _clienteService: ClienteService,
-    private _grupoService: GrupoService,
     private _pusherService: PusherService
-
   ) {
 
     // Solicitar clientes a backend
     this._clienteService.query().subscribe(
       Response => {
-
+        // Guardar clientes
         this.clientes = Response;
-
         // Por cada cliente
         for (let i = 0; i < this.clientes.length; i++) {
-
           let cliente: Cliente = this.clientes[i];
-
           // Los contratos de cada cliente
           let contratos: Contrato[] = cliente.contratos;
-
           // Por cada contrato
           for (let j = 0; j < contratos.length; j++) {
-
             // El contrato debe contener su cliente
             contratos[j].contrato_historico.cliente = cliente;
-
           }
-
         }
-
-      }, error => {
-        console.log(<any>error);
       }
     );
 
@@ -95,17 +86,17 @@ export class ClientesComponent implements OnInit, OnDestroy {
     }
   }
 
-  public ngOnInit() {
-    //console.log('el componente cliente ha sido cargado');
-  }
-
   public abrirContratos(contratos: Contrato[]) {
     this.contratos = contratos;
     this.contratosComponent.abrir();
   }
 
-  public deleteCliente(id: number) {
-    this._clienteService.delete(id).subscribe(null);
+  public registerCliente() {
+    this.registroClienteComponent.abrir();
+  }
+
+  public deleteCliente(cliente: Cliente) {
+    this.eliminarClienteComponent.abrir(cliente);
   }
 
   public onCreateCliente(cliente: Cliente) {

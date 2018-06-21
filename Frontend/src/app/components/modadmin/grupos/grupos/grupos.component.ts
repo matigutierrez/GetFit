@@ -12,6 +12,7 @@ import { RegistroGrupoComponent } from '../registrogrupo/registrogrupo.component
 import { HorarioComponent } from '../../../extra/horario/horario.component';
 import { Horario } from '../../../../models/Horario';
 import { ContratosComponent } from '../../clientes/contratos/contratos.component';
+import { EliminarGrupoComponent } from '../eliminargrupo/eliminargrupo.component';
 
 @Component({
     selector: 'grupos',
@@ -19,15 +20,23 @@ import { ContratosComponent } from '../../clientes/contratos/contratos.component
 })
 export class GruposComponent implements OnDestroy {
 
+    // Componente para visualizar contratos de un grupo
     @ViewChild(ContratosComponent)
     public contratosComponent: ContratosComponent;
 
+    // Componente para registrar un grupo
     @ViewChild(RegistroGrupoComponent)
     public registroGrupoComponent: RegistroGrupoComponent;
 
+    // Componente para inscribir clientes al grupo
     @ViewChild(InscripcionGrupoComponent)
     public inscripcionGrupoComponent: InscripcionGrupoComponent;
 
+    // Componente para eliminar grupos
+    @ViewChild(EliminarGrupoComponent)
+    public eliminarGrupoComponent: EliminarGrupoComponent;
+
+    // Componente para ver horarios de los grupos
     @ViewChild(HorarioComponent)
     public horario: HorarioComponent;
 
@@ -110,9 +119,9 @@ export class GruposComponent implements OnDestroy {
         this.contratosComponent.abrir();
     }
 
-    public deleteGrupo(id: number) {
+    public deleteGrupo(grupo: Grupo) {
         // Al eliminar un grupo
-        this._grupoService.delete(id).subscribe(null);
+        this.eliminarGrupoComponent.abrir(grupo);
     }
 
     public registerGrupo() {

@@ -2,7 +2,7 @@
     <div class="modal-content modalback">
         <div class="row">
             <div class=" col s10 m6 left-align">
-                <h5>¿Seguro que desea eliminar esta sede?</h5>
+                <h5>¿Seguro que desea eliminar este grupo?</h5>
             </div>
             <div class="col s2 m6 right-align">
                 <a (click)="cerrar()">
@@ -10,24 +10,30 @@
                 </a>
             </div>
         </div>
-        <form #sedeForm="ngForm" (ngSubmit)="onSubmit()">
+        <form #grupoForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="col s12">
-                <div *ngIf="sede" class="row">
+                <div *ngIf="grupo" class="row">
                     <table class="responsive-table centered">
                         <thead>
                             <tr>
-                                <th>Sede</th>
-                                <th>Dirección</th>
+                                <th>Grupo</th>
+                                <th>Descripción</th>
+                                <th>Costo</th>
+                                <th>Capacidad</th>
+                                <th>Inscritos</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{sede.sed_nombre}}</td>
-                                <td>{{sede.sed_direccion}}</td>
+                                <td>{{grupo.gru_nombre}}</td>
+                                <td>{{grupo.gru_descripcion}}</td>
+                                <td>${{grupo.gru_costo}}</td>
+                                <td>{{grupo.gru_capacidad}}</td>
+                                <td>{{grupo.contratos.length}}</td>
                             </tr>
                         </tbody>
                     </table>
-                    <p class="red-text right-align">Esta acción es irrevertible, podría eliminar información importante de la sede (clientes, cobranzas, grupos, etc).</p>
+                    <p class="red-text right-align">Esta acción es irrevertible, podría eliminar información importante del grupo (cobranzas, horarios, contratos, etc).</p>
                 </div>
             </div>
             <div class="row">
