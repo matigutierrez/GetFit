@@ -1,52 +1,56 @@
 <div *ngIf="!usuarios" class="progress">
-  <div class="indeterminate"></div>
+    <div class="indeterminate"></div>
 </div>
 <div *ngIf="usuarios" class="row">
-  <div class="padtable">
-    <h4>Usuarios</h4>
-    <div>
-      <table class="responsive-table striped highlight">
-        <thead>
-          <tr>
-            <th>Correo</th>
-            <th>Rol</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let usuario of usuarios | paginate: { id: 'usuarios', itemsPerPage: 6, currentPage: p }; index as i;">
-            <td>{{usuario.usu_correo}}</td>
-            <td>{{usuario.rol.rol_nombre}}</td>
-            <td>
-              <a [routerLink]="['/admin/usuario', usuario.id]">
-                <i class="material-icons">settings</i>
-              </a>
-            </td>
-            <td>
-              <a>
-                <i class="material-icons">close</i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-        <pagination-controls id="usuarios" (pageChange)="p = $event"></pagination-controls>
-      </table>
+    <div class="padtable">
+        <div class="row">
+            <div class="col s12 m12 left-align">
+                <h4>Usuarios</h4>
+            </div>
+        </div>
+        <div>
+            <table class="responsive-table striped highlight">
+                <thead>
+                    <tr>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios | paginate: { id: 'usuarios', itemsPerPage: 6, currentPage: p }; index as i;">
+                        <td>{{usuario.usu_correo}}</td>
+                        <td>{{usuario.rol.rol_nombre}}</td>
+                        <td>
+                            <a [routerLink]="['/admin/usuario', usuario.id]">
+                                <i class="material-icons">settings</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                                <i class="material-icons">close</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls id="usuarios" (pageChange)="p = $event"></pagination-controls>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="fixed-action-btn horizontal click-to-toggle">
-  <a class="btn-floating btn-large blue-grey darken-2">
-    <i class="material-icons">add</i>
-  </a>
-  <ul>
-    <li>
-      <a class="btn-floating light-blue" (click)="registrarUsuario()">
-        <i class="material-icons">account_circle</i>
-      </a>
-    </li>
-  </ul>
+    <a class="btn-floating btn-large blue-grey darken-2">
+        <i class="material-icons">add</i>
+    </a>
+    <ul>
+        <li>
+            <a class="btn-floating light-blue" (click)="registrarUsuario()">
+                <i class="material-icons">account_circle</i>
+            </a>
+        </li>
+    </ul>
 </div>
 
 <registrousuario></registrousuario>

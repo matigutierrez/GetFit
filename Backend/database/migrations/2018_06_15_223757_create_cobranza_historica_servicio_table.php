@@ -15,12 +15,12 @@ class CreateCobranzaHistoricaServicioTable extends Migration
     {
         Schema::create('tgf_cobranza_historica_servicio', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tgf_disponibilidad_servicio_id')->unsigned();
-            $table->foreign('tgf_disponibilidad_servicio_id', 'cob_hist_serv_disp')->references('id')->on('tgf_servicio')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('tgf_cliente_id')->unsigned();
-            $table->foreign('tgf_cliente_id')->references('id')->on('tgf_cliente')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('tgf_solicitud_servicio_historica_id')->unsigned();
+            $table->foreign('tgf_solicitud_servicio_historica_id', 'chs_sse_id')->references('id')->on('tgf_solicitud_servicio_historica')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('chs_monto');
             $table->timestamp('chs_fecha');
+
+            $table->unique('tgf_solicitud_servicio_historica_id', 'chs_sse_id_u');
         });
     }
 

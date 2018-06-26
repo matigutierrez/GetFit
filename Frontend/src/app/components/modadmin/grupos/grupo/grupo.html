@@ -1,4 +1,7 @@
 <div class="row">
+    <div *ngIf="!grupo" class="progress">
+        <div class="indeterminate"></div>
+    </div>
     <div *ngIf="grupo" class="padtable">
         <h4>{{grupo.gru_nombre}}</h4>
         <p>{{grupo.gru_descripcion}}</p>

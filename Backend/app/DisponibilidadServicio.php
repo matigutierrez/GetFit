@@ -22,4 +22,12 @@ class DisponibilidadServicio extends Model
     public function servicio() {
         return $this->belongsTo('App\Servicio', 'tgf_servicio_id');
     }
+
+    public function solicitudes_historicas() {
+        return $this->hasMany('App\SolicitudServicioHistorica', 'tgf_disponibilidad_servicio_id');
+    }
+
+    public function solicitudes() {
+        return $this->hasMany('App\SolicitudServicio', 'tgf_disponibilidad_servicio_id');
+    }
 }

@@ -18,6 +18,7 @@ import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { ServicioComponent } from './servicios/servicio/servicio.component';
 import { SedeComponent } from './sedes/sede/sede.component';
 import { IndexServiciosComponent } from './servicios/index/indexservicios.component';
+import { DisponibilidadServicioComponent } from './servicios/disponibilidadservicio/disponibilidadservicio.component';
 
 const appRoutes: Routes = [
     {
@@ -44,6 +45,10 @@ const appRoutes: Routes = [
             {
                 path: 'servicio/:id',
                 component: ServicioComponent
+            },
+            {
+                path: 'dispserv/:id',
+                component: DisponibilidadServicioComponent
             },
             {
                 path: 'clientes',

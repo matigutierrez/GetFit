@@ -88,6 +88,21 @@ class CobranzaController extends Controller
 
         $this->pusher->trigger('cobranza', 'update', $cobranza);
 
+        // Obtener cobranza historica
+        $cobranzaHist = $cobranza->cobranza_historica;
+
+        // Obtener contrato historico
+        $contratoHist = $cobranza->contrato->contrato_historico;
+
+        // Actualizar contrato historico de cobranza historica
+        $cobranzaHist->tgf_contrato_historico_id = $contratoHist->id;
+        $cobranzaHist->save();
+
+        // Cachear pago
+        $cobranzaHist->pago;
+
+        $this->pusher->trigger('cobranza_historica', 'update', $cobranzaHist);
+
         return ['updated' => true];
     }
 

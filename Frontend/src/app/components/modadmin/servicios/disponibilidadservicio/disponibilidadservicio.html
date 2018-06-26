@@ -1,0 +1,39 @@
+<div class="row">
+    <div *ngIf="!disponibilidadServicio" class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <div *ngIf="disponibilidadServicio" class="padtable">
+        <h4>Disponibilidad de Servicio</h4>
+        <p>Del {{disponibilidadServicio.dse_fecha_inicio.toLocaleDateString("es-cl")}} al {{disponibilidadServicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</p>
+
+        <div class="divider"></div>
+
+        <!-- Tabs -->
+        <div class="row">
+            <ul class="tabs" materialize="tabs">
+                <li class="tab col s2">
+                    <a class="active" href="#editardisponibilidad">
+                        <i class="material-icons">settings</i>Editar Disponibilidad
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#solicitudes">
+                        <i class="material-icons">person</i>Solicitudes
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Panel inferior -->
+        <div class="row">
+            <!-- Contenido de tabber -->
+            <div id="editardisponibilidad" class="col s12">
+                <editardisponibilidadservicio [disponibilidadServicio]="disponibilidadServicio"></editardisponibilidadservicio>
+            </div>
+            <div id="solicitudes" class="col s12">
+                <solicitudesdisponibilidadservicio [disponibilidadServicio]="disponibilidadServicio"></solicitudesdisponibilidadservicio>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -19,11 +19,9 @@
                 <td>{{disponibilidadServicio.dse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
                 <td>{{disponibilidadServicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</td>
                 <td>
-                    <!--
-                    <a [routerLink]="['/admin/servicio', servicio.id]">
+                    <a [routerLink]="['/admin/dispserv', disponibilidadServicio.id]">
                         <i class="material-icons">settings</i>
                     </a>
-                    -->
                 </td>
                 <td>
                     <a (click)="deleteDisponibilidadServicio(disponibilidadServicio)">
@@ -31,8 +29,8 @@
                     </a>
                 </td>
             </tr>
-            <pagination-controls id="dispServicios" (pageChange)="p = $event"></pagination-controls>
         </tbody>
+        <pagination-controls id="dispServicios" (pageChange)="p = $event"></pagination-controls>
     </table>
 </div>
 

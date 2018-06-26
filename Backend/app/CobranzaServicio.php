@@ -10,8 +10,7 @@ class CobranzaServicio extends Model
     protected $primarykey = 'id';
 
     protected $fillable = [
-        'tgf_cobranza_historica_servicio_id',
-        'tgf_cliente_id'
+        'tgf_cobranza_historica_servicio_id'
     ];
 
     protected $with = ['cobranza_historica_servicio'];

@@ -40,6 +40,7 @@ export class ClientesGrupoComponent implements OnDestroy {
     // Numero de página
     public p1: number = 1;
     public p2: number = 1;
+    public p3: number = 1;
 
     // Canal de contratos
     private contratoChannel: any;

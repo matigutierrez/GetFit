@@ -1,0 +1,89 @@
+<div class="row">
+
+    <!-- Tabs verticales -->
+    <div class="col s2">
+        <ul class="tabs-vertical" materialize="tabs">
+            <li class="tab row">
+                <a class="active" href="#solicitudes_actuales">
+                    <p *ngIf="!solicitudesServicio">Actuales (0)</p>
+                    <p *ngIf="solicitudesServicio">Actuales ({{solicitudesServicio.length}})</p>
+                </a>
+            </li>
+            <li class="tab row">
+                <a href="#solicitudes_historicas">
+                    <p *ngIf="!solicitudesServicioHistoricas">Históricas (0)</p>
+                    <p *ngIf="solicitudesServicioHistoricas">Históricas ({{solicitudesServicioHistoricas.length}})</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col s10">
+
+        <!-- Solicitudes actuales -->
+        <div id="solicitudes_actuales">
+            <div *ngIf="!solicitudesServicio" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <div *ngIf="solicitudesServicio">
+                <h5>Solicitudes Actuales</h5>
+                <div class="padtable">
+                    <table class="responsive-table striped highlight">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Inicio</th>
+                                <th>Termino</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let solicitudServicio of solicitudesServicio | paginate: { id: 'pagSolicitudesServActuales', itemsPerPage: 6, currentPage: p1 }; index as i;">
+                                <td>{{solicitudServicio.solicitud_servicio_historica.cliente.cli_nombres}} {{solicitudServicio.solicitud_servicio_historica.cliente.cli_apellidos}}</td>
+                                <td>{{solicitudServicio.solicitud_servicio_historica.sse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
+                                <td>{{solicitudServicio.solicitud_servicio_historica.sse_fecha_fin.toLocaleDateString("es-cl")}}</td>
+                                <td>
+                                    <a (click)="deleteSolicitudServicio(contrato)">
+                                        <i class="material-icons">close</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="pagSolicitudesServActuales" (pageChange)="p1 = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solicitudes históricas -->
+        <div id="solicitudes_historicas">
+            <div *ngIf="!solicitudesServicioHistoricas" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <div *ngIf="solicitudesServicioHistoricas">
+                <h5>Solicitudes Históricas</h5>
+                <div class="padtable">
+                    <table class="responsive-table striped highlight">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Inicio</th>
+                                <th>Termino</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let solicitudServicioHistorica of solicitudesServicioHistoricas | paginate: { id: 'pagSolicitudesServHistoricas', itemsPerPage: 6, currentPage: p2 }; index as i;">
+                                <td>{{solicitudServicioHistorica.cliente.cli_nombres}} {{solicitudServicioHistorica.cliente.cli_apellidos}}</td>
+                                <td>{{solicitudServicioHistorica.sse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
+                                <td>{{solicitudServicioHistorica.sse_fecha_fin.toLocaleDateString("es-cl")}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="pagSolicitudesServHistoricas" (pageChange)="p2 = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

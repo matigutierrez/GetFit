@@ -52,6 +52,8 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('diasemana', 'DiaSemanaController');
 
 	Route::apiResource('disponibilidadservicio', 'DisponibilidadServicioController');
+	Route::get('disponibilidadservicio/{id}/solicitudeshistoricas', 'DisponibilidadServicioController@solicitudesHistoricas');
+	Route::get('disponibilidadservicio/{id}/solicitudes', 'DisponibilidadServicioController@solicitudes');
 
 	Route::apiResource('evaluacion', 'EvaluacionController');
 
@@ -89,6 +91,8 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('solicitudgrupo', 'SolicitudGrupoController');
 	Route::get('solicitudgrupo/findtoken/{tgf_grupo_id}', 'SolicitudGrupoController@findToken');
 	Route::get('solicitudgrupo/solicitar/{tgf_grupo_id}', 'SolicitudGrupoController@solicitar');
+
+	Route::apiResource('solicitudserviciohistorica', 'SolicitudServicioHistoricaController');
 
 	Route::apiResource('tipogrupo', 'TipoGrupoController');
 

@@ -3,7 +3,11 @@
 </div>
 <div *ngIf="clientes" class="row">
     <div class="padtable">
-        <h4>Clientes</h4>
+        <div class="row">
+            <div class="col s12 m12 left-align">
+                <h4>Clientes</h4>
+            </div>
+        </div>
         <div>
             <table class="responsive-table striped highlight">
                 <thead>
@@ -18,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 6, currentPage: p }; index as i;">
+                    <tr *ngFor="let cliente of clientes | paginate: { id: 'clientes', itemsPerPage: 6, currentPage: p }; index as i;">
                         <td>{{cliente.cli_rut}}</td>
                         <td>{{cliente.cli_nombres + " " + cliente.cli_apellidos}}</td>
                         <td>
@@ -41,8 +45,8 @@
                         </td>
                     </tr>
                 </tbody>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </table>
+            <pagination-controls id="clientes" (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

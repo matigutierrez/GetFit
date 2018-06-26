@@ -1,0 +1,59 @@
+<form #servicioForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="col s12">
+        <div class="row">
+
+            <!-- Seleccionar servicio -->
+            <div *ngIf="servicios" class="col s12">
+                <div class="input-field">
+                    <i class="material-icons prefix">work</i>
+
+                    <!-- Select activo -->
+                    <select [disabled]="!servicios" name="tgf_servicio_id" [(ngModel)]="disponibilidadServicio.tgf_servicio_id" materialize="material_select"
+                        [materializeSelectOptions]="servicios">
+                        <option value="" disabled selected>Seleccionar Servicio</option>
+                        <option *ngFor="let servicio of servicios" [ngValue]="servicio.id">{{servicio.ser_nombre}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="date" #dse_fecha_inicio name="dse_fecha_inicio" (change)="onChangeFechaInicio($event)">
+                    <label class="active" for="icon_prefix">Fecha de Inicio</label>
+                </div>
+            </div>
+            <div class="col s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="date" #dse_fecha_fin name="dse_fecha_fin" (change)="onChangeFechaTermino($event)">
+                    <label class="active" for="icon_prefix">Fecha de Termino</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l3 offset-l9">
+            <div class="right-align">
+
+                <button *ngIf="!editando" class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Editar" name="action">Editar</button>
+
+                <div *ngIf="editando" class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-green-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -61,6 +61,9 @@ import { RegistroDisponibilidadServicioComponent } from './servicios/registrodis
 import { EliminarDisponibilidadServicioComponent } from './servicios/eliminardisponibilidadservicio/eliminardisponibilidadservicio.component';
 import { EliminarClienteComponent } from './clientes/eliminarcliente/eliminarcliente.component';
 import { EliminarGrupoComponent } from './grupos/eliminargrupo/eliminargrupo.component';
+import { DisponibilidadServicioComponent } from './servicios/disponibilidadservicio/disponibilidadservicio.component';
+import { EditarDisponibilidadServicioComponent } from './servicios/disponibilidadservicio/editardisponibilidadservicio/editardisponibilidadservicio.component';
+import { SolicitudesDisponibilidadServicioComponent } from './servicios/disponibilidadservicio/solicitudesdisponibilidadservicio/solicitudesdisponibilidadservicio.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +96,9 @@ import { EliminarGrupoComponent } from './grupos/eliminargrupo/eliminargrupo.com
 
     // Disponibilidad de servicios
     DisponibilidadServiciosComponent,
+    DisponibilidadServicioComponent,
+    EditarDisponibilidadServicioComponent,
+    SolicitudesDisponibilidadServicioComponent,
     RegistroDisponibilidadServicioComponent,
     EliminarDisponibilidadServicioComponent,
 

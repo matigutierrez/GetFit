@@ -10,23 +10,18 @@ class CobranzaHistoricaServicio extends Model
     protected $primarykey = 'id';
 
     protected $fillable = [
-        'tgf_disponibilidad_servicio_id',
-        'tgf_cliente_id',
+        'tgf_solicitud_servicio_historica_id',
         'chs_monto',
         'chs_fecha'
     ];
 
-    protected $with = ['disponibilidad_servicio', 'pago_servicio'];
+    protected $with = ['solicitud_servicio_historica', 'pago_servicio'];
 
     const CREATED_AT = 'chs_fecha';
     const UPDATED_AT = null;
 
-    public function disponibilidad_servicio() {
-        return $this->belongsTo('App\DisponibilidadServicio', 'tgf_disponibilidad_servicio_id');
-    }
-
-    public function cliente() {
-        return $this->belongsTo('App\Cliente', 'tgf_cliente_id');
+    public function solicitud_servicio_historica() {
+        return $this->belongsTo('App\SolicitudServicioHistorica', 'tgf_solicitud_servicio_historica_id');
     }
 
     public function pago_servicio() {

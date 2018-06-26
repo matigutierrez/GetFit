@@ -46,14 +46,13 @@ class CobranzaHistoricaServicioController extends Controller
     {
         // Crear una cobranza historica de un servicio
         $cobranzaHist = new CobranzaHistoricaServicio;
-        $cobranzaHist->tgf_disponibilidad_servicio_id = $request->tgf_disponibilidad_servicio_id;
-        $cobranzaHist->tgf_cliente_id = $request->tgf_cliente_id;
+        $cobranzaHist->tgf_solicitud_servicio_historica_id = $request->tgf_solicitud_servicio_historica_id;
         $cobranzaHist->chs_monto = $request->chs_monto;
 
         $cobranzaHist->save();
 
-        // Cachear disponibilidad de servicio
-        $cobranzaHist->disponibilidad_servicio;
+        // Cachear solicitud de servicio historica
+        $cobranzaHist->solicitud_servicio_historica;
 
         // Enviar por pusher
         $this->pusher->trigger('cobranzaHistoricaServicio', 'create', $cobranzaHist);
@@ -61,7 +60,6 @@ class CobranzaHistoricaServicioController extends Controller
         // Crear una cobranza de servicio
         $cobranza = new CobranzaServicio;
         $cobranza->tgf_cobranza_historica_servicio_id = $cobranzaHist->id;
-        $cobranza->tgf_cliente_id = $cobranzaHist->tgf_cliente_id;
 
         $cobranza->save();
 
@@ -108,8 +106,8 @@ class CobranzaHistoricaServicioController extends Controller
         $cobranzaHist = CobranzaHistoricaServicio::find($id);
         $cobranzaHist->update($request->all());
 
-        // Cachear disponibilidad de servicio y pago
-        $cobranzaHist->disponibilidad_servicio;
+        // Cachear solicitud de servicio historica y pago
+        $cobranzaHist->solicitud_servicio_historica;
         $cobranzaHist->pago_servicio;
 
         $this->pusher->trigger('cobranzaHistoricaServicio', 'update', $cobranzaHist);

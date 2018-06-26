@@ -105,9 +105,35 @@ class CobranzaHistoricaController extends Controller
 
         // Cachear variables
         $cobranzaHist->pago;
-        $cobranzaHist->contrato_historico->contrato_historico;
+        $cobranzaHist->contrato_historico;
 
         $this->pusher->trigger('cobranza_historica', 'update', $cobranzaHist);
+
+        // Obtener contrato historico
+        $contratoHist = $cobranzaHist->contrato_historico;
+
+        // Obtener contrato actual del contrato historico
+        $contrato = $contratoHist->contrato;
+
+        // Si hay contrato
+        if ( isset($contrato) ) {
+            // Obtener cobranza
+            $cobranza = $cobranzaHist->cobranza;
+
+            // Si existe cobranza
+            if ( isset($cobranza) ) {
+                // Actualizar 'tgf_contrato_id' de la cobranza
+                $cobranza->tgf_contrato_id = $contrato->id;
+                $cobranza->save();
+
+                // Cachear cobranza historica
+                $cobranza->cobranza_historica;
+
+                $this->pusher->trigger('cobranza', 'update', $cobranza);
+            }
+        }
+        
+        return ['updated' => true];
     }
 
     /**

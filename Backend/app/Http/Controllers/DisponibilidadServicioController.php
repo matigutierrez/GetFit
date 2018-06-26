@@ -120,4 +120,21 @@ class DisponibilidadServicioController extends Controller
 
         return ['deleted' => true];
     }
+
+    /**
+     * Obtener las solicitudes historicas para una disponibilidad de servicio
+     * 
+     */
+    public function solicitudesHistoricas($id) {
+        return DisponibilidadServicio::find($id)->solicitudes_historicas;
+    }
+
+    /**
+     * Obtener las solicitudes para una disponibilidad de servicio
+     * 
+     */
+    public function solicitudes($id) {
+        return DisponibilidadServicio::find($id)->solicitudes;
+    }
+
 }

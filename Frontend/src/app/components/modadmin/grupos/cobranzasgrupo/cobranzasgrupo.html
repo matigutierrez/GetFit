@@ -29,51 +29,50 @@
             <div *ngIf="cobranzas">
                 <p class="red-text">Sólo se muestran cobranzas sin pagos, para ver cobranzas pagadas haga click en "Cobranzas Históricas".</p>
                 <div class="padtable">
-                    <div>
-                        <table class="responsive-table striped highlight">
-                            <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Fecha</th>
-                                    <th>Mes</th>
-                                    <th>Monto</th>
-                                    <th>Estado</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let cobranza of cobranzas | paginate: { id: 'cobranzasGrupo', itemsPerPage: 6, currentPage: p1 }; index as i;">
-                                    <td>{{cobranza.cobranza_historica.contrato_historico.cliente.cli_nombres}} {{cobranza.cobranza_historica.contrato_historico.cliente.cli_apellidos}}</td>
-                                    <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString()}}</td>
-                                    <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
-                                    <td>{{cobranza.cobranza_historica.cob_monto}}</td>
-                                    <td>
-                                        <p *ngIf="cobranza.cobranza_historica.pago">{{cobranza.cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
-                                        <i *ngIf="!cobranza.cobranza_historica.pago" class="material-icons">close</i>
-                                    </td>
-                                    <td>
-                                        <a *ngIf="!cobranza.cobranza_historica.pago" (click)="abrirCobranza(cobranza)" materialize="tooltip" data-position="left" data-tooltip="Registrar pago">
-                                            <i class="material-icons">check</i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a (click)="deleteCobranza(cobranza.id)" materialize="tooltip" data-position="left" data-tooltip="Cancelar cobranza">
-                                            <i class="material-icons">close</i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a (click)="deleteContrato(cobranza.contrato)" materialize="tooltip" data-position="left" data-tooltip="Cancelar cupo">
-                                            <i class="material-icons">delete</i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <pagination-controls id="cobranzasGrupo" (pageChange)="p1 = $event"></pagination-controls>
-                        </table>
-                    </div>
+                    <table class="responsive-table striped highlight">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Mes</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cobranza of cobranzas | paginate: { id: 'cobranzasGrupo', itemsPerPage: 6, currentPage: p1 }; index as i;">
+                                <td>{{cobranza.cobranza_historica.contrato_historico.cliente.cli_nombres}} {{cobranza.cobranza_historica.contrato_historico.cliente.cli_apellidos}}</td>
+                                <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString()}}</td>
+                                <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
+                                <td>{{cobranza.cobranza_historica.cob_monto}}</td>
+                                <td>
+                                    <p *ngIf="cobranza.cobranza_historica.pago">{{cobranza.cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
+                                    <i *ngIf="!cobranza.cobranza_historica.pago" class="material-icons">close</i>
+                                </td>
+                                <td>
+                                    <a *ngIf="!cobranza.cobranza_historica.pago" (click)="abrirCobranza(cobranza)" materialize="tooltip" data-position="left"
+                                        data-tooltip="Registrar pago">
+                                        <i class="material-icons">check</i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a (click)="deleteCobranza(cobranza.id)" materialize="tooltip" data-position="left" data-tooltip="Cancelar cobranza">
+                                        <i class="material-icons">close</i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a (click)="deleteContrato(cobranza.contrato)" materialize="tooltip" data-position="left" data-tooltip="Cancelar cupo">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="cobranzasGrupo" (pageChange)="p1 = $event"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -86,41 +85,39 @@
             </div>
             <div *ngIf="cobranzasHistoricas">
                 <div class="padtable">
-                    <div>
-                        <table class="responsive-table striped highlight">
-                            <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Fecha</th>
-                                    <th>Mes</th>
-                                    <th>Monto</th>
-                                    <th>Estado</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let cobranza_historica of cobranzasHistoricas | paginate: { id: 'cobranzasHistGrupo', itemsPerPage: 6, currentPage: p2 }; index as i;">
-                                    <td>{{cobranza_historica.contrato_historico.cliente.cli_nombres}} {{cobranza_historica.contrato_historico.cliente.cli_apellidos}}</td>
-                                    <td>{{cobranza_historica.cob_fecha.toLocaleString()}}</td>
-                                    <td>{{cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
-                                    <td>{{cobranza_historica.cob_monto}}</td>
-                                    <td>
-                                        <p *ngIf="cobranza_historica.pago">{{cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
-                                        <i *ngIf="!cobranza_historica.pago" class="material-icons">close</i>
-                                    </td>
-                                    <!--
+                    <table class="responsive-table striped highlight">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Mes</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cobranza_historica of cobranzasHistoricas | paginate: { id: 'cobranzasHistGrupo', itemsPerPage: 6, currentPage: p2 }; index as i;">
+                                <td>{{cobranza_historica.contrato_historico.cliente.cli_nombres}} {{cobranza_historica.contrato_historico.cliente.cli_apellidos}}</td>
+                                <td>{{cobranza_historica.cob_fecha.toLocaleString()}}</td>
+                                <td>{{cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
+                                <td>{{cobranza_historica.cob_monto}}</td>
+                                <td>
+                                    <p *ngIf="cobranza_historica.pago">{{cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
+                                    <i *ngIf="!cobranza_historica.pago" class="material-icons">close</i>
+                                </td>
+                                <!--
                                     <td>
                                         <a *ngIf="!cobranza_historica.pago" (click)="abrirCobranza(cobranza)">
                                             <i class="material-icons">check</i>
                                         </a>
                                     </td>
                                     -->
-                                </tr>
-                            </tbody>
-                            <pagination-controls id="cobranzasHistGrupo" (pageChange)="p2 = $event"></pagination-controls>
-                        </table>
-                    </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="cobranzasHistGrupo" (pageChange)="p2 = $event"></pagination-controls>
                 </div>
             </div>
         </div>
