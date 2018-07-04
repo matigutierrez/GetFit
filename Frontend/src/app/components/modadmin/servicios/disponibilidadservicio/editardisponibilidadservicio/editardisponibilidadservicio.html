@@ -8,7 +8,7 @@
                     <i class="material-icons prefix">work</i>
 
                     <!-- Select activo -->
-                    <select [disabled]="!servicios" name="tgf_servicio_id" [(ngModel)]="disponibilidadServicio.tgf_servicio_id" materialize="material_select"
+                    <select [disabled]="!servicios" name="tgf_servicio_id" [(ngModel)]="disponibilidadHistoricaServicio.tgf_servicio_id" materialize="material_select"
                         [materializeSelectOptions]="servicios">
                         <option value="" disabled selected>Seleccionar Servicio</option>
                         <option *ngFor="let servicio of servicios" [ngValue]="servicio.id">{{servicio.ser_nombre}}</option>

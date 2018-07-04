@@ -142,5 +142,14 @@ class ContratoController extends Controller
 
         return null;
     }
+
+    /**
+     * Obtener los contratos del cliente
+     * 
+     * @return \App\Contrato
+     */
+    public function indexToken(AuthenticateController $auth) {
+        return $auth->getAuthenticatedUser()->cliente->contratos;
+    }
     
 }

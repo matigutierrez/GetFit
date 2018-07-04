@@ -18,6 +18,7 @@ import { ExtraModule } from '../extra/extra.module';
 import { HorariosComponent } from './horarios/horarios.component';
 import { SolicitarGrupoComponent } from './horarios/solicitargrupo/solicitargrupo.component';
 import { ContratosHorariosComponent } from './horarios/contratoshorarios/contratoshorarios.component';
+import { DisponibilidadServiciosHorariosComponent } from './horarios/disponibilidadservicioshorarios/disponibilidadservicioshorarios.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ContratosHorariosComponent } from './horarios/contratoshorarios/contrat
     CobranzaComponent,
     GruposComponent,
     HorariosComponent,
+    DisponibilidadServiciosHorariosComponent,
     ContratosHorariosComponent,
     SolicitarGrupoComponent
   ],

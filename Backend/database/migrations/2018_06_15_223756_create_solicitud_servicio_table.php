@@ -16,9 +16,11 @@ class CreateSolicitudServicioTable extends Migration
         Schema::create('tgf_solicitud_servicio', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tgf_solicitud_servicio_historica_id')->unsigned();
-            $table->foreign('tgf_solicitud_servicio_historica_id', 'sse_sse_id')->references('id')->on('tgf_solicitud_servicio_historica')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('tgf_disponibilidad_servicio_id')->unsigned();
-            $table->foreign('tgf_disponibilidad_servicio_id')->references('id')->on('tgf_disponibilidad_servicio')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tgf_solicitud_servicio_historica_id', 'sos_sse_id')->references('id')->on('tgf_solicitud_servicio_historica')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('tgf_disponibilidad_historica_servicio_id')->unsigned();
+            $table->foreign('tgf_disponibilidad_historica_servicio_id', 'sos_dse_id')->references('id')->on('tgf_disponibilidad_historica_servicio')->onDelete('cascade')->onUpdate('cascade');
+        
+            $table->unique('tgf_solicitud_servicio_historica_id', 'sos_see_id_u');
         });
     }
 

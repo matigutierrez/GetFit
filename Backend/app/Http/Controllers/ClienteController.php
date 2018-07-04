@@ -212,20 +212,6 @@ class ClienteController extends Controller
     }
 
     /**
-     * Obtener solicitudes de grupo de cliente
-     * 
-     * @return \App\SolicitudGrupo
-     */
-    public function solicitudesGrupoToken(AuthenticateController $auth) {
-        $solicitudes = $auth->getAuthenticatedUser()->cliente->solicitudesGrupo;
-        $solicitudes->pluck('cliente');
-        $solicitudes->pluck('grupo.horario');
-        $solicitudes->pluck('grupo.sede');
-
-        return $solicitudes;
-    }
-
-    /**
      * Obtener solicitudes de grupo de un cliente
      * 
      * @return \App\SolicitudGrupo
@@ -236,17 +222,6 @@ class ClienteController extends Controller
         $solicitudes->pluck('grupo');
 
         return $solicitudes;
-    }
-
-    /**
-     * Obtener los contratos del cliente
-     * 
-     * @return \App\Contrato
-     */
-    public function contratosToken(AuthenticateController $auth) {
-        $contratos = $auth->getAuthenticatedUser()->cliente->contratos;
-
-        return $contratos;
     }
 
 }

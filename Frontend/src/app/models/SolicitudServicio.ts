@@ -1,5 +1,5 @@
 import { SolicitudServicioHistorica } from "./SolicitudServicioHistorica";
-import { DisponibilidadServicio } from "./DisponibilidadServicio";
+import { DisponibilidadHistoricaServicio } from "./DisponibilidadHistoricaServicio";
 
 export class SolicitudServicio {
 
@@ -8,14 +8,14 @@ export class SolicitudServicio {
     public tgf_disponibilidad_servicio_id: number;
 
     public solicitud_servicio_historica: SolicitudServicioHistorica;
-    public disponibilidad_servicio: DisponibilidadServicio;
+    public disponibilidad_historica_servicio: DisponibilidadHistoricaServicio;
 
     public constructor(json?: any) {
 
         Object.assign(this, json);
 
         if (this.solicitud_servicio_historica) { this.solicitud_servicio_historica = new SolicitudServicioHistorica(this.solicitud_servicio_historica) };
-        if (this.disponibilidad_servicio) { this.disponibilidad_servicio = new DisponibilidadServicio(this.disponibilidad_servicio) };
+        if (this.disponibilidad_historica_servicio) { this.disponibilidad_historica_servicio = new DisponibilidadHistoricaServicio(this.disponibilidad_historica_servicio) };
 
     }
 

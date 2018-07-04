@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { DisponibilidadServicio } from "../../../../../models/DisponibilidadServicio";
 import { Servicio } from "../../../../../models/Servicio";
 import { ServicioService } from "../../../../../services/servicio.service";
-import { DisponibilidadServicioService } from "../../../../../services/disponibilidadservicio.service";
+import { DisponibilidadHistoricaServicioService } from "../../../../../services/disponibilidadhistoricaservicio.service";
+import { DisponibilidadHistoricaServicio } from "../../../../../models/DisponibilidadHistoricaServicio";
 
 @Component({
     selector: 'editardisponibilidadservicio',
@@ -11,8 +11,8 @@ import { DisponibilidadServicioService } from "../../../../../services/disponibi
 export class EditarDisponibilidadServicioComponent implements OnInit {
 
     // Disponibilidad de servicio
-    @Input("disponibilidadServicio")
-    public disponibilidadServicio: DisponibilidadServicio;
+    @Input("disponibilidadHistoricaServicio")
+    public disponibilidadHistoricaServicio: DisponibilidadHistoricaServicio;
 
     @ViewChild("dse_fecha_inicio")
     public html_dse_fecha_inicio: ElementRef;
@@ -27,7 +27,7 @@ export class EditarDisponibilidadServicioComponent implements OnInit {
     public editando: boolean;
 
     public constructor(
-        private _disponibilidadServicioService: DisponibilidadServicioService,
+        private _disponibilidadHistoricaServicioService: DisponibilidadHistoricaServicioService,
         private _servicioService: ServicioService
     ) {
         this._servicioService.query().subscribe(
@@ -40,26 +40,26 @@ export class EditarDisponibilidadServicioComponent implements OnInit {
 
     public ngOnInit() {
         // Fijar la fecha inicial
-        this.html_dse_fecha_inicio.nativeElement.valueAsDate = this.disponibilidadServicio.dse_fecha_inicio;
+        this.html_dse_fecha_inicio.nativeElement.valueAsDate = this.disponibilidadHistoricaServicio.dse_fecha_inicio;
 
         // Fijar la fecha de termino
-        this.html_dse_fecha_fin.nativeElement.valueAsDate = this.disponibilidadServicio.dse_fecha_fin;
+        this.html_dse_fecha_fin.nativeElement.valueAsDate = this.disponibilidadHistoricaServicio.dse_fecha_fin;
     }
 
     public onChangeFechaInicio(event: any): void {
-        this.disponibilidadServicio.dse_fecha_inicio = new Date(event.target.value);
+        this.disponibilidadHistoricaServicio.dse_fecha_inicio = new Date(event.target.value);
     }
 
     public onChangeFechaTermino(event: any): void {
-        this.disponibilidadServicio.dse_fecha_fin = new Date(event.target.value);
+        this.disponibilidadHistoricaServicio.dse_fecha_fin = new Date(event.target.value);
     }
 
     public onSubmit() {
-        if (this.disponibilidadServicio.tgf_servicio_id != null && this.disponibilidadServicio.dse_fecha_inicio != null && this.disponibilidadServicio.dse_fecha_fin != null) {
+        if (this.disponibilidadHistoricaServicio.tgf_servicio_id != null && this.disponibilidadHistoricaServicio.dse_fecha_inicio != null && this.disponibilidadHistoricaServicio.dse_fecha_fin != null) {
             // Indicar que se encuentra editando
             this.editando = true;
             
-            this._disponibilidadServicioService.update(this.disponibilidadServicio).subscribe(
+            this._disponibilidadHistoricaServicioService.update(this.disponibilidadHistoricaServicio).subscribe(
                 Response => {
                     // Indicar que dejó de editar
                     this.editando = false;

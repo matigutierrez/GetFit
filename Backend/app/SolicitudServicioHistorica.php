@@ -10,18 +10,18 @@ class SolicitudServicioHistorica extends Model
     protected $primarykey = 'id';
 
     protected $fillable = [
-        'tgf_disponibilidad_servicio_id',
+        'tgf_disponibilidad_historica_servicio_id',
         'tgf_cliente_id',
         'sse_fecha_inicio',
         'sse_fecha_fin'
     ];
 
-    protected $with = ['disponibilidad_servicio', 'cliente'];
+    protected $with = ['disponibilidad_historica_servicio', 'cliente'];
 
     public $timestamps = false;
 
-    public function disponibilidad_servicio() {
-        return $this->belongsTo('App\DisponibilidadServicio', 'tgf_disponibilidad_servicio_id');
+    public function disponibilidad_historica_servicio() {
+        return $this->belongsTo('App\DisponibilidadHistoricaServicio', 'tgf_disponibilidad_historica_servicio_id');
     }
 
     public function cliente() {

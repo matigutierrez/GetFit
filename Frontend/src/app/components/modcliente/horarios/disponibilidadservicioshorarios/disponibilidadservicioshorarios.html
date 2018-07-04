@@ -1,0 +1,12 @@
+<div *ngIf="!disponibilidadServicios" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="disponibilidadServicios" class="row">
+    <div class="card-panel teal lighten-2 center-align">
+        <b>SERVICIOS</b>
+    </div>
+    <a *ngFor="let disponibilidadServicio of disponibilidadServicios" materialize="tooltip" class="card-panel tooltipped lighten-2 center-align"
+        data-position="bottom" data-tooltip="Click para solicitar" style="display: block; background-color: rgb(236, 64, 122);">
+        {{disponibilidadServicio.disponibilidad_historica_servicio.servicio.ser_nombre}}
+    </a>
+</div>

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'chartlineCliente',
   templateUrl: 'chartline.html'
 })
-
 export class ChartlineClienteComponent implements OnInit {
   public lineChartData:Array<any>;
   public lineChartLabels:Array<any>;

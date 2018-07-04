@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { DisponibilidadServicio } from "../../../../models/DisponibilidadServicio";
+import { DisponibilidadHistoricaServicio } from "../../../../models/DisponibilidadHistoricaServicio";
 import { ActivatedRoute } from "@angular/router";
-import { DisponibilidadServicioService } from "../../../../services/disponibilidadservicio.service";
+import { DisponibilidadHistoricaServicioService } from "../../../../services/disponibilidadhistoricaservicio.service";
 
 @Component({
     selector: 'disponibilidadservicio',
@@ -13,10 +13,10 @@ export class DisponibilidadServicioComponent implements OnInit {
     public id: number;
 
     // La disponibilidad de servicio actual
-    public disponibilidadServicio: DisponibilidadServicio;
+    public disponibilidadHistoricaServicio: DisponibilidadHistoricaServicio;
 
     public constructor(
-        private _disponibilidadServicioService: DisponibilidadServicioService,
+        private _disponibilidadHistoricaServicioService: DisponibilidadHistoricaServicioService,
         private _route: ActivatedRoute
     ) {
         this._route.params.subscribe(params => {
@@ -25,9 +25,9 @@ export class DisponibilidadServicioComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this._disponibilidadServicioService.get(this.id).subscribe(
+        this._disponibilidadHistoricaServicioService.get(this.id).subscribe(
             Response => {
-                this.disponibilidadServicio = Response;
+                this.disponibilidadHistoricaServicio = Response;
             }
         );
     }

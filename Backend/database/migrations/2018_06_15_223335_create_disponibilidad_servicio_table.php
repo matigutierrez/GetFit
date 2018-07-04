@@ -15,10 +15,10 @@ class CreateDisponibilidadServicioTable extends Migration
     {
         Schema::create('tgf_disponibilidad_servicio', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tgf_servicio_id')->unsigned();
-            $table->foreign('tgf_servicio_id')->references('id')->on('tgf_servicio')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamp('dse_fecha_inicio')->nullable();
-            $table->timestamp('dse_fecha_fin')->nullable();
+            $table->integer('tgf_disponibilidad_historica_servicio_id')->unsigned();
+            $table->foreign('tgf_disponibilidad_historica_servicio_id', 'dse_dse_id')->references('id')->on('tgf_disponibilidad_historica_servicio')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unique('tgf_disponibilidad_historica_servicio_id', 'dse_dse_id_u');
         });
     }
 

@@ -11,7 +11,7 @@ class SolicitudServicio extends Model
 
     protected $fillable = [
         'tgf_solicitud_servicio_historica_id',
-        'tgf_disponibilidad_servicio_id'
+        'tgf_disponibilidad_historica_servicio_id'
     ];
 
     protected $with = ['solicitud_servicio_historica'];
@@ -22,7 +22,7 @@ class SolicitudServicio extends Model
         return $this->belongsTo('App\SolicitudServicioHistorica', 'tgf_solicitud_servicio_historica_id');
     }
 
-    public function disponibilidad_servicio() {
-        return $this->belongsTo('App\DisponibilidadServicio', 'tgf_disponibilidad_servicio_id');
+    public function disponibilidad_historica_servicio() {
+        return $this->belongsTo('App\DisponibilidadServicio', 'tgf_disponibilidad_historica_servicio_id');
     }
 }

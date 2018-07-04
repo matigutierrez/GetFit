@@ -43,11 +43,6 @@ export class ClienteService {
         return this._http.delete(GLOBAL.url + 'cliente/' + id);
     }
 
-    public getSolicitudesToken(): Observable<SolicitudGrupo[]> {
-        return this._http.get<SolicitudGrupo[]>(GLOBAL.url + 'clientesolicitudes')
-            .pipe(map(solicitudes => solicitudes.map(solicitud => new SolicitudGrupo(solicitud))));
-    }
-
     public getContratos(cliente: Cliente): Observable<Contrato[]> {
         return this._http.get<Contrato[]>(GLOBAL.url + 'cliente/' + cliente.id + '/contratos')
             .pipe(map(contratos => contratos.map(contrato => new Contrato(contrato))));

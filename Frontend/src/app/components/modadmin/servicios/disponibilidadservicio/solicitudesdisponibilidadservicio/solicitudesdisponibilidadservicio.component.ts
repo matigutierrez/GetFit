@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { DisponibilidadServicio } from "../../../../../models/DisponibilidadServicio";
-import { DisponibilidadServicioService } from "../../../../../services/disponibilidadservicio.service";
+import { DisponibilidadHistoricaServicio } from "../../../../../models/DisponibilidadHistoricaServicio";
+import { DisponibilidadHistoricaServicioService } from "../../../../../services/disponibilidadhistoricaservicio.service";
 import { SolicitudServicioHistorica } from "../../../../../models/SolicitudServicioHistorica";
 import { SolicitudServicio } from "../../../../../models/SolicitudServicio";
 
@@ -12,7 +12,7 @@ import { SolicitudServicio } from "../../../../../models/SolicitudServicio";
 export class SolicitudesDisponibilidadServicioComponent {
 
     // Disponibilidad de servicio a trabajar
-    public disponibilidadServicio: DisponibilidadServicio;
+    public disponibilidadHistoricaServicio: DisponibilidadHistoricaServicio;
 
     // Solicitudes de servicio actuales
     public solicitudesServicio: SolicitudServicio[];
@@ -25,7 +25,7 @@ export class SolicitudesDisponibilidadServicioComponent {
     public p2: number = 1;
 
     public constructor(
-        private _disponibilidadServicioService: DisponibilidadServicioService
+        private _disponibilidadHistoricaServicioService: DisponibilidadHistoricaServicioService
     ) {
 
     }
@@ -34,20 +34,20 @@ export class SolicitudesDisponibilidadServicioComponent {
 
     }
 
-    @Input("disponibilidadServicio")
-    public set setDisponibilidadServicio(disponibilidadServicio: DisponibilidadServicio) {
+    @Input("disponibilidadHistoricaServicio")
+    public set setDisponibilidadServicio(disponibilidadHistoricaServicio: DisponibilidadHistoricaServicio) {
         // Cachear disponibilidad de servicio
-        this.disponibilidadServicio = disponibilidadServicio;
+        this.disponibilidadHistoricaServicio = disponibilidadHistoricaServicio;
         
         // Obtener solicitudes historicas
-        this._disponibilidadServicioService.getSolicitudesHistoricas(this.disponibilidadServicio).subscribe(
+        this._disponibilidadHistoricaServicioService.getSolicitudesHistoricas(this.disponibilidadHistoricaServicio).subscribe(
             Response => {
                 this.solicitudesServicioHistoricas = Response;
             }
         );
 
         // Obtener solicitudes actuales
-        this._disponibilidadServicioService.getSolicitudes(this.disponibilidadServicio).subscribe(
+        this._disponibilidadHistoricaServicioService.getSolicitudes(this.disponibilidadHistoricaServicio).subscribe(
             Response => {
                 this.solicitudesServicio = Response;
             }

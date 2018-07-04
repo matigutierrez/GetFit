@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './admin.routing';
-import { JwtModule } from '@auth0/angular-jwt';
 import { MaterializeModule } from 'angular2-materialize';
 import { ChartsModule } from 'ng2-charts';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -64,6 +63,7 @@ import { EliminarGrupoComponent } from './grupos/eliminargrupo/eliminargrupo.com
 import { DisponibilidadServicioComponent } from './servicios/disponibilidadservicio/disponibilidadservicio.component';
 import { EditarDisponibilidadServicioComponent } from './servicios/disponibilidadservicio/editardisponibilidadservicio/editardisponibilidadservicio.component';
 import { SolicitudesDisponibilidadServicioComponent } from './servicios/disponibilidadservicio/solicitudesdisponibilidadservicio/solicitudesdisponibilidadservicio.component';
+import { EliminarCobranzaComponent } from './cobranzas/eliminarcobranza/eliminarcobranza.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +116,7 @@ import { SolicitudesDisponibilidadServicioComponent } from './servicios/disponib
     CobranzasComponent,
     PagoCobranzaComponent,
     RegistroCobranzaComponent,
+    EliminarCobranzaComponent,
 
     CircleChartComponent,
 

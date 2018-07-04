@@ -1,4 +1,4 @@
-import { DisponibilidadServicio } from "./DisponibilidadServicio";
+import { DisponibilidadHistoricaServicio } from "./DisponibilidadHistoricaServicio";
 import { Cliente } from "./Cliente";
 
 export class SolicitudServicioHistorica {
@@ -10,7 +10,7 @@ export class SolicitudServicioHistorica {
     public sse_fecha_inicio: Date;
     public sse_fecha_fin: Date;
 
-    public disponibilidad_servicio: DisponibilidadServicio;
+    public disponibilidad_historica_servicio: DisponibilidadHistoricaServicio;
     public cliente: Cliente;
 
     public constructor(json?: any) {
@@ -19,7 +19,7 @@ export class SolicitudServicioHistorica {
         if (this.sse_fecha_inicio) { this.sse_fecha_inicio = new Date(this.sse_fecha_inicio) };
         if (this.sse_fecha_fin) { this.sse_fecha_fin = new Date(this.sse_fecha_fin) };
 
-        if (this.disponibilidad_servicio) { this.disponibilidad_servicio = new DisponibilidadServicio(this.disponibilidad_servicio) };
+        if (this.disponibilidad_historica_servicio) { this.disponibilidad_historica_servicio = new DisponibilidadHistoricaServicio(this.disponibilidad_historica_servicio) };
         if (this.cliente) { this.cliente = new Cliente(this.cliente) };
     }
 

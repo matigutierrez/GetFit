@@ -1,64 +1,64 @@
 <div id="modal" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modal">
-        <div class="modal-content modalback">
-            <div class="row">
-                <div class=" col s10 m6 left-align">
-                    <h5>Registro de Servicio</h5>
-                </div>
-                <div class="col s2 m6 right-align">
-                    <a (click)="cerrar()">
-                        <i class="material-icons">close</i>
-                    </a>
+    <div class="modal-content modalback">
+        <div class="row">
+            <div class=" col s10 m6 left-align">
+                <h5>Registro de Servicio</h5>
+            </div>
+            <div class="col s2 m6 right-align">
+                <a (click)="cerrar()">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
+        </div>
+        <form #servicioForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="col s12">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">perm_identity</i>
+                            <input type="text" name="ser_nombre" #ser_nombre="ngModel" [(ngModel)]="servicio.ser_nombre">
+                            <label for="icon_prefix">Nombre del Servicio</label>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">perm_identity</i>
+                            <input type="text" name="ser_descripcion" #ser_descripcion="ngModel" [(ngModel)]="servicio.ser_descripcion">
+                            <label for="icon_prefix">Descripción</label>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">attach_money</i>
+                            <input type="number" name="ser_costo" #ser_costo="ngModel" [(ngModel)]="servicio.ser_costo">
+                            <label for="icon_prefix">Costo</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <form #servicioForm="ngForm" (ngSubmit)="onSubmit()">
-                <div class="col s12">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="input-field">
-                                <i class="material-icons prefix">perm_identity</i>
-                                <input type="text" name="ser_nombre" #ser_nombre="ngModel" [(ngModel)]="servicio.ser_nombre">
-                                <label for="icon_prefix">Nombre del Servicio</label>
-                            </div>
-                        </div>
-                        <div class="col s12">
-                            <div class="input-field">
-                                <i class="material-icons prefix">perm_identity</i>
-                                <input type="text" name="ser_descripcion" #ser_descripcion="ngModel" [(ngModel)]="servicio.ser_descripcion">
-                                <label for="icon_prefix">Descripción</label>
-                            </div>
-                        </div>
-                        <div class="col s12">
-                            <div class="input-field">
-                                <i class="material-icons prefix">attach_money</i>
-                                <input type="number" name="ser_costo" #ser_costo="ngModel" [(ngModel)]="servicio.ser_costo">
-                                <label for="icon_prefix">Costo</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 l3 offset-l9">
-                        <div class="right-align">
-    
-                            <button *ngIf="!registrando" class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Registrar" name="action">Registrar</button>
-    
-                            <div *ngIf="registrando" class="preloader-wrapper small active">
-                                <div class="spinner-layer spinner-green-only">
-                                    <div class="circle-clipper left">
-                                        <div class="circle"></div>
-                                    </div>
-                                    <div class="gap-patch">
-                                        <div class="circle"></div>
-                                    </div>
-                                    <div class="circle-clipper right">
-                                        <div class="circle"></div>
-                                    </div>
+            <div class="row">
+                <div class="col s12 l3 offset-l9">
+                    <div class="right-align">
+
+                        <button *ngIf="!registrando" class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Registrar" name="action">Registrar</button>
+
+                        <div *ngIf="registrando" class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
                                 </div>
                             </div>
-    
                         </div>
+
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>

@@ -47,7 +47,7 @@ class SolicitudServicioHistoricaController extends Controller
     public function store(Request $request)
     {
         $solicitudHist = new SolicitudServicioHistorica;
-        $solicitudHist->tgf_disponibilidad_servicio_id = $request->tgf_disponibilidad_servicio_id;
+        $solicitudHist->tgf_disponibilidad_historica_servicio_id = $request->tgf_disponibilidad_historica_servicio_id;
         $solicitudHist->tgf_cliente_id = $request->tgf_cliente_id;
         $solicitudHist->sse_fecha_inicio = Carbon::parse($request->sse_fecha_inicio)->toDateTimeString();
         $solicitudHist->sse_fecha_fin = Carbon::parse($request->sse_fecha_fin)->toDateTimeString();
@@ -56,7 +56,7 @@ class SolicitudServicioHistoricaController extends Controller
         $solicitudHist->save();
 
         // Cachear disponibilidad de servicio y cliente
-        $solicitudHist->disponibilidad_servicio;
+        $solicitudHist->disponibilidad_historica_servicio;
         $solicitudHist->cliente;
 
         // Enviar por pusher
@@ -64,7 +64,7 @@ class SolicitudServicioHistoricaController extends Controller
 
         $solicitud = new SolicitudServicio;
         $solicitud->tgf_solicitud_servicio_historica_id = $solicitudHist->id;
-        $solicitud->tgf_disponibilidad_servicio_id = $solicitudHist->tgf_disponibilidad_servicio_id;
+        $solicitud->tgf_disponibilidad_historica_servicio_id = $solicitudHist->tgf_disponibilidad_historica_servicio_id;
 
         // Guardar solicitud en base de datos
         $solicitud->save();
@@ -113,7 +113,7 @@ class SolicitudServicioHistoricaController extends Controller
         $solicitudHist->update($request->all());
 
         // Cachear disponibilidad de servicio y cliente
-        $solicitudHist->disponibilidad_servicio;
+        $solicitudHist->disponibilidad_historica_servicio;
         $solicitudHist->cliente;
 
         // Enviar por pusher
@@ -123,8 +123,8 @@ class SolicitudServicioHistoricaController extends Controller
         $solicitud = $solicitudHist->solicitud_servicio;
 
         if ( isset($solicitud) ) {
-            // Si existe solicitud, actualizar su 'tgf_disponibilidad_servicio_id'
-            $solicitud->tgf_disponibilidad_servicio_id = $solicitudHist->tgf_disponibilidad_servicio_id;
+            // Si existe solicitud, actualizar su 'tgf_disponibilidad_historica_servicio_id'
+            $solicitud->tgf_disponibilidad_historica_servicio_id = $solicitudHist->tgf_disponibilidad_historica_servicio_id;
             $solicitud->save();
 
             // Cachear solicitud historica
@@ -155,12 +155,12 @@ class SolicitudServicioHistoricaController extends Controller
     public function solicitar(Request $request, AuthenticateController $auth) {
 
         // Buscar disponibilidad de servicio
-        $disponibilidad = DisponibilidadServicio::find($request->tgf_disponibilidad_servicio_id);
+        $disponibilidad = DisponibilidadServicio::find($request->tgf_disponibilidad_historica_servicio_id);
 
         // Validar que la fecha actual se encuentra entre '$disponibilidad->dse_fecha_inicio' y '$disponibilidad->dse_fecha_fin'
 
         $solicitud = new SolicitudServicioHist;
-        $solicitud->tgf_disponibilidad_servicio_id = $request->tgf_disponibilidad_servicio_id;
+        $solicitud->tgf_disponibilidad_historica_servicio_id = $request->tgf_disponibilidad_historica_servicio_id;
         $solicitud->tgf_cliente_id = $auth->getAuthenticatedUser()->cliente->id;
         $solicitudHist->sse_fecha_inicio = Carbon::parse($request->sse_fecha_inicio)->toDateTimeString();
         $solicitudHist->sse_fecha_fin = Carbon::parse($request->sse_fecha_fin)->toDateTimeString();
@@ -169,7 +169,7 @@ class SolicitudServicioHistoricaController extends Controller
         $solicitudHist->save();
 
         // Cachear disponibilidad de servicio y cliente
-        $solicitudHist->disponibilidad_servicio;
+        $solicitudHist->disponibilidad_historica_servicio;
         $solicitudHist->cliente;
 
         // Enviar por pusher
@@ -177,7 +177,7 @@ class SolicitudServicioHistoricaController extends Controller
 
         $solicitud = new SolicitudServicio;
         $solicitud->tgf_solicitud_servicio_historica_id = $solicitudHist->id;
-        $solicitud->tgf_disponibilidad_servicio_id = $solicitudHist->tgf_disponibilidad_servicio_id;
+        $solicitud->tgf_disponibilidad_historica_servicio_id = $solicitudHist->tgf_disponibilidad_historica_servicio_id;
 
         // Guardar solicitud en base de datos
         $solicitud->save();

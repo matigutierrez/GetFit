@@ -1,0 +1,12 @@
+<div *ngIf="!contratos" class="progress">
+    <div class="indeterminate"></div>
+</div>
+<div *ngIf="contratos" class="row">
+    <div class="card-panel teal lighten-2 center-align">
+        <b>TUS GRUPOS</b>
+    </div>
+    <a *ngFor="let contrato of contratos" materialize="tooltip" class="card-panel tooltipped lighten-2 center-align" data-position="bottom"
+        data-tooltip="Haz click para renovar" style="display: block;" [ngStyle]="{'background-color': contrato.contrato_historico.grupo.tipo_grupo.tgr_color}">
+        {{contrato.contrato_historico.grupo.gru_nombre}}
+    </a>
+</div>

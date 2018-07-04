@@ -25,6 +25,11 @@ export class ContratoService {
             .pipe(map(contratos => contratos.map(contrato => new Contrato(contrato))));
     }
 
+    public queryToken(): Observable<Contrato[]> {
+        return this._http.get<Contrato[]>(GLOBAL.url + "contratotoken")
+            .pipe(map(contratos => contratos.map(contrato => new Contrato(contrato))));
+    }
+
     public get(id: number): Observable<Contrato> {
         return this._http.get<Contrato>(GLOBAL.url + "contrato/" + id)
             .pipe(map(contrato => new Contrato(contrato)));

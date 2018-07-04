@@ -161,4 +161,13 @@ class SolicitudGrupoController extends Controller
         return null;
     }
 
+    /**
+     * Obtener solicitudes de grupo de cliente
+     * 
+     * @return \App\SolicitudGrupo
+     */
+    public function indexToken(AuthenticateController $auth) {
+        return $auth->getAuthenticatedUser()->cliente->solicitudesGrupo()->with(['cliente', 'grupo.horarios', 'grupo.sede'])->get();
+    }
+
 }

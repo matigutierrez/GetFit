@@ -30,8 +30,6 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('cliente/{id}/cobranzas', 'ClienteController@cobranzas');
 	Route::get('cliente/{id}/cobranzashistoricas', 'ClienteController@cobranzas_historicas');
 	Route::get('cliente/{id}/solicitudes', 'ClienteController@solicitudesGrupo');
-	Route::get('clientecontratos', 'ClienteController@contratosToken');
-	Route::get('clientesolicitudes', 'ClienteController@solicitudesGrupoToken');
 
 	Route::apiResource('cobranza', 'CobranzaController');
 	Route::get('cobranzastoken', 'CobranzaController@cobranzasToken');
@@ -46,14 +44,17 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::get('contrato/{id}/acta', 'ContratoController@acta');
 	Route::get('contrato/find/{cliente_id}/{tgf_grupo_id}', 'ContratoController@find');
 	Route::get('contrato/findtoken/{tgf_grupo_id}', 'ContratoController@findToken');
+	Route::get('contratotoken', 'ContratoController@indexToken');
 
 	Route::apiResource('contratohistorico', 'ContratoHistoricoController');
 
 	Route::apiResource('diasemana', 'DiaSemanaController');
 
+	Route::apiResource('disponibilidadhistoricaservicio', 'DisponibilidadHistoricaServicioController');
+	Route::get('disponibilidadhistoricaservicio/{id}/solicitudeshistoricas', 'DisponibilidadHistoricaServicioController@solicitudesHistoricas');
+	Route::get('disponibilidadhistoricaservicio/{id}/solicitudes', 'DisponibilidadHistoricaServicioController@solicitudes');
+
 	Route::apiResource('disponibilidadservicio', 'DisponibilidadServicioController');
-	Route::get('disponibilidadservicio/{id}/solicitudeshistoricas', 'DisponibilidadServicioController@solicitudesHistoricas');
-	Route::get('disponibilidadservicio/{id}/solicitudes', 'DisponibilidadServicioController@solicitudes');
 
 	Route::apiResource('evaluacion', 'EvaluacionController');
 
@@ -91,6 +92,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 	Route::apiResource('solicitudgrupo', 'SolicitudGrupoController');
 	Route::get('solicitudgrupo/findtoken/{tgf_grupo_id}', 'SolicitudGrupoController@findToken');
 	Route::get('solicitudgrupo/solicitar/{tgf_grupo_id}', 'SolicitudGrupoController@solicitar');
+	Route::get('solicitudgrupotoken', 'SolicitudGrupoController@indexToken');
 
 	Route::apiResource('solicitudserviciohistorica', 'SolicitudServicioHistoricaController');
 

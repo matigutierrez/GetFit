@@ -2,7 +2,7 @@
     <div class="modal-content modalback">
         <div class="row">
             <div class=" col s10 m6 left-align">
-                <h5>¿Seguro que desea eliminar la disponibilidad de este servicio?</h5>
+                <h5>¿Seguro que desea eliminar esta cobranza?</h5>
             </div>
             <div class="col s2 m6 right-align">
                 <a (click)="cerrar()">
@@ -10,28 +10,35 @@
                 </a>
             </div>
         </div>
-        <form #servicioForm="ngForm" (ngSubmit)="onSubmit()">
+        <form #cobranzaForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="col s12">
-                <div *ngIf="disponibilidadServicio" class="row">
+                <div *ngIf="cobranza" class="row">
                     <table class="responsive-table centered">
                         <thead>
                             <tr>
-                                <th>Servicio</th>
-                                <th>Descripción</th>
-                                <th>Fecha de Inicio</th>
-                                <th>Fecha de Termino</th>
+                                <th>Cliente</th>
+                                <th>Grupo</th>
+                                <th>Fecha</th>
+                                <th>Mes</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{disponibilidadServicio.disponibilidad_historica_servicio.servicio.ser_nombre}}</td>
-                                <td>{{disponibilidadServicio.disponibilidad_historica_servicio.servicio.ser_descripcion}}</td>
-                                <td>{{disponibilidadServicio.disponibilidad_historica_servicio.dse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
-                                <td>{{disponibilidadServicio.disponibilidad_historica_servicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</td>
+                                <td>{{cobranza.contrato.contrato_historico.cliente.cli_nombres}} {{cobranza.contrato.contrato_historico.cliente.cli_apellidos}}</td>
+                                <td>{{cobranza.contrato.contrato_historico.grupo.gru_nombre}}</td>
+                                <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString()}}</td>
+                                <td>{{cobranza.cobranza_historica.cob_fecha.toLocaleString("es-CL", {month: "long"}) | titlecase}}</td>
+                                <td>{{cobranza.cobranza_historica.cob_monto}}</td>
+                                <td>
+                                    <p *ngIf="cobranza.cobranza_historica.pago">{{cobrana.cobranza_historica.pago.metodo_pago.mep_nombre}}</p>
+                                    <i *ngIf="!cobranza.cobranza_historica.pago" class="material-icons">close</i>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-                    <p class="red-text right-align">Una vez eliminada esta disponibilidad, los clientes no podrán solicitar el servicio hasta registrar un nuevo periodo de disponibilidad.</p>
+                    <p class="green-text right-align">Se mantendrá un registro histórico de la cobranza.</p>
                 </div>
             </div>
             <div class="row">

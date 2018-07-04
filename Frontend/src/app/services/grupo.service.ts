@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GLOBAL } from './global';
@@ -9,7 +9,6 @@ import { Profesor } from '../models/Profesor';
 import { Horario } from '../models/Horario';
 import { Contrato } from '../models/Contrato';
 import { SolicitudGrupo } from '../models/SolicitudGrupo';
-import { Cobranza } from '../models/Cobranza';
 import { ContratoHistorico } from '../models/ContratoHistorico';
 
 @Injectable({
@@ -63,11 +62,6 @@ export class GrupoService {
     public getContratosCobranzasHistoricas(grupo: Grupo): Observable<ContratoHistorico[]> {
         return this._http.get<ContratoHistorico[]>(GLOBAL.url + 'grupo/' + grupo.id + '/contratoscobranzashistoricas')
             .pipe(map(contratosHistoricos => contratosHistoricos.map(contratoHistorico => new ContratoHistorico(contratoHistorico))));
-    }
-
-    public getContratosToken(): Observable<Contrato[]> {
-        return this._http.get<Contrato[]>(GLOBAL.url + 'clientecontratos')
-            .pipe(map(contratos => contratos.map(contrato => new Contrato(contrato))));
     }
 
     public getSolicitudes(grupo: Grupo): Observable<SolicitudGrupo[]> {

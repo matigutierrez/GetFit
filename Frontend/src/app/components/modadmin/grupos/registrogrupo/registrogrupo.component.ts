@@ -28,6 +28,9 @@ export class RegistroGrupoComponent implements AfterViewChecked {
     // Lista de tipos de grupos
     public tipoGrupos: TipoGrupo[];
 
+    // Indicar que se está registrando el grupo
+    public registrando: boolean;
+
     public constructor(
         private _grupoService: GrupoService,
         private _sedeService: SedeService,
@@ -63,27 +66,31 @@ export class RegistroGrupoComponent implements AfterViewChecked {
         this.grupo.gru_solicitable = 1;
         this.grupo.tgf_sede_id = 1;
         this.grupo.tgf_tipo_grupo_id = 1;
+        this.registrando = false;
     }
 
     public onSubmit() {
         // Si la sede y el tipo de grupo no son nulos
         if (this.grupo.tgf_sede_id != null && this.grupo.tgf_tipo_grupo_id != null) {
 
+            this.registrando = true;
+
             // Registrar grupo
             this._grupoService.save(this.grupo).subscribe(
                 Response => {
                     this.cerrar();
-                    this.limpiar();
                 }
             );
         }
     }
 
     public abrir() {
+        this.limpiar();
         this.modal.emit({ action: "modal", params: ['open'] });
     }
 
     public cerrar() {
+        this.limpiar();
         this.modal.emit({ action: "modal", params: ['close'] });
     }
 

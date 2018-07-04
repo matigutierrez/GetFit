@@ -1,10 +1,10 @@
 import { Component, ViewChild } from "@angular/core";
-import { GrupoService } from "../../../services/grupo.service";
 import { Grupo } from "../../../models/Grupo";
 import { Contrato } from "../../../models/Contrato";
 import { HorarioComponent } from "../../extra/horario/horario.component";
 import { SolicitudGrupo } from "../../../models/SolicitudGrupo";
-import { ClienteService } from "../../../services/cliente.service";
+import { ContratoService } from "../../../services/contrato.service";
+import { SolicitudGrupoService } from "../../../services/solicitudgrupo.service";
 
 @Component({
     selector: 'grupos',
@@ -27,19 +27,19 @@ export class GruposComponent {
     public p3: number = 1;
 
     public constructor(
-        private _grupoService: GrupoService,
-        private _clienteService: ClienteService
+        private _solicitudGrupoService: SolicitudGrupoService,
+        private _contratoService: ContratoService
     ) {
 
         // Obtener contratos
-        this._grupoService.getContratosToken().subscribe(
+        this._contratoService.queryToken().subscribe(
             Response => {
                 this.contratos = Response;
             }
         )
 
         // Obtener solicitados
-        this._clienteService.getSolicitudesToken().subscribe(
+        this._solicitudGrupoService.queryToken().subscribe(
             Response => {
                 this.solicitudes = Response;
             }

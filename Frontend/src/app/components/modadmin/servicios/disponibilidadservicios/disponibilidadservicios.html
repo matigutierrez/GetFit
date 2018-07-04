@@ -1,37 +1,101 @@
-<div *ngIf="!disponibilidadServicios" class="progress">
-    <div class="indeterminate"></div>
-</div>
-<div *ngIf="disponibilidadServicios">
-    <table class="responsive-table striped highlight">
-        <thead>
-            <tr>
-                <th>Servicio</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Termino</th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let disponibilidadServicio of disponibilidadServicios | paginate: { id: 'dispServicios', itemsPerPage: 6, currentPage: p }; index as i;">
-                <td>{{disponibilidadServicio.servicio.ser_nombre}}</td>
-                <td>{{disponibilidadServicio.dse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
-                <td>{{disponibilidadServicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</td>
-                <td>
-                    <a [routerLink]="['/admin/dispserv', disponibilidadServicio.id]">
-                        <i class="material-icons">settings</i>
-                    </a>
-                </td>
-                <td>
-                    <a (click)="deleteDisponibilidadServicio(disponibilidadServicio)">
-                        <i class="material-icons">close</i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-        <pagination-controls id="dispServicios" (pageChange)="p = $event"></pagination-controls>
-    </table>
+<div class="row">
+
+    <!-- Tabs verticales -->
+    <div class="col s2">
+        <ul class="tabs-vertical" materialize="tabs">
+            <li class="tab row">
+                <a class="active" href="#disponibilidades_actuales">
+                    <p *ngIf="!disponibilidadServicios">Actuales (0)</p>
+                    <p *ngIf="disponibilidadServicios">Actuales ({{disponibilidadServicios.length}})</p>
+                </a>
+            </li>
+            <li class="tab row">
+                <a href="#disponibilidades_historicas">
+                    <p *ngIf="!disponibilidadHistoricaServicios">Históricas (0)</p>
+                    <p *ngIf="disponibilidadHistoricaServicios">Históricas ({{disponibilidadHistoricaServicios.length}})</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col s10">
+
+        <!-- Disponibilidades actuales -->
+        <div id="disponibilidades_actuales">
+            <div *ngIf="!disponibilidadServicios">
+                <div class="indeterminate"></div>
+            </div>
+            <div *ngIf="disponibilidadServicios">
+                <h5>Disponibilidades Actuales</h5>
+                <table class="responsive-table striped highlight">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Fecha de Inicio</th>
+                            <th>Fecha de Termino</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let disponibilidadServicio of disponibilidadServicios | paginate: { id: 'dispServicios', itemsPerPage: 6, currentPage: p1 }; index as i;">
+                            <td>{{disponibilidadServicio.disponibilidad_historica_servicio.servicio.ser_nombre}}</td>
+                            <td>{{disponibilidadServicio.disponibilidad_historica_servicio.dse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
+                            <td>{{disponibilidadServicio.disponibilidad_historica_servicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</td>
+                            <td>
+                                <a [routerLink]="['/admin/dispserv', disponibilidadServicio.disponibilidad_historica_servicio.id]">
+                                    <i class="material-icons">settings</i>
+                                </a>
+                            </td>
+                            <td>
+                                <a (click)="deleteDisponibilidadServicio(disponibilidadServicio)">
+                                    <i class="material-icons">close</i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls id="dispServicios" (pageChange)="p1 = $event"></pagination-controls>
+            </div>
+        </div>
+
+        <!-- Disponibilidades historicas -->
+        <div id="disponibilidades_historicas">
+            <div *ngIf="!disponibilidadHistoricaServicios">
+                <div class="indeterminate"></div>
+            </div>
+            <div *ngIf="disponibilidadHistoricaServicios">
+                <h5>Disponibilidades Históricas</h5>
+                <table class="responsive-table striped highlight">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Fecha de Inicio</th>
+                            <th>Fecha de Termino</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let disponibilidadHistoricaServicio of disponibilidadHistoricaServicios | paginate: { id: 'dispHistServicios', itemsPerPage: 6, currentPage: p2 }; index as i;">
+                            <td>{{disponibilidadHistoricaServicio.servicio.ser_nombre}}</td>
+                            <td>{{disponibilidadHistoricaServicio.dse_fecha_inicio.toLocaleDateString("es-cl")}}</td>
+                            <td>{{disponibilidadHistoricaServicio.dse_fecha_fin.toLocaleDateString("es-cl")}}</td>
+                            <td>
+                                <a [routerLink]="['/admin/dispserv', disponibilidadHistoricaServicio.id]">
+                                    <i class="material-icons">settings</i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls id="dispHistServicios" (pageChange)="p2 = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <div class="fixed-action-btn horizontal click-to-toggle">

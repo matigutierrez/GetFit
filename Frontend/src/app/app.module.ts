@@ -5,11 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import { MaterializeModule } from 'angular2-materialize';
-import { ChartsModule } from 'ng2-charts';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { AuthService } from './services/auth.service';
 import { AppModuleAdmin } from './components/modadmin/admin.module';
 import { AppModuleCliente } from './components/modcliente/cliente.module';
 import { AppModuleProfesor } from './components/modprofesor/profesor.module';
@@ -19,7 +16,6 @@ import { PusherService } from './services/pusher.service';
 import { ContratoService } from './services/contrato.service';
 import { NotificacionService } from './services/notificacion.service';
 import { GLOBAL } from './services/global';
-import { ProfesorService } from './services/profesor.service';
 import { ExtraModule } from './components/extra/extra.module';
 
 export function getToken(): string {

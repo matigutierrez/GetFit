@@ -96,7 +96,23 @@
             <div class="row">
                 <div class="col s12 l3 offset-l9">
                     <div class="right-align">
-                        <button class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Registrar" name="action">Registrar</button>
+
+                        <button *ngIf="!registrando" class="waves-effect waves-light btn blue-grey darken-2" type="submit" value="Registrar" name="action">Registrar</button>
+
+                        <div *ngIf="registrando" class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

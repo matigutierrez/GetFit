@@ -5,6 +5,7 @@ import { Cobranza } from '../../../../models/Cobranza';
 import { PagoCobranzaComponent } from '../pagocobranza/pagocobranza.component';
 import { RegistroCobranzaComponent } from '../registrocobranza/registrocobranza.component';
 import { Pago } from '../../../../models/Pago';
+import { EliminarCobranzaComponent } from '../eliminarcobranza/eliminarcobranza.component';
 
 declare var Materialize: any;
 
@@ -14,13 +15,17 @@ declare var Materialize: any;
 })
 export class CobranzasComponent implements OnDestroy {
 
-    // Componente para pago de cobranzas
-    @ViewChild(PagoCobranzaComponent)
-    public pagoCobranzaComponent: PagoCobranzaComponent;
-
     // Componente para registro de cobranzas
     @ViewChild(RegistroCobranzaComponent)
     public registroCobranzaComponent: RegistroCobranzaComponent;
+
+    // Componente para eliminación de cobranza
+    @ViewChild(EliminarCobranzaComponent)
+    public eliminarCobranzaComponent: EliminarCobranzaComponent;
+
+    // Componente para pago de cobranzas
+    @ViewChild(PagoCobranzaComponent)
+    public pagoCobranzaComponent: PagoCobranzaComponent;
 
     // Lista de cobranzas
     public cobranzas: Cobranza[];
@@ -76,7 +81,7 @@ export class CobranzasComponent implements OnDestroy {
     }
 
     public deleteCobranza(cobranza: Cobranza): void {
-        this._cobranzaService.delete(cobranza.id).subscribe(null);
+        this.eliminarCobranzaComponent.abrir(cobranza);
     }
 
     public onCreatePago(pago: Pago) {

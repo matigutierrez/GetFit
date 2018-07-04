@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DisponibilidadServicio;
 use Illuminate\Http\Request;
 use Pusher\Laravel\PusherManager;
-use Carbon\Carbon;
 
 class DisponibilidadServicioController extends Controller
 {
@@ -44,20 +43,7 @@ class DisponibilidadServicioController extends Controller
      */
     public function store(Request $request)
     {
-        $disponibilidad = new DisponibilidadServicio;
-        $disponibilidad->tgf_servicio_id = $request->tgf_servicio_id;
-        $disponibilidad->dse_fecha_inicio = Carbon::parse($request->dse_fecha_inicio)->toDateTimeString();
-        $disponibilidad->dse_fecha_fin = Carbon::parse($request->dse_fecha_fin)->toDateTimeString();
-
-        $disponibilidad->save();
-
-        // Cachear servicio
-        $disponibilidad->servicio;
-
-        $this->pusher->trigger('disponibilidadServicio', 'create', $disponibilidad);
-        
-        return $disponibilidad->id;
-
+        // CREAR POR MEDIO DE DipsonibilidadHistoricaServicioController
     }
 
     /**
@@ -92,18 +78,12 @@ class DisponibilidadServicioController extends Controller
     public function update(Request $request, $id)
     {
         $disponibilidad = DisponibilidadServicio::find($id);
-        $disponibilidad->update([
-            'tgf_servicio_id' => $request->tgf_servicio_id,
-            'dse_fecha_inicio' => Carbon::parse($request->dse_fecha_inicio)->toDateTimeString(),
-            'dse_fecha_fin' => Carbon::parse($request->dse_fecha_fin)->toDateTimeString()
-        ]);
+        $disponibilidad->update($request->all());
 
-        // Cachear servicio
-        $disponibilidad->servicio;
+        // Cachear disponibilidad histórica de servicio
+        $disponibilidad->disponibilidad_historica_servicio;
 
         $this->pusher->trigger('disponibilidadServicio', 'update', $disponibilidad);
-
-        return ['updated' => true];
     }
 
     /**
@@ -118,23 +98,5 @@ class DisponibilidadServicioController extends Controller
 
         $this->pusher->trigger('disponibilidadServicio', 'delete', $id);
 
-        return ['deleted' => true];
     }
-
-    /**
-     * Obtener las solicitudes historicas para una disponibilidad de servicio
-     * 
-     */
-    public function solicitudesHistoricas($id) {
-        return DisponibilidadServicio::find($id)->solicitudes_historicas;
-    }
-
-    /**
-     * Obtener las solicitudes para una disponibilidad de servicio
-     * 
-     */
-    public function solicitudes($id) {
-        return DisponibilidadServicio::find($id)->solicitudes;
-    }
-
 }
